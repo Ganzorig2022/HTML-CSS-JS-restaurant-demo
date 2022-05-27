@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&family=Roboto+Condensed&family=Sacramento&display=swap");
+
+:root {
+  --modal-duration: 1s;
+  --primary-color: #30336b;
+  --secondary-color: #fb1c25;
+  --main-font-family: "Sacramento", cursive;
+  --secondary-font-family: "Lato", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--secondary-font-family);
+  /* font-family: "Lato", sans-serif; */
+  background-image: url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/*===========NAVBAR STYLE===================*/
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* background-color: var(--primary-color); */
+  background-image: url("https://dishup.qodeinteractive.com/wp-content/themes/dishup/assets/img/background_pattern.jpg");
+  /* color: #fff; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100px;
+  z-index: 100;
+  overflow: hidden;
+}
+
+nav .logo {
+  padding: 30px 0;
+  text-align: center;
+}
+
+nav .logo img {
+  width: 200px;
+  height: 100%;
+}
+
+nav ul {
+  display: flex;
+  padding: 0;
+  list-style-type: none;
+}
+
+nav ul li {
+  /* border-bottom: 2px solid rgba(200, 200, 200, 0.1); */
+  padding: 20px;
+}
+
+nav ul li a {
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  color: var(--secondary-color);
+}
+
+form {
+  position: relative;
+  width: 200px;
+  max-width: 100%;
+}
+
+form input {
+  border: 0;
+  border-radius: 50px;
+  font-size: 10px;
+  padding: 10px 20px;
+  width: 100%;
+}
+
+form button {
+  position: absolute;
+  top: 1px;
+  right: 0px;
+  background-color: var(--secondary-color);
+  border: 0;
+  border-radius: 50px;
+  color: #fff;
+  font-size: 10px;
+  padding: 8px 15px;
+}
+
+.navBtnContainer {
+  display: flex;
+  align-items: center;
+}
+.navBtnContainer button {
+  background-color: var(--secondary-color);
+  border: 0;
+  border-radius: 50px;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px 20px;
+  font-size: 10px;
+  margin: 0 10px;
+  letter-spacing: 3px;
+}
+
+.navBtnContainer button:active {
+  outline: 0;
+  transform: scale(0.98);
+}
+
+/*====================MAIN SECTION=============== */
+.container {
+  padding: 15px;
+  margin: 0 auto;
+  max-width: 100%;
+  width: 800px;
+}
