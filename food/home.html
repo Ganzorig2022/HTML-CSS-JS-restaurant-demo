@@ -10,15 +10,8 @@
       integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
       crossorigin="anonymous"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"
-    />
-    <!-- <script
-      src="https://kit.fontawesome.com/06507b3ae3.js"
-      crossorigin="anonymous"
-    ></script> -->
     <link rel="stylesheet" href="home.css" />
+    <link rel="shortcut icon" type="image/png" href="img/logo_black.png" />
     <title>Restaurant Reservation and Booking Website</title>
   </head>
   <body>
@@ -27,28 +20,63 @@
       <div class="logo">
         <img src="img/logo_white.png" />
       </div>
+      <input type="checkbox" name="" id="check" />
+      <label for="check" class="checkBtn">
+        <i class="fas fa-bars"></i>
+      </label>
       <ul>
-        <li><a href="#">Home</a></li>
+        <li><a class="active" href="#">Home</a></li>
         <li><a href="#">About Us</a></li>
         <li><a href="#">Blog</a></li>
         <li><a href="#">Contact Me</a></li>
       </ul>
       <!--============FORM SECTION========= -->
-      <form id="form">
+      <!-- <form id="form">
         <input type="text" id="search" placeholder="Enter restaurant name..." />
         <button><i class="fas fa-search"></i></button>
-      </form>
+      </form> -->
       <div class="navBtnContainer">
         <i class="fa-solid fa-cart-shopping"></i>
-        <button class="signUp-btn" id="open">Sign Up</button>
-        <button class="login-btn" id="open">Login</button>
+        <button class="signUp-btn ripple" id="open">Sign Up</button>
+        <button class="login-btn ripple" id="open">Login</button>
       </div>
     </nav>
-    <!--============HERO SECTION========= -->
+    <!--============HEADER SECTION========= -->
+    <header>
+      <div class="showcase-content">
+        <h1>Your Restaurant</h1>
+        <p>Чанартай сонголт</p>
+        <button class="order-btn ripple" id="open">Захиалга өгөх</button>
+      </div>
+    </header>
+    <!--============main SECTION========= -->
     <main>
-      <h1>Your Restaurant</h1>
-      <p>Чанартай сонголт</p>
-      <button class="order-btn" id="open">Захиалга өгөх</button>
+      <h1>Restaurants</h1>
+      <div class="main-container">
+        <div class="left-content">
+          <h2>Манай рестораны тухай</h2>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Error
+            aliquam in, quo minima dignissimos tempore voluptas a adipisci
+            expedita. Fugit ut rem non consectetur, aspernatur nihil voluptatem
+            deserunt cupiditate repudiandae!
+          </p>
+          <div class="stars-outer">
+            <div class="stars-inner"></div>
+          </div>
+          <span class="number-rating"
+            >Үнэлгээ: <span id="number-rating"> 4.5</span></span
+          >
+        </div>
+        <div class="right-content">
+          <div class="right-content-img">
+            <img
+              src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
     </main>
     <script src="home.js"></script>
   </body>

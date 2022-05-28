@@ -1,31 +1,47 @@
-//navbar-iin 3n zuraas buhii button
-const toggle = document.getElementById("toggle");
+// Run getRatings when DOM loads
+document.addEventListener("DOMContentLoaded", getRatings);
 
-// modal tsonhnii close button
-const close = document.getElementById("close");
+const starsTotal = 5;
+// Get ratings
+function getRatings() {
+  // Get percentage
+  const numberRating = document.getElementById("number-rating");
+  let numberRatingValue = numberRating.textContent;
 
-//navbar-iin SIGN UP button
-const open = document.getElementById("open");
+  const starPercentage = (numberRatingValue / starsTotal) * 100;
 
-const modal = document.getElementById("modal");
+  // Round to nearest 10
+  const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
 
-// toggle NAVbar garch irdeg heseg
-toggle.addEventListener("click", () => {
-  document.body.classList.toggle("show-nav");
-});
+  // Set width of stars-inner to percentage
+  const starsInner = document.querySelector(".stars-inner");
+  starsInner.style.width = starPercentageRounded;
+}
 
-// SHOW MODAL heseg
-open.addEventListener("click", () => {
-  modal.classList.add("show-modal");
-});
 
-// HIDE MODAL heseg
-close.addEventListener("click", () => {
-  modal.classList.remove("show-modal");
-});
+// =================Button Effect====================
+const buttons = document.querySelectorAll(".ripple");
+buttons.forEach((button) => {
+  button.addEventListener("click", function (e) {
+    // mouse-iin bairshliig X, Y toogoor gargaj ogno.
+    const x = e.clientX;
+    const y = e.clientY;
 
-// HIDE MODAL outside click
-// Zaawal close button dr darahgviger MODAL tsonhnii gadna tald haana ch bsan darahad alga bolno.
-window.addEventListener("click", (e) => {
-  e.target == modal ? modal.classList.remove("show-modal") : false;
+    // button bairshliig gargaj ogno.
+    const buttonTop = e.target.offsetTop;
+    const buttonLeft = e.target.offsetLeft;
+
+    const xInside = x - buttonLeft;
+    const yInside = y - buttonTop;
+
+    const circle = document.createElement("span");
+
+    // circle.className = "circle"- ni classList.add-tai adilhan.
+    circle.classList.add("circle");
+    this.appendChild(circle);
+    circle.style.top = yInside + "px";
+    circle.style.left = xInside + "px";
+
+    setTimeout(() => circle.remove(), 200);
+  });
 });
