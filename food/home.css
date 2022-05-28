@@ -78,7 +78,7 @@ form {
   width: 200px;
   max-width: 100%;
 }
-
+/*500px-ees dooshlohoor menu huraagdaj BAR dr darhaar garch irne */
 .checkBtn {
   font-size: 1.5rem;
   color: #fff;
@@ -113,6 +113,8 @@ form button {
   display: flex;
   align-items: center;
 }
+
+/* SignUp, Login Button Style*/
 .navBtnContainer button {
   font-family: inherit;
   font-size: 0.8rem;
@@ -124,6 +126,20 @@ form button {
   cursor: pointer;
   padding: 5px 10px;
   margin-left: 10px;
+}
+
+/* Hereglegch newtreh LINK */
+.profile {
+  margin-left: 10px;
+  border-radius: 10px;
+  background-color: #ccc;
+  text-align: center;
+  padding: 0px 5px;
+}
+.fa-user {
+  width: 26px;
+  height: 26px;
+  color: #000;
 }
 
 /*====================HEADER SECTION=============== */
@@ -223,6 +239,7 @@ header button {
     transform: translate(0);
   }
 }
+
 /*====================MAIN SECTION=============== */
 main {
   background-image: url("https://dishup.qodeinteractive.com/wp-content/themes/dishup/assets/img/background_pattern.jpg");
@@ -246,12 +263,17 @@ main h2 {
   font-weight: 300;
   margin-bottom: 0.75rem;
   line-height: 1.1;
+  display: flex;
+  align-items: center;
 }
 main p {
   font-family: var(--third-font-family);
   font-size: 1rem;
   color: #fff;
   margin: 10px 0;
+}
+main p strong {
+  color: var(--secondary-color);
 }
 
 .main-container {
@@ -274,6 +296,23 @@ main p {
   padding: 0 15px;
   text-align: center;
 }
+.main-container .left-content button {
+  font-family: var(--third-font-family);
+  background-color: var(--secondary-color);
+  border: 0;
+  border-radius: 50px;
+  color: #fff;
+  cursor: pointer;
+  padding: 5px 20px;
+  font-size: 1rem;
+  margin-top: 1rem;
+  transform: scale(0.98);
+}
+.left-content img {
+  border-radius: 50%;
+  width: 100px;
+  margin-left: 10px;
+}
 .main-container .right-content {
   margin: 0 auto;
   width: 50%;
@@ -289,7 +328,7 @@ main p {
   transition: transform 0.5s ease;
 }
 
-/* ===============Rating Star============= */
+/* Rating Star*/
 .stars-outer {
   position: relative;
   display: inline-block;
@@ -424,7 +463,9 @@ button .circle {
   .left-content h2 {
     font-size: 2rem;
   }
-
+  .left-content img {
+    width: 75px;
+  }
   .right-content img {
     width: 400px;
   }
@@ -447,6 +488,9 @@ button .circle {
   }
   .main-container .left-content {
     margin-left: auto;
+  }
+  .left-content img {
+    margin-left: 20px;
   }
 }
 
