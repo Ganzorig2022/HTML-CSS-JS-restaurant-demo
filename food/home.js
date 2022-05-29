@@ -18,7 +18,6 @@ function getRatings() {
   starsInner.style.width = starPercentageRounded;
 }
 
-
 // =================Button Effect====================
 const buttons = document.querySelectorAll(".ripple");
 buttons.forEach((button) => {
@@ -44,4 +43,12 @@ buttons.forEach((button) => {
 
     setTimeout(() => circle.remove(), 200);
   });
+});
+
+const userProfileBtn = document.getElementsByClassName("profile")[0];
+
+userProfileBtn.addEventListener("click", () => {
+  console.log("clicked");
+  const userProfile = document.getElementsByClassName("user-profile-modal")[0];
+  userProfile.classList.toggle("hidden");
 });

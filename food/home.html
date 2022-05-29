@@ -15,21 +15,21 @@
     <title>Restaurant Reservation and Booking Website</title>
   </head>
   <body>
-    <!-- NAVBAR SECTION -->
+    <!--==================1. NAVBAR SECTION================== -->
     <nav class="">
       <div class="logo">
-        <img src="img/logo_white.png" />
+        <a href="home.html"><img src="img/logo_white.png" /></a>
       </div>
       <input type="checkbox" name="" id="check" />
       <label for="check" class="checkBtn">
         <i class="fas fa-bars"></i>
       </label>
       <ul>
-        <li><a class="active" href="#">Нүүр</a></li>
+        <li><a class="active" href="./home.html">Нүүр</a></li>
         <li><a href="#">Бидний тухай</a></li>
         <li><a href="#">Холбоо барих</a></li>
       </ul>
-      <!--============FORM SECTION========= -->
+      <!--============SEARCH INPUT SECTION========= -->
       <!-- <form id="form">
         <input type="text" id="search" placeholder="Enter restaurant name..." />
         <button><i class="fas fa-search"></i></button>
@@ -43,9 +43,30 @@
             <i class="fas fa-user"></i>
           </a>
         </div>
+        <!-- Profile Window -->
+        <div class="user-profile-modal">
+          <h3>Хэрэглэгч ID:</h3>
+          <div>
+            <li>
+              <i class="fas fa-user-circle"></i
+              ><a class="" href="/profile.html">Хувийн мэдээлэл</a>
+            </li>
+            <li>
+              <i class="fas fa-edit"></i
+              ><a class="" href="/profile.html">Миний захиалга</a>
+            </li>
+            <li>
+              <i class="fas fa-cog"></i
+              ><a class="" href="/profile.html">Тохиргоо</a>
+            </li>
+            <li>
+              <a class="" href="#">Гарах</a>
+            </li>
+          </div>
+        </div>
       </div>
     </nav>
-    <!--============HEADER SECTION========= -->
+    <!--============2.HEADER SECTION========= -->
     <header>
       <div class="showcase-content">
         <h1>Your Restaurant</h1>
@@ -53,7 +74,7 @@
         <button class="order-btn ripple" id="open">Захиалга өгөх</button>
       </div>
     </header>
-    <!--============main SECTION========= -->
+    <!--============3.Main SECTION========= -->
     <main>
       <h1>Restaurants</h1>
       <div class="main-container">
