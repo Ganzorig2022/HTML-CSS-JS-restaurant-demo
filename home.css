@@ -367,8 +367,60 @@ section h2 img{
   /* margin-left: 20px; */
   margin: 0 10px 0 20px; 
 }
+.menu-container{
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  /* margin: 10px 0; */
+  padding: 10px;
+  border-bottom: 1px solid rgb(230, 230, 230);
+}
+.menu-container button{
+  font-family: inherit;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  background-color: white;
+  border: 2px solid rgb(230, 230, 230);
+  border-radius: 5px;
+  /* color: #fff; */
+  cursor: pointer;
+  padding: 5px 10px;
+  margin-left: 10px;
+  position: relative;
+}
+.btnBorder{
+  border: 2px solid var(--secondary-color);
+}
+.listContainer{
+  column-count: 2;
+  list-style: none;
+  margin: 16px 0 0;
+}
+ul {
+  /* display: block; */
+  
+}
+li {
+  /* display: list-item; */
+  margin-bottom: 16px;
+}
+li p{
+  font-family: var(--secondary-font-family);
+}
+.MenuText{
+  background-color: var(--secondary-color);
+  padding: 5px;
+  color: #fff;
 
-
+}
+h3{
+  display: flex;
+  font-family: var(--secondary-font-family);
+    font-size: 14px;
+    font-weight: 500;
+    justify-content: space-between;
+    line-height: 20px;
+}
 
 main {
   background-image: url("https://dishup.qodeinteractive.com/wp-content/themes/dishup/assets/img/background_pattern.jpg");
