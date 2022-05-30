@@ -36,8 +36,6 @@ nav {
   top: 0;
   z-index: 1;
   padding: 0.5rem 1rem;
-  /* overflow: hidden; */
-  /* box-shadow: 0 5px rgba(0, 0, 0, 0.4); */
   border-bottom: 1px solid rgb(87, 87, 87);
 }
 
@@ -371,24 +369,21 @@ main p strong {
   margin: 10px 0;
   padding: 10px 20px;
 }
-.main-container .left-content li a {
+.main-container .left-content li p {
   font-size: 0.9rem;
   text-decoration: none;
   color: #555;
   display: inline-block;
 }
-.main-container .left-content li:hover {
-  border-left: 3px solid;
+
+.main-container .left-content li.active {
+  border-left: 3px solid #000;
 }
-.main-container .left-content li a:hover {
+.main-container .left-content li p:hover {
   color: var(--secondary-color);
 }
-
 .main-container .right-content {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
   width: 80%;
   padding: 0 15px;
   margin: 0 20px;
@@ -396,15 +391,93 @@ main p strong {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
 }
-.right-content img {
-  width: 500px;
-  border-radius: 10px;
+.main-container .right-content.content2 {
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  display: none;
 }
-.right-content:hover img {
-  transform: scale(1.1);
-  transition: transform 0.5s ease;
+.main-container .right-content.content2 div {
+  padding: 20px;
+  font-size: 1rem;
+}
+.main-container .right-content.content2 div span {
+  margin-top: 20px;
+  font-size: 0.75rem;
 }
 
+.main-container .right-content.content2.show {
+  display: flex;
+}
+
+/* ===================content 1 ==============*/
+.right-content.content1 {
+  display: flex;
+  flex-direction: column;
+}
+.right-content.content1 h3 {
+  margin-top: 10px;
+  font-weight: 500;
+}
+.form1-container {
+  width: 100%;
+}
+.form1-container div {
+  width: 50%;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.form1-container div label {
+  margin-left: 10px;
+}
+.form-control {
+  border: 2px solid #ced4da;
+  width: 100%;
+  height: 48px;
+  border-radius: 4px;
+  padding: 12px 15px;
+  margin: 10px 0;
+}
+.form-control:focus {
+  outline: 0;
+  border-color: #5fbaa7;
+}
+
+.main-container .right-content.content1 {
+  display: none;
+}
+.main-container .right-content.content1.show {
+  display: block;
+}
+
+.save-btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.save-btn {
+  font-family: var(--third-font-family);
+  background-color: var(--secondary-color);
+  border: 0;
+  border-radius: 50px;
+  color: #fff;
+  cursor: pointer;
+  padding: 5px 20px;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  transform: scale(0.98);
+}
+
+/* ===================BUSAD==============*/
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
 /* JS dr ".circle class idewhjsineer tsagaan booronhii durs garna. */
 button:active {
   outline: 0;
@@ -481,9 +554,7 @@ button .circle {
   .main-container .right-content {
     width: auto;
   }
-  .right-content img {
-    width: 300px;
-  }
+
   .left-content h2 {
     font-size: 2rem;
   }
@@ -501,15 +572,6 @@ button .circle {
   }
   .main-container .left-content {
     width: 40%;
-  }
-  .left-content h2 {
-    font-size: 2rem;
-  }
-  .left-content img {
-    width: 75px;
-  }
-  .right-content img {
-    width: 400px;
   }
 }
 
