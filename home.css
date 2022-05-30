@@ -23,6 +23,8 @@ body {
   line-height: 1.4;
   /* font-family: "Lato", sans-serif; */
   /* filter: blur(4px); */
+  background-image: url("https://dishup.qodeinteractive.com/wp-content/themes/dishup/assets/img/background_pattern.jpg");
+
 }
 
 /*===========NAVBAR MAIN STYLE===================*/
@@ -313,6 +315,61 @@ header button {
 }
 
 /*====================MAIN SECTION=============== */
+section{
+  width: 60%;
+  height: 100vh;
+  /* background-color: white; */
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+section .rightContainer{
+  width: 60%;
+  height: 100vh;
+  background-color: white;
+  border-radius: 10px;
+  padding: 0 10px;
+}
+section .leftContainer{
+  width: 35%;
+  height: 100vh;
+  border-radius: 10px;
+  background-color: white;
+}
+section h2{
+  font-family: var(--third-font-family);
+  /* color: #fff; */
+  font-size: 2rem;
+  font-weight: 300;
+  margin-bottom: 0.75rem;
+  line-height: 1.1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: auto;
+  padding: 10px 0px;
+  border-bottom: 1px solid rgb(230, 230, 230);
+}
+section h2 img{
+  width: 80px;
+  border-radius: 50%;
+}
+
+.stars-container{
+  width: 100%;
+  height: 50px;
+  /* background-color: #555; */
+  /* padding: 0 10px; */
+  display: flex;
+  align-items: center;
+}
+.stars-container i{
+  /* margin-left: 20px; */
+  margin: 0 10px 0 20px; 
+}
+
+
+
 main {
   background-image: url("https://dishup.qodeinteractive.com/wp-content/themes/dishup/assets/img/background_pattern.jpg");
 }
@@ -404,7 +461,13 @@ main p strong {
 .stars-outer {
   position: relative;
   display: inline-block;
-  margin: 10px 0;
+  margin: 0 10px 0 0px;
+
+}
+.fa-message{
+  font-family:'Times New Roman', Times, serif;
+  font-weight: 900;
+
 }
 
 .stars-inner {
