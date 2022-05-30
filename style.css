@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&family=Roboto+Condensed&family=Sacramento&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Comfortaa%7CKaushan+Script%7COswald&display=swap%22");
+@import url("https://fonts.googleapis.com/css?family=Comfortaa|Kaushan+Script|Oswald&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Anton");
 :root {
   --modal-duration: 1s;
   --primary-color: #30336b;
@@ -36,9 +38,9 @@ nav {
   /* position: fixed; */
   top: 0;
   left: 0;
-  width: 100vw;
+  /* width: 100vw; */
   height: 100px;
-  z-index: 100;
+  /* z-index: 100; */
   overflow: hidden;
 }
 
@@ -129,14 +131,19 @@ form button {
 }
 main{
     color: white;
-    font-family: var(--third-font-family);
+    /* font-family: var(--third-font-family); */
     text-align: center;
 }
 section{
     display: flex;
-    width: 80%;
-    height: 500px;
+    width: 100%;
+    height: 700px;
     background-color: #30336b;
+    margin: auto;
+}
+span{
+  font-size: 50px;
+  font-family: var(--third-font-family);
 }
 .stars-outer{
   flex: 1;
@@ -144,9 +151,17 @@ section{
   /* display: inline-block; */
   content: "\f005 \f005 \f005 \f005 \f005";
   color: white;
+  background-image: url(https://images03.nicepage.com/a1389d7bc73adea1e1c1fb7e/255828e9c1025ebeb2d56125/pexelsphoto3304057.jpeg);
+  background-position:center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .resImage{
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #332e29;
 }
 .start-inner{
   position: absolute;
