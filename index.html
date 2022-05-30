@@ -27,27 +27,52 @@
     <!-- NAVBAR SECTION -->
     <nav class="">
       <div class="logo">
-        <img src="logo_white.png" />
+        <a href="index.html"><img src="logo_white.png" /></a>
       </div>
+      <input type="checkbox" name="" id="check" />
+      <label for="check" class="checkBtn">
+        <i class="fas fa-bars"></i>
+      </label>
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Contact Me</a></li>
+        <li><a class="active" href="./index.html">Нүүр</a></li>
+        <li><a href="#">Бидний тухай</a></li>
+        <li><a href="#">Холбоо барих</a></li>
       </ul>
-      <!--============FORM SECTION========= -->
-      <form id="form">
-        <input
-          type="text"
-          id="search"
-          placeholder="Enter restaurant name..."
-        />
+      <!--============SEARCH INPUT SECTION========= -->
+      <!-- <form id="form">
+        <input type="text" id="search" placeholder="Enter restaurant name..." />
         <button><i class="fas fa-search"></i></button>
-      </form>
+      </form> -->
       <div class="navBtnContainer">
         <i class="fa-solid fa-cart-shopping"></i>
-        <button class="signUp-btn" id="open">Sign Up</button>
-        <button class="login-btn" id="open">Login</button>
+        <button class="signUp-btn ripple" id="open">Sign Up</button>
+        <button class="login-btn ripple" id="open">Login</button>
+        <div class="profile">
+          <a href="#">
+            <i class="fas fa-user"></i>
+          </a>
+        </div>
+        <!-- Profile Window -->
+        <div class="user-profile-modal">
+          <h3>Хэрэглэгч ID:</h3>
+          <div>
+            <li>
+              <i class="fas fa-user-circle"></i
+              ><a class="" href="/profile.html">Хувийн мэдээлэл</a>
+            </li>
+            <li>
+              <i class="fas fa-edit"></i
+              ><a class="" href="/profile.html">Миний захиалга</a>
+            </li>
+            <li>
+              <i class="fas fa-cog"></i
+              ><a class="" href="/profile.html">Тохиргоо</a>
+            </li>
+            <li>
+              <a class="" href="#">Гарах</a>
+            </li>
+          </div>
+        </div>
       </div>
     </nav>
     <main>
