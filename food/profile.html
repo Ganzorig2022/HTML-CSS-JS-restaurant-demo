@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+      integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="profile.css" />
+    <link rel="shortcut icon" type="image/png" href="img/logo_black.png" />
+    <title>Restaurant Reservation and Booking Website</title>
+  </head>
+  <body>
+    <!--==================1. NAVBAR SECTION================== -->
+    <nav class="">
+      <div class="logo">
+        <a href="home.html"><img src="img/logo_white.png" /></a>
+      </div>
+      <input type="checkbox" name="" id="check" />
+      <label for="check" class="checkBtn">
+        <i class="fas fa-bars"></i>
+      </label>
+      <ul>
+        <li><a class="active" href="/home.html">Нүүр</a></li>
+        <li><a href="#">Бидний тухай</a></li>
+        <li><a href="#">Холбоо барих</a></li>
+      </ul>
+      <div class="navBtnContainer">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <button class="signUp-btn ripple" id="open">Sign Up</button>
+        <button class="login-btn ripple" id="open">Login</button>
+        <div class="profile">
+          <a href="#">
+            <i class="fas fa-user"></i>
+          </a>
+        </div>
+        <!-- Profile Window -->
+        <div class="user-profile-modal">
+          <h3>Хэрэглэгч ID:</h3>
+          <div>
+            <li>
+              <i class="fas fa-user-circle"></i
+              ><a class="" href="#">Хувийн мэдээлэл</a>
+            </li>
+            <li>
+              <i class="fas fa-edit"></i><a class="" href="#">Миний захиалга</a>
+            </li>
+            <li><i class="fas fa-cog"></i><a class="" href="#">Тохиргоо</a></li>
+            <li>
+              <a class="" href="#">Гарах</a>
+            </li>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!--============2.HEADER SECTION========= -->
+    <header>
+      <div class="showcase-content">
+        <h1>Your Restaurant</h1>
+        <p>Хэрэглэгчийн Булан</p>
+        <!-- <button class="order-btn ripple" id="open">Захиалга өгөх</button> -->
+      </div>
+    </header>
+    <!--============3.Main SECTION========= -->
+    <main>
+      <h1>Миний Захиалгууд</h1>
+      <div class="main-container">
+        <div class="left-content">
+          <li>
+            <a class="" href="#">Хувийн мэдээлэл</a>
+          </li>
+          <li>
+            <a class="" href="#">Миний захиалга</a>
+          </li>
+          <li><a class="" href="#">Тохиргоо</a></li>
+          <li>
+            <a class="" href="#">Гарах</a>
+          </li>
+        </div>
+        <div class="right-content">
+          <div class="right-content-img">kljhggfhjgjhk</div>
+        </div>
+      </div>
+    </main>
+    <script src="profile.js"></script>
+  </body>
+</html>
