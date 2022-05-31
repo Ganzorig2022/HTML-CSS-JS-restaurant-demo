@@ -10,7 +10,9 @@
       integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="Main.css" />
+    <script src="https://kit.fontawesome.com/a3b239acb8.js" crossorigin="anonymous"></script>
+
     <link rel="shortcut icon" type="image/png" href="img/logo_black.png" />
     <title>Restaurant Reservation and Booking Website</title>
   </head>
@@ -75,7 +77,7 @@
       </div>
     </header>
     <!--============3.Main SECTION========= -->
-    <main>
+    <!-- <main>
       <h1>Restaurants</h1>
       <div class="main-container">
         <div class="left-content">
@@ -99,7 +101,7 @@
           <span class="number-rating"
             >Үнэлгээ: 5-аас <span id="number-rating"> 4.5</span></span
           >
-          <button class="more-btn ripple" id="open" onclick="location.href=`Main.html`">Дэлгэрэнгүй</button>
+          <button class="more-btn ripple" id="open">Дэлгэрэнгүй</button>
         </div>
         <div class="right-content">
           <div class="right-content-img">
@@ -110,7 +112,92 @@
           </div>
         </div>
       </div>
-    </main>
-    <script src="home.js"></script>
+    </main> -->
+    <section class="container">
+      <div class="rightContainer ">
+        <h2>
+          Momo Hot Pot restaurant
+          <span
+            ><img
+              src="https://scontent.fuln8-1.fna.fbcdn.net/v/t31.18172-8/17761016_1896818063904890_8880108015428113544_o.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=knDZV3HMs5IAX9Ujg6u&tn=SZT24u-xOvzoHsDB&_nc_ht=scontent.fuln8-1.fna&oh=00_AT9_1fu_3gSME4gAa7hw50JfxkHqOtK838ZEE1jakNoWTw&oe=62B5DB9B"
+              alt=""
+          /></span>
+        </h2>
+        <div class="stars-container">
+          <div class="stars-outer">
+            <div class="stars-inner"></div>
+          </div>
+          <span class="">4.5</span>
+          <i class="fa-regular fa-message"></i>
+          <span><span>10  </span>Comment</span>
+        </div>
+        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. A doloribus esse nihil doloremque non architecto praesentium, illo earum maiores ipsa porro optio tenetur voluptatum similique vitae eius quisquam eveniet ea?</span>
+        <h3>
+          Menu
+        </h3>
+        <div class="menu-container">
+
+            <button class="btnBorder">
+              Хоол
+            </button>
+            <button>
+              Ус, ундаа
+            </button>
+
+            
+        </div>
+        <ul class="listContainer">
+          <li>
+            <h4> <span class="MenuText">ЯСНЫ ШӨЛ</span> <span>5,500₮</span></h4>
+            <p>Mongolian beef boun soup</p>
+          </li>
+          <li>
+            <h4> <span class="MenuText">ЯСНЫ СҮҮН ШӨЛ</span> <span>6,900₮</span></h4>
+            <p>Milk boun soup</p>
+          </li>
+          <li><h4> <span class="MenuText">МӨӨГНИЙ ШӨЛ</span> <span>6,500₮</span></h4>
+            <p>Mushroom boun soup</p></li>
+          <li><h4> <span class="MenuText">УЛААН ЛОЙЛЫН ШӨЛ</span> <span>7,500₮</span></h4>
+            <p>Tomato boun soup</p></li>
+        </ul>
+        <button class="">Дэлгэрэнгүй</button>
+        <h3>
+          Нийт <span> 10 </span> хүн үнэлгээ өгсөн
+        </h3>
+        <div class="stars-outer">
+          <div class="stars-inner"></div>
+          <span>4.5 дундаж үнэлгээ</span>
+        </div>
+        <ul class="ratingContaner">
+          <li>4.5 <span>хоол</span> </li>
+          <li>4.7 <span>үйлчилгээ</span></li>
+          <li>5 <span>Тав тухтай байдал</span></li>
+        </ul>
+      </div>
+      
+      <div class="leftContainer">
+        <h2>Ширээ захиалга</h2>
+        <span>Хүний тоо</span>
+        <select name="person" id="">
+          <option value="1">1 хүн</option>
+          <option value="2">2 хүн</option>
+          <option value="3">3 хүн</option>
+          <option value="4">4 хүн</option>
+          <option value="5">5 хүн</option>
+        </select>
+        <div class="datetime center"><span>Цаг</span>
+          <span>Өдөр</span></div>
+        <div class="center">
+          <select name="person" id="">
+            <option value=""></option>
+          </select>
+          <select name="person" id="">
+            <option value=""></option>
+            <option value=""></option>
+          </select></div>
+        <button>Захиалга</button>
+      </div>
+    </section>
+    <script src="Main.js"></script>
   </body>
 </html>
