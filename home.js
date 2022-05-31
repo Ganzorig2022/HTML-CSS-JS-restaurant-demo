@@ -45,10 +45,18 @@ buttons.forEach((button) => {
   });
 });
 
+// ========================Profile window Open=====================
 const userProfileBtn = document.getElementsByClassName("profile")[0];
 
 userProfileBtn.addEventListener("click", () => {
-  console.log("clicked");
   const userProfile = document.getElementsByClassName("user-profile-modal")[0];
   userProfile.classList.toggle("hidden");
+});
+
+// ========================Cart Modal Window Open=====================
+const cartIconBtn = document.getElementsByClassName("fa-shopping-cart")[0];
+
+cartIconBtn.addEventListener("click", () => {
+  const cartModal = document.getElementsByClassName("cart-modal")[0];
+  cartModal.classList.toggle("hidden");
 });

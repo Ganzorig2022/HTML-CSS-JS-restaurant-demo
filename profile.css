@@ -140,22 +140,127 @@ form button {
   height: 26px;
   color: #000;
 }
+.cart-icon {
+  position: relative;
+}
+.fa-shopping-cart {
+  font-size: 1rem;
+  letter-spacing: 2px;
+  background-color: #ccc;
+  border-radius: 50px;
+  color: #000;
+  cursor: pointer;
+  padding: 7px 10px;
+  margin-left: 10px;
+}
+.fa-shopping-cart:hover,
+.profile:hover {
+  box-shadow: 0 0 0.5vw #f2676d, 0 0 0.3vw #f2676d, 0 0 0.3vw #f2676d,
+    0 0 0 #ed1c24, 0 0 0.1vw #ed1c24, 0.05vw 0 0 #f2676d, 0.05vw 0 0 #ed1c24,
+    0.05vw 0 0.05vw #ed1c24, 0.05vw 0 0.5vw #ed1c24, 0.02vw 0 0.05vw #ed1c24,
+    0.05vw 0 0.05vw #ed1c24, -0.05vw 0 0.3vw #ed1c24, 0.05vw 0 0.2vw #ed1c24,
+    -0.1vw 0 0.2vw #f9343b, -0.05vw 0 0 #f9343b, 0 0 1.5vw #f9343b;
+}
+/* Cart Modal Window */
+.cart-modal {
+  background-color: #fff;
+  padding: 10px 0;
+  width: 300px;
+  border-radius: 15px;
+  transition: 0.5s;
+  position: absolute;
+  top: 70px;
+  right: 00px;
+  z-index: 3;
+  flex-direction: column;
+  display: none;
+}
+.cart-modal.hidden {
+  display: block;
+}
 
+.cart-modal::after {
+  content: "";
+  position: absolute;
+  top: -30px;
+  right: 18px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 30px solid #fff;
+}
+.cart-modal--header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px 10px;
+  border-bottom: 1px solid #555;
+}
+
+.cart-modal--header h3 {
+  font-size: 1rem;
+}
+
+.cart-modal--item {
+  display: flex;
+  align-items: center;
+  padding: 10px 10px;
+  border-bottom: 1px solid #555;
+  position: relative;
+}
+
+.cart-modal--item:hover {
+  background-color: rgb(255, 224, 224);
+}
+.cart-modal--item--image img {
+  object-fit: cover;
+  width: 60px;
+  border-radius: 10px;
+}
+.cart-modal--item--content {
+  margin-left: 5px;
+  padding-bottom: 10px;
+}
+.cart-modal--item--content h4 {
+  font-weight: 400;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+.cart-modal--item--content small {
+  color: #868686;
+}
+.cart-modal--item--content small:last-child {
+  margin-left: 10px;
+  color: #000;
+  font-weight: 600;
+}
+
+.cart-modal--item .cart-item-delete-btn {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+}
+.cart-modal--item .cart-item-delete-btn i {
+  transition: transform 0.6s ease-in-out;
+}
+.cart-modal--item .cart-item-delete-btn i:hover {
+  transform: rotate(180deg);
+}
 /* User Profile Modal Window */
 .user-profile-modal {
   background-color: #fff;
-  padding: 10px 20px 0;
+  padding: 10px 0 0;
   width: 150px;
   border-radius: 15px;
   transition: 0.5s;
   position: absolute;
   top: 90px;
   right: 10px;
-  opacity: 0;
-  z-index: 2;
+  display: none;
+  z-index: 5;
 }
 .user-profile-modal.hidden {
-  opacity: 1;
+  display: block;
 }
 .user-profile-modal div {
   display: flex;
@@ -181,7 +286,7 @@ form button {
 }
 .user-profile-modal div li {
   list-style: none;
-  padding: 10px 0;
+  padding: 10px 10px;
   border-top: 1px solid rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
@@ -209,7 +314,9 @@ form button {
 .user-profile-modal div li a:hover {
   color: var(--secondary-color);
 }
-
+.user-profile-modal div li:hover {
+  background-color: #efefef;
+}
 /*====================HEADER SECTION=============== */
 header {
   height: 50vh;
