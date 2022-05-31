@@ -17,7 +17,11 @@
   margin: 0;
   padding: 0;
 }
-
+.center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 body {
   font-family: var(--third-font-family);
   line-height: 1.4;
@@ -336,6 +340,19 @@ section .leftContainer{
   border-radius: 10px;
   background-color: white;
 }
+.rightContainer button{
+  font-family: inherit;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  padding: 5px 10px;
+  margin-left: 10px;
+  position: relative;
+}
 section h2{
   font-family: var(--third-font-family);
   /* color: #fff; */
@@ -349,6 +366,23 @@ section h2{
   margin: auto;
   padding: 10px 0px;
   border-bottom: 1px solid rgb(230, 230, 230);
+}
+section h3{
+  font-family: var(--third-font-family);
+  /* color: #fff; */
+  font-size: 2rem;
+  font-weight: 300;
+  margin-bottom: 0.75rem;
+  line-height: 1.1;
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: space-around; */
+  margin: auto;
+  padding: 10px 0px;
+  border-bottom: 1px solid rgb(230, 230, 230);
+}
+section h3 span{
+  margin: 0 10px ;
 }
 section h2 img{
   width: 80px;
@@ -379,10 +413,10 @@ section h2 img{
   font-family: inherit;
   font-size: 0.8rem;
   letter-spacing: 2px;
-  background-color: white;
-  border: 2px solid rgb(230, 230, 230);
+  background-color: var(--secondary-color);
+  border: none;
   border-radius: 5px;
-  /* color: #fff; */
+  color: #fff;
   cursor: pointer;
   padding: 5px 10px;
   margin-left: 10px;
@@ -398,6 +432,8 @@ section h2 img{
 }
 ul {
   /* display: block; */
+  border-bottom: 1px solid rgb(230, 230, 230);
+
   
 }
 li {
@@ -408,12 +444,12 @@ li p{
   font-family: var(--secondary-font-family);
 }
 .MenuText{
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   padding: 5px;
   color: #fff;
 
 }
-h3{
+h4{
   display: flex;
   font-family: var(--secondary-font-family);
     font-size: 14px;
@@ -507,7 +543,31 @@ main p strong {
 .right-content:hover img {
   transform: scale(1.1);
   transition: transform 0.5s ease;
+
 }
+/* leftContainer */
+.leftContainer select{
+  width: 100%;
+  font-size: 1rem;
+  border: none;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  color: #ccc;
+}
+
+/* Нийт үнэлгээ */
+.ratingContaner{
+  display: flex;
+}
+.ratingContaner li{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-left: 1px solid rgb(230, 230, 230);
+}
+
+
 
 /* Rating Star*/
 .stars-outer {
