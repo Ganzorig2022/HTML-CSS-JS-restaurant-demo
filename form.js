@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut} from "https://www.gstatic.com/firebasejs/9.8.2/firebase-auth.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -29,7 +29,7 @@ document.getElementById('log-btn').addEventListener('click', function(){
     document.getElementById('login-div').style.display="inline";
 });
 
-
+// LOGIN HESEG
     document.getElementById('login-btn').addEventListener('click', function(){
         const loginEmail=document.getElementById("login-email").value;
         const loginPassword=document.getElementById("login-password").value;
@@ -52,6 +52,39 @@ document.getElementById('log-btn').addEventListener('click', function(){
         });
     });
 
+//REGISTER HESEG
+        document.getElementById('register-btn').addEventListener('click', function(){
+        const registerEmail=document.getElementById("register-email").value;
+        const registerPassword=document.getElementById("register-password").value;
+
+        createUserWithEmailAndPassword(auth, registerEmail, registerPassword)
+        .then((userCredential) => {
+     // Signed in
+        const user = userCredential.user;
+        document.getElementById('result-box').style.display="inline";
+        document.getElementById('register-div').style.display="none";
+        document.getElementById('result').innerHTML="Welcome <br>"+registerEmail+" was registered successfully";
+        })
+        .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        document.getElementById('result-box').style.display="inline";
+        document.getElementById('register-div').style.display="none";
+        document.getElementById('result').innerHTML="Sorry ! <br>"+errorMessage;
+
+        });
+    });
+//LOGOUT HESEG
+        document.getElementById('log-out-btn').addEventListener('click', function(){
+        signOut(auth).then(() => {
+        // Sign-out successful.
+        document.getElementById('result-box').style.display="none";
+        document.getElementById('login-div').style.display="inline";
+        }).catch((error) => {
+         // An error happened.
+        document.getElementById('result').innerHTML="Sorry ! <br>"
+        });
+        })
 
 
 
