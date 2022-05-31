@@ -15,6 +15,7 @@ function getRatings() {
 
   // Set width of stars-inner to percentage
   const starsInner = document.querySelector(".stars-inner");
+
   starsInner.style.width = starPercentageRounded;
 }
 
@@ -52,3 +53,6 @@ userProfileBtn.addEventListener("click", () => {
   const userProfile = document.getElementsByClassName("user-profile-modal")[0];
   userProfile.classList.toggle("hidden");
 });
+
+
+

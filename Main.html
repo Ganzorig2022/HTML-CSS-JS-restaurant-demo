@@ -11,6 +11,8 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="Main.css" />
+    <link rel="stylesheet" href="MainCalendar.css" />
+
     <script src="https://kit.fontawesome.com/a3b239acb8.js" crossorigin="anonymous"></script>
 
     <link rel="shortcut icon" type="image/png" href="img/logo_black.png" />
@@ -71,7 +73,7 @@
     <!--============2.HEADER SECTION========= -->
     <header>
       <div class="showcase-content">
-        <h1>Your Restaurant</h1>
+        <h1>MOMO HOT POT</h1>
         <p>Чанартай сонголт</p>
         <button class="order-btn ripple" id="open">Захиалга өгөх</button>
       </div>
@@ -123,11 +125,14 @@
               alt=""
           /></span>
         </h2>
+        
         <div class="stars-container">
           <div class="stars-outer">
             <div class="stars-inner"></div>
           </div>
-          <span class="">4.5</span>
+          <span class="number-rating" id="number-rating"
+            > 2.5</span
+          >
           <i class="fa-regular fa-message"></i>
           <span><span>10  </span>Comment</span>
         </div>
@@ -136,16 +141,14 @@
           Menu
         </h3>
         <div class="menu-container">
-
             <button class="btnBorder">
               Хоол
             </button>
             <button>
               Ус, ундаа
             </button>
-
-            
         </div>
+        <h5>ШӨЛ</h5>
         <ul class="listContainer">
           <li>
             <h4> <span class="MenuText">ЯСНЫ ШӨЛ</span> <span>5,500₮</span></h4>
@@ -160,13 +163,13 @@
           <li><h4> <span class="MenuText">УЛААН ЛОЙЛЫН ШӨЛ</span> <span>7,500₮</span></h4>
             <p>Tomato boun soup</p></li>
         </ul>
-        <button class="">Дэлгэрэнгүй</button>
+        <button class="button">Хоолны цэс дэлгэрэнгүй харах</button>
         <h3>
-          Нийт <span> 10 </span> хүн үнэлгээ өгсөн
+          Үнэлгээ өгсөн: <span> 10 </span> хүн
         </h3>
-        <div class="stars-outer">
-          <div class="stars-inner"></div>
-          <span>4.5 дундаж үнэлгээ</span>
+        <div class="stars-outer" >
+          <div class="stars-inner" style="width: 20%;"></div>
+          <span class="number-rating" id="number-rating" >4.5</span>
         </div>
         <ul class="ratingContaner">
           <li>4.5 <span>хоол</span> </li>
@@ -176,28 +179,79 @@
       </div>
       
       <div class="leftContainer">
-        <h2>Ширээ захиалга</h2>
+        <div class="leftContainerTime">
+          <h2>Ширээ захиалга</h2>
         <span>Хүний тоо</span>
-        <select name="person" id="">
+        <select name="person" id="person" class="">
           <option value="1">1 хүн</option>
-          <option value="2">2 хүн</option>
+          <option value="2" selected>2 хүн</option>
           <option value="3">3 хүн</option>
           <option value="4">4 хүн</option>
           <option value="5">5 хүн</option>
         </select>
-        <div class="datetime center"><span>Цаг</span>
-          <span>Өдөр</span></div>
-        <div class="center">
-          <select name="person" id="">
-            <option value=""></option>
-          </select>
-          <select name="person" id="">
-            <option value=""></option>
-            <option value=""></option>
+        <div class="datetime ">
+          <div>Цаг</div>
+          <div>Өдөр</div>
+        </div>
+        <div class="calendar center">
+          
+          <div class="date-picker center">
+            <div class="selected-date"></div>
+        
+            <div class="dates">
+              <div class="month">
+                <div class="arrows prev-mth">&lt;</div>
+                <div class="mth"></div>
+                <div class="arrows next-mth">&gt;</div>
+              </div>
+        
+              <div class="days"></div>
+            </div>
+          </div>
+          <select name="time" id="time" class="">
+            <option value="12">12:00 AM</option>
+            <option value="1">1:00 AM</option>
+            <option value="2">2:00 AM</option>
+            <option value="3">3:00 AM</option>
+            <option value="4">4:00 AM</option>
+            <option value="5">5:00 AM</option>
+            <option value="6">6:00 AM</option>
+            <option value="7">7:00 AM</option>
+            <option value="8">8:00 AM</option>
+            <option value="9">9:00 AM</option>
+            <option value="10">10:00 AM</option>
+            <option value="11">11:00 AM</option>
+            <option value="1" selected>1:00 PM</option>
+            <option value="2">2:00 PM</option>
+            <option value="3">3:00 PM</option>
+            <option value="4">4:00 PM</option>
+            <option value="5">5:00 PM</option>
+            <option value="6">6:00 PM</option>
+            <option value="7">7:00 PM</option>
+            <option value="8">8:00 PM</option>
+            <option value="9">9:00 PM</option>
+            <option value="10">10:00 PM</option>
+            <option value="11">11:00 PM</option>
+            <option value="12">12:00 PM</option>
+
           </select></div>
-        <button>Захиалга</button>
+        <button class="btnTime">Захиалга</button>
+        </div>
+        <div class="leftContainerLocation">
+          <img src="img/location.png" style="width: 100%; border-radius: 5px;" alt="">
+          <div class="locationTitle">
+            <div>
+              <i class="fa-solid fa-location-dot"></i><span>Салбар 1: Мөнгөн завъяагаас Их дэлгүүр явах зам дагуу,</span>
+            </div>
+            <div>
+              <i class="fa-solid fa-location-dot"></i><span>Салбар 2: UB palace-н урд 47/2-р байр 15170 Ulaanbaatar, Mongolia</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
     <script src="Main.js"></script>
+    <script src="Calendar.js"></script>
+
   </body>
 </html>
