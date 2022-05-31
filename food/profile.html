@@ -49,7 +49,7 @@
             <li>
               <i class="fas fa-edit"></i><a class="" href="#">Миний захиалга</a>
             </li>
-            <li><i class="fas fa-cog"></i><a class="" href="#">Тохиргоо</a></li>
+            <!-- <li><i class="fas fa-cog"></i><a class="" href="#">Тохиргоо</a></li> -->
             <li>
               <a class="" href="#">Гарах</a>
             </li>
@@ -71,18 +71,83 @@
       <div class="main-container">
         <div class="left-content">
           <li>
-            <a class="" href="#">Хувийн мэдээлэл</a>
+            <p>Хувийн мэдээлэл</p>
           </li>
           <li>
-            <a class="" href="#">Миний захиалга</a>
+            <p>Миний захиалга</p>
           </li>
-          <li><a class="" href="#">Тохиргоо</a></li>
+          <!-- <li>
+            <p>Тохиргоо</p>
+          </li> -->
           <li>
-            <a class="" href="#">Гарах</a>
+            <p>Гарах</p>
           </li>
         </div>
-        <div class="right-content">
-          <div class="right-content-img">kljhggfhjgjhk</div>
+        <div class="right-content content1">
+          <h3>Хувийн мэдээлэл</h3>
+          <div class="form1-container flex-row">
+            <div class="flex-column">
+              <label>Нэр *</label>
+              <input
+                type="text"
+                name="first-name"
+                value="Ganzorig"
+                class="form-control"
+              />
+            </div>
+            <div class="flex-column">
+              <label>Овог *</label>
+              <input
+                type="text"
+                name="last-name"
+                value="Nyamsuren"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="form1-container flex-row">
+            <div class="flex-column">
+              <label>Хүйс</label>
+              <select name="gender" id="" class="form-control">
+                <option value="M">Эрэгтэй</option>
+                <option value="F">Эмэгтэй</option>
+              </select>
+            </div>
+            <div class="flex-column">
+              <label>Төрсөн өдөр</label>
+              <input
+                type="text"
+                name="birthday"
+                value=""
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="save-btn-container">
+            <button class="save-btn ripple">Мэдээллээ хадгалах</button>
+          </div>
+        </div>
+        <div class="right-content content2">
+          <div class="right-content-date flex-column">
+            Огноо
+            <span>2022-05-30</span>
+          </div>
+          <div class="right-content-people flex-column">
+            Хүн
+            <span>2</span>
+          </div>
+          <div class="right-content-time flex-column">
+            Цаг <span>17:00</span>
+          </div>
+          <div class="right-content-seat flex-column">Ширээ <span>2</span></div>
+          <div class="right-content-food flex-column">
+            Төлөв
+            <span>Баталгаажсан</span>
+          </div>
+          <div class="right-content-price flex-column">
+            Үнэ ₮
+            <span>30000₮</span>
+          </div>
         </div>
       </div>
     </main>
