@@ -55,4 +55,40 @@ userProfileBtn.addEventListener("click", () => {
 });
 
 
+//listContainer1
+let menuBtn = document.getElementById("btnBorder");
+let menuBtn1 = document.getElementById("btnBorder1");
+let MenuTxt = document.getElementsByTagName("h5")[0];
+let listContainer = document.querySelector(".listContainer");
+let listContainer1 = document.querySelector(".listContainer1");
 
+menuBtn.addEventListener("click", ()=>{
+  if(listContainer.style.display == "block"){
+
+  }else{
+  menuBtn.classList.toggle("btnActive");
+  menuBtn1.classList.toggle("btnActive");
+
+  MenuTxt.textContent = "ШӨЛ";
+  
+  listContainer.style.display = "block";
+  listContainer1.style.display = "none";
+  }
+  // menuBtn.classList.toggle("btnActive");
+  // menuBtn1.classList.toggle("btnActive");
+  // MenuTxt.textContent = "ШӨЛ";
+  // listContainer.style.display = "block";
+  // listContainer1.style.display = "none";
+});
+menuBtn1.addEventListener("click", ()=>{
+  if(listContainer1.style.display == "block"){
+
+  }else{
+  menuBtn.classList.toggle("btnActive");
+  menuBtn1.classList.toggle("btnActive");
+  MenuTxt.textContent = "Ус, ундаа";
+  listContainer.style.display = "none";
+  listContainer1.style.display = "block";
+  }
+  
+});
