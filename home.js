@@ -1,22 +1,22 @@
 // Run getRatings when DOM loads
 document.addEventListener("DOMContentLoaded", getRatings);
 
-const starsTotal = 5;
-// Get ratings
-function getRatings() {
-  // Get percentage
-  const numberRating = document.getElementById("number-rating");
-  let numberRatingValue = numberRating.textContent;
+// const starsTotal = 5;
+// // Get ratings
+// function getRatings() {
+//   // Get percentage
+//   const numberRating = document.getElementById("number-rating");
+//   let numberRatingValue = numberRating.textContent;
 
-  const starPercentage = (numberRatingValue / starsTotal) * 100;
+//   const starPercentage = (numberRatingValue / starsTotal) * 100;
 
-  // Round to nearest 10
-  const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+//   // Round to nearest 10
+//   const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
 
-  // Set width of stars-inner to percentage
-  const starsInner = document.querySelector(".stars-inner");
-  starsInner.style.width = starPercentageRounded;
-}
+//   // Set width of stars-inner to percentage
+//   const starsInner = document.querySelector(".stars-inner");
+//   starsInner.style.width = starPercentageRounded;
+// }
 
 // =================Button Effect====================
 const buttons = document.querySelectorAll(".ripple");

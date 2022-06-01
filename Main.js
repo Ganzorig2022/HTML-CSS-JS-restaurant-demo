@@ -1,13 +1,16 @@
 // Run getRatings when DOM loads
 document.addEventListener("DOMContentLoaded", getRatings);
 
-const starsTotal = 5;
+let starsTotal = 5;
 // Get ratings
 function getRatings() {
   // Get percentage
-  const numberRating = document.getElementById("number-rating");
-  let numberRatingValue = numberRating.textContent;
-
+  let numberRating = document.getElementsByClassName("number-rating");
+  let numberRatingValue = numberRating[0].textContent;
+  console.log("numberRatingValue", numberRatingValue);
+  for(let j=0; j<numberRating.length; j++){
+    numberRating[j].textContent = numberRatingValue;
+  }
   const starPercentage = (numberRatingValue / starsTotal) * 100;
 
   // Round to nearest 10
@@ -15,10 +18,11 @@ function getRatings() {
 
   // Set width of stars-inner to percentage
   const starsInner = document.querySelector(".stars-inner");
-
-  starsInner.style.width = starPercentageRounded;
+  const starsInner1 = document.getElementsByClassName("stars-inner");
+  for(let i=0; i<starsInner1.length; i++){
+  starsInner1[i].style.width = starPercentageRounded;
+  }
 }
-
 // =================Button Effect====================
 const buttons = document.querySelectorAll(".ripple");
 buttons.forEach((button) => {
@@ -53,6 +57,21 @@ userProfileBtn.addEventListener("click", () => {
   const userProfile = document.getElementsByClassName("user-profile-modal")[0];
   userProfile.classList.toggle("hidden");
 });
+// let meterDiv = document.getElementsByClassName("meterDiv")[0];
+// meterDiv.style.width = "50%";
+// Meter rating
+let meterFoodRating = document.getElementsByClassName("meterFoodRating");
+let meterDivCount =0;
+for(let i=0; i<meterFoodRating.length; i++){
+  let meterFoodRatingValue = meterFoodRating[i].textContent;
+  let meterPercentage = (meterFoodRatingValue / starsTotal) * 100;
+  // Round to nearest 10
+  let meterPercentageRounded = `${Math.round(meterPercentage / 10) * 10}%`;
+  meterDivCount ++;
+  let meterDiv = document.getElementsByClassName(`meterDiv${meterDivCount}`)[0];
+  console.log("meterDiv", meterDiv);
+  meterDiv.style.width = meterPercentageRounded;
+}
 
 
 //listContainer1
