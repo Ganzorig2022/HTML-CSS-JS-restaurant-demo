@@ -1,3 +1,17 @@
+@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&family=Roboto+Condensed&family=Sacramento&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Comfortaa|Kaushan+Script|Oswald&display=swap");
+
+:root {
+  --modal-duration: 1s;
+  --primary-color: #30336b;
+  --secondary-color: #fb1c25;
+  --text-shadow-color: #1c9797;
+  --main-font-family: "Sacramento", cursive;
+  --secondary-font-family: "Lato", sans-serif;
+  --third-font-family: Oswald, sans-serif;
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -38,76 +52,154 @@ main{
     flex-direction: column;
     width: 80%;
     height: 500px;
-    background-color: darkcyan;
+    /* background-color: darkcyan; */
+    background-image: url(https://png.pngtree.com/thumb_back/fh260/back_our/20190621/ourmid/pngtree-restaurant-food-menu-background-image_190820.jpg);
+    background-size: cover;
+    background-position: center;
     margin: auto;
+    border-radius: 20px;
     /* margin-top: 300px; */
+
+}
+h1{
+    margin: auto;
+    font-family: var(--third-font-family);
+    color: var(--secondary-color);
 
 }
 .seat{
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    background-color: aqua;
+    background-color: #fab22c;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .seat::after{
     content: "";
     width: 10px;
-    height: 35px;
+    height: 36px;
     border-radius: 10px;
-    background-color: rgb(204, 167, 5);
+    background-color: rgb(255, 255, 255);
     position: absolute;
-    margin-left: -10px;
-    margin-top: 17px;
+    margin-left: -80px;
 }
 .seat::before{
     content: "";
     width: 10px;
-    height: 35px;
+    height: 36px;
     border-radius: 10px;
-    background-color: rgb(204, 167, 5);
+    background-color: rgb(255, 255, 255);
     position: absolute;
-    margin-left: 70px;
-    margin-top: 17px;
+    margin-left: 80px;
 }
 .seat1{
     width: 150px;
     height: 70px;
     border-radius: 20px;
-    background-color: aqua;
+    background-color: #fab22c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.active{
+    background-color: var(--secondary-color);
+}
+.seat:hover{
+    cursor: pointer;
+
+}
+.seat1:hover{
+    cursor: pointer;
+}
+.seat2:hover{
+    cursor: pointer;
 }
 .seat1::after{
     content: "";
     position: absolute;
-    width: 35px;
+    width: 36px;
     height: 10px;
     border-radius: 10px;
-    background-color: rgb(204, 167, 5);
-    margin-top: -10px;
-    margin-left: 13px;
-    box-shadow: 90px 0 0 0 rgb(204, 167, 5);
+    background-color: rgb(255, 255, 255);
+    margin-top: -80px;
+    margin-left: -90px;
+    box-shadow: 90px 0 0 0 rgb(255, 255, 255);
 }
 .seat1::before{
     content: "";
     position: absolute;
-    width: 35px;
+    width: 36px;
     height: 10px;
     border-radius: 10px;
-    background-color: rgb(204, 167, 5);
-    margin-top: 70px;
-    margin-left: 13px;
-    box-shadow: 90px 0 0 0 rgb(204, 167, 5);
-}
-.seat1 span{
-    width: 10px;
-    height: 35px;
-    border-radius: 10px;
-    background-color: rgb(204, 167, 5);
+    background-color: rgb(255, 255, 255);
+    margin-top: 80px;
+    margin-left: -90px;
+    box-shadow: 90px 0 0 0 rgb(255, 255, 255);
 }
 .seat2{
     width: 100px;
     height: 100px;
     border-radius: 20px;
-    background-color: aqua;
+    background-color: #fab22c;
     transform: rotate(45deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.seat2 .seatNum{
+    transform: rotate(-45deg);
+}
+.seat2::after{
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 36px;
+    border-radius: 10px;
+    background-color: white;
+    /* transform: rotate(45deg); */
+    margin-top: 0px;
+    margin-left: -110px;
+    box-shadow: 110px 0 0 0 white;
+}
+.seat2::before{
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 36px;
+    border-radius: 10px;
+    background-color: white;
+    transform: rotate(90deg);
+    margin-top: -110px;
+    margin-left: 0px;
+    box-shadow: 110px 0 0 0 white;
+}
+.timer{
+    width: 80%;
+    height: auto;
+    display: flex;
+    margin: auto;
+    margin-bottom: 50px;
+}
+.fimerFlex{
+    flex: 1;
+    font-family: var(--secondary-font-family);
+
+}
+.timer *{
+    padding: 10px;    
+}
+.timerBorder{
+    border: 1px solid rgb(204, 204, 204);
+}
+.timerBorderTrans{
+    border-left-color: transparent;
+
+}
+.seatNum{
+    position: absolute;
+    color: white;
+    font-size: 2rem;
 }

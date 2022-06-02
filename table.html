@@ -5,35 +5,105 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="table.css">
+    <link rel="stylesheet" href="MainCalendar1.css">
     <title>Document</title>
 </head>
 <body>
     <main>
         <div class="container">
+                <div class="timer">
+                    <select name="person" id="person" class="timerBorder fimerFlex">
+                        <option value="1">1 хүн</option>
+                        <option value="2" selected>2 хүн</option>
+                        <option value="3">3 хүн</option>
+                        <option value="4">4 хүн</option>
+                        <option value="5">5 хүн</option>
+                    </select>
+                    <div class="date-picker fimerFlex center timerBorder timerBorderTrans">
+                        <div class="selected-date"></div>
+                        <div class="dates">
+                            <div class="month">
+                                <div class="arrows prev-mth">&lt;</div>
+                                <div class="mth"></div>
+                                <div class="arrows next-mth">&gt;</div>
+                            </div>
+                        <div class="days"></div>
+                    </div>
+                </div>
+                <select name="time" id="time" class="timerBorder fimerFlex timerBorderTrans">
+                    <option value="12">12:00 AM</option>
+                    <option value="1">1:00 AM</option>
+                    <option value="2">2:00 AM</option>
+                    <option value="3">3:00 AM</option>
+                    <option value="4">4:00 AM</option>
+                    <option value="5">5:00 AM</option>
+                    <option value="6">6:00 AM</option>
+                    <option value="7">7:00 AM</option>
+                    <option value="8">8:00 AM</option>
+                    <option value="9">9:00 AM</option>
+                    <option value="10">10:00 AM</option>
+                    <option value="11">11:00 AM</option>
+                    <option value="1" selected>1:00 PM</option>
+                    <option value="2">2:00 PM</option>
+                    <option value="3">3:00 PM</option>
+                    <option value="4">4:00 PM</option>
+                    <option value="5">5:00 PM</option>
+                    <option value="6">6:00 PM</option>
+                    <option value="7">7:00 PM</option>
+                    <option value="8">8:00 PM</option>
+                    <option value="9">9:00 PM</option>
+                    <option value="10">10:00 PM</option>
+                    <option value="11">11:00 PM</option>
+                    <option value="12">12:00 PM</option>
+                </select>
+            </div>
+            <h1>Ширээний сонголт</h1>
             <div class="table">
                 <div class="row">
-                    <div class="seat"></div>
-                    <div class="seat"></div>
-                    <div class="seat"></div>
-                    <div class="seat"></div>
-                    <div class="seat"></div>
+                    <div class="seat">
+                        <span class="seatNum">1</span>
+                    </div>
+                    <div class="seat">
+                        <span class="seatNum">2</span>
+                    </div>
+                    <div class="seat">
+                        <span class="seatNum">3</span>
+                    </div>
+                    <div class="seat">
+                        <span class="seatNum">4</span>
+                    </div>
+                    <div class="seat">
+                        <span class="seatNum">5</span>
+                    </div>
 
                 </div>
                 <div class="row">
                     <div class="seat1">
-                    <span></span>
+                        <span class="seatNum">4</span>
                     </div>
-                    <div class="seat1"></div>
+                    <div class="seat1">
+                        <span class="seatNum">5</span>
+                    </div>
 
                 </div>
                 <div class="row">
-                    <div class="seat2"></div>
-                    <div class="seat2"></div>
-                    <div class="seat2"></div>
+                    <div class="seat2">
+                        <span class="seatNum">6</span>
+                    </div>
+                    <div class="seat2">
+                        <span class="seatNum">7</span>
+                    </div>
+                    <div class="seat2">
+                        <span class="seatNum">8</span>
+                    </div>
                 </div>
                 
             </div>
         </div>
     </main>
+    <script src="Calendar.js"></script>
+    <script src="table.js"></script>
+
+
 </body>
 </html>
