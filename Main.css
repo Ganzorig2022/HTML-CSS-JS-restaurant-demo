@@ -468,6 +468,8 @@ section h2 img{
 }
 .listContainer1{
   display: none;
+  list-style: none;
+
 }
 .listContainer ul {
   border-bottom: 1px solid rgb(230, 230, 230);
@@ -640,7 +642,6 @@ main p strong {
   display: inline-block;
   margin: 10px 0;
 }
-
 .stars-inner {
   position: absolute;
   top: 0;
@@ -649,20 +650,128 @@ main p strong {
   overflow: hidden;
   width: 0;
 }
-
 .stars-outer::before {
   content: "\f005 \f005 \f005 \f005 \f005";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   color: #ccc;
 }
-
 .stars-inner::before {
   content: "\f005 \f005 \f005 \f005 \f005";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   color: #f8ce0b;
 }
+
+.test{
+  width: 50%;
+  height: 20px;
+  background-color: #555;
+}
+.test::before{
+  content: "\f007 \f007 \f007 \f007 \f007 \f007 \f007";
+  font-family: "Font Awesome 5 Free";
+
+  color: #f8ce0b;
+
+}
+/* Person rating */
+.personRating{
+  display: flex;
+  width: 100%;
+  height: auto;
+}
+.personRatingLeft{
+  flex: 1;
+}
+.personRatingRight{
+  flex: 1;  
+}
+.personRatingRight div{
+  display: flex;
+}
+.meterFoodRating{
+  width: 20%;
+  padding: 0 5px;
+}
+.meter{
+  appearance: none;
+  width: 100%;
+  height: 20px;
+  border: 0.0625rem solid #d8d9db;
+}
+.meterDiv1{
+  /* display: block; */
+  background-color: var(--secondary-color);
+  height: 1rem;
+}
+.meterDiv2{
+  /* display: block; */
+  background-color: var(--secondary-color);
+  height: 1rem;
+}
+.meterDiv3{
+  /* display: block; */
+  background-color: var(--secondary-color);
+  height: 1rem;
+}
+/* Comment heseg */
+.comment{
+  width: 100%;
+  height: auto;
+  display: flex;
+  padding: 10px 0;
+  border-bottom: 1px solid rgb(87, 87, 87);
+
+}
+.comment .commentProfile{
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* color: #ccc; */
+}
+.comment .commentText{
+  width: 80%;
+}
+.commentProfilePicture{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #d86441;
+  color: #ccc;
+}
+.commentTextrating{
+  display: flex;
+  list-style: none;
+
+}
+.foodRating span{
+  color: var(--secondary-color);
+}
+.serviceRating span{
+  color: var(--secondary-color);
+}
+.ambienceRating span{
+  color: var(--secondary-color);
+}
+.foodRating::after{
+  color: #000000;
+    content: "\B7";
+    padding: 0 4px;
+}
+.serviceRating::after{
+  color: #000;
+    content: "\B7";
+    padding: 0 4px;
+}
+/* .ambienceRating::after{
+  color: #000;
+    content: "\B7";
+    padding: 0 4px;
+} */
+
 
 
 .number-rating {
@@ -808,8 +917,3 @@ button .circle {
 /* =======================LANDSCAPE================= */
 @media (min-width: 1200px) {
 }
-
-
-
-
-
