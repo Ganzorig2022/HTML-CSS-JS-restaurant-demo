@@ -1,0 +1,47 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    /* width: 100%; */
+    /* height: 100vh; */
+    background-image: url(https://cdn.otstatic.com/restref-site/img/png/wood-grain-pattern-gray@2x.png);
+    background-size: 625px;
+}
+main{
+    width: 50%;
+    height: 100vh;
+    background-color: white;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container{
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    width: 100%;
+    height: auto;
+}
+.container .table{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 400px;
+    background-color: darkcyan;
+    margin: auto;
+    /* margin-top: 300px; */
+
+}
+.seat{
+    width: 50px;
+    height: 50px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: aqua;
+    margin: 3px;
+}

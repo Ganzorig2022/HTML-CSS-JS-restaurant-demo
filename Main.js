@@ -111,3 +111,13 @@ menuBtn1.addEventListener("click", ()=>{
   }
   
 });
+
+const cartIconBtn = document.getElementsByClassName("fa-shopping-cart")[0];
+
+
+
+// ========================Cart Modal Window Open=====================
+cartIconBtn.addEventListener("click", () => {
+  const cartModal = document.getElementsByClassName("cart-modal")[0];
+  cartModal.classList.toggle("hidden");
+});
