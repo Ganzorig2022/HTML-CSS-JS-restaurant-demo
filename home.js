@@ -60,3 +60,35 @@ cartIconBtn.addEventListener("click", () => {
   const cartModal = document.getElementsByClassName("cart-modal")[0];
   cartModal.classList.toggle("hidden");
 });
+
+// ========================LOGIN MODAL window Open=====================
+const loginOpen = document.getElementById("login-open");
+const loginModal = document.getElementById("login-modal");
+const loginClose = document.getElementById("modal-close-btn");
+
+loginOpen.addEventListener("click", () => {
+  loginModal.classList.add("show-modal");
+});
+loginClose.addEventListener("click", () => {
+  loginModal.classList.remove("show-modal");
+});
+
+window.addEventListener("click", (e) => {
+  e.target == loginModal ? loginModal.classList.remove("show-modal") : false;
+});
+
+// ========================SIGNUP MODAL window Open=====================
+const singupOpen = document.getElementById("signup-open");
+const signupModal = document.getElementById("signup-modal");
+const signupClose = document.getElementById("signup-close-btn");
+
+singupOpen.addEventListener("click", () => {
+  signupModal.classList.add("show-modal");
+});
+signupClose.addEventListener("click", () => {
+  signupModal.classList.remove("show-modal");
+});
+
+window.addEventListener("click", (e) => {
+  e.target == signupModal ? signupModal.classList.remove("show-modal") : false;
+});
