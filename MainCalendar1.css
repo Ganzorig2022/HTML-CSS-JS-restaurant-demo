@@ -29,7 +29,7 @@
       display: none;
       position: absolute;
       top: 100%;
-      left: -50px;
+      /* left: -5%; */
       /* right: 0; */
       background-color: #f1f2f4;
       z-index: 100;

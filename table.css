@@ -61,7 +61,7 @@ main{
     border-radius: 20px;
     /* margin-top: 300px; */
     position: relative;
-
+    font-family: var(--third-font-family);
 }
 .windowsTop{
     width: 100%;
@@ -257,7 +257,7 @@ h1{
 .seatNum{
     position: absolute;
     color: white;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 .button{
     width: 20%;
