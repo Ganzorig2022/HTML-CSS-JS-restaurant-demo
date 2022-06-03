@@ -46,25 +46,62 @@ main{
     display: flex;
     align-items: center;
     justify-content: space-around;
+    padding:30px 0;
 }
 .container .table{
     display: flex;
     flex-direction: column;
     width: 80%;
-    height: 500px;
+    height: auto;
     /* background-color: darkcyan; */
-    background-image: url(https://png.pngtree.com/thumb_back/fh260/back_our/20190621/ourmid/pngtree-restaurant-food-menu-background-image_190820.jpg);
+    background-image: url(https://dishup.qodeinteractive.com/wp-content/themes/dishup/assets/img/background_pattern.jpg);
     background-size: cover;
     background-position: center;
     margin: auto;
     border-radius: 20px;
     /* margin-top: 300px; */
+    position: relative;
 
 }
+.windowsTop{
+    width: 100%;
+    height: auto;
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+}
+.windowsRight{
+    width: 10px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    display: flex;
+    background-color: gray;
+}
+
+.test{
+    /* position: absolute; */
+    width: 100px;
+    height: 10px;
+    background-color: #fff;
+    border: 1px solid grey;
+    margin-top: -5px;
+    /* margin-left: ; */
+}
+.test div{
+    width: 100px;
+    height: 1px;
+    background-color: gray;
+    margin-top: 5px;
+
+}
+
+
 h1{
     margin: auto;
     font-family: var(--third-font-family);
     color: var(--secondary-color);
+    letter-spacing: 2px;
 
 }
 .seat{
@@ -72,6 +109,7 @@ h1{
     height: 70px;
     border-radius: 50%;
     background-color: #fab22c;
+    background-color: var(--primary-color);
     position: relative;
     display: flex;
     justify-content: center;
@@ -99,14 +137,12 @@ h1{
     width: 150px;
     height: 70px;
     border-radius: 20px;
-    background-color: #fab22c;
+    background-color: var(--primary-color);
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.active{
-    background-color: var(--secondary-color);
-}
+
 .seat:hover{
     cursor: pointer;
 
@@ -139,12 +175,29 @@ h1{
     margin-left: -90px;
     box-shadow: 90px 0 0 0 rgb(255, 255, 255);
 }
+.seat1Chair{
+    width: 10px;
+    height: 36px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    margin-left: -160px;
+}
+.seat1Chair::after{
+    content: "";
+    width: 10px;
+    height: 36px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    margin-left: 160px;
+}
 .seat2{
+    transform: rotate(45deg);
     width: 100px;
     height: 100px;
     border-radius: 20px;
-    background-color: #fab22c;
-    transform: rotate(45deg);
+    background-color: var(--primary-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -176,6 +229,9 @@ h1{
     margin-left: 0px;
     box-shadow: 110px 0 0 0 white;
 }
+.active{
+    background-color: var(--secondary-color);
+}
 .timer{
     width: 80%;
     height: auto;
@@ -203,3 +259,35 @@ h1{
     color: white;
     font-size: 2rem;
 }
+.button{
+    width: 20%;
+    margin: auto;
+    margin-top: 10px;
+    font-family: inherit;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    background-color: var(--secondary-color);
+    border: 0;
+    border-radius: 50px;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px 10px;
+    /* margin-left: 10px; */
+    /* position: relative; */
+}
+.moon{
+    padding: 0;
+    margin: 0;
+    padding-top: 10px;
+    justify-content: flex-start;
+}
+#moon {
+    width: 150px;
+    height: 80px;
+    /* border-radius: 50%; */
+    border-top-right-radius: 10px;
+    /* border-top-right-radius: 20%; */
+
+    box-shadow: inset -15px 15px 0 0 red;
+    /* background-color: #1c9797; */
+  }
