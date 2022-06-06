@@ -19,6 +19,7 @@ function getRatings() {
   // Set width of stars-inner to percentage
   const starsInner = document.querySelector(".stars-inner");
   const starsInner1 = document.getElementsByClassName("stars-inner");
+  console.log("hey hey",starsInner1);
   for(let i=0; i<starsInner1.length; i++){
   starsInner1[i].style.width = starPercentageRounded;
   }

@@ -5,7 +5,8 @@ const mth_element = document.querySelector('.date-picker .dates .month .mth');
 const next_mth_element = document.querySelector('.date-picker .dates .month .next-mth');
 const prev_mth_element = document.querySelector('.date-picker .dates .month .prev-mth');
 const days_element = document.querySelector('.date-picker .dates .days');
-let selectedTime = document.getElementById('person');
+let selectedPerson = document.getElementById('person');
+let selectedTime = document.getElementById('time');
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 let date = new Date();
@@ -20,6 +21,7 @@ let selectedYear = year;
 
 mth_element.textContent = months[month] + ' ' + year;
 selected_date_element.textContent = formatDate(date);
+console.log("time", selected_date_element.textContent)
 
 selected_date_element.dataset.value = selectedDate;
 
@@ -29,9 +31,9 @@ populateDates();
 date_picker_element.addEventListener('click', toggleDatePicker);
 next_mth_element.addEventListener('click', goToNextMonth);
 prev_mth_element.addEventListener('click', goToPrevMonth);
-selectedTime.addEventListener('click', ()=>{
-    selectedTime.classList.toggle("borderActive");
-console.log(selectedTime);
+selectedPerson.addEventListener('click', ()=>{
+    selectedPerson.classList.toggle("borderActive");
+console.log(selectedPerson);
 
 });
 
@@ -89,7 +91,9 @@ function populateDates (e) {
 			selectedYear = year;
 
 			selected_date_element.textContent = formatDate(selectedDate);
+			// console.log("change", selected_date_element.textContent);
 			selected_date_element.dataset.value = selectedDate;
+			// console.log("change", selected_date_element.dataset.value);
 
 			populateDates();
 		});
@@ -131,11 +135,31 @@ function formatDate (d) {
 
 let btnTime = document.getElementsByClassName("btnTime")[0];
 btnTime.addEventListener("click", ()=>{
-	let personKey = selectedTime.textContent;
-	let personValue = selectedTime.value;
-	if(personKey && personValue){
-		localStorage.setItem(personKey, personValue)
-		location.reload();
+	let key = selectedPerson.value;
+	let value = selectedPerson.options[selectedPerson.selectedIndex].text;
+	let date = selected_date_element.textContent;
+	let datekey = "Date";
+	let timeKey = selectedTime.value;
+	let timeValue = selectedTime.options[selectedTime.selectedIndex].text;
+
+	console.log("localstore",date)
+	console.log("localstore timeKey",timeKey)
+
+	console.log("localstore timeValue",timeValue)
+
+	if(key && value){
+		localStorage.setItem(key, value)
+		localStorage.setItem(datekey, date)
+		localStorage.setItem(timeKey, timeValue)
+
+
+		// location.reload();
 	}
-	
+	window.location.assign("table.html")
 });
+
+
+// for(let i=0; i<localStorage.length; i++){
+//     let key = localStorage.person[i];
+//     let value = localStorage.getItem[key];
+// }

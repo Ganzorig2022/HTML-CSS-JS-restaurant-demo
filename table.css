@@ -95,14 +95,22 @@ main{
     margin-top: 5px;
 
 }
-
+p{
+    font-family: var(--third-font-family);
+    font-size: 3rem;
+    color: rgb(255, 0, 0);
+    text-shadow: 3px 5px 0px var(--text-shadow-color);
+    animation: moveInRight 1s ease-out;
+    margin: auto;
+    padding: 20px 0;
+}
 
 h1{
     margin: auto;
     font-family: var(--third-font-family);
     color: var(--secondary-color);
     letter-spacing: 2px;
-
+    padding: 10px 0px;
 }
 .seat{
     width: 70px;
