@@ -123,3 +123,19 @@ function formatDate (d) {
 
 	return day + ' / ' + month + ' / ' + year;
 }
+
+
+
+
+// localStorage
+
+let btnTime = document.getElementsByClassName("btnTime")[0];
+btnTime.addEventListener("click", ()=>{
+	let personKey = selectedTime.textContent;
+	let personValue = selectedTime.value;
+	if(personKey && personValue){
+		localStorage.setItem(personKey, personValue)
+		location.reload();
+	}
+	
+});
