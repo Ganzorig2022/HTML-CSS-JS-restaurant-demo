@@ -121,3 +121,12 @@ cartIconBtn.addEventListener("click", () => {
   const cartModal = document.getElementsByClassName("cart-modal")[0];
   cartModal.classList.toggle("hidden");
 });
+
+
+
+
+
+
+// /* LocalStore */
+let PersonValue = document.getElementById("person").ariaValueMax;
+console.log(PersonValue);
