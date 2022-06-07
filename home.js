@@ -142,13 +142,11 @@ signinBtn.addEventListener("click", async () => {
   const signinPassword = document.getElementById("login-password").value;
 
   isSuccessful = await signIn(signinEmail, signinPassword);
-  console.log(isSuccessful);
 
   if (isSuccessful) {
     swal("Та амжилттай нэвтэрлээ!");
 
     loginModal.classList.remove("show-modal");
-    console.log("hey nuhtsul shalgaw");
     disableLoginInputs();
     clearLoginInputs();
 
@@ -157,8 +155,8 @@ signinBtn.addEventListener("click", async () => {
 });
 
 // =========================LOG OUT USER=================
-logoutBtn.addEventListener("click", () => {
-  isSuccessful = logOut();
+logoutBtn.addEventListener("click", async () => {
+  isSuccessful = await logOut();
   if (isSuccessful) {
     // swal("Та системээс гарлаа.");
     localStorage.removeItem("loggedUserUid");
@@ -207,11 +205,9 @@ function clearSignupInputs() {
 // =========================USER NAME-iig Haruulah=================
 function showUserName() {
   let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
-  console.log("hooe bi hewlegdej bna");
 
-  console.log(JSON.parse(localStorage.getItem("loggedUserUid")));
-  console.log(userData);
   let userName = userData.name;
 
   userProfileModalHeader.innerHTML = `Хэрэглэгч: ${userName}`;
 }
+showUserName();

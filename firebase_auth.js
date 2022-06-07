@@ -40,77 +40,44 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+// const database = getDatabase(app);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
 // ===========================SIGN UP AUTHENTICATION=======================
-const signUp = function (signupEmail, signupPassword, signupName) {
-  const isSuccessful = createUserWithEmailAndPassword(
+const signUp = async function (signupEmail, signupPassword, signupName) {
+  const userCredential = await createUserWithEmailAndPassword(
     auth,
     signupEmail,
     signupPassword,
     signupName
-  )
-    .then((userCredential) => {
-      //==== Signed in
-      const userUid = userCredential.user.uid;
-
-      setDoc(doc(db, "users", userUid), {
-        name: signupName,
-        email: signupEmail,
-        password: signupPassword,
-      });
-
-      return true;
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      return false;
-    });
-  return isSuccessful;
+  );
+  return true;
 };
 
 // ===========================SIGN IN AUTHENTICATION=======================
-const signIn = function (signinEmail, signinPassword) {
-  const isSuccessful = signInWithEmailAndPassword(
+const signIn = async function (signinEmail, signinPassword) {
+  const userCredential = await signInWithEmailAndPassword(
     auth,
     signinEmail,
     signinPassword
-  )
-    .then((userCredential) => {
-      const userUid = userCredential.user.uid;
-      getUserDataFromFireStore(userUid);
+  );
 
-      return true;
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+  const userUid = userCredential.user.uid;
 
-      swal(errorCode, errorMessage);
-      return false;
-    });
-  return isSuccessful;
+  await getUserDataFromFireStore(userUid);
+
+  return true;
 };
 
 // =========================LOG OUT USER IN AUTHENTICATION=================
-const logOut = function () {
-  const isSuccessful = signOut(auth)
-    .then(() => {
-      // Sign-out successful.
-      return true;
-    })
-    .catch((error) => {
-      // An error happened.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      swal(errorCode, errorMessage);
-
-      return false;
-    });
-  return isSuccessful;
+const logOut = async function () {
+  try {
+    await signOut(auth);
+    return true;
+  } catch (error) {
+    console.log("ERR: ", error);
+  }
 };
 
 //=========page REFRESH hiihed Newtersen hereglegch bga esehiig shalgadag heseg=======
@@ -124,18 +91,15 @@ onAuthStateChanged(auth, (user) => {
 });
 
 // =============Get Document Data from Firestore=============
-const getUserDataFromFireStore = function (userUid) {
-  getDoc(doc(db, "users", userUid))
-    .then((doc) => {
-      // {name: "xxx", email: "gmail.com", password:"xxxx"} gej firestore-oos irne.
-      let userData = doc.data();
-
-      // firestore-aas awsan user-iin data-gaa LOCALSTORAGE-d object baidlaar hadgalaw.
-      localStorage.setItem("loggedUserUid", JSON.stringify(userData));
-    })
-    .catch((error) => {
-      swal("Aldaa zaalaa", error);
-    });
+const getUserDataFromFireStore = async function (userUid) {
+  try {
+    const docData = await getDoc(doc(db, "users", userUid));
+    // console.log("DOC: ", docData.data());
+    let userData = docData.data();
+    localStorage.setItem("loggedUserUid", JSON.stringify(userData));
+  } catch (error) {
+    swal("ERR: ", error);
+  }
 };
 
 export { signUp, signIn, logOut };
