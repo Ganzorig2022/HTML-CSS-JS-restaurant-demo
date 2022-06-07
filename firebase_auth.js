@@ -7,6 +7,8 @@ import {
   signOut,
   onAuthStateChanged,
   updateProfile,
+  updatePassword,
+  updateEmail,
 } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-auth.js";
 
 import {
@@ -27,6 +29,7 @@ import {
   doc,
   getDoc,
   onSnapshot,
+  increment,
 } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -94,7 +97,6 @@ onAuthStateChanged(auth, (user) => {
 const getUserDataFromFireStore = async function (userUid) {
   try {
     const docData = await getDoc(doc(db, "users", userUid));
-    // console.log("DOC: ", docData.data());
     let userData = docData.data();
     localStorage.setItem("loggedUserUid", JSON.stringify(userData));
   } catch (error) {
@@ -102,4 +104,62 @@ const getUserDataFromFireStore = async function (userUid) {
   }
 };
 
-export { signUp, signIn, logOut };
+// =============Update User Info to Firestore=============
+const updateUserDataInFireStore = async function (
+  userFirstName,
+  userLastName,
+  userLoginPassword,
+  userLoginEmail
+) {
+  const user = auth.currentUser;
+  const userUid = user.uid;
+
+  try {
+    await setDoc(
+      doc(db, "users", userUid),
+      {
+        firstname: userFirstName,
+        lastname: userLastName,
+        password: userLoginPassword,
+        email: userLoginEmail,
+      },
+      { merge: true }
+    );
+
+    resetPasswordEmail(userLoginPassword, userLoginEmail);
+
+    // let userData = docData.data();
+    // localStorage.setItem("loggedUserUid", JSON.stringify(userData));
+    return true;
+  } catch (error) {
+    swal("ERR: ", error);
+  }
+};
+
+// =============Change Login Password and Email to Firestore=============
+function resetPasswordEmail(userLoginPassword, userLoginEmail) {
+  const user = auth.currentUser;
+  const newPassword = userLoginPassword;
+  const newEMail = userLoginEmail;
+
+  updatePassword(user, newPassword)
+    .then(() => {
+      // Update successful.
+      swal("Таны нэвтрэх password солигдлоо.");
+    })
+    .catch((error) => {
+      console.log("password update error", error);
+    });
+
+  updateEmail(user, newEMail)
+    .then(() => {
+      // Update successful.
+      swal("Таны нэвтрэх email солигдлоо.");
+      console.log("Таны нэвтрэх email солигдлоо.");
+    })
+    .catch((error) => {
+      console.log("email update error", error);
+    });
+}
+
+export { signUp, signIn, logOut, updateUserDataInFireStore };

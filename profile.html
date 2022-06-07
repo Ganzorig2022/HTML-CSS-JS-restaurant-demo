@@ -11,6 +11,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="profile.css" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="shortcut icon" type="image/png" href="img/logo_black.png" />
     <title>Restaurant Reservation and Booking Website</title>
   </head>
@@ -80,7 +81,7 @@
           </div>
         </div>
         <div class="profile">
-          <a href="#">
+          <a>
             <i class="fas fa-user"></i>
           </a>
         </div>
@@ -96,10 +97,6 @@
               <i class="fas fa-edit"></i
               ><a class="" href="/profile.html">Миний захиалга</a>
             </li>
-            <!-- <li>
-              <i class="fas fa-cog"></i
-              ><a class="" href="/profile.html">Тохиргоо</a>
-            </li> -->
             <li>
               <a class="" href="#" id="logout-btn">Гарах</a>
             </li>
@@ -120,19 +117,18 @@
       <h1>Миний Захиалгууд</h1>
       <div class="main-container">
         <div class="left-content">
+          <h3 class="logged-user-id" id="logged-user-id">Хэрэглэгч: <span>Ganzo</span> </h3>
           <li>
             <p>Хувийн мэдээлэл</p>
           </li>
           <li>
             <p>Миний захиалга</p>
           </li>
-          <!-- <li>
-            <p>Тохиргоо</p>
-          </li> -->
           <li>
-            <p>Гарах</p>
+            <p id="user-logout-btn">Гарах</p>
           </li>
         </div>
+        <!-- Хувийн Мэдээлэл бүхий жижиг цонх -->
         <div class="right-content content1">
           <h3>Хувийн мэдээлэл</h3>
           <div class="form1-container flex-row">
@@ -141,8 +137,9 @@
               <input
                 type="text"
                 name="first-name"
-                value="Ganzorig"
+                value=""
                 class="form-control"
+                id="user-first-name"
               />
             </div>
             <div class="flex-column">
@@ -150,33 +147,41 @@
               <input
                 type="text"
                 name="last-name"
-                value="Nyamsuren"
+                value=""
                 class="form-control"
+                id="user-last-name"
               />
             </div>
           </div>
           <div class="form1-container flex-row">
             <div class="flex-column">
-              <label>Хүйс</label>
-              <select name="gender" id="" class="form-control">
-                <option value="M">Эрэгтэй</option>
-                <option value="F">Эмэгтэй</option>
-              </select>
-            </div>
-            <div class="flex-column">
-              <label>Төрсөн өдөр</label>
+              <label>Нууц Үг</label>
               <input
                 type="text"
-                name="birthday"
+                name="password"
                 value=""
                 class="form-control"
+                id="user-login-password"
+              />
+            </div>
+            <div class="flex-column">
+              <label>Имэйл</label>
+              <input
+                type="email"
+                name="email"
+                value=""
+                class="form-control"
+                id="user-login-email"
               />
             </div>
           </div>
           <div class="save-btn-container">
-            <button class="save-btn ripple">Мэдээллээ хадгалах</button>
+            <button class="save-btn ripple" id="save-user-info-btn">
+              Мэдээллээ хадгалах
+            </button>
           </div>
         </div>
+        <!-- Хэрэглэгчийн Захиалга-ын Мэдээлэл бүхий жижиг цонх -->
         <div class="right-content content2">
           <div class="right-content-date flex-column">
             Огноо
@@ -201,7 +206,67 @@
         </div>
       </div>
     </main>
-    <!--============4.LOGIN MODAL SECTION========= -->
+    <!--============4.SIGNUP MODAL SECTION========= -->
+    <div class="signup-modal-container" id="signup-modal">
+      <div class="signup-modal">
+        <button class="signup-close-btn" id="signup-close-btn">
+          <i class="fa fa-times"></i>
+        </button>
+        <div class="signup-modal-header">
+          <h3>Бүртгүүлэх</h3>
+        </div>
+        <div class="signup-modal-content">
+          <form class="signup-modal-form">
+            <div>
+              <label for="name">Нэр</label>
+              <input
+                type="text"
+                id="signup-name"
+                placeholder="Нэрээ оруулна уу..."
+                class="form-input"
+                required
+              />
+            </div>
+            <div>
+              <label for="email">Имэйл</label>
+              <input
+                type="email"
+                id="signup-email"
+                placeholder="Имэйлээ оруулна уу..."
+                class="form-input"
+                required
+              />
+            </div>
+            <div>
+              <label for="password">Нууц үг</label>
+              <input
+                type="password"
+                id="signup-password"
+                placeholder="Нууц үгээ оруулна уу..."
+                class="form-input"
+                required
+              />
+            </div>
+            <div>
+              <label for="password2">Нууц үг дахин оруулах</label>
+              <input
+                type="password"
+                id="signup-password2"
+                placeholder="Нууц үгээ дахин оруулна уу..."
+                class="form-input"
+              />
+            </div>
+            <input
+              type="button"
+              value="Бүртгүүлэх"
+              class="signup-submit-btn"
+              id="signup-submit-btn"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+    <!--============5.LOGIN MODAL SECTION========= -->
     <div class="login-modal-container" id="login-modal">
       <div class="login-modal">
         <button class="modal-close-btn" id="modal-close-btn">
@@ -249,7 +314,7 @@
         </div>
       </div>
     </div>
-    <script src="profile.js"></script>
-    <script type="module" src="home_firebase.js"></script>
+    <script type="module" src="/firebase_auth.js"></script>
+    <script type="module" src="profile.js"></script>
   </body>
 </html>

@@ -18,6 +18,7 @@ function getRatings() {
   // Set width of stars-inner to percentage
   const starsInner = document.querySelector(".stars-inner");
   starsInner.style.width = starPercentageRounded;
+  showUserName();
 }
 
 // =================Button Effect====================
@@ -70,6 +71,7 @@ const loginClose = document.getElementById("modal-close-btn");
 
 loginOpen.addEventListener("click", () => {
   loginModal.classList.add("show-modal");
+  clearLoginInputs();
 });
 loginClose.addEventListener("click", () => {
   loginModal.classList.remove("show-modal");
@@ -80,12 +82,13 @@ window.addEventListener("click", (e) => {
 });
 
 // ========================SIGNUP MODAL window Open=====================
-let singupOpen = document.getElementById("signup-open");
+let signupOpen = document.getElementById("signup-open");
 let signupModal = document.getElementById("signup-modal");
 const signupClose = document.getElementById("signup-close-btn");
 
-singupOpen.addEventListener("click", () => {
+signupOpen.addEventListener("click", () => {
   signupModal.classList.add("show-modal");
+  clearSignupInputs();
 });
 signupClose.addEventListener("click", () => {
   signupModal.classList.remove("show-modal");
@@ -123,15 +126,14 @@ signupBtn.addEventListener("click", () => {
 
     disableLoginInputs();
     clearSignupInputs();
+    disableSignUpBtn();
 
-    signinBtn.defaultValue = "Та нэвтэрсэн байна!";
     showUserName();
   } else {
     swal("Та нэвтрээгүй байна");
 
     enableLoginInputs();
-
-    signinBtn.defaultValue = "Нэвтрэx";
+    enableSignUpBtn();
   }
 });
 
@@ -147,8 +149,10 @@ signinBtn.addEventListener("click", async () => {
     swal("Та амжилттай нэвтэрлээ!");
 
     loginModal.classList.remove("show-modal");
-    disableLoginInputs();
     clearLoginInputs();
+    disableLoginInputs();
+    disableLoginBtn();
+    disableSignUpBtn();
 
     showUserName();
   }
@@ -158,19 +162,21 @@ signinBtn.addEventListener("click", async () => {
 logoutBtn.addEventListener("click", async () => {
   isSuccessful = await logOut();
   if (isSuccessful) {
-    // swal("Та системээс гарлаа.");
+    swal("Та системээс гарлаа.");
     localStorage.removeItem("loggedUserUid");
     userProfileModal.classList.remove("hidden");
     userProfileModalHeader.innerHTML = `Хэрэглэгч:`;
 
     enableLoginInputs();
+    enableLoginBtn();
+    enableSignUpBtn();
+    clearLoginInputs();
   } else {
     disableLoginInputs();
   }
 });
 
 // SIGN IN hiisnii daraa input-uudiig IDEWHGV bolgoh
-
 function disableLoginInputs() {
   loginInputs.forEach((input) => {
     input.setAttribute("disabled", "");
@@ -178,13 +184,12 @@ function disableLoginInputs() {
 }
 
 // SIGN OUT hiisnii daraa input-uudiig IDEWHTEI bolgoh
-
 function enableLoginInputs() {
   loginInputs.forEach((input) => {
     input.removeAttribute("disabled");
   });
 }
-
+// SIGN IN hiisnii daraa input-uudiig CLEAR hiih
 function clearLoginInputs() {
   const signinEmail = document.getElementById("login-email");
   const signinPassword = document.getElementById("login-password");
@@ -192,6 +197,8 @@ function clearLoginInputs() {
   signinEmail.value = "";
   signinPassword.value = "";
 }
+
+// SIGN OUT hiisnii daraa input-uudiig CLEAR hiih
 function clearSignupInputs() {
   const signupName = document.getElementById("signup-name");
   const signupEmail = document.getElementById("signup-email");
@@ -202,6 +209,31 @@ function clearSignupInputs() {
   signupPassword.value = "";
 }
 
+// SIGN IN hiisnii daraa LOGIN button-iig IDEWHGVI bolgoh
+function disableLoginBtn() {
+  loginOpen.disabled = true;
+  loginOpen.style.backgroundColor = "#555";
+  loginOpen.style.cursor = "no-drop";
+}
+// SIGN OUT hiisnii daraa LOGIN button-iig IDEWHTEI bolgoh
+function enableLoginBtn() {
+  loginOpen.disabled = false;
+  loginOpen.style.backgroundColor = "var(--secondary-color)";
+  loginOpen.style.cursor = "pointer";
+}
+// SIGN UP hiisnii daraa LOGIN button-iig IDEWHGVI bolgoh
+function disableSignUpBtn() {
+  signupOpen.disabled = true;
+  signupOpen.style.backgroundColor = "#555";
+  signupOpen.style.cursor = "no-drop";
+}
+// SIGN UP hiisnii daraa LOGIN button-iig IDEWHTEI bolgoh
+function enableSignUpBtn() {
+  signupOpen.disabled = false;
+  signupOpen.style.backgroundColor = "var(--secondary-color)";
+  signupOpen.style.cursor = "pointer";
+}
+
 // =========================USER NAME-iig Haruulah=================
 function showUserName() {
   let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
@@ -210,4 +242,3 @@ function showUserName() {
 
   userProfileModalHeader.innerHTML = `Хэрэглэгч: ${userName}`;
 }
-showUserName();
