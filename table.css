@@ -29,9 +29,9 @@ main{
     border-radius: 10px;
     margin: auto;
     margin-top: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
 }
 .container{
     display: flex;
@@ -98,11 +98,15 @@ main{
 p{
     font-family: var(--third-font-family);
     font-size: 3rem;
-    color: rgb(255, 0, 0);
+    color: #fff;
     text-shadow: 3px 5px 0px var(--text-shadow-color);
     animation: moveInRight 1s ease-out;
+    width: 100%;
     margin: auto;
     padding: 20px 0;
+    background-image: url(https://dishup.qodeinteractive.com/wp-content/themes/dishup/assets/img/background_pattern.jpg);
+    border-radius: 10px;
+    text-align: center;
 }
 
 h1{
@@ -110,7 +114,9 @@ h1{
     font-family: var(--third-font-family);
     color: var(--secondary-color);
     letter-spacing: 2px;
-    padding: 10px 0px;
+    padding: 40px;
+    text-shadow: 3px 2px 1px #dedede;
+
 }
 .seat{
     width: 70px;
@@ -245,7 +251,8 @@ h1{
     height: auto;
     display: flex;
     margin: auto;
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
+    padding: 40px;
 }
 .fimerFlex{
     flex: 1;
@@ -292,10 +299,11 @@ h1{
 #moon {
     width: 150px;
     height: 80px;
-    /* border-radius: 50%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 400;
     border-top-right-radius: 10px;
-    /* border-top-right-radius: 20%; */
-
     box-shadow: inset -15px 15px 0 0 red;
-    /* background-color: #1c9797; */
   }
