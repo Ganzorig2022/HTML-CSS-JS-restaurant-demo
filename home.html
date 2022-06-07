@@ -9,8 +9,10 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <link rel="stylesheet" href="home.css" />
     <link rel="shortcut icon" type="image/png" href="img/logo_black.png" />
+
     <title>Restaurant Reservation and Booking Website</title>
   </head>
   <body>
@@ -90,7 +92,7 @@
         </div>
         <!-- Profile Window -->
         <div class="user-profile-modal">
-          <h3>Хэрэглэгч:</h3>
+          <h3 id="user-profile-modal--header">Хэрэглэгч:</h3>
           <div>
             <li>
               <i class="fas fa-user-circle"></i
@@ -264,7 +266,7 @@
         </div>
       </div>
     </div>
-    <script src="home.js"></script>
-    <script type="module" src="firebase.js"></script>
+    <script type="module" src="/firebase_auth.js"></script>
+    <script type="module" src="home.js"></script>
   </body>
 </html>

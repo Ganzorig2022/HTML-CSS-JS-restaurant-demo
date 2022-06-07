@@ -21,8 +21,6 @@
 body {
   font-family: var(--third-font-family);
   line-height: 1.4;
-  /* font-family: "Lato", sans-serif; */
-  /* filter: blur(4px); */
 }
 
 /*===========NAVBAR MAIN STYLE===================*/
@@ -36,8 +34,6 @@ nav {
   top: 0;
   z-index: 1;
   padding: 0.5rem 1rem;
-  /* overflow: hidden; */
-  /* box-shadow: 0 5px rgba(0, 0, 0, 0.4); */
   border-bottom: 1px solid rgb(87, 87, 87);
 }
 
@@ -277,7 +273,6 @@ form button {
   text-align: center;
   font-size: 1rem;
   padding-bottom: 10px;
-  font-weight: 500;
   line-height: 1.2em;
 }
 .user-profile-modal::before {
@@ -289,7 +284,7 @@ form button {
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-bottom: 50px solid rgb(255, 255, 255);
+  border-bottom: 40px solid rgb(255, 255, 255);
 }
 .user-profile-modal div li {
   list-style: none;

@@ -30,9 +30,8 @@
         <li><a href="#">Холбоо барих</a></li>
       </ul>
       <div class="navBtnContainer">
-        <i class="fa-solid fa-cart-shopping"></i>
-        <button class="signUp-btn ripple" id="open">Бүртгүүлэх</button>
-        <button class="login-btn ripple" id="open">Нэвтрэх</button>
+        <button class="signUp-btn ripple" id="signup-open">Бүртгүүлэх</button>
+        <button class="login-btn ripple" id="login-open">Нэвтрэх</button>
         <div class="cart-icon">
           <i class="fas fa-shopping-cart"></i>
           <div class="cart-modal">
@@ -87,18 +86,22 @@
         </div>
         <!-- Profile Window -->
         <div class="user-profile-modal">
-          <h3>Хэрэглэгч ID:</h3>
+          <h3 id="user-profile-modal--header">Хэрэглэгч:</h3>
           <div>
             <li>
               <i class="fas fa-user-circle"></i
-              ><a class="" href="#">Хувийн мэдээлэл</a>
+              ><a class="" href="/profile.html">Хувийн мэдээлэл</a>
             </li>
             <li>
-              <i class="fas fa-edit"></i><a class="" href="#">Миний захиалга</a>
+              <i class="fas fa-edit"></i
+              ><a class="" href="/profile.html">Миний захиалга</a>
             </li>
-            <!-- <li><i class="fas fa-cog"></i><a class="" href="#">Тохиргоо</a></li> -->
+            <!-- <li>
+              <i class="fas fa-cog"></i
+              ><a class="" href="/profile.html">Тохиргоо</a>
+            </li> -->
             <li>
-              <a class="" href="#">Гарах</a>
+              <a class="" href="#" id="logout-btn">Гарах</a>
             </li>
           </div>
         </div>
@@ -198,6 +201,55 @@
         </div>
       </div>
     </main>
+    <!--============4.LOGIN MODAL SECTION========= -->
+    <div class="login-modal-container" id="login-modal">
+      <div class="login-modal">
+        <button class="modal-close-btn" id="modal-close-btn">
+          <i class="fa fa-times"></i>
+        </button>
+        <div class="login-modal-header">
+          <h3>Нэвтрэх</h3>
+        </div>
+        <div class="login-modal-content">
+          <form class="login-modal-form">
+            <!-- <div>
+              <label for="name">Нэр</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Нэрээ оруулна уу..."
+                class="form-input"
+              />
+            </div> -->
+            <div>
+              <label for="email">Имэйл</label>
+              <input
+                type="email"
+                id="login-email"
+                placeholder="Имэйлээ оруулна уу..."
+                class="form-input"
+              />
+            </div>
+            <div>
+              <label for="password">Нууц үг</label>
+              <input
+                type="password"
+                id="login-password"
+                placeholder="Нууц үгээ оруулна уу..."
+                class="form-input"
+              />
+            </div>
+            <input
+              type="button"
+              value="Нэвтрэх"
+              class="login-submit-btn"
+              id="login-submit-btn"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
     <script src="profile.js"></script>
+    <script type="module" src="home_firebase.js"></script>
   </body>
 </html>

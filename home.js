@@ -1,3 +1,5 @@
+import { signUp, signIn, logOut } from "./firebase_auth.js";
+
 // Run getRatings when DOM loads
 document.addEventListener("DOMContentLoaded", getRatings);
 
@@ -63,7 +65,7 @@ cartIconBtn.addEventListener("click", () => {
 
 // ========================LOGIN MODAL window Open=====================
 const loginOpen = document.getElementById("login-open");
-const loginModal = document.getElementById("login-modal");
+let loginModal = document.getElementsByClassName("login-modal-container")[0];
 const loginClose = document.getElementById("modal-close-btn");
 
 loginOpen.addEventListener("click", () => {
@@ -78,8 +80,8 @@ window.addEventListener("click", (e) => {
 });
 
 // ========================SIGNUP MODAL window Open=====================
-const singupOpen = document.getElementById("signup-open");
-const signupModal = document.getElementById("signup-modal");
+let singupOpen = document.getElementById("signup-open");
+let signupModal = document.getElementById("signup-modal");
 const signupClose = document.getElementById("signup-close-btn");
 
 singupOpen.addEventListener("click", () => {
@@ -92,3 +94,124 @@ signupClose.addEventListener("click", () => {
 window.addEventListener("click", (e) => {
   e.target == signupModal ? signupModal.classList.remove("show-modal") : false;
 });
+
+//////////////////////////////////FIRESTORE///////////////////////////
+// =============================GLOBAL VARIABLES=======================
+const signupBtn = document.getElementById("signup-submit-btn");
+const signinBtn = document.getElementById("login-submit-btn");
+const logoutBtn = document.getElementById("logout-btn");
+const userProfileModal =
+  document.getElementsByClassName("user-profile-modal")[0];
+const userProfileModalHeader = document.getElementById(
+  "user-profile-modal--header"
+);
+let loginInputs = document.querySelectorAll(".login-modal-form input");
+
+let isSuccessful = false;
+
+// ===========================SIGN UP NEW USER=======================
+signupBtn.addEventListener("click", () => {
+  const signupName = document.getElementById("signup-name").value;
+  const signupEmail = document.getElementById("signup-email").value;
+  const signupPassword = document.getElementById("signup-password").value;
+  isSuccessful = signUp(signupEmail, signupPassword, signupName);
+
+  if (isSuccessful) {
+    swal("Шинэ хэрэглэгч үүслээ!");
+
+    signupModal.classList.remove("show-modal");
+
+    disableLoginInputs();
+    clearSignupInputs();
+
+    signinBtn.defaultValue = "Та нэвтэрсэн байна!";
+    showUserName();
+  } else {
+    swal("Та нэвтрээгүй байна");
+
+    enableLoginInputs();
+
+    signinBtn.defaultValue = "Нэвтрэx";
+  }
+});
+
+// ===========================SIGN IN EXISTING USER=======================
+
+signinBtn.addEventListener("click", async () => {
+  const signinEmail = document.getElementById("login-email").value;
+  const signinPassword = document.getElementById("login-password").value;
+
+  isSuccessful = await signIn(signinEmail, signinPassword);
+  console.log(isSuccessful);
+
+  if (isSuccessful) {
+    swal("Та амжилттай нэвтэрлээ!");
+
+    loginModal.classList.remove("show-modal");
+    console.log("hey nuhtsul shalgaw");
+    disableLoginInputs();
+    clearLoginInputs();
+
+    showUserName();
+  }
+});
+
+// =========================LOG OUT USER=================
+logoutBtn.addEventListener("click", () => {
+  isSuccessful = logOut();
+  if (isSuccessful) {
+    // swal("Та системээс гарлаа.");
+    localStorage.removeItem("loggedUserUid");
+    userProfileModal.classList.remove("hidden");
+    userProfileModalHeader.innerHTML = `Хэрэглэгч:`;
+
+    enableLoginInputs();
+  } else {
+    disableLoginInputs();
+  }
+});
+
+// SIGN IN hiisnii daraa input-uudiig IDEWHGV bolgoh
+
+function disableLoginInputs() {
+  loginInputs.forEach((input) => {
+    input.setAttribute("disabled", "");
+  });
+}
+
+// SIGN OUT hiisnii daraa input-uudiig IDEWHTEI bolgoh
+
+function enableLoginInputs() {
+  loginInputs.forEach((input) => {
+    input.removeAttribute("disabled");
+  });
+}
+
+function clearLoginInputs() {
+  const signinEmail = document.getElementById("login-email");
+  const signinPassword = document.getElementById("login-password");
+
+  signinEmail.value = "";
+  signinPassword.value = "";
+}
+function clearSignupInputs() {
+  const signupName = document.getElementById("signup-name");
+  const signupEmail = document.getElementById("signup-email");
+  const signupPassword = document.getElementById("signup-password");
+
+  signupName.value = "";
+  signupEmail.value = "";
+  signupPassword.value = "";
+}
+
+// =========================USER NAME-iig Haruulah=================
+function showUserName() {
+  let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
+  console.log("hooe bi hewlegdej bna");
+
+  console.log(JSON.parse(localStorage.getItem("loggedUserUid")));
+  console.log(userData);
+  let userName = userData.name;
+
+  userProfileModalHeader.innerHTML = `Хэрэглэгч: ${userName}`;
+}

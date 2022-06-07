@@ -1,6 +1,5 @@
 // =================Button Effect====================
 const buttons = document.querySelectorAll(".ripple");
-console.log(buttons);
 buttons.forEach((button) => {
   button.addEventListener("click", function (e) {
     // mouse-iin bairshliig X, Y toogoor gargaj ogno.
@@ -67,4 +66,20 @@ const cartIconBtn = document.getElementsByClassName("fa-shopping-cart")[0];
 cartIconBtn.addEventListener("click", () => {
   const cartModal = document.getElementsByClassName("cart-modal")[0];
   cartModal.classList.toggle("hidden");
+});
+
+// ========================LOGIN MODAL window Open=====================
+const loginOpen = document.getElementById("login-open");
+const loginModal = document.getElementById("login-modal");
+const loginClose = document.getElementById("modal-close-btn");
+
+loginOpen.addEventListener("click", () => {
+  loginModal.classList.add("show-modal");
+});
+loginClose.addEventListener("click", () => {
+  loginModal.classList.remove("show-modal");
+});
+
+window.addEventListener("click", (e) => {
+  e.target == loginModal ? loginModal.classList.remove("show-modal") : false;
 });
