@@ -108,16 +108,18 @@
     <header>
       <div class="showcase-content">
         <h1>Your Restaurant</h1>
-        <p>Хэрэглэгчийн Булан</p>
+        <!-- <p>Хэрэглэгчийн Булан</p> -->
         <!-- <button class="order-btn ripple" id="open">Захиалга өгөх</button> -->
       </div>
     </header>
     <!--============3.Main SECTION========= -->
     <main>
-      <h1>Миний Захиалгууд</h1>
+      <h1 id="main-header">Хэрэглэгчийн Булан</h1>
       <div class="main-container">
         <div class="left-content">
-          <h3 class="logged-user-id" id="logged-user-id">Хэрэглэгч: <span>Ganzo</span> </h3>
+          <h3 class="logged-user-id">
+            Нэвтэрсэн хэрэглэгч: <span id="logged-user-id">Ganzo</span>
+          </h3>
           <li>
             <p>Хувийн мэдээлэл</p>
           </li>
@@ -183,25 +185,30 @@
         </div>
         <!-- Хэрэглэгчийн Захиалга-ын Мэдээлэл бүхий жижиг цонх -->
         <div class="right-content content2">
-          <div class="right-content-date flex-column">
-            Огноо
-            <span>2022-05-30</span>
-          </div>
-          <div class="right-content-people flex-column">
-            Хүн
-            <span>2</span>
-          </div>
-          <div class="right-content-time flex-column">
-            Цаг <span>17:00</span>
-          </div>
-          <div class="right-content-seat flex-column">Ширээ <span>2</span></div>
-          <div class="right-content-food flex-column">
-            Төлөв
-            <span>Баталгаажсан</span>
-          </div>
-          <div class="right-content-price flex-column">
-            Үнэ ₮
-            <span>30000₮</span>
+          <h3>Миний Захиалга</h3>
+          <div>
+            <div class="right-content-date flex-column">
+              Огноо
+              <span>2022-05-30</span>
+            </div>
+            <div class="right-content-people flex-column">
+              Хүн
+              <span>2</span>
+            </div>
+            <div class="right-content-time flex-column">
+              Цаг <span>17:00</span>
+            </div>
+            <div class="right-content-seat flex-column">
+              Ширээ <span>2</span>
+            </div>
+            <div class="right-content-food flex-column">
+              Төлөв
+              <span class="order-status">Баталгаажсан</span>
+            </div>
+            <!-- <div class="right-content-price flex-column">
+              Үнэ ₮
+              <span>30000₮</span>
+            </div> -->
           </div>
         </div>
       </div>

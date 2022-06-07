@@ -34,13 +34,6 @@ buttons.forEach((button) => {
     setTimeout(() => circle.remove(), 200);
   });
 });
-// ========================Profile window Open=====================
-// const userProfileBtn = document.getElementsByClassName("profile")[0];
-
-// userProfileBtn.addEventListener("click", () => {
-//   const userProfile = document.getElementsByClassName("user-profile-modal")[0];
-//   userProfile.classList.toggle("hidden");
-// });
 
 // ========================Profile Menu Show Hide==================
 
@@ -53,11 +46,13 @@ listItems.forEach((item, idx) => {
     hideAllListItems();
     item.classList.add("active");
     if (idx === 1) {
+      //hereglegchiin zahialga tsonh
       content2.classList.add("show");
     } else {
       content2.classList.remove("show");
     }
     if (idx === 0) {
+      //huwiin medeelel tsonh
       content1.classList.add("show");
     } else {
       content1.classList.remove("show");
@@ -86,6 +81,7 @@ loginOpen.addEventListener("click", () => {
   loginModal.classList.add("show-modal");
   clearLoginInputs();
 });
+
 loginClose.addEventListener("click", () => {
   loginModal.classList.remove("show-modal");
 });
@@ -122,6 +118,7 @@ const userProfileModalHeader = document.getElementById(
   "user-profile-modal--header"
 );
 let loginInputs = document.querySelectorAll(".login-modal-form input");
+const loggedUserId = document.getElementById("logged-user-id");
 
 let isSuccessful = false;
 
@@ -151,7 +148,6 @@ signupBtn.addEventListener("click", () => {
 });
 
 // ===========================SIGN IN EXISTING USER=======================
-
 signinBtn.addEventListener("click", async () => {
   const signinEmail = document.getElementById("login-email").value;
   const signinPassword = document.getElementById("login-password").value;
@@ -179,6 +175,7 @@ logoutBtn.addEventListener("click", async () => {
     localStorage.removeItem("loggedUserUid");
     userProfileModal.classList.remove("hidden");
     userProfileModalHeader.innerHTML = `Хэрэглэгч:`;
+    loggedUserId.textContent = "";
 
     enableLoginInputs();
     enableLoginBtn();
@@ -273,6 +270,7 @@ function showUserName() {
   let userName = userData.name;
 
   userProfileModalHeader.innerHTML = `Хэрэглэгч: ${userName}`;
+  loggedUserId.textContent = userName;
 }
 
 // =============Update User Info to Firestore=============
@@ -286,14 +284,23 @@ saveUserInfoBtn.addEventListener("click", async () => {
   ).value;
   const userLoginEmail = document.getElementById("user-login-email").value;
 
-  isSuccessful = await updateUserDataInFireStore(
-    userFirstName,
-    userLastName,
-    userLoginPassword,
-    userLoginEmail
-  );
-  if (isSuccessful) {
-    saveUserInfoBtn.innerHTML = "Мэдээлэл хадгалагдсан";
+  if (
+    userFirstName == "" &&
+    userLastName == "" &&
+    userLoginPassword == "" &&
+    userLoginEmail == ""
+  ) {
+    swal("Та мэдээллээ бөглөөд хадгална уу.");
   } else {
+    isSuccessful = await updateUserDataInFireStore(
+      userFirstName,
+      userLastName,
+      userLoginPassword,
+      userLoginEmail
+    );
+    if (isSuccessful) {
+      saveUserInfoBtn.innerHTML = "Мэдээлэл хадгалагдлаа";
+    } else {
+    }
   }
 });
