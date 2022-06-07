@@ -307,3 +307,15 @@ h1{
     border-top-right-radius: 10px;
     box-shadow: inset -15px 15px 0 0 red;
   }
+
+  button:hover {
+    box-shadow: 0 0 0.5vw #f2676d, 0 0 0.3vw #f2676d, 0 0 0.3vw #f2676d,
+      0 0 0 #ed1c24, 0 0 0.1vw #ed1c24, 0.05vw 0 0 #f2676d, 0.05vw 0 0 #ed1c24,
+      0.05vw 0 0.05vw #ed1c24, 0.05vw 0 0.5vw #ed1c24, 0.02vw 0 0.05vw #ed1c24,
+      0.05vw 0 0.05vw #ed1c24, -0.05vw 0 0.3vw #ed1c24, 0.05vw 0 0.2vw #ed1c24,
+      -0.1vw 0 0.2vw #f9343b, -0.05vw 0 0 #f9343b, 0 0 1.5vw #f9343b;
+  }
+  button:active {
+    outline: 0;
+    transform: scale(0.9);
+  }
