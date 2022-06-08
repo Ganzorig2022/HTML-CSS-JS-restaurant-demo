@@ -139,6 +139,7 @@ signupBtn.addEventListener("click", async () => {
       disableLoginInputs();
       clearSignupInputs();
       disableSignUpBtn();
+      disableLoginBtn();
     } else {
       swal("Шинэ хэрэглэгч үүсэхэд алдаа гарлаа!");
 
@@ -171,6 +172,7 @@ signinBtn.addEventListener("click", async () => {
       disableLoginInputs();
       disableLoginBtn();
       disableSignUpBtn();
+      activeUserProfile();
 
       showUserName();
     } else {
@@ -197,6 +199,7 @@ logoutBtn.addEventListener("click", async () => {
     enableLoginBtn();
     enableSignUpBtn();
     clearLoginInputs();
+    inActiveUserProfile();
   } else {
     disableLoginInputs();
   }
@@ -235,30 +238,32 @@ function clearSignupInputs() {
   signupPassword.value = "";
 }
 
-// SIGN IN hiisnii daraa LOGIN button-iig IDEWHGVI bolgoh
+// SIGN IN hiisnii daraa LOGIN button-iig NONE bolgoh
 function disableLoginBtn() {
-  loginOpen.disabled = true;
-  loginOpen.style.backgroundColor = "#555";
-  loginOpen.style.cursor = "no-drop";
+  loginOpen.style.display = "none";
 }
 // SIGN OUT hiisnii daraa LOGIN button-iig IDEWHTEI bolgoh
 function enableLoginBtn() {
-  loginOpen.disabled = false;
-  loginOpen.style.backgroundColor = "var(--secondary-color)";
-  loginOpen.style.cursor = "pointer";
+  loginOpen.style.display = "block";
 }
-// SIGN UP hiisnii daraa LOGIN button-iig IDEWHGVI bolgoh
+// SIGN UP hiisnii daraa LOGIN button-iig NONE bolgoh
 function disableSignUpBtn() {
-  signupOpen.disabled = true;
-  signupOpen.style.backgroundColor = "#555";
-  signupOpen.style.cursor = "no-drop";
+  signupOpen.style.display = "none";
 }
 
 // SIGN UP hiisnii daraa LOGIN button-iig IDEWHTEI bolgoh
 function enableSignUpBtn() {
-  signupOpen.disabled = false;
-  signupOpen.style.backgroundColor = "var(--secondary-color)";
-  signupOpen.style.cursor = "pointer";
+  signupOpen.style.display = "block";
+}
+function activeUserProfile() {
+  const userIcon = document.getElementsByClassName("fa-user")[0];
+  userIcon.style.color = "#fff";
+  userProfileBtn.style.background = "#fb1c25";
+}
+function inActiveUserProfile() {
+  const userIcon = document.getElementsByClassName("fa-user")[0];
+  userIcon.style.color = "#000";
+  userProfileBtn.style.background = "#ccc";
 }
 
 // =========================USER NAME-iig Haruulah=================
