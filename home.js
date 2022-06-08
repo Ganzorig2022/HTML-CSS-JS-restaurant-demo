@@ -50,23 +50,23 @@ buttons.forEach((button) => {
 
 // ========================Profile window Open=====================
 const userProfileBtn = document.getElementsByClassName("profile")[0];
+const userProfile = document.getElementsByClassName("user-profile-modal")[0];
 
 userProfileBtn.addEventListener("click", () => {
-  const userProfile = document.getElementsByClassName("user-profile-modal")[0];
   userProfile.classList.toggle("hidden");
 });
 
 // ========================Cart Modal Window Open=====================
 const cartIconBtn = document.getElementsByClassName("fa-shopping-cart")[0];
+const cartModal = document.getElementsByClassName("cart-modal")[0];
 
 cartIconBtn.addEventListener("click", () => {
-  const cartModal = document.getElementsByClassName("cart-modal")[0];
   cartModal.classList.toggle("hidden");
 });
 
 // ========================LOGIN MODAL window Open=====================
 const loginOpen = document.getElementById("login-open");
-let loginModal = document.getElementsByClassName("login-modal-container")[0];
+const loginModal = document.getElementsByClassName("login-modal-container")[0];
 const loginClose = document.getElementById("modal-close-btn");
 
 loginOpen.addEventListener("click", () => {
@@ -78,7 +78,9 @@ loginClose.addEventListener("click", () => {
 });
 
 window.addEventListener("click", (e) => {
-  e.target == loginModal ? loginModal.classList.remove("show-modal") : false;
+  if (e.target == loginModal) {
+    loginModal.classList.remove("show-modal");
+  }
 });
 
 // ========================SIGNUP MODAL window Open=====================
@@ -113,48 +115,70 @@ let loginInputs = document.querySelectorAll(".login-modal-form input");
 let isSuccessful = false;
 
 // ===========================SIGN UP NEW USER=======================
-signupBtn.addEventListener("click", () => {
+signupBtn.addEventListener("click", async () => {
   const signupName = document.getElementById("signup-name").value;
   const signupEmail = document.getElementById("signup-email").value;
   const signupPassword = document.getElementById("signup-password").value;
-  isSuccessful = signUp(signupEmail, signupPassword, signupName);
+  const signupPassword2 = document.getElementById("signup-password2").value;
 
-  if (isSuccessful) {
-    swal("Шинэ хэрэглэгч үүслээ!");
+  if (
+    checkRequiredInputs([
+      signupName,
+      signupEmail,
+      signupPassword,
+      signupPassword2,
+    ])
+  ) {
+    isSuccessful = await signUp(signupEmail, signupPassword, signupName);
 
-    signupModal.classList.remove("show-modal");
+    if (isSuccessful) {
+      swal("Шинэ хэрэглэгч амжилттай үүслээ!");
 
-    disableLoginInputs();
-    clearSignupInputs();
-    disableSignUpBtn();
+      signupModal.classList.remove("show-modal");
 
-    showUserName();
+      disableLoginInputs();
+      clearSignupInputs();
+      disableSignUpBtn();
+    } else {
+      swal("Шинэ хэрэглэгч үүсэхэд алдаа гарлаа!");
+
+      enableLoginInputs();
+      enableSignUpBtn();
+    }
   } else {
-    swal("Та нэвтрээгүй байна");
-
-    enableLoginInputs();
-    enableSignUpBtn();
+    swal("Таны бөглөх талбарууд хоосон байна!");
   }
 });
 
-// ===========================SIGN IN EXISTING USER=======================
+// INPUT-uud hooson esehiig shalgadag function()
+function checkRequiredInputs(inputArr) {
+  return !inputArr.includes("");
+}
 
+// ===========================SIGN IN EXISTING USER=======================
 signinBtn.addEventListener("click", async () => {
   const signinEmail = document.getElementById("login-email").value;
   const signinPassword = document.getElementById("login-password").value;
 
-  isSuccessful = await signIn(signinEmail, signinPassword);
+  if (checkRequiredInputs([signinEmail, signinPassword])) {
+    isSuccessful = await signIn(signinEmail, signinPassword);
 
-  if (isSuccessful) {
-    swal("Та амжилттай нэвтэрлээ!");
+    if (isSuccessful) {
+      swal("Та амжилттай нэвтэрлээ!");
 
-    loginModal.classList.remove("show-modal");
-    clearLoginInputs();
-    disableLoginInputs();
-    disableLoginBtn();
-    disableSignUpBtn();
+      loginModal.classList.remove("show-modal");
+      clearLoginInputs();
+      disableLoginInputs();
+      disableLoginBtn();
+      disableSignUpBtn();
 
-    showUserName();
+      showUserName();
+    } else {
+      swal("Нэвтрэлт амжилтгүй. Хэрэглэгч олдсонгүй!");
+      clearLoginInputs();
+    }
+  } else {
+    swal("Таны бөглөх талбарууд хоосон байна!");
   }
 });
 
@@ -163,7 +187,9 @@ logoutBtn.addEventListener("click", async () => {
   isSuccessful = await logOut();
   if (isSuccessful) {
     swal("Та системээс гарлаа.");
+    // localStorage-iig empty bolgono.
     localStorage.removeItem("loggedUserUid");
+
     userProfileModal.classList.remove("hidden");
     userProfileModalHeader.innerHTML = `Хэрэглэгч:`;
 
@@ -227,6 +253,7 @@ function disableSignUpBtn() {
   signupOpen.style.backgroundColor = "#555";
   signupOpen.style.cursor = "no-drop";
 }
+
 // SIGN UP hiisnii daraa LOGIN button-iig IDEWHTEI bolgoh
 function enableSignUpBtn() {
   signupOpen.disabled = false;
@@ -236,9 +263,16 @@ function enableSignUpBtn() {
 
 // =========================USER NAME-iig Haruulah=================
 function showUserName() {
-  let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
+  if (localStorage.length > 0) {
+    //Items are stored in local storage
+    let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
+    let userName = userData.name;
+    console.log("Username: ", userName);
 
-  let userName = userData.name;
+    userProfileModalHeader.innerHTML = `Хэрэглэгч: ${userName}`;
+  } else {
+    console.log("Local storage is empty");
 
-  userProfileModalHeader.innerHTML = `Хэрэглэгч: ${userName}`;
+    //Local storage is empty
+  }
 }

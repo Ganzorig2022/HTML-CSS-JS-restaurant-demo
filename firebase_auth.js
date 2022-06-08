@@ -49,28 +49,38 @@ const auth = getAuth(app);
 
 // ===========================SIGN UP AUTHENTICATION=======================
 const signUp = async function (signupEmail, signupPassword, signupName) {
-  const userCredential = await createUserWithEmailAndPassword(
-    auth,
-    signupEmail,
-    signupPassword,
-    signupName
-  );
-  return true;
+  try {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      signupEmail,
+      signupPassword,
+      signupName
+    );
+    const userUid = userCredential.user.uid;
+
+    return true;
+  } catch (error) {
+    return false;
+  }
 };
 
 // ===========================SIGN IN AUTHENTICATION=======================
 const signIn = async function (signinEmail, signinPassword) {
-  const userCredential = await signInWithEmailAndPassword(
-    auth,
-    signinEmail,
-    signinPassword
-  );
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      signinEmail,
+      signinPassword
+    );
 
-  const userUid = userCredential.user.uid;
+    const userUid = userCredential.user.uid;
 
-  await getUserDataFromFireStore(userUid);
+    await getUserDataFromFireStore(userUid);
 
-  return true;
+    return true;
+  } catch (error) {
+    return false;
+  }
 };
 
 // =========================LOG OUT USER IN AUTHENTICATION=================
@@ -87,7 +97,7 @@ const logOut = async function () {
 onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
-    swal("Та нэвтэрсэн хэвээр байна!", uid);
+    swal(`Та нэвтэрсэн хэвээр байна. Таны ID:${uid}`);
   } else {
     swal("Та системээс гарсан байна!");
   }
@@ -97,7 +107,7 @@ onAuthStateChanged(auth, (user) => {
 const getUserDataFromFireStore = async function (userUid) {
   try {
     const docData = await getDoc(doc(db, "users", userUid));
-    let userData = docData.data();
+    let userData = await docData.data();
     localStorage.setItem("loggedUserUid", JSON.stringify(userData));
   } catch (error) {
     swal("ERR: ", error);
@@ -128,8 +138,6 @@ const updateUserDataInFireStore = async function (
 
     resetPasswordEmail(userLoginPassword, userLoginEmail);
 
-    // let userData = docData.data();
-    // localStorage.setItem("loggedUserUid", JSON.stringify(userData));
     return true;
   } catch (error) {
     swal("ERR: ", error);

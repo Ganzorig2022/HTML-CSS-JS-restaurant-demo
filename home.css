@@ -7,6 +7,7 @@
   --primary-color: #30336b;
   --secondary-color: #fb1c25;
   --text-shadow-color: #1c9797;
+  --error-color: #e74c3c;
   --main-font-family: "Sacramento", cursive;
   --secondary-font-family: "Lato", sans-serif;
   --third-font-family: Oswald, sans-serif;
@@ -610,6 +611,7 @@ main p strong {
   outline: 0;
   border: 1px solid var(--secondary-color);
 }
+
 .modal-close-btn,
 .signup-close-btn {
   background-color: transparent;
