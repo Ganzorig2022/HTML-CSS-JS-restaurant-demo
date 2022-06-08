@@ -140,6 +140,7 @@ signupBtn.addEventListener("click", async () => {
       clearSignupInputs();
       disableSignUpBtn();
       disableLoginBtn();
+      activeUserProfile();
     } else {
       swal("Шинэ хэрэглэгч үүсэхэд алдаа гарлаа!");
 
@@ -150,11 +151,6 @@ signupBtn.addEventListener("click", async () => {
     swal("Таны бөглөх талбарууд хоосон байна!");
   }
 });
-
-// INPUT-uud hooson esehiig shalgadag function()
-function checkRequiredInputs(inputArr) {
-  return !inputArr.includes("");
-}
 
 // ===========================SIGN IN EXISTING USER=======================
 signinBtn.addEventListener("click", async () => {
@@ -177,7 +173,6 @@ signinBtn.addEventListener("click", async () => {
       showUserName();
     } else {
       swal("Нэвтрэлт амжилтгүй. Хэрэглэгч олдсонгүй!");
-      clearLoginInputs();
     }
   } else {
     swal("Таны бөглөх талбарууд хоосон байна!");
@@ -205,6 +200,10 @@ logoutBtn.addEventListener("click", async () => {
   }
 });
 
+// INPUT-uud hooson esehiig shalgadag function()
+function checkRequiredInputs(inputArr) {
+  return !inputArr.includes("");
+}
 // SIGN IN hiisnii daraa input-uudiig IDEWHGV bolgoh
 function disableLoginInputs() {
   loginInputs.forEach((input) => {
@@ -272,12 +271,9 @@ function showUserName() {
     //Items are stored in local storage
     let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
     let userName = userData.name;
-    console.log("Username: ", userName);
 
     userProfileModalHeader.innerHTML = `Хэрэглэгч: ${userName}`;
   } else {
     console.log("Local storage is empty");
-
-    //Local storage is empty
   }
 }

@@ -112,58 +112,83 @@ window.addEventListener("click", (e) => {
 const signupBtn = document.getElementById("signup-submit-btn");
 const signinBtn = document.getElementById("login-submit-btn");
 const logoutBtn = document.getElementById("user-logout-btn");
-const userProfileModal =
-  document.getElementsByClassName("user-profile-modal")[0];
-const userProfileModalHeader = document.getElementById(
-  "user-profile-modal--header"
-);
+const userProfileBtn = document.getElementsByClassName("profile")[0];
 let loginInputs = document.querySelectorAll(".login-modal-form input");
 const loggedUserId = document.getElementById("logged-user-id");
+
+const userIcon = document.getElementsByClassName("fa-user")[0];
 
 let isSuccessful = false;
 
 // ===========================SIGN UP NEW USER=======================
-signupBtn.addEventListener("click", () => {
+signupBtn.addEventListener("click", async () => {
   const signupName = document.getElementById("signup-name").value;
   const signupEmail = document.getElementById("signup-email").value;
   const signupPassword = document.getElementById("signup-password").value;
-  isSuccessful = signUp(signupEmail, signupPassword, signupName);
+  const signupPassword2 = document.getElementById("signup-password2").value;
 
-  if (isSuccessful) {
-    swal("Шинэ хэрэглэгч үүслээ!");
+  if (
+    checkRequiredInputs([
+      signupName,
+      signupEmail,
+      signupPassword,
+      signupPassword2,
+    ])
+  ) {
+    isSuccessful = await signUp(signupEmail, signupPassword, signupName);
 
-    signupModal.classList.remove("show-modal");
+    if (isSuccessful) {
+      swal("Шинэ хэрэглэгч амжилттай үүслээ!");
 
-    disableLoginInputs();
-    clearSignupInputs();
-    disableSignUpBtn();
+      signupModal.classList.remove("show-modal");
 
-    showUserName();
+      disableLoginInputs();
+      clearSignupInputs();
+      disableSignUpBtn();
+      disableLoginBtn();
+    } else {
+      swal("Шинэ хэрэглэгч үүсэхэд алдаа гарлаа!");
+
+      enableLoginInputs();
+      enableSignUpBtn();
+    }
   } else {
-    swal("Та нэвтрээгүй байна");
-
-    enableLoginInputs();
-    enableSignUpBtn();
+    swal("Таны бөглөх талбарууд хоосон байна!");
   }
 });
+
+// INPUT-uud hooson esehiig shalgadag function()
+function checkRequiredInputs(inputArr) {
+  return !inputArr.includes("");
+}
 
 // ===========================SIGN IN EXISTING USER=======================
 signinBtn.addEventListener("click", async () => {
   const signinEmail = document.getElementById("login-email").value;
   const signinPassword = document.getElementById("login-password").value;
 
-  isSuccessful = await signIn(signinEmail, signinPassword);
+  if (checkRequiredInputs([signinEmail, signinPassword])) {
+    isSuccessful = await signIn(signinEmail, signinPassword);
 
-  if (isSuccessful) {
-    swal("Та амжилттай нэвтэрлээ!");
+    if (isSuccessful) {
+      swal(`Хэрэглэгч "${showUserName()}" та амжилттай нэвтэрлээ!`);
 
-    loginModal.classList.remove("show-modal");
-    clearLoginInputs();
-    disableLoginInputs();
-    disableLoginBtn();
-    disableSignUpBtn();
+      loginModal.classList.remove("show-modal");
+      clearLoginInputs();
+      disableLoginBtn();
+      disableSignUpBtn();
+      activeUserProfile();
 
-    showUserName();
+      showUserName();
+      content1.classList.add("show");
+
+      showUserInfo();
+    } else {
+      swal("Нэвтрэлт амжилтгүй. Хэрэглэгч олдсонгүй!");
+      clearLoginInputs();
+    }
+  } else {
+    swal("Таны бөглөх талбарууд хоосон байна!");
   }
 });
 
@@ -171,35 +196,89 @@ signinBtn.addEventListener("click", async () => {
 logoutBtn.addEventListener("click", async () => {
   isSuccessful = await logOut();
   if (isSuccessful) {
-    swal("Та системээс гарлаа.");
-    localStorage.removeItem("loggedUserUid");
-    userProfileModal.classList.remove("hidden");
-    userProfileModalHeader.innerHTML = `Хэрэглэгч:`;
-    loggedUserId.textContent = "";
+    swal("Та системээс гарлаа. Дахин нэвтэрч орно уу.");
+    localStorage.clear("loggedUserUid");
+    content1.classList.add("show");
+    loggedUserId.textContent = "байхгүй!";
 
-    enableLoginInputs();
     enableLoginBtn();
     enableSignUpBtn();
     clearLoginInputs();
+    inActiveUserProfile();
     clearUserInputs();
   } else {
-    disableLoginInputs();
+    disableLoginBtn();
   }
 });
 
-// SIGN IN hiisnii daraa input-uudiig IDEWHGV bolgoh
-function disableLoginInputs() {
-  loginInputs.forEach((input) => {
-    input.setAttribute("disabled", "");
-  });
+//======================= SIGN IN hiisnii daraa hereglegchiin medeelliig HARUULAH
+function showUserInfo() {
+  if (localStorage.length > 0) {
+    //Items are stored in local storage
+    let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
+    let FirstName = userData.firstname;
+    let LastName = userData.lastname;
+    let Password = userData.password;
+    let Email = userData.email;
+
+    userFirstName.value = FirstName;
+    userLastName.value = LastName;
+    userLoginPassword.value = Password;
+    userLoginEmail.value = Email;
+  } else {
+    console.log("Local storage is empty");
+  }
 }
 
-// SIGN OUT hiisnii daraa input-uudiig IDEWHTEI bolgoh
-function enableLoginInputs() {
-  loginInputs.forEach((input) => {
-    input.removeAttribute("disabled");
-  });
+// =========================USER NAME-iig Haruulah=================
+function showUserName() {
+  if (localStorage.length > 0) {
+    //Items are stored in local storage
+    let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
+    let userName = userData.name;
+    // console.log("Username: ", userName);
+
+    loggedUserId.textContent = userName;
+    return userName;
+  } else {
+    console.log("Local storage is empty");
+  }
 }
+
+// =============Update User Info to Firestore=============
+const saveUserInfoBtn = document.getElementById("save-user-info-btn");
+
+saveUserInfoBtn.addEventListener("click", async () => {
+  const userFirstName = document.getElementById("user-first-name").value;
+  const userLastName = document.getElementById("user-last-name").value;
+  const userLoginPassword = document.getElementById(
+    "user-login-password"
+  ).value;
+  const userLoginEmail = document.getElementById("user-login-email").value;
+
+  if (
+    checkRequiredInputs([
+      userFirstName,
+      userLastName,
+      userLoginPassword,
+      userLoginEmail,
+    ])
+  ) {
+    isSuccessful = await updateUserDataInFireStore(
+      userFirstName,
+      userLastName,
+      userLoginPassword,
+      userLoginEmail
+    );
+    if (isSuccessful) {
+      swal("Мэдээлэл хадгалагдлаа");
+    } else {
+      swal("Амжилтгүй!");
+    }
+  } else {
+    swal("Таны бөглөх талбарууд хоосон байна!");
+  }
+});
 
 // SIGN IN hiisnii daraa input-uudiig CLEAR hiih
 function clearLoginInputs() {
@@ -220,15 +299,13 @@ function clearSignupInputs() {
   signupEmail.value = "";
   signupPassword.value = "";
 }
-// SIGN OUT hiisnii daraa LOGIN button-iig IDEWHTEI bolgoh
-function clearUserInputs() {
-  const userFirstName = document.getElementById("user-first-name");
-  const userLastName = document.getElementById("user-last-name");
-  const userLoginPassword = document.getElementById(
-    "user-login-password"
-  ).value;
-  const userLoginEmail = document.getElementById("user-login-email");
+// SIGN OUT hiisnii daraa hereglegchiin medeelliig CLEAR hiih
+const userFirstName = document.getElementById("user-first-name");
+const userLastName = document.getElementById("user-last-name");
+const userLoginPassword = document.getElementById("user-login-password");
+const userLoginEmail = document.getElementById("user-login-email");
 
+function clearUserInputs() {
   userFirstName.value = "";
   userLastName.value = "";
   userLoginPassword.value = "";
@@ -237,70 +314,29 @@ function clearUserInputs() {
 
 // SIGN IN hiisnii daraa LOGIN button-iig IDEWHGVI bolgoh
 function disableLoginBtn() {
-  loginOpen.disabled = true;
-  loginOpen.style.backgroundColor = "#555";
-  loginOpen.style.cursor = "no-drop";
+  loginOpen.style.display = "none";
 }
 
 // SIGN OUT hiisnii daraa LOGIN button-iig IDEWHTEI bolgoh
 function enableLoginBtn() {
-  loginOpen.disabled = false;
-  loginOpen.style.backgroundColor = "var(--secondary-color)";
-  loginOpen.style.cursor = "pointer";
+  loginOpen.style.display = "block";
 }
 
 // SIGN UP hiisnii daraa LOGIN button-iig IDEWHGVI bolgoh
 function disableSignUpBtn() {
-  signupOpen.disabled = true;
-  signupOpen.style.backgroundColor = "#555";
-  signupOpen.style.cursor = "no-drop";
+  signupOpen.style.display = "none";
 }
 
 // SIGN UP hiisnii daraa LOGIN button-iig IDEWHTEI bolgoh
 function enableSignUpBtn() {
-  signupOpen.disabled = false;
-  signupOpen.style.backgroundColor = "var(--secondary-color)";
-  signupOpen.style.cursor = "pointer";
+  signupOpen.style.display = "block";
 }
 
-// =========================USER NAME-iig Haruulah=================
-function showUserName() {
-  let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
-
-  let userName = userData.name;
-
-  userProfileModalHeader.innerHTML = `Хэрэглэгч: ${userName}`;
-  loggedUserId.textContent = userName;
+function activeUserProfile() {
+  userIcon.style.color = "#fff";
+  userProfileBtn.style.background = "#fb1c25";
 }
-
-// =============Update User Info to Firestore=============
-const saveUserInfoBtn = document.getElementById("save-user-info-btn");
-
-saveUserInfoBtn.addEventListener("click", async () => {
-  const userFirstName = document.getElementById("user-first-name").value;
-  const userLastName = document.getElementById("user-last-name").value;
-  const userLoginPassword = document.getElementById(
-    "user-login-password"
-  ).value;
-  const userLoginEmail = document.getElementById("user-login-email").value;
-
-  if (
-    userFirstName == "" &&
-    userLastName == "" &&
-    userLoginPassword == "" &&
-    userLoginEmail == ""
-  ) {
-    swal("Та мэдээллээ бөглөөд хадгална уу.");
-  } else {
-    isSuccessful = await updateUserDataInFireStore(
-      userFirstName,
-      userLastName,
-      userLoginPassword,
-      userLoginEmail
-    );
-    if (isSuccessful) {
-      saveUserInfoBtn.innerHTML = "Мэдээлэл хадгалагдлаа";
-    } else {
-    }
-  }
-});
+function inActiveUserProfile() {
+  userIcon.style.color = "#000";
+  userProfileBtn.style.background = "#ccc";
+}

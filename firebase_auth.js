@@ -11,14 +11,14 @@ import {
   updateEmail,
 } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-auth.js";
 
-import {
-  getDatabase,
-  get,
-  ref,
-  child,
-  onChildChanged,
-  push,
-} from "https://www.gstatic.com/firebasejs/9.8.1/firebase-database.js";
+// import {
+//   getDatabase,
+//   get,
+//   ref,
+//   child,
+//   onChildChanged,
+//   push,
+// } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-database.js";
 
 import {
   getFirestore,
@@ -29,7 +29,6 @@ import {
   doc,
   getDoc,
   onSnapshot,
-  increment,
 } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -46,7 +45,7 @@ const app = initializeApp(firebaseConfig);
 // const database = getDatabase(app);
 const db = getFirestore(app);
 const auth = getAuth(app);
-
+let documentID;
 // ===========================SIGN UP AUTHENTICATION=======================
 const signUp = async function (signupEmail, signupPassword, signupName) {
   try {
@@ -56,8 +55,16 @@ const signUp = async function (signupEmail, signupPassword, signupName) {
       signupPassword,
       signupName
     );
+    // 1. User ID-iigaa barij awna.
     const userUid = userCredential.user.uid;
 
+    // 2. User ID-iigaaraa shineer uusgesen DOCUMENT COLLECTION-oo FIRESTORE DATABASE dotor hadgalna.
+    const docRef = await setDoc(doc(db, "users", userUid), {
+      name: signupName,
+      password: signupPassword,
+      email: signupEmail,
+    });
+    
     return true;
   } catch (error) {
     return false;
@@ -74,7 +81,6 @@ const signIn = async function (signinEmail, signinPassword) {
     );
 
     const userUid = userCredential.user.uid;
-
     await getUserDataFromFireStore(userUid);
 
     return true;
@@ -105,13 +111,9 @@ onAuthStateChanged(auth, (user) => {
 
 // =============Get Document Data from Firestore=============
 const getUserDataFromFireStore = async function (userUid) {
-  try {
-    const docData = await getDoc(doc(db, "users", userUid));
-    let userData = await docData.data();
-    localStorage.setItem("loggedUserUid", JSON.stringify(userData));
-  } catch (error) {
-    swal("ERR: ", error);
-  }
+  const docData = await getDoc(doc(db, "users", userUid));
+  let userData = docData.data();
+  localStorage.setItem("loggedUserUid", JSON.stringify(userData));
 };
 
 // =============Update User Info to Firestore=============
