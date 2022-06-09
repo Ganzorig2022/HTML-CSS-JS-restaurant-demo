@@ -20,6 +20,23 @@ function getRatings() {
   starsInner.style.width = starPercentageRounded;
   showUserName();
 }
+// ==================Scroll To Top Effect===============
+const scrollToTopBtn = document.getElementById("scrollToTop-button");
+window.onscroll = function () {
+  scrollFunction();
+};
+function scrollFunction() {
+  if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
+    scrollToTopBtn.style.display = "block";
+  } else {
+    scrollToTopBtn.style.display = "none";
+  }
+}
+
+scrollToTopBtn.addEventListener("click", () => {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+});
 
 // =================Button Effect====================
 const buttons = document.querySelectorAll(".ripple");
