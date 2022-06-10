@@ -66,6 +66,7 @@ orderButton.addEventListener("click", ()=>{
 		localStorage.setItem(timeKey, timeValue)
 		localStorage.setItem(orderTableKey, orderTableValue)
 	}
+	window.location.assign("profile.html")
 
 });
     

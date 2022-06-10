@@ -4,17 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
-      integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
+    <script
+      src="https://kit.fontawesome.com/06507b3ae3.js"
       crossorigin="anonymous"
-    />
+    ></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="Main.css" />
     <link rel="stylesheet" href="MainCalendar.css" />
-
-    <script src="https://kit.fontawesome.com/a3b239acb8.js" crossorigin="anonymous"></script>
-
+    <!-- <script src="https://kit.fontawesome.com/a3b239acb8.js" crossorigin="anonymous"></script> -->
     <link rel="shortcut icon" type="image/png" href="img/logo_black.png" />
     <title>Restaurant Reservation and Booking Website</title>
   </head>
@@ -33,14 +30,9 @@
         <li><a href="#">Бидний тухай</a></li>
         <li><a href="#">Холбоо барих</a></li>
       </ul>
-      <!--============SEARCH INPUT SECTION========= -->
-      <!-- <form id="form">
-        <input type="text" id="search" placeholder="Enter restaurant name..." />
-        <button><i class="fas fa-search"></i></button>
-      </form> -->
-      <div class="navBtnContainer">
-        <button class="signUp-btn ripple" id="open">Бүртгүүлэх</button>
-        <button class="login-btn ripple" id="open">Нэвтрэх</button>
+     <div class="navBtnContainer">
+        <button class="signUp-btn ripple" id="signup-open">Бүртгүүлэх</button>
+        <button class="login-btn ripple" id="login-open">Нэвтрэх</button>
         <div class="cart-icon">
           <i class="fas fa-shopping-cart"></i>
           <div class="cart-modal">
@@ -95,7 +87,7 @@
         </div>
         <!-- Profile Window -->
         <div class="user-profile-modal">
-          <h3>Хэрэглэгч ID:</h3>
+          <h3 id="user-profile-modal--header">Хэрэглэгч:</h3>
           <div>
             <li>
               <i class="fas fa-user-circle"></i
@@ -105,12 +97,8 @@
               <i class="fas fa-edit"></i
               ><a class="" href="/profile.html">Миний захиалга</a>
             </li>
-            <!-- <li>
-              <i class="fas fa-cog"></i
-              ><a class="" href="/profile.html">Тохиргоо</a>
-            </li> -->
             <li>
-              <a class="" href="#">Гарах</a>
+              <a class="" href="#" id="logout-btn">Гарах</a>
             </li>
           </div>
         </div>
@@ -124,43 +112,115 @@
         <button class="order-btn ripple" id="open">Захиалга өгөх</button>
       </div>
     </header>
-    <!--============3.Main SECTION========= -->
-    <!-- <main>
-      <h1>Restaurants</h1>
-      <div class="main-container">
-        <div class="left-content">
-          <h2>
-            Momo Hot Pot restaurant
-            <span
-              ><img
-                src="https://scontent.fuln8-1.fna.fbcdn.net/v/t31.18172-8/17761016_1896818063904890_8880108015428113544_o.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=knDZV3HMs5IAX9Ujg6u&tn=SZT24u-xOvzoHsDB&_nc_ht=scontent.fuln8-1.fna&oh=00_AT9_1fu_3gSME4gAa7hw50JfxkHqOtK838ZEE1jakNoWTw&oe=62B5DB9B"
-                alt=""
-            /></span>
-          </h2>
-          <p>
-            Эрүүл, амтат хоол, найрсаг үйлчилгээтэй Момо Хот Пот та бүхнийг урьж
-            байна.<br /><br />
-            <strong>Хаяг :&nbsp; </strong>Улсын Их Дэлгүүрийн зүүн талд, Мөнгөн
-            завьяа явах зам дагуу
-          </p>
-          <div class="stars-outer">
-            <div class="stars-inner"></div>
-          </div>
-          <span class="number-rating"
-            >Үнэлгээ: 5-аас <span id="number-rating"> 4.5</span></span
-          >
-          <button class="more-btn ripple" id="open">Дэлгэрэнгүй</button>
+    <!--============4.SIGNUP MODAL SECTION========= -->
+    <div class="signup-modal-container" id="signup-modal">
+      <div class="signup-modal">
+        <button class="signup-close-btn" id="signup-close-btn">
+          <i class="fa fa-times"></i>
+        </button>
+        <div class="signup-modal-header">
+          <h3>Бүртгүүлэх</h3>
         </div>
-        <div class="right-content">
-          <div class="right-content-img">
-            <img
-              src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-              alt=""
+        <div class="signup-modal-content">
+          <form class="signup-modal-form">
+            <div>
+              <label for="name">Нэр</label>
+              <input
+                type="text"
+                id="signup-name"
+                placeholder="Нэрээ оруулна уу..."
+                class="form-input"
+                required
+              />
+            </div>
+            <div>
+              <label for="email">Имэйл*</label>
+              <input
+                type="email"
+                id="signup-email"
+                placeholder="Имэйлээ оруулна уу..."
+                class="form-input"
+                required
+              />
+            </div>
+            <div>
+              <label for="password">Нууц үг*</label>
+              <input
+                type="password"
+                id="signup-password"
+                placeholder="Нууц үгээ оруулна уу..."
+                class="form-input"
+                required
+              />
+            </div>
+            <div>
+              <label for="password2">Нууц үг дахин оруулах</label>
+              <input
+                type="password"
+                id="signup-password2"
+                placeholder="Нууц үгээ дахин оруулна уу..."
+                class="form-input"
+              />
+            </div>
+            <input
+              type="button"
+              value="Бүртгүүлэх"
+              class="signup-submit-btn"
+              id="signup-submit-btn"
             />
-          </div>
+          </form>
         </div>
       </div>
-    </main> -->
+    </div>
+    <!--============5.LOGIN MODAL SECTION========= -->
+    <div class="login-modal-container" id="login-modal">
+      <div class="login-modal">
+        <button class="modal-close-btn" id="modal-close-btn">
+          <i class="fa fa-times"></i>
+        </button>
+        <div class="login-modal-header">
+          <h3>Нэвтрэх</h3>
+        </div>
+        <div class="login-modal-content">
+          <form class="login-modal-form">
+            <!-- <div>
+              <label for="name">Нэр</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Нэрээ оруулна уу..."
+                class="form-input"
+              />
+            </div> -->
+            <div>
+              <label for="email">Имэйл</label>
+              <input
+                type="email"
+                id="login-email"
+                placeholder="Имэйлээ оруулна уу..."
+                class="form-input"
+              />
+            </div>
+            <div>
+              <label for="password">Нууц үг</label>
+              <input
+                type="password"
+                id="login-password"
+                placeholder="Нууц үгээ оруулна уу..."
+                class="form-input"
+              />
+            </div>
+            <input
+              type="button"
+              value="Нэвтрэх"
+              class="login-submit-btn"
+              id="login-submit-btn"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+    <!--============6.CONTAINER SECTION========= -->
     <section class="container">
       <div class="rightContainer ">
         <h2>
@@ -187,10 +247,10 @@
           Menu
         </h3>
         <div class="menu-container">
-            <button id="btnBorder" class="button btnActive">
+            <button id="btnBorder" class="buttonMenu btnActive">
               Хоол
             </button>
-            <button id="btnBorder1" class="button">
+            <button id="btnBorder1" class="buttonMenu">
               Ус, ундаа
             </button>
         </div>
@@ -219,7 +279,7 @@
           <li><h4> <span class="MenuText">МӨСТЭЙ ЦАЙ /Лимон/</span> <span>3,900₮</span></h4>
           <li><h4> <span class="MenuText">МӨСТЭЙ ЦАЙ /Хад/</span> <span>3,900₮</span></h4>
         </ul>
-        <button class="button">Хоолны цэс дэлгэрэнгүй харах</button>
+        <button class="buttonMenu">Хоолны цэс дэлгэрэнгүй харах</button>
         <h3>
           Үнэлгээ өгсөн: <span> 10 </span> хүн
         </h3>
@@ -391,6 +451,67 @@
         </div>
       </div>
     </section>
+
+    <!--============7.FOOTER SECTION========= -->
+    <footer>
+      <div class="footer-container1">
+        <div class="footer-items">
+          <div class="footer-contacts">
+            <h2 class="footer-items-title">Холбоо барих</h2>
+            <p>
+              <i id="contact-icon" class="fas fa-phone"></i>72-700-800
+            </p=>
+            <p>
+              <i id="contact-icon" class="fas fa-envelope"></i>info@nest.edu.mn
+            </p>
+          </div>
+          <div class="footer-location">
+            <h2 class="footer-items-title">Байршил</h2>
+            <p>
+              <i class="fas fa-location-dot"></i> Улаанбаатар,
+              Чингисийн Өргөн Чөлөө 17, Гурван гол оффис, 301 тоот
+            </p>
+          </div>
+          <div class="footer-technology">
+            <h2 class="footer-items-title">Ашигласан технологиуд</h2>
+            <p>
+              <span>HTML5</span>
+              <span>CSS3</span>
+              <span>Javascript</span>
+              <span>Firebase</span>
+              <span>Github</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-container2">
+        <div class="footer-items2">
+          <p class="footer-items2-created-by">Бүтээсэн: <span>Coding is Doping</span> </p>
+          <div class="footer-items2-social">
+            <a href="https://www.facebook.com/">
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.twitter.com/">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.github.com/">
+              <i class="fab fa-github"></i>
+            </a>
+          </div>
+          <div class="footer-items2-all-rights">
+            <span class="text"
+              >© 2022. Зохиогчийн бүх эрх хуулиар хамгаалагдсан.
+            </span>
+          </div>
+        </div>
+        <button class="scroll-to-top-button" id="scrollToTop-button"><i class="fas fa-arrow-up"></i></button>
+      </div>
+    </footer>
+    <script type="module" src="/firebase_auth.js"></script>
+    <script type="module" src="home.js"></script>
     <script src="Main.js"></script>
     <script src="Calendar.js"></script>
 
