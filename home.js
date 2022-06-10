@@ -16,8 +16,11 @@ function getRatings() {
   const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
 
   // Set width of stars-inner to percentage
-  const starsInner = document.querySelector(".stars-inner");
-  starsInner.style.width = starPercentageRounded;
+  const starsInners = document.querySelectorAll(".stars-inner");
+  starsInners.forEach((starInner) => {
+    starInner.style.width = starPercentageRounded;
+  });
+
   showUserName();
 }
 // ==================Scroll To Top Effect===============
@@ -294,3 +297,53 @@ function showUserName() {
     console.log("Local storage is empty");
   }
 }
+
+const searchField = document.getElementsByClassName("restaurant-search")[0];
+const searchInput = document.getElementsByClassName(
+  "restaurant-search__input"
+)[0];
+const searchResultsContainer =
+  document.getElementsByClassName("search-results")[0];
+console.log(searchResultsContainer);
+const showCaseContent = document.getElementsByClassName("showcase-content")[0];
+
+const restaurants = [
+  {
+    name: "ling",
+    rating: 3,
+  },
+  {
+    name: "momo",
+    rating: 5,
+  },
+];
+
+searchField.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  // if input field is empty, clear the search results
+  if (searchInput.value === null) {
+    searchResultsContainer.innerHTML = "";
+    return;
+  }
+
+  // filter restaurant
+  const searchResults = restaurants.filter(
+    (restaurant) => +searchInput.value <= restaurant.rating
+  );
+
+  console.log(searchResults);
+  searchResults.forEach((element) => {
+    console.log(element);
+    let itemHTML = `
+    <div class="search-results">
+        <p>${element.name}</p>
+        <p>${element.rating}</p>
+    </div>
+    `;
+    //showCaseContent.appendChild(itemHTML);
+    showCaseContent.innerHTML += itemHTML;
+
+    console.log("HTML", showCaseContent.innerHTML);
+  });
+});

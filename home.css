@@ -19,6 +19,18 @@
   padding: 0;
 }
 
+::-webkit-scrollbar {
+  width: 15px;
+}
+::-webkit-scrollbar-track {
+  background-color: #dcdcdc;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #555;
+}
 body {
   font-family: var(--third-font-family);
   line-height: 1.4;
@@ -81,33 +93,6 @@ nav ul li a.active {
 #check {
   display: none;
 }
-/* form {
-  position: relative;
-  width: 200px;
-  max-width: 100%;
-} */
-
-/* form input {
-  border: 0;
-  border-radius: 50px;
-  font-size: 10px;
-  padding: 10px 20px;
-  width: 100%;
-}
-
-
-
-form button {
-  position: absolute;
-  top: 1px;
-  right: 0px;
-  background-color: var(--secondary-color);
-  border: 0;
-  border-radius: 50px;
-  color: #fff;
-  font-size: 10px;
-  padding: 8px 15px;
-} */
 
 .navBtnContainer {
   display: flex;
@@ -324,7 +309,6 @@ form button {
 /*====================HEADER SECTION=============== */
 header {
   height: 100vh;
-  color: #fff;
   background-image: url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80");
   background-position: center center;
   background-repeat: no-repeat;
@@ -369,7 +353,7 @@ header h1:hover {
     transform: translate(0);
   }
 }
-header p {
+header .showcase-content__p {
   font-family: var(--third-font-family);
   font-size: 3rem;
   color: #fff;
@@ -392,7 +376,7 @@ header p {
     transform: translate(0);
   }
 }
-header button {
+header .order-btn {
   font-family: var(--third-font-family);
   background-color: var(--secondary-color);
   border: 0;
@@ -406,6 +390,88 @@ header button {
   animation: moveInBottom 0.5s ease-out 0.75s;
   animation-fill-mode: backwards;
 }
+
+/* header SEARCH INPUT heseg */
+.restaurant-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  margin-top: 20px;
+  animation: moveInBottom 0.5s ease-out 0.75s;
+  animation-fill-mode: backwards;
+}
+.restaurant-search__input {
+  font-family: inherit;
+  background-color: #f4f2f2f2;
+  color: #000;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  width: 90%;
+  margin-right: -3rem;
+  transition: all 0.2s;
+}
+.restaurant-search__input:focus {
+  outline: 0;
+  width: 100%;
+}
+.restaurant-search__button {
+  border: none;
+  background-color: transparent;
+}
+.restaurant-search__button:hover {
+  box-shadow: none;
+}
+.fa-search {
+  margin: 10px;
+  color: #999;
+}
+
+.search-results {
+  margin: 10px;
+  color: #000;
+  background-color: #fff;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 2px 10px rgb(0 0 0 /30%);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  height: 200px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.search-results::-webkit-scrollbar {
+  width: 10px;
+}
+.search-results::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+.search-results::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #34c2c2;
+}
+.search-results ul li {
+  list-style: none;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgb(0 0 0 /30%);
+}
+.search-results ul li span {
+  color: #555;
+  font-size: 0.8rem;
+}
+.search-results p {
+  color: #34c2c2;
+}
+
+.search-results ul li .stars-outer::before,
+.search-results ul li .stars-inner::before {
+  font-size: 0.8rem;
+}
 @keyframes moveInBottom {
   0% {
     opacity: 0;
@@ -418,7 +484,6 @@ header button {
     transform: translate(0);
   }
 }
-
 /*====================MAIN SECTION=============== */
 main {
   background-image: url("https://dishup.qodeinteractive.com/wp-content/themes/dishup/assets/img/background_pattern.jpg");

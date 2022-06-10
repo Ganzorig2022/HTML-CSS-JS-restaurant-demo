@@ -29,12 +29,7 @@
         <li><a href="#">Бидний тухай</a></li>
         <li><a href="#">Холбоо барих</a></li>
       </ul>
-      <!--============SEARCH INPUT SECTION========= -->
-      <!-- <form id="form">
-        <input type="text" id="search" placeholder="Enter restaurant name..." />
-        <button><i class="fas fa-search"></i></button>
-      </form> -->
-      <div class="navBtnContainer">
+     <div class="navBtnContainer">
         <button class="signUp-btn ripple" id="signup-open">Бүртгүүлэх</button>
         <button class="login-btn ripple" id="login-open">Нэвтрэх</button>
         <div class="cart-icon">
@@ -112,8 +107,39 @@
     <header>
       <div class="showcase-content">
         <h1>Your Restaurant</h1>
-        <p>Чанартай сонголт</p>
+        <p class="showcase-content__p">Чанартай сонголт</p>
+        <form class="restaurant-search">
+          <input type="text" class="restaurant-search__input" placeholder="Рестораны үнэлгээгээр хайна уу..."/>
+          <button class="restaurant-search__button">
+            <i class="fas fa-search"></i>
+          </button>
+        </form>
         <button class="order-btn ripple" id="open">Захиалга өгөх</button>
+        <div class="search-results">
+          <ul>
+            <li>
+              <p>restaurant1</p>
+              <div class="stars-outer">
+                <div class="stars-inner"></div>
+              </div>
+                <span class="number-rating"><span id="number-rating"> 4.5</span></span>
+            </li>
+             <li>
+              <p>restaurant1</p>
+              <div class="stars-outer">
+                <div class="stars-inner"></div>
+              </div>
+                <span class="number-rating"><span id="number-rating"> 3.5</span></span>
+            </li>
+             <li>
+              <p>restaurant3</p>
+              <div class="stars-outer">
+                <div class="stars-inner"></div>
+              </div>
+                <span class="number-rating"><span id="number-rating"> 3.5</span></span>
+            </li>
+          </ul>
+        </div>
       </div>
     </header>
     <!--============3.Main SECTION========= -->
