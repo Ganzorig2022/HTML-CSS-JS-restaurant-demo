@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function getRatings() {
   const starsTotal = 5;
   let starPercentageRounded = 0;
-  
+
   // Get percentage
   const numberRatings = document.querySelectorAll("#number-rating");
 
@@ -305,8 +305,7 @@ const searchInput = document.getElementsByClassName(
   "restaurant-search__input"
 )[0];
 const searchResultsContainer =
-  document.getElementsByClassName("search-results")[0];
-const showCaseContent = document.getElementsByClassName("showcase-content")[0];
+  document.getElementsByClassName("search-results-UL")[0];
 
 const restaurants = [
   {
@@ -317,13 +316,17 @@ const restaurants = [
     name: "momo",
     rating: 5,
   },
+  {
+    name: "yuna",
+    rating: 4,
+  },
 ];
 
-searchField.addEventListener("submit", (e) => {
-  e.preventDefault();
-
+searchField.addEventListener("submit", (event) => {
+  event.preventDefault();
+  searchResultsContainer.innerHTML = "";
   // if input field is empty, clear the search results
-  if (searchInput.value === null) {
+  if (+searchInput.value === null) {
     searchResultsContainer.innerHTML = "";
     return;
   }
@@ -333,18 +336,17 @@ searchField.addEventListener("submit", (e) => {
     (restaurant) => +searchInput.value <= restaurant.rating
   );
 
-  console.log(searchResults);
   searchResults.forEach((element) => {
     console.log(element);
     let itemHTML = `
-    <div class="search-results">
-        <p>${element.name}</p>
-        <p>${element.rating}</p>
-    </div>
-    `;
-    //showCaseContent.appendChild(itemHTML);
-    showCaseContent.innerHTML += itemHTML;
-
-    console.log("HTML", showCaseContent.innerHTML);
+            <li>
+              <p>${element.name}</p>
+              <div class="stars-outer">
+                <div class="stars-inner"></div>
+              </div>
+              <span class="number-rating"><span id="number-rating"> ${element.rating}</span></span>
+            </li>`;
+    searchResultsContainer.innerHTML += itemHTML;
+    getRatings();
   });
 });

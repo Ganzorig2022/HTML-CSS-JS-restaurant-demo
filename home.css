@@ -437,7 +437,7 @@ header .order-btn {
   border-radius: 10px;
   display: flex;
   justify-content: center;
-  height: 200px;
+  height: 250px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
