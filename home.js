@@ -305,40 +305,40 @@ const searchInput = document.getElementsByClassName(
   "restaurant-search__input"
 )[0];
 const searchResultsContainer =
-  document.getElementsByClassName("search-results-UL")[0];
+  document.getElementsByClassName("search-results")[0];
+const searchResultsUL = document.getElementsByClassName("search-results-UL")[0];
 
-const restaurants = [
+const restaurantsArr = [
   {
     name: "ling",
-    rating: 3,
+    rating: 2.7,
   },
   {
     name: "momo",
-    rating: 5,
+    rating: 4.5,
   },
   {
     name: "yuna",
-    rating: 4,
+    rating: 3.8,
   },
 ];
 
-searchField.addEventListener("submit", (event) => {
-  event.preventDefault();
-  searchResultsContainer.innerHTML = "";
-  // if input field is empty, clear the search results
-  if (+searchInput.value === null) {
-    searchResultsContainer.innerHTML = "";
-    return;
-  }
-
-  // filter restaurant
-  const searchResults = restaurants.filter(
-    (restaurant) => +searchInput.value <= restaurant.rating
+function getRestaurantsToDOM(ratingValue) {
+  // 1. Restauranii array-g ihees baga ruu ni sort-low.
+  const sortedRestaurantsArr = restaurantsArr.sort(
+    (a, b) => b.rating - a.rating
   );
+  // 2. Sortolson array-gaara filter() hiihed vr dvn ni hamgiin ondor vnelgeeteigeesee dooshoo tsuwj RESULT garna.
+  const searchResults = sortedRestaurantsArr.filter(
+    (restaurant) => ratingValue <= restaurant.rating
+  );
+  // 3. Array-gaara dawtaad "3" gesen utga oghod 3-aas deesh vnelgeetei restauranii medeelliig DOM ruu hiine.
+  searchResultsContainer.classList.add("show");
 
-  searchResults.forEach((element) => {
-    console.log(element);
-    let itemHTML = `
+  if (!searchResultsUL.innerHTML == "") {
+    searchResultsUL.innerHTML = "";
+    searchResults.forEach((element) => {
+      let itemHTML = `
             <li>
               <p>${element.name}</p>
               <div class="stars-outer">
@@ -346,7 +346,26 @@ searchField.addEventListener("submit", (event) => {
               </div>
               <span class="number-rating"><span id="number-rating"> ${element.rating}</span></span>
             </li>`;
-    searchResultsContainer.innerHTML += itemHTML;
-    getRatings();
-  });
+      searchResultsUL.innerHTML += itemHTML;
+      searchInput.value = "";
+      getRatings();
+    });
+  }
+}
+
+searchField.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  let ratingValue = searchInput.value;
+
+  // herwee hooson utgan dr darwal hailt hiigdehgvi
+  if (ratingValue === "") {
+    swal("Та хайлтын хэсэг дээр ямар нэгэн тоо оруулна уу!");
+  } else {
+    if (ratingValue <= 5 && ratingValue >= 1) {
+      getRestaurantsToDOM(+ratingValue);
+    } else {
+      swal("Та 1-ээс 5-ын хооронд бүхэл тоо оруулна уу.");
+    }
+  }
 });
