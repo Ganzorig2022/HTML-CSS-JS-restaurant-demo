@@ -1,28 +1,29 @@
 import { signUp, signIn, logOut } from "./firebase_auth.js";
 
 // Run getRatings when DOM loads
-document.addEventListener("DOMContentLoaded", getRatings);
+document.addEventListener("DOMContentLoaded", () => {
+  getRatings();
+  showUserName();
+});
 
-const starsTotal = 5;
-// Get ratings
+//=======Vnelgeenii toonoos hamaars 5 STAR-uudiig budah
 function getRatings() {
+  const starsTotal = 5;
+  let starPercentageRounded = 0;
+  
   // Get percentage
-  const numberRating = document.getElementById("number-rating");
-  let numberRatingValue = numberRating.textContent;
-
-  const starPercentage = (numberRatingValue / starsTotal) * 100;
-
-  // Round to nearest 10
-  const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+  const numberRatings = document.querySelectorAll("#number-rating");
 
   // Set width of stars-inner to percentage
   const starsInners = document.querySelectorAll(".stars-inner");
-  starsInners.forEach((starInner) => {
+  starsInners.forEach((starInner, idx) => {
+    let numberRatingValue = numberRatings[idx].textContent;
+    const starPercentage = (numberRatingValue / starsTotal) * 100;
+    starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
     starInner.style.width = starPercentageRounded;
   });
-
-  showUserName();
 }
+
 // ==================Scroll To Top Effect===============
 const scrollToTopBtn = document.getElementById("scrollToTop-button");
 window.onscroll = function () {
@@ -298,13 +299,13 @@ function showUserName() {
   }
 }
 
+//=============restauran-iig vnelgeegeer ni haih==========
 const searchField = document.getElementsByClassName("restaurant-search")[0];
 const searchInput = document.getElementsByClassName(
   "restaurant-search__input"
 )[0];
 const searchResultsContainer =
   document.getElementsByClassName("search-results")[0];
-console.log(searchResultsContainer);
 const showCaseContent = document.getElementsByClassName("showcase-content")[0];
 
 const restaurants = [
