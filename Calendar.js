@@ -19,12 +19,10 @@ let selectedDay = day;
 let selectedMonth = month;
 let selectedYear = year;
 
+
 mth_element.textContent = months[month] + ' ' + year;
 selected_date_element.textContent = formatDate(date);
-console.log("time", selected_date_element.textContent)
-
 selected_date_element.dataset.value = selectedDate;
-
 populateDates();
 
 // EVENT LISTENERS
@@ -137,22 +135,14 @@ let btnTime = document.getElementsByClassName("btnTime")[0];
 btnTime.addEventListener("click", ()=>{
 	let key = selectedPerson.value;
 	let value = selectedPerson.options[selectedPerson.selectedIndex].text;
-	let date = selected_date_element.textContent;
-	let datekey = "Date";
-	let timeKey = selectedTime.value;
-	let timeValue = selectedTime.options[selectedTime.selectedIndex].text;
-
-	console.log("localstore",date)
-	console.log("localstore timeKey",timeKey)
-
-	console.log("localstore timeValue",timeValue)
-
+	let dateValue = selected_date_element.textContent;
+	let	datekey = "Date";
+	let	timeKey = selectedTime.value;
+	let	timeValue = selectedTime.options[selectedTime.selectedIndex].text;
 	if(key && value){
 		localStorage.setItem(key, value)
-		localStorage.setItem(datekey, date)
+		localStorage.setItem(datekey, dateValue)
 		localStorage.setItem(timeKey, timeValue)
-
-
 		// location.reload();
 	}
 	window.location.assign("table.html")

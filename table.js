@@ -1,125 +1,71 @@
-let seatSelect = document.getElementsByClassName("seat");
-let seat1Select = document.getElementsByClassName("seat1");
-let seat2Select = document.getElementsByClassName("seat2");
-let personNum = document.getElementById("person").value;
+let tablesSelected = document.getElementsByClassName("tables");
+let personNum = document.getElementById("person");
 let option = document.getElementsByClassName("option")
-let timeValue = document.getElementsByClassName("timeValue")
-
-// const selected_date_element = document.querySelector('.date-picker .selected-date');
+let tableTimeValue = document.getElementsByClassName("timeValue")
+let orderButton = document.getElementsByClassName("orderbutton")[0];
 
 //LocalStore
 for(let i=0; i<option.length; i++){
     if(option[i].textContent === localStorage.person){
-        console.log("Tentsuu bns")
-        // option[i].options.[selected]
         option[i].setAttribute("selected", "");
     }
 }
 selected_date_element.textContent = localStorage.Date;
-for(let i=0; i<timeValue.length; i++){
-    console.log("Tentsuu bnaaaaaa", timeValue[i])
-
-    if(timeValue[i].textContent === localStorage.timeValue){
-        console.log("Tentsuu bnaaaaaa")
-        timeValue[i].setAttribute("selected", "");
+for(let i=0; i<tableTimeValue.length; i++){
+    if(tableTimeValue[i].textContent === localStorage.timeValue){
+        tableTimeValue[i].setAttribute("selected", "");
     }
 }
+let personSelected = personNum.options[personNum.selectedIndex].text;
+let personValue = personNum.options[personNum.selectedIndex].value
 
-
-
+//Ширээ сонгох болон 2 давхар ширээ захиалга шалгах хэсэг
+//=============================================================================================
 let seat = 0;
-for(let i=0; i<seatSelect.length; i++){
-    seatSelect[i].addEventListener("click", (e)=>{
-        // seat +=2;
-        let seatCount = seatSelect[i].firstElementChild.value;
-        let personNum = document.getElementById("person").value;
-        if(seatCount>=personNum){
+let orderTable = "";
+for(let i=0; i<tablesSelected.length; i++){
+    tablesSelected[i].addEventListener("click", (e)=>{
+        let seatCount = tablesSelected[i].firstElementChild.value;
+        orderTable = tablesSelected[i].lastElementChild.textContent;
+        if(seatCount>=personValue){
             console.log("ALDAA");
             if(seat<1){
                 seat++;
-                seatSelect[i].classList.toggle("active");
-                if(seatSelect[i].classList[1]){
+                tablesSelected[i].classList.toggle("active");
+                if(tablesSelected[i].classList[2]){
                 }
                 else{
                     seat=seat-2;
                 }
-            } else{if(seatSelect[i].classList[1]){
+            } else{if(tablesSelected[i].classList[2]){
                     seat--;
-                    seatSelect[i].classList.toggle("active");
+                    tablesSelected[i].classList.toggle("active");
                 }else
                 alert("Та 2 ширээ захилах гэж байна.");
             }
         } else {
-            swal(`${personNum} deesh suudaltai shiree zahialna uu`);
+            swal(`${personValue} дээш суудалтай ширээ захиална уу!`);
         }
-        
-        console.log("seat", seat);
     });
     }
-    console.log("seat1Select[i].childElementCount",seat1Select[1].firstElementChild.value);
+//=============================================================================================
 
-    for(let i=0; i<seat1Select.length; i++){
-        seat1Select[i].addEventListener("click", (e)=>{
-            // seat +=2;
-            let seatCount = seat1Select[i].firstElementChild.value;
+//
+orderButton.addEventListener("click", ()=>{
+    let key = "person";
+	let value = selectedPerson.options[selectedPerson.selectedIndex].text;
+	let dateValue = selected_date_element.textContent;
+	let	datekey = "Date";
+	let	timeKey = selectedTime.value;
+	let	timeValue = selectedTime.options[selectedTime.selectedIndex].text;
+    let orderTableKey = "Table";
+    let orderTableValue = orderTable;
+	if(key && value){
+		localStorage.setItem(key, value)
+		localStorage.setItem(datekey, dateValue)
+		localStorage.setItem(timeKey, timeValue)
+		localStorage.setItem(orderTableKey, orderTableValue)
+	}
 
-            let personNum = document.getElementById("person").value;
-            console.log("seatCount",seatCount);
-
-            if(seatCount>=personNum){
-                console.log("ALDAA");
-                if(seat<1){
-                    seat++;
-                    seat1Select[i].classList.toggle("active");
-                    if(seat1Select[i].classList[1]){
-                    }
-                    else{
-                        seat=seat-2;
-                    }
-                } else{if(seat1Select[i].classList[1]){
-                        seat--;
-                        seat1Select[i].classList.toggle("active");
-                    }else
-                    swal("Та 2 ширээ захилах гэж байна.");
-                }
-            } else {
-                swal(`${personNum} deesh suudaltai shiree zahialna uu`);
-            }
-            
-            console.log("seat", seat);
-        });
-        }
-
-
-
-
-        for(let i=0; i<seat2Select.length; i++){
-            seat2Select[i].addEventListener("click", (e)=>{
-                // seat +=2;
-                let seatCount = seat2Select[i].firstElementChild.value;
-                let personNum = document.getElementById("person").value;
-                console.log("seatCount",seatCount);
-
-                if(seatCount>=personNum){
-                    console.log("ALDAA");
-                    if(seat<1){
-                        seat++;
-                        seat2Select[i].classList.toggle("active");
-                        if(seat2Select[i].classList[1]){
-                        }
-                        else{
-                            seat=seat-2;
-                        }
-                    } else{if(seat2Select[i].classList[1]){
-                            seat--;
-                            seat2Select[i].classList.toggle("active");
-                        }else
-                        alert("Та 2 ширээ захилах гэж байна.");
-                    }
-                } else {
-                    alert(`${personNum} deesh suudaltai shiree zahialna uu`);
-                }
-                
-                console.log("seat", seat);
-            });
-            }
+});
+    
