@@ -594,6 +594,7 @@ main p strong {
 .login-modal-container,
 .signup-modal-container {
   background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
   display: none;
   position: fixed;
   top: 0;

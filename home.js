@@ -321,7 +321,12 @@ const restaurantsArr = [
     name: "yuna",
     rating: 3.8,
   },
+  {
+    name: "bull",
+    rating: 4.9,
+  },
 ];
+// console.log(restaurantsArr.some((res) => res.rating === 2.7));
 
 function getRestaurantsToDOM(ratingValue) {
   // 1. Restauranii array-g ihees baga ruu ni sort-low.
@@ -333,12 +338,11 @@ function getRestaurantsToDOM(ratingValue) {
     (restaurant) => ratingValue <= restaurant.rating
   );
   // 3. Array-gaara dawtaad "3" gesen utga oghod 3-aas deesh vnelgeetei restauranii medeelliig DOM ruu hiine.
-  searchResultsContainer.classList.add("show");
-
-  if (!searchResultsUL.innerHTML == "") {
-    searchResultsUL.innerHTML = "";
-    searchResults.forEach((element) => {
-      let itemHTML = `
+  if (searchResults.length > 0) {
+    if (!searchResultsUL.innerHTML == "") {
+      searchResultsUL.innerHTML = "";
+      searchResults.forEach((element) => {
+        let itemHTML = `
             <li>
               <p>${element.name}</p>
               <div class="stars-outer">
@@ -346,10 +350,16 @@ function getRestaurantsToDOM(ratingValue) {
               </div>
               <span class="number-rating"><span id="number-rating"> ${element.rating}</span></span>
             </li>`;
-      searchResultsUL.innerHTML += itemHTML;
-      searchInput.value = "";
-      getRatings();
-    });
+        searchResultsUL.innerHTML += itemHTML;
+        searchResultsContainer.classList.add("show");
+        searchInput.value = "";
+        getRatings();
+      });
+    }
+  } else {
+    searchResultsUL.innerHTML = "";
+    searchResultsContainer.classList.remove("show");
+    swal(`${ratingValue} үнэлгээтэй ресторан олдсонгүй!`);
   }
 }
 
