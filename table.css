@@ -319,3 +319,121 @@ h1{
     outline: 0;
     transform: scale(0.9);
   }
+
+
+
+  /*====================LOGIN MODAL SECTION=============== */
+.login-modal-container,
+.signup-modal-container {
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+/* JS dr ".show-modal" class ajillana. */
+.login-modal-container.show-modal,
+.signup-modal-container.show-modal {
+  display: block;
+}
+.login-modal,
+.signup-modal {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  overflow: hidden;
+  /* yag golluuldag style */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  width: 400px;
+  animation: modalOpen var(--modal-duration); /* 1s duration*/
+}
+.login-modal-header,
+.signup-modal-header {
+  background-color: var(--secondary-color);
+  color: #fff;
+  padding: 15px;
+  letter-spacing: 5px;
+}
+.login-modal-header h3,
+.signup-modal-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.login-modal-content,
+.signup-modal-content {
+  padding: 20px;
+}
+.login-modal-form div,
+.signup-modal-form div {
+  margin: 15px 0;
+}
+.login-modal-form label,
+.signup-modal-form label {
+  font-size: 1.2rem;
+}
+.login-modal-form .form-input,
+.signup-modal-form .form-input {
+  padding: 8px;
+  width: 100%;
+  margin-top: 5px;
+  border: 2px solid #dcdcdc;
+  border-radius: 4px;
+}
+.login-modal-form .form-input:focus,
+.signup-modal-form .form-input:focus {
+  outline: 0;
+  border: 1px solid var(--secondary-color);
+}
+
+.modal-close-btn,
+.signup-close-btn {
+  background-color: transparent;
+  font-size: 25px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #fff;
+  border: none;
+  margin: 10px;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transition: transform 0.6s ease-in-out;
+}
+.modal-close-btn:hover,
+.signup-close-btn:hover {
+  transform: rotate(180deg);
+  box-shadow: none;
+}
+
+.login-submit-btn,
+.signup-submit-btn {
+  background-color: #000;
+  border: 0;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px 12px;
+  width: 100%;
+}
+
+.login-modal-form input:disabled {
+  background: #bababa;
+  cursor: not-allowed;
+  color: #000;
+}
+
+/* budgeesee TODORNO */
+@keyframes modalOpen {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

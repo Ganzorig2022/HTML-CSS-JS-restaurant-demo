@@ -139,7 +139,116 @@
                 
             </div>
             <button class="orderbutton">Захиалга</button>
+            <button class="orderbutton" onclick="location.href=`Main.html`">Буцах</button>
         </div>
+        <!--============4.SIGNUP MODAL SECTION========= -->
+    <div class="signup-modal-container" id="signup-modal">
+        <div class="signup-modal">
+          <button class="signup-close-btn" id="signup-close-btn">
+            <i class="fa fa-times"></i>
+          </button>
+          <div class="signup-modal-header">
+            <h3>Бүртгүүлэх</h3>
+          </div>
+          <div class="signup-modal-content">
+            <form class="signup-modal-form">
+              <div>
+                <label for="name">Нэр</label>
+                <input
+                  type="text"
+                  id="signup-name"
+                  placeholder="Нэрээ оруулна уу..."
+                  class="form-input"
+                  required
+                />
+              </div>
+              <div>
+                <label for="email">Имэйл*</label>
+                <input
+                  type="email"
+                  id="signup-email"
+                  placeholder="Имэйлээ оруулна уу..."
+                  class="form-input"
+                  required
+                />
+              </div>
+              <div>
+                <label for="password">Нууц үг*</label>
+                <input
+                  type="password"
+                  id="signup-password"
+                  placeholder="Нууц үгээ оруулна уу..."
+                  class="form-input"
+                  required
+                />
+              </div>
+              <div>
+                <label for="password2">Нууц үг дахин оруулах</label>
+                <input
+                  type="password"
+                  id="signup-password2"
+                  placeholder="Нууц үгээ дахин оруулна уу..."
+                  class="form-input"
+                />
+              </div>
+              <input
+                type="button"
+                value="Бүртгүүлэх"
+                class="signup-submit-btn"
+                id="signup-submit-btn"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--============5.LOGIN MODAL SECTION========= -->
+      <div class="login-modal-container" id="login-modal">
+        <div class="login-modal">
+          <button class="modal-close-btn" id="modal-close-btn">
+            <i class="fa fa-times"></i>
+          </button>
+          <div class="login-modal-header">
+            <h3>Нэвтрэх</h3>
+          </div>
+          <div class="login-modal-content">
+            <form class="login-modal-form">
+              <!-- <div>
+                <label for="name">Нэр</label>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Нэрээ оруулна уу..."
+                  class="form-input"
+                />
+              </div> -->
+              <div>
+                <label for="email">Имэйл</label>
+                <input
+                  type="email"
+                  id="login-email"
+                  placeholder="Имэйлээ оруулна уу..."
+                  class="form-input"
+                />
+              </div>
+              <div>
+                <label for="password">Нууц үг</label>
+                <input
+                  type="password"
+                  id="login-password"
+                  placeholder="Нууц үгээ оруулна уу..."
+                  class="form-input"
+                />
+              </div>
+              <input
+                type="button"
+                value="Нэвтрэх"
+                class="login-submit-btn"
+                id="login-submit-btn"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
     </main>
     <script src="Calendar.js"></script>
     <script src="table.js"></script>

@@ -66,7 +66,15 @@ orderButton.addEventListener("click", ()=>{
 		localStorage.setItem(timeKey, timeValue)
 		localStorage.setItem(orderTableKey, orderTableValue)
 	}
-	window.location.assign("profile.html")
+    window.location.assign("profile.html")
 
 });
     
+const loginOpen = document.getElementById("login-open");
+const loginModal = document.getElementsByClassName("login-modal-container")[0];
+const loginClose = document.getElementById("modal-close-btn");
+window.addEventListener("click", (e) => {
+    if (e.target == loginModal) {
+      loginModal.classList.remove("show-modal");
+    }
+  });

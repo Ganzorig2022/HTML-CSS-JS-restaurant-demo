@@ -1,3 +1,7 @@
+// import { signinBtn, logoutBtn, signupBtn } from "./home.js";
+
+
+
 // Run getRatings when DOM loads
 document.addEventListener("DOMContentLoaded", getRatings);
 
@@ -126,8 +130,34 @@ cartIconBtn.addEventListener("click", () => {
 
 
 
+// ========================Захиалга өгөх товч дээр дарах=====================
 
+const loginOpen = document.getElementById("login-open");
+const loginModal = document.getElementsByClassName("login-modal-container")[0];
+const loginClose = document.getElementById("modal-close-btn");
 
-// /* LocalStore */
-let PersonValue = document.getElementById("person").ariaValueMax;
-console.log(PersonValue);
+let btnTime = document.getElementsByClassName("btnTime")[0];
+btnTime.addEventListener("click", ()=>{
+  // signinBtn();
+	// let key = selectedPerson.value;
+	// let value = selectedPerson.options[selectedPerson.selectedIndex].text;
+	// let dateValue = selected_date_element.textContent;
+	// let	datekey = "Date";
+	// let	timeKey = selectedTime.value;
+	// let	timeValue = selectedTime.options[selectedTime.selectedIndex].text;
+	// if(key && value){
+	// 	localStorage.setItem(key, value)
+	// 	localStorage.setItem(datekey, dateValue)
+	// 	localStorage.setItem(timeKey, timeValue)
+	// 	// location.reload();
+	// }
+  if(localStorage.loggedUserUid){
+    window.location.assign("table.html")
+  }
+  else {
+    loginModal.classList.add("show-modal");
+    // console.log("hello")
+  }
+
+	// window.location.assign("table.html")
+});

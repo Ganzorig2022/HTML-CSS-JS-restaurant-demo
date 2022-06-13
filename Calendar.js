@@ -131,22 +131,22 @@ function formatDate (d) {
 
 // localStorage
 
-let btnTime = document.getElementsByClassName("btnTime")[0];
-btnTime.addEventListener("click", ()=>{
-	let key = selectedPerson.value;
-	let value = selectedPerson.options[selectedPerson.selectedIndex].text;
-	let dateValue = selected_date_element.textContent;
-	let	datekey = "Date";
-	let	timeKey = selectedTime.value;
-	let	timeValue = selectedTime.options[selectedTime.selectedIndex].text;
-	if(key && value){
-		localStorage.setItem(key, value)
-		localStorage.setItem(datekey, dateValue)
-		localStorage.setItem(timeKey, timeValue)
-		// location.reload();
-	}
-	window.location.assign("table.html")
-});
+// let btnTime = document.getElementsByClassName("btnTime")[0];
+// btnTime.addEventListener("click", ()=>{
+// 	let key = selectedPerson.value;
+// 	let value = selectedPerson.options[selectedPerson.selectedIndex].text;
+// 	let dateValue = selected_date_element.textContent;
+// 	let	datekey = "Date";
+// 	let	timeKey = selectedTime.value;
+// 	let	timeValue = selectedTime.options[selectedTime.selectedIndex].text;
+// 	if(key && value){
+// 		localStorage.setItem(key, value)
+// 		localStorage.setItem(datekey, dateValue)
+// 		localStorage.setItem(timeKey, timeValue)
+// 		// location.reload();
+// 	}
+// 	window.location.assign("table.html")
+// });
 
 
 // for(let i=0; i<localStorage.length; i++){

@@ -501,9 +501,15 @@ main p strong {
 .main-container .right-content.content2 h3 {
   margin-top: 10px;
 }
-.main-container .right-content.content2 div {
+.main-container .right-content.content2 .right-content-child1 {
   display: flex;
   justify-content: space-between;
+  padding: 20px;
+  font-size: 1rem;
+}
+.right-content-child2 {
+  display: flex;
+  justify-content: flex-end;
   padding: 20px;
   font-size: 1rem;
 }
@@ -564,6 +570,7 @@ main p strong {
   display: flex;
   justify-content: flex-end;
 }
+
 .save-btn {
   font-family: var(--third-font-family);
   background-color: var(--secondary-color);
