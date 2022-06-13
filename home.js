@@ -355,6 +355,21 @@ function getRestaurantsToDOM(ratingValue) {
         searchInput.value = "";
         getRatings();
       });
+    } else {
+      searchResults.forEach((element) => {
+        let itemHTML = `
+            <li>
+              <p>${element.name}</p>
+              <div class="stars-outer">
+                <div class="stars-inner"></div>
+              </div>
+              <span class="number-rating"><span id="number-rating"> ${element.rating}</span></span>
+            </li>`;
+        searchResultsUL.innerHTML += itemHTML;
+        searchResultsContainer.classList.add("show");
+        searchInput.value = "";
+        getRatings();
+      });
     }
   } else {
     searchResultsUL.innerHTML = "";
