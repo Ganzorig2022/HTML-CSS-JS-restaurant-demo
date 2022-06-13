@@ -9,9 +9,11 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="Main.css" />
     <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="MainCalendar.css" />
+    <!-- <script src="https://kit.fontawesome.com/a3b239acb8.js" crossorigin="anonymous"></script> -->
     <link rel="shortcut icon" type="image/png" href="img/logo_black.png" />
-
     <title>Restaurant Reservation and Booking Website</title>
   </head>
   <body>
@@ -34,7 +36,6 @@
         <button class="login-btn ripple" id="login-open">Нэвтрэх</button>
         <div class="cart-icon">
           <i class="fas fa-shopping-cart"></i>
-          <!-- Sagsand bga ITEM-iin heseg -->
           <div class="cart-modal">
             <div class="cart-modal--header">
               <h3>Таны сагс ( 1 захиалга )</h3>
@@ -81,11 +82,7 @@
           </div>
         </div>
         <div class="profile">
-<<<<<<< HEAD
-          <a>
-=======
           <a href="#">
->>>>>>> BranchMB1
             <i class="fas fa-user"></i>
           </a>
         </div>
@@ -111,92 +108,11 @@
     <!--============2.HEADER SECTION========= -->
     <header>
       <div class="showcase-content">
-        <h1>Your Restaurant</h1>
-        <p class="showcase-content__p">Чанартай сонголт</p>
-        <form class="restaurant-search">
-          <input type="text" class="restaurant-search__input" placeholder="Рестораны үнэлгээгээр хайна уу..."/>
-          <button class="restaurant-search__button">
-            <i class="fas fa-search"></i>
-          </button>
-        </form>
+        <h1>MOMO HOT POT</h1>
+        <p>Чанартай сонголт</p>
         <button class="order-btn ripple" id="open">Захиалга өгөх</button>
-<<<<<<< HEAD
-        <!-- JS-ees elementvvd END orj irne. -->
-        <div class="search-results">
-          <ul class="search-results-UL">
-            
-=======
-        <div class="search-results">
-          <ul>
-            <li>
-              <p>restaurant1</p>
-              <div class="stars-outer">
-                <div class="stars-inner"></div>
-              </div>
-                <span class="number-rating"><span id="number-rating"> 4.5</span></span>
-            </li>
-             <li>
-              <p>restaurant1</p>
-              <div class="stars-outer">
-                <div class="stars-inner"></div>
-              </div>
-                <span class="number-rating"><span id="number-rating"> 3.5</span></span>
-            </li>
-             <li>
-              <p>restaurant3</p>
-              <div class="stars-outer">
-                <div class="stars-inner"></div>
-              </div>
-                <span class="number-rating"><span id="number-rating"> 3.5</span></span>
-            </li>
->>>>>>> BranchMB1
-          </ul>
-        </div>
       </div>
     </header>
-    <!--============3.Main SECTION========= -->
-    <main>
-      <h1>Restaurants</h1>
-      <div class="main-container">
-        <div class="left-content">
-          <h2>
-            Momo Hot Pot restaurant
-            <span
-              ><img
-                src="https://scontent.fuln8-1.fna.fbcdn.net/v/t31.18172-8/17761016_1896818063904890_8880108015428113544_o.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=knDZV3HMs5IAX9Ujg6u&tn=SZT24u-xOvzoHsDB&_nc_ht=scontent.fuln8-1.fna&oh=00_AT9_1fu_3gSME4gAa7hw50JfxkHqOtK838ZEE1jakNoWTw&oe=62B5DB9B"
-                alt=""
-            /></span>
-          </h2>
-          <p>
-            Эрүүл, амтат хоол, найрсаг үйлчилгээтэй Момо Хот Пот та бүхнийг урьж
-            байна.<br /><br />
-            <strong>Хаяг :&nbsp; </strong>Улсын Их Дэлгүүрийн зүүн талд, Мөнгөн
-            завьяа явах зам дагуу
-          </p>
-          <div class="stars-outer">
-            <div class="stars-inner"></div>
-          </div>
-          <span class="number-rating"
-<<<<<<< HEAD
-            >Үнэлгээ: 5-аас <span id="number-rating"> 4</span></span
-          >
-          <button class="more-btn ripple" id="open">Дэлгэрэнгүй</button>
-=======
-            >Үнэлгээ: 5-аас <span id="number-rating"> 4.5</span></span
-          >
-          <button class="more-btn ripple" id="open" onclick="location.href=`main.html`">Дэлгэрэнгүй</button>
->>>>>>> BranchMB1
-        </div>
-        <div class="right-content">
-          <div class="right-content-img">
-            <img
-              src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-              alt=""
-            />
-          </div>
-        </div>
-      </div>
-    </main>
     <!--============4.SIGNUP MODAL SECTION========= -->
     <div class="signup-modal-container" id="signup-modal">
       <div class="signup-modal">
@@ -305,7 +221,239 @@
         </div>
       </div>
     </div>
-    <!--============6.FOOTER SECTION========= -->
+    <!--============6.CONTAINER SECTION========= -->
+    <section class="container">
+      <div class="rightContainer ">
+        <h2>
+          Momo Hot Pot restaurant
+          <span
+            ><img
+              src="https://scontent.fuln8-1.fna.fbcdn.net/v/t31.18172-8/17761016_1896818063904890_8880108015428113544_o.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=knDZV3HMs5IAX9Ujg6u&tn=SZT24u-xOvzoHsDB&_nc_ht=scontent.fuln8-1.fna&oh=00_AT9_1fu_3gSME4gAa7hw50JfxkHqOtK838ZEE1jakNoWTw&oe=62B5DB9B"
+              alt=""
+          /></span>
+        </h2>
+        
+        <div class="stars-container">
+          
+          <div class="stars-outer">
+            <div class="stars-inner"></div>
+          </div>
+          <span class="number-rating" id="number-rating"> 3</span
+          >
+          <i class="fa-regular fa-message"></i>
+          <span><span>10  </span>Comment</span>
+        </div>
+        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. A doloribus esse nihil doloremque non architecto praesentium, illo earum maiores ipsa porro optio tenetur voluptatum similique vitae eius quisquam eveniet ea?</span>
+        <h3>
+          Menu
+        </h3>
+        <div class="menu-container">
+            <button id="btnBorder" class="buttonMenu btnActive">
+              Хоол
+            </button>
+            <button id="btnBorder1" class="buttonMenu">
+              Ус, ундаа
+            </button>
+        </div>
+        <h5>ШӨЛ</h5>
+        <ul class="listContainer">
+          <li>
+            <h4> <span class="MenuText">ЯСНЫ ШӨЛ</span> <span>5,500₮</span></h4>
+            <p>Mongolian beef boun soup</p>
+          </li>
+          <li>
+            <h4> <span class="MenuText">ЯСНЫ СҮҮН ШӨЛ</span> <span>6,900₮</span></h4>
+            <p>Milk boun soup</p>
+          </li>
+          <li><h4> <span class="MenuText">МӨӨГНИЙ ШӨЛ</span> <span>6,500₮</span></h4>
+            <p>Mushroom boun soup</p></li>
+          <li><h4> <span class="MenuText">УЛААН ЛОЙЛЫН ШӨЛ</span> <span>7,500₮</span></h4>
+            <p>Tomato boun soup</p></li>
+        </ul>
+        <ul class="listContainer1">
+          <li>
+            <h4> <span class="MenuText">МӨСТЭЙ ЦАЙ /Алим/</span> <span>3,900₮</span></h4>
+          </li>
+          <li>
+            <h4> <span class="MenuText">МӨСТЭЙ ЦАЙ /Гүзээлзгэнэ/</span> <span>3,900₮</span></h4>
+          </li>
+          <li><h4> <span class="MenuText">МӨСТЭЙ ЦАЙ /Лимон/</span> <span>3,900₮</span></h4>
+          <li><h4> <span class="MenuText">МӨСТЭЙ ЦАЙ /Хад/</span> <span>3,900₮</span></h4>
+        </ul>
+        <button class="buttonMenu">Хоолны цэс дэлгэрэнгүй харах</button>
+        <h3>
+          Үнэлгээ өгсөн: <span> 10 </span> хүн
+        </h3>
+        <div class="personRating">
+          <div class="personRatingLeft">
+            <div class="stars-container">
+              <div class="stars-outer">
+                <div class="stars-inner"></div>
+              </div>
+              <span class="number-rating"></span
+              >
+                
+            </div>
+            <ul class="ratingContaner">
+              <li>4 <span>хоол</span> </li>
+              <li>4 <span>үйлчилгээ</span></li>
+              <li>5 <span>Тав тухтай байдал</span></li>
+            </ul>
+          </div>
+          <div class="personRatingRight">
+            <div>
+              <span class="meterFoodRating">5</span>
+              <meter class="meter" min="0" max="100" value="">
+                <div class="meterDiv1">
+                </div>
+            </div>
+            <div>
+              <span class="meterFoodRating">4</span>
+              <meter class="meter" min="0" max="100" value="">
+                <div class="meterDiv2">
+                </div>
+            </div>
+            <div>
+              <span class="meterFoodRating">3</span>
+              <meter class="meter" min="0" max="100" value="">
+                <div class="meterDiv3">
+                </div>
+            </div>
+            <div>
+              <span class="meterFoodRating">2</span>
+              <meter class="meter" min="0" max="100" value="">
+                <div class="meterDiv4">
+                </div>
+            </div>
+            <div>
+              <span class="meterFoodRating">1</span>
+              <meter class="meter" min="0" max="100" value="">
+                <div class="meterDiv5">
+                </div>
+            </div>
+          </div>
+        </div>
+
+
+        <h3>Сэтгэгдэл</h3>
+        <div class="comment">
+
+          <div class="commentProfile">
+            <div class="commentProfilePicture center">
+              <span>MB</span>
+            </div>
+            <span>NAME</span>
+            <div>
+            <i class="fa-regular fa-message"></i>
+            <span><span>3 </span>сэтгэгдэл</span>
+            </div>
+          </div>
+          <div class="commentText">
+            <div class="stars-container">
+              <div class="stars-outer">
+                <div class="stars-inner"></div>
+              </div>
+              <span>2 days ago</span>
+            </div>
+            <div>
+              <span class="foodRating">Хоол <span>4.5</span></span>
+              <span class="serviceRating">Yйлчилгээ <span>4.7</span></span>
+              <span class="ambienceRating">Тав тухтай байдал <span>5</span></span>
+            </div>
+            <div>
+              <span>Дажгүй орчинтой газар байналээ. Дуу жоохон чанга. Чимээтэйг эс тооцвол</span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      
+
+
+
+
+
+      <div class="leftContainer">
+        <div class="leftContainerTime">
+          <h2>Ширээ захиалга</h2>
+        <span>Хүний тоо</span>
+        <select name="person" id="person" class="">
+          <option value="person">1 хүн</option>
+          <option value="person" selected>2 хүн</option>
+          <option value="person">3 хүн</option>
+          <option value="person">4 хүн</option>
+          <option value="person">5 хүн</option>
+        </select>
+        <div class="datetime ">
+          <div>Цаг</div>
+          <div>Өдөр</div>
+        </div>
+
+
+
+
+
+
+
+        <div class="calendar center">
+          
+          <div class="date-picker center">
+            <div class="selected-date"></div>
+        
+            <div class="dates">
+              <div class="month">
+                <div class="arrows prev-mth">&lt;</div>
+                <div class="mth"></div>
+                <div class="arrows next-mth">&gt;</div>
+              </div>
+        
+              <div class="days"></div>
+            </div>
+          </div>
+          <select name="time" id="time" class="">
+            <option class="timeValue" value="timeValue">12:00 AM</option>
+            <option class="timeValue" value="timeValue">1:00 AM</option>
+            <option class="timeValue" value="timeValue">2:00 AM</option>
+            <option class="timeValue" value="timeValue">3:00 AM</option>
+            <option class="timeValue" value="timeValue">4:00 AM</option>
+            <option class="timeValue" value="timeValue">5:00 AM</option>
+            <option class="timeValue" value="timeValue">6:00 AM</option>
+            <option class="timeValue" value="timeValue">7:00 AM</option>
+            <option class="timeValue" value="timeValue">8:00 AM</option>
+            <option class="timeValue" value="timeValue">9:00 AM</option>
+            <option class="timeValue" value="timeValue">10:00 AM</option>
+            <option class="timeValue" value="timeValue">11:00 AM</option>
+            <option class="timeValue" value="timeValue" selected>1:00 PM</option>
+            <option class="timeValue" value="timeValue">2:00 PM</option>
+            <option class="timeValue" value="timeValue">3:00 PM</option>
+            <option class="timeValue" value="timeValue">4:00 PM</option>
+            <option class="timeValue" value="timeValue">5:00 PM</option>
+            <option class="timeValue" value="timeValue">6:00 PM</option>
+            <option class="timeValue" value="timeValue">7:00 PM</option>
+            <option class="timeValue" value="timeValue">8:00 PM</option>
+            <option class="timeValue" value="timeValue">9:00 PM</option>
+            <option class="timeValue" value="timeValue">10:00 PM</option>
+            <option class="timeValue" value="timeValue">11:00 PM</option>
+            <option class="timeValue" value="timeValue">12:00 PM</option>
+
+          </select></div>
+        <button class="btnTime">Захиалга</button>
+        </div>
+        <div class="leftContainerLocation">
+          <img src="img/location.png" style="width: 100%; border-radius: 5px;" alt="">
+          <div class="locationTitle">
+            <div>
+              <i class="fa-solid fa-location-dot"></i><span>Салбар 1: Мөнгөн завъяагаас Их дэлгүүр явах зам дагуу,</span>
+            </div>
+            <div>
+              <i class="fa-solid fa-location-dot"></i><span>Салбар 2: UB palace-н урд 47/2-р байр 15170 Ulaanbaatar, Mongolia</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--============7.FOOTER SECTION========= -->
     <footer>
       <div class="footer-container1">
         <div class="footer-items">
@@ -365,30 +513,8 @@
     </footer>
     <script type="module" src="/firebase_auth.js"></script>
     <script type="module" src="home.js"></script>
+    <script src="Main.js"></script>
+    <script src="Calendar.js"></script>
+
   </body>
 </html>
-<<<<<<< HEAD
-
-<!-- <li>
-              <p>restaurant1</p>
-              <div class="stars-outer">
-                <div class="stars-inner"></div>
-              </div>
-              <span class="number-rating"><span id="number-rating"> 4.5</span></span>
-            </li>
-             <li>
-              <p>restaurant2</p>
-              <div class="stars-outer">
-                <div class="stars-inner"></div>
-              </div>
-                <span class="number-rating"><span id="number-rating"> 3.5</span></span>
-            </li>
-             <li>
-              <p>restaurant3</p>
-              <div class="stars-outer">
-                <div class="stars-inner"></div>
-              </div>
-                <span class="number-rating"><span id="number-rating"> 3</span></span>
-            </li> -->
-=======
->>>>>>> BranchMB1

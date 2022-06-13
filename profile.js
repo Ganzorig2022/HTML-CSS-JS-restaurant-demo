@@ -224,6 +224,8 @@ logoutBtn.addEventListener("click", async () => {
     clearLoginInputs();
     inActiveUserProfile();
     clearUserInputs();
+    localStorage.clear();
+    localStorageShowOrderItems();
   } else {
     disableLoginBtn();
   }
@@ -358,3 +360,35 @@ function inActiveUserProfile() {
   userIcon.style.color = "#000";
   userProfileBtn.style.background = "#ccc";
 }
+
+
+
+
+//LOCALSTORAGE-ees data awaw
+
+let personOrderDate = document.getElementsByClassName("right-content-date")[0];
+let personOrderPersonValue = document.getElementsByClassName("right-content-people")[0];
+let personOrderTimeValue = document.getElementsByClassName("right-content-time")[0];
+let personOrderSeatValue = document.getElementsByClassName("right-content-seat")[0];
+let orderStatus = document.getElementsByClassName("order-status")[0];
+
+
+
+console.log(localStorage.Date);
+localStorageShowOrderItems();
+function localStorageShowOrderItems(){
+  personOrderDate.lastElementChild.textContent = localStorage.Date;
+  personOrderPersonValue.lastElementChild.textContent = localStorage.person;
+  personOrderTimeValue.lastElementChild.textContent = localStorage.timeValue;
+  personOrderSeatValue.lastElementChild.textContent = localStorage.Table;
+  orderStatus.textContent = "Баталгаажсан";
+}
+
+
+
+//Ширээ захиалга руу буцах хэсэг
+let backUserInfoBtn = document.getElementById("back-user-info-btn");
+backUserInfoBtn.addEventListener("click", ()=>{
+  window.location.assign("table.html")
+
+});

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="table.css">
+    <link rel="stylesheet" href="MainCalendar1.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <main>
+        <div class="container">
+            <p>
+                Ширээ захиалга
+            </p>
+
+
+                <div class="timer">
+                    <select name="person" id="person" class="timerBorder fimerFlex">
+                        <option class="option" value="1">1 хүн</option>
+                        <option class="option" value="2">2 хүн</option>
+                        <option class="option" value="3">3 хүн</option>
+                        <option class="option" value="4">4 хүн</option>
+                        <option class="option" value="5">5 хүн</option>
+                    </select>
+                    <div class="date-picker fimerFlex center timerBorder timerBorderTrans">
+                        <div class="selected-date"></div>
+                        <div class="dates">
+                            <div class="month">
+                                <div class="arrows prev-mth">&lt;</div>
+                                <div class="mth"></div>
+                                <div class="arrows next-mth">&gt;</div>
+                            </div>
+                        <div class="days"></div>
+                    </div>
+                </div>
+                <select name="time" id="time" class="timerBorder fimerFlex timerBorderTrans">
+                    <option class="timeValue" value="timeValue">12:00 AM</option>
+                    <option class="timeValue" value="timeValue">1:00 AM</option>
+                    <option class="timeValue" value="timeValue">2:00 AM</option>
+                    <option class="timeValue" value="timeValue">3:00 AM</option>
+                    <option class="timeValue" value="timeValue">4:00 AM</option>
+                    <option class="timeValue" value="timeValue">5:00 AM</option>
+                    <option class="timeValue" value="timeValue">6:00 AM</option>
+                    <option class="timeValue" value="timeValue">7:00 AM</option>
+                    <option class="timeValue" value="timeValue">8:00 AM</option>
+                    <option class="timeValue" value="timeValue">9:00 AM</option>
+                    <option class="timeValue" value="timeValue">10:00 AM</option>
+                    <option class="timeValue" value="timeValue">11:00 AM</option>
+                    <option class="timeValue" value="timeValue" selected>1:00 PM</option>
+                    <option class="timeValue" value="timeValue">2:00 PM</option>
+                    <option class="timeValue" value="timeValue">3:00 PM</option>
+                    <option class="timeValue" value="timeValue">4:00 PM</option>
+                    <option class="timeValue" value="timeValue">5:00 PM</option>
+                    <option class="timeValue" value="timeValue">6:00 PM</option>
+                    <option class="timeValue" value="timeValue">7:00 PM</option>
+                    <option class="timeValue" value="timeValue">8:00 PM</option>
+                    <option class="timeValue" value="timeValue">9:00 PM</option>
+                    <option class="timeValue" value="timeValue">10:00 PM</option>
+                    <option class="timeValue" value="timeValue">11:00 PM</option>
+                    <option class="timeValue" value="timeValue">12:00 PM</option>
+                </select>
+            </div>
+            <h1>Ширээний сонголт</h1>
+            <div class="table">
+                <div class="row">
+                    <div class="seat tables" aria-valuetext="2">
+                        <option value="2"></option>
+                        <span class="seatNum">1</span>
+                    </div>
+                    <div class="seat tables">
+                        <option value="2"></option>
+                        <span class="seatNum">2</span>
+                    </div>
+                    <div class="seat tables">
+                        <option value="2"></option>
+
+                        <span class="seatNum">3</span>
+                    </div>
+                    <div class="seat tables">
+                        <option value="2"></option>
+
+                        <span class="seatNum">4</span>
+                    </div>
+                    <div class="seat tables">
+                        <option value="2"></option>
+
+                        <span class="seatNum">5</span>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="seat1 tables">
+                        <option value="6"></option>
+                        <span class="seat1Chair"></span>
+                        <span class="seatNum">4</span>
+                    </div>
+                    <div class="seat1 tables">
+                        <option value="6"></option>
+                        <span class="seat1Chair"></span>
+                        <span class="seatNum">5</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="seat2 tables">
+                        <option value="4"></option>
+                        <span class="seatNum">6</span>
+                    </div>
+                    <div class="seat2 tables">
+                        <option value="4"></option>
+                        <span class="seatNum">7</span>
+                    </div>
+                    <div class="seat2 tables">
+                        <option value="4"></option>
+                        <span class="seatNum">8</span>
+                    </div>
+                </div>
+                <div class="row moon">
+                    <div id="moon"> Касс</div>
+                </div>
+
+                <div class="windowsTop">
+                    <div class="test">
+                        <div></div>
+                    </div>
+                    <div class="test">
+                        <div></div>
+                    </div>
+                </div>
+                <!-- <div class="windowsRight">
+                    <div class="rightWindow">
+                        <div></div>
+                    </div>
+                </div> -->
+                
+                
+            </div>
+            <button class="orderbutton">Захиалга</button>
+            <button class="orderbutton" onclick="location.href=`Main.html`">Буцах</button>
+        </div>
+        <!--============4.SIGNUP MODAL SECTION========= -->
+    <div class="signup-modal-container" id="signup-modal">
+        <div class="signup-modal">
+          <button class="signup-close-btn" id="signup-close-btn">
+            <i class="fa fa-times"></i>
+          </button>
+          <div class="signup-modal-header">
+            <h3>Бүртгүүлэх</h3>
+          </div>
+          <div class="signup-modal-content">
+            <form class="signup-modal-form">
+              <div>
+                <label for="name">Нэр</label>
+                <input
+                  type="text"
+                  id="signup-name"
+                  placeholder="Нэрээ оруулна уу..."
+                  class="form-input"
+                  required
+                />
+              </div>
+              <div>
+                <label for="email">Имэйл*</label>
+                <input
+                  type="email"
+                  id="signup-email"
+                  placeholder="Имэйлээ оруулна уу..."
+                  class="form-input"
+                  required
+                />
+              </div>
+              <div>
+                <label for="password">Нууц үг*</label>
+                <input
+                  type="password"
+                  id="signup-password"
+                  placeholder="Нууц үгээ оруулна уу..."
+                  class="form-input"
+                  required
+                />
+              </div>
+              <div>
+                <label for="password2">Нууц үг дахин оруулах</label>
+                <input
+                  type="password"
+                  id="signup-password2"
+                  placeholder="Нууц үгээ дахин оруулна уу..."
+                  class="form-input"
+                />
+              </div>
+              <input
+                type="button"
+                value="Бүртгүүлэх"
+                class="signup-submit-btn"
+                id="signup-submit-btn"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--============5.LOGIN MODAL SECTION========= -->
+      <div class="login-modal-container" id="login-modal">
+        <div class="login-modal">
+          <button class="modal-close-btn" id="modal-close-btn">
+            <i class="fa fa-times"></i>
+          </button>
+          <div class="login-modal-header">
+            <h3>Нэвтрэх</h3>
+          </div>
+          <div class="login-modal-content">
+            <form class="login-modal-form">
+              <!-- <div>
+                <label for="name">Нэр</label>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Нэрээ оруулна уу..."
+                  class="form-input"
+                />
+              </div> -->
+              <div>
+                <label for="email">Имэйл</label>
+                <input
+                  type="email"
+                  id="login-email"
+                  placeholder="Имэйлээ оруулна уу..."
+                  class="form-input"
+                />
+              </div>
+              <div>
+                <label for="password">Нууц үг</label>
+                <input
+                  type="password"
+                  id="login-password"
+                  placeholder="Нууц үгээ оруулна уу..."
+                  class="form-input"
+                />
+              </div>
+              <input
+                type="button"
+                value="Нэвтрэх"
+                class="login-submit-btn"
+                id="login-submit-btn"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="Calendar.js"></script>
+    <script src="table.js"></script>
+
+
+</body>
+</html>
