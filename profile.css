@@ -514,11 +514,6 @@ main p strong {
 .main-container .right-content.content2 h3 {
   margin-top: 10px;
 }
-<<<<<<< HEAD
-.main-container .right-content.content2 div {
-  display: flex;
-  justify-content: space-between;
-=======
 .main-container .right-content.content2 .right-content-child1 {
   display: flex;
   justify-content: space-between;
@@ -528,7 +523,6 @@ main p strong {
 .right-content-child2 {
   display: flex;
   justify-content: flex-end;
->>>>>>> BranchMB1
   padding: 20px;
   font-size: 1rem;
 }
@@ -607,10 +601,7 @@ main p strong {
 .login-modal-container,
 .signup-modal-container {
   background-color: rgba(0, 0, 0, 0.6);
-<<<<<<< HEAD
   backdrop-filter: blur(4px);
-=======
->>>>>>> BranchMB1
   display: none;
   position: fixed;
   top: 0;

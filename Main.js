@@ -1,7 +1,5 @@
 // import { signinBtn, logoutBtn, signupBtn } from "./home.js";
 
-
-
 // Run getRatings when DOM loads
 document.addEventListener("DOMContentLoaded", getRatings);
 
@@ -12,7 +10,7 @@ function getRatings() {
   let numberRating = document.getElementsByClassName("number-rating");
   let numberRatingValue = numberRating[0].textContent;
   console.log("numberRatingValue", numberRatingValue);
-  for(let j=0; j<numberRating.length; j++){
+  for (let j = 0; j < numberRating.length; j++) {
     numberRating[j].textContent = numberRatingValue;
   }
   const starPercentage = (numberRatingValue / starsTotal) * 100;
@@ -23,9 +21,9 @@ function getRatings() {
   // Set width of stars-inner to percentage
   const starsInner = document.querySelector(".stars-inner");
   const starsInner1 = document.getElementsByClassName("stars-inner");
-  console.log("hey hey",starsInner1);
-  for(let i=0; i<starsInner1.length; i++){
-  starsInner1[i].style.width = starPercentageRounded;
+  console.log("hey hey", starsInner1);
+  for (let i = 0; i < starsInner1.length; i++) {
+    starsInner1[i].style.width = starPercentageRounded;
   }
 }
 // =================Button Effect====================
@@ -66,18 +64,17 @@ userProfileBtn.addEventListener("click", () => {
 // meterDiv.style.width = "50%";
 // Meter rating
 let meterFoodRating = document.getElementsByClassName("meterFoodRating");
-let meterDivCount =0;
-for(let i=0; i<meterFoodRating.length; i++){
+let meterDivCount = 0;
+for (let i = 0; i < meterFoodRating.length; i++) {
   let meterFoodRatingValue = meterFoodRating[i].textContent;
   let meterPercentage = (meterFoodRatingValue / starsTotal) * 100;
   // Round to nearest 10
   let meterPercentageRounded = `${Math.round(meterPercentage / 10) * 10}%`;
-  meterDivCount ++;
+  meterDivCount++;
   let meterDiv = document.getElementsByClassName(`meterDiv${meterDivCount}`)[0];
   console.log("meterDiv", meterDiv);
   meterDiv.style.width = meterPercentageRounded;
 }
-
 
 //listContainer1
 let menuBtn = document.getElementById("btnBorder");
@@ -86,17 +83,16 @@ let MenuTxt = document.getElementsByTagName("h5")[0];
 let listContainer = document.querySelector(".listContainer");
 let listContainer1 = document.querySelector(".listContainer1");
 
-menuBtn.addEventListener("click", ()=>{
-  if(listContainer.style.display == "block"){
+menuBtn.addEventListener("click", () => {
+  if (listContainer.style.display == "block") {
+  } else {
+    menuBtn.classList.toggle("btnActive");
+    menuBtn1.classList.toggle("btnActive");
 
-  }else{
-  menuBtn.classList.toggle("btnActive");
-  menuBtn1.classList.toggle("btnActive");
+    MenuTxt.textContent = "ШӨЛ";
 
-  MenuTxt.textContent = "ШӨЛ";
-  
-  listContainer.style.display = "block";
-  listContainer1.style.display = "none";
+    listContainer.style.display = "block";
+    listContainer1.style.display = "none";
   }
   // menuBtn.classList.toggle("btnActive");
   // menuBtn1.classList.toggle("btnActive");
@@ -104,31 +100,24 @@ menuBtn.addEventListener("click", ()=>{
   // listContainer.style.display = "block";
   // listContainer1.style.display = "none";
 });
-menuBtn1.addEventListener("click", ()=>{
-  if(listContainer1.style.display == "block"){
-
-  }else{
-  menuBtn.classList.toggle("btnActive");
-  menuBtn1.classList.toggle("btnActive");
-  MenuTxt.textContent = "Ус, ундаа";
-  listContainer.style.display = "none";
-  listContainer1.style.display = "block";
+menuBtn1.addEventListener("click", () => {
+  if (listContainer1.style.display == "block") {
+  } else {
+    menuBtn.classList.toggle("btnActive");
+    menuBtn1.classList.toggle("btnActive");
+    MenuTxt.textContent = "Ус, ундаа";
+    listContainer.style.display = "none";
+    listContainer1.style.display = "block";
   }
-  
 });
 
 const cartIconBtn = document.getElementsByClassName("fa-shopping-cart")[0];
-
-
 
 // ========================Cart Modal Window Open=====================
 cartIconBtn.addEventListener("click", () => {
   const cartModal = document.getElementsByClassName("cart-modal")[0];
   cartModal.classList.toggle("hidden");
 });
-
-
-
 
 // ========================Захиалга өгөх товч дээр дарах=====================
 
@@ -137,27 +126,26 @@ const loginModal = document.getElementsByClassName("login-modal-container")[0];
 const loginClose = document.getElementById("modal-close-btn");
 
 let btnTime = document.getElementsByClassName("btnTime")[0];
-btnTime.addEventListener("click", ()=>{
+btnTime.addEventListener("click", () => {
   // signinBtn();
-	// let key = selectedPerson.value;
-	// let value = selectedPerson.options[selectedPerson.selectedIndex].text;
-	// let dateValue = selected_date_element.textContent;
-	// let	datekey = "Date";
-	// let	timeKey = selectedTime.value;
-	// let	timeValue = selectedTime.options[selectedTime.selectedIndex].text;
-	// if(key && value){
-	// 	localStorage.setItem(key, value)
-	// 	localStorage.setItem(datekey, dateValue)
-	// 	localStorage.setItem(timeKey, timeValue)
-	// 	// location.reload();
-	// }
-  if(localStorage.loggedUserUid){
-    window.location.assign("table.html")
+  let key = selectedPerson.value;
+  let value = selectedPerson.options[selectedPerson.selectedIndex].text;
+  let dateValue = selected_date_element.textContent;
+  let datekey = "Date";
+  let timeKey = selectedTime.value;
+  let timeValue = selectedTime.options[selectedTime.selectedIndex].text;
+  if (key && value) {
+    localStorage.setItem(key, value);
+    localStorage.setItem(datekey, dateValue);
+    localStorage.setItem(timeKey, timeValue);
+    // location.reload();
   }
-  else {
+  if (localStorage.loggedUserUid) {
+    window.location.assign("table.html");
+  } else {
     loginModal.classList.add("show-modal");
     // console.log("hello")
   }
 
-	// window.location.assign("table.html")
+  // window.location.assign("table.html")
 });
