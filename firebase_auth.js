@@ -29,6 +29,7 @@ import {
   doc,
   getDoc,
   onSnapshot,
+  query,
 } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -45,7 +46,6 @@ const app = initializeApp(firebaseConfig);
 // const database = getDatabase(app);
 const db = getFirestore(app);
 const auth = getAuth(app);
-let documentID;
 // ===========================SIGN UP AUTHENTICATION=======================
 const signUp = async function (signupEmail, signupPassword, signupName) {
   try {
@@ -64,7 +64,7 @@ const signUp = async function (signupEmail, signupPassword, signupName) {
       password: signupPassword,
       email: signupEmail,
     });
-    
+
     return true;
   } catch (error) {
     return false;
@@ -109,12 +109,26 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-// =============Get Document Data from Firestore=============
+// =============Get Single Document Data from Firestore=============
 const getUserDataFromFireStore = async function (userUid) {
   const docData = await getDoc(doc(db, "users", userUid));
   let userData = docData.data();
   localStorage.setItem("loggedUserUid", JSON.stringify(userData));
 };
+// =============Get Multiple Document Data from Firestore=============
+const getTableDataFromFireStore = async function () {
+  const docData = await query(collection(db, "restaurant"));
+  let queryData = await getDocs(docData);
+  let restaurantArr = [];
+  queryData.forEach((doc) => {
+    let restaurantData = doc.data();
+    restaurantArr.push({ ...restaurantData, id: doc.id });
+  });
+  localStorage.setItem("restaurantAllData", JSON.stringify(restaurantArr));
+  // return restaurantArr;
+};
+
+getTableDataFromFireStore();
 
 // =============Update User Info to Firestore=============
 const updateUserDataInFireStore = async function (

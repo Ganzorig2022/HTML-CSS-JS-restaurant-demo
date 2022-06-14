@@ -3,6 +3,7 @@ import { signUp, signIn, logOut } from "./firebase_auth.js";
 // Run getRatings when DOM loads
 document.addEventListener("DOMContentLoaded", () => {
   getRatings();
+  showRestaurantsContent();
   showUserName();
 });
 
@@ -13,7 +14,6 @@ function getRatings() {
 
   // Get percentage
   const numberRatings = document.querySelectorAll("#number-rating");
-
   // Set width of stars-inner to percentage
   const starsInners = document.querySelectorAll(".stars-inner");
   starsInners.forEach((starInner, idx) => {
@@ -394,3 +394,58 @@ searchField.addEventListener("submit", (event) => {
     }
   }
 });
+
+// ============================================================
+function showRestaurantsContent() {
+  let restaurantArr = JSON.parse(localStorage.getItem("restaurantAllData"));
+
+  restaurantArr.forEach((restaurant) => {
+    let itemHTML = `        
+    <div class="main-container__restaurant-content">
+            <div class="left-content">
+              <h2>${restaurant.name}
+                <span
+                  ><img
+                    src="https://scontent.fuln8-1.fna.fbcdn.net/v/t31.18172-8/17761016_1896818063904890_8880108015428113544_o.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=knDZV3HMs5IAX9Ujg6u&tn=SZT24u-xOvzoHsDB&_nc_ht=scontent.fuln8-1.fna&oh=00_AT9_1fu_3gSME4gAa7hw50JfxkHqOtK838ZEE1jakNoWTw&oe=62B5DB9B"
+                    alt=""
+                /></span>
+              </h2>
+              <p>
+                Эрүүл, амтат хоол, найрсаг үйлчилгээтэй Момо Хот Пот та бүхнийг урьж
+                байна.<br /><br />
+                <strong>Хаяг :&nbsp; </strong>Улсын Их Дэлгүүрийн зүүн талд, Мөнгөн
+                завьяа явах зам дагуу
+              </p>
+              <div class="stars-outer">
+                <div class="stars-inner"></div>
+              </div>
+              <span class="number-rating"
+                >Үнэлгээ: 5-аас <span id="number-rating"> ${restaurant.rating}</span></span
+              >
+              <button class="more-btn ripple" id="open" restaurant-id="${restaurant.id}">Дэлгэрэнгүй <i class="fas fa-arrow-right"></i></button>
+            </div>
+            <div class="right-content">
+              <div class="right-content-img">
+                <img
+                  src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                  alt=""
+                />
+              </div>
+            </div>
+    </div>`;
+    let mainContainer = document.getElementsByClassName("main-container")[0];
+    mainContainer.innerHTML += itemHTML;
+    getRatings();
+    moreBtnClick();
+  });
+}
+
+// ========================Дэлгэрэнгүй товч дээр дарах=====================
+function moreBtnClick() {
+  const moreBtn = document.querySelectorAll(".more-btn");
+  moreBtn.forEach((more) => {
+    more.addEventListener("click", () => {
+      location.href = "Main.html";
+    });
+  });
+}

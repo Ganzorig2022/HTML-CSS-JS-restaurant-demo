@@ -1,30 +1,28 @@
 // import { signinBtn, logoutBtn, signupBtn } from "./home.js";
 
 // Run getRatings when DOM loads
-document.addEventListener("DOMContentLoaded", getRatings);
+document.addEventListener("DOMContentLoaded", () => {
+  getRatings();
+  showUserName();
+});
 
-let starsTotal = 5;
+const starsTotal = 5;
 // Get ratings
+//=======Vnelgeenii toonoos hamaars 5 STAR-uudiig budah
 function getRatings() {
-  // Get percentage
-  let numberRating = document.getElementsByClassName("number-rating");
-  let numberRatingValue = numberRating[0].textContent;
-  console.log("numberRatingValue", numberRatingValue);
-  for (let j = 0; j < numberRating.length; j++) {
-    numberRating[j].textContent = numberRatingValue;
-  }
-  const starPercentage = (numberRatingValue / starsTotal) * 100;
+  let starPercentageRounded = 0;
 
-  // Round to nearest 10
-  const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+  // Get percentage
+  const numberRatings = document.querySelectorAll(".number-rating");
 
   // Set width of stars-inner to percentage
-  const starsInner = document.querySelector(".stars-inner");
-  const starsInner1 = document.getElementsByClassName("stars-inner");
-  console.log("hey hey", starsInner1);
-  for (let i = 0; i < starsInner1.length; i++) {
-    starsInner1[i].style.width = starPercentageRounded;
-  }
+  const starsInners = document.querySelectorAll(".stars-inner");
+  starsInners.forEach((starInner, idx) => {
+    let numberRatingValue = numberRatings[idx].textContent;
+    const starPercentage = (numberRatingValue / starsTotal) * 100;
+    starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+    starInner.style.width = starPercentageRounded;
+  });
 }
 // =================Button Effect====================
 const buttons = document.querySelectorAll(".ripple");
@@ -53,13 +51,14 @@ buttons.forEach((button) => {
   });
 });
 
+// ========================Profile window Open=====================
 const userProfileBtn = document.getElementsByClassName("profile")[0];
+const userProfile = document.getElementsByClassName("user-profile-modal")[0];
 
 userProfileBtn.addEventListener("click", () => {
-  console.log("clicked");
-  const userProfile = document.getElementsByClassName("user-profile-modal")[0];
   userProfile.classList.toggle("hidden");
 });
+
 // let meterDiv = document.getElementsByClassName("meterDiv")[0];
 // meterDiv.style.width = "50%";
 // Meter rating
@@ -72,11 +71,10 @@ for (let i = 0; i < meterFoodRating.length; i++) {
   let meterPercentageRounded = `${Math.round(meterPercentage / 10) * 10}%`;
   meterDivCount++;
   let meterDiv = document.getElementsByClassName(`meterDiv${meterDivCount}`)[0];
-  console.log("meterDiv", meterDiv);
   meterDiv.style.width = meterPercentageRounded;
 }
 
-//listContainer1
+//=====================listContainer1===========================
 let menuBtn = document.getElementById("btnBorder");
 let menuBtn1 = document.getElementById("btnBorder1");
 let MenuTxt = document.getElementsByTagName("h5")[0];
@@ -94,11 +92,6 @@ menuBtn.addEventListener("click", () => {
     listContainer.style.display = "block";
     listContainer1.style.display = "none";
   }
-  // menuBtn.classList.toggle("btnActive");
-  // menuBtn1.classList.toggle("btnActive");
-  // MenuTxt.textContent = "ШӨЛ";
-  // listContainer.style.display = "block";
-  // listContainer1.style.display = "none";
 });
 menuBtn1.addEventListener("click", () => {
   if (listContainer1.style.display == "block") {
@@ -111,9 +104,8 @@ menuBtn1.addEventListener("click", () => {
   }
 });
 
-const cartIconBtn = document.getElementsByClassName("fa-shopping-cart")[0];
-
 // ========================Cart Modal Window Open=====================
+const cartIconBtn = document.getElementsByClassName("fa-shopping-cart")[0];
 cartIconBtn.addEventListener("click", () => {
   const cartModal = document.getElementsByClassName("cart-modal")[0];
   cartModal.classList.toggle("hidden");
@@ -124,28 +116,41 @@ cartIconBtn.addEventListener("click", () => {
 const loginOpen = document.getElementById("login-open");
 const loginModal = document.getElementsByClassName("login-modal-container")[0];
 const loginClose = document.getElementById("modal-close-btn");
-
 let btnTime = document.getElementsByClassName("btnTime")[0];
+
 btnTime.addEventListener("click", () => {
-  // signinBtn();
-  let key = selectedPerson.value;
-  let value = selectedPerson.options[selectedPerson.selectedIndex].text;
+  // let key = selectedPerson.value;
+  let personValue = selectedPerson.options[selectedPerson.selectedIndex].text;
   let dateValue = selected_date_element.textContent;
-  let datekey = "Date";
-  let timeKey = selectedTime.value;
   let timeValue = selectedTime.options[selectedTime.selectedIndex].text;
-  if (key && value) {
-    localStorage.setItem(key, value);
-    localStorage.setItem(datekey, dateValue);
-    localStorage.setItem(timeKey, timeValue);
-    // location.reload();
-  }
+
+  let timeData = {
+    person: personValue,
+    date: dateValue,
+    time: timeValue,
+  };
+
+  localStorage.setItem("order-time", JSON.stringify(timeData));
+
   if (localStorage.loggedUserUid) {
     window.location.assign("table.html");
   } else {
     loginModal.classList.add("show-modal");
-    // console.log("hello")
   }
-
-  // window.location.assign("table.html")
 });
+
+// =========================USER NAME-iig Haruulah=================
+const loggedUserId = document.getElementById("logged-user-id");
+
+function showUserName() {
+  if (localStorage.loggedUserUid) {
+    //Items are stored in local storage
+    let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
+    let userName = userData.name;
+
+    loggedUserId.innerHTML = `${userName}`;
+    console.log("User is available");
+  } else {
+    console.log("User is NOT available");
+  }
+}

@@ -1,148 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="table.css">
-    <link rel="stylesheet" href="MainCalendar1.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="table.css" />
+    <link rel="stylesheet" href="MainCalendar1.css" />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/06507b3ae3.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Document</title>
-</head>
-<body>
-
-    <main>
-        <div class="container">
-            <p>
-                Ширээ захиалга
-            </p>
-
-
-                <div class="timer">
-                    <select name="person" id="person" class="timerBorder fimerFlex">
-                        <option class="option" value="1">1 хүн</option>
-                        <option class="option" value="2">2 хүн</option>
-                        <option class="option" value="3">3 хүн</option>
-                        <option class="option" value="4">4 хүн</option>
-                        <option class="option" value="5">5 хүн</option>
-                    </select>
-                    <div class="date-picker fimerFlex center timerBorder timerBorderTrans">
-                        <div class="selected-date"></div>
-                        <div class="dates">
-                            <div class="month">
-                                <div class="arrows prev-mth">&lt;</div>
-                                <div class="mth"></div>
-                                <div class="arrows next-mth">&gt;</div>
-                            </div>
-                        <div class="days"></div>
-                    </div>
-                </div>
-                <select name="time" id="time" class="timerBorder fimerFlex timerBorderTrans">
-                    <option class="timeValue" value="timeValue">12:00 AM</option>
-                    <option class="timeValue" value="timeValue">1:00 AM</option>
-                    <option class="timeValue" value="timeValue">2:00 AM</option>
-                    <option class="timeValue" value="timeValue">3:00 AM</option>
-                    <option class="timeValue" value="timeValue">4:00 AM</option>
-                    <option class="timeValue" value="timeValue">5:00 AM</option>
-                    <option class="timeValue" value="timeValue">6:00 AM</option>
-                    <option class="timeValue" value="timeValue">7:00 AM</option>
-                    <option class="timeValue" value="timeValue">8:00 AM</option>
-                    <option class="timeValue" value="timeValue">9:00 AM</option>
-                    <option class="timeValue" value="timeValue">10:00 AM</option>
-                    <option class="timeValue" value="timeValue">11:00 AM</option>
-                    <option class="timeValue" value="timeValue" selected>1:00 PM</option>
-                    <option class="timeValue" value="timeValue">2:00 PM</option>
-                    <option class="timeValue" value="timeValue">3:00 PM</option>
-                    <option class="timeValue" value="timeValue">4:00 PM</option>
-                    <option class="timeValue" value="timeValue">5:00 PM</option>
-                    <option class="timeValue" value="timeValue">6:00 PM</option>
-                    <option class="timeValue" value="timeValue">7:00 PM</option>
-                    <option class="timeValue" value="timeValue">8:00 PM</option>
-                    <option class="timeValue" value="timeValue">9:00 PM</option>
-                    <option class="timeValue" value="timeValue">10:00 PM</option>
-                    <option class="timeValue" value="timeValue">11:00 PM</option>
-                    <option class="timeValue" value="timeValue">12:00 PM</option>
-                </select>
+  </head>
+  <body>
+    <!--==================1. NAVBAR SECTION================== -->
+  <nav class="">
+    <div class="logo">
+      <a href="home.html"><img src="img/logo_white.png" /></a>
+    </div>
+    <input type="checkbox" name="" id="check" />
+    <label for="check" class="checkBtn">
+      <i class="fas fa-bars"></i>
+    </label>
+    <ul>
+      <li><a class="activePage" href="./home.html">Нүүр</a></li>
+      <li><a href="#">Бидний тухай</a></li>
+      <li><a href="#">Холбоо барих</a></li>
+    </ul>
+   <div class="navBtnContainer">
+      <button class="signUp-btn ripple" id="signup-open">Бүртгүүлэх</button>
+      <button class="login-btn ripple" id="login-open">Нэвтрэх</button>
+      <div class="cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+        <!-- Sagsand bga ITEM-iin heseg -->
+        <div class="cart-modal">
+          <div class="cart-modal--header">
+            <h3>Таны сагс ( 1 захиалга )</h3>
+            <button class="cart-empty-btn">Хоослох</button>
+          </div>
+          <div class="cart-modal--item">
+            <div class="cart-modal--item--image">
+              <img
+                src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                alt=""
+              />
             </div>
-            <h1>Ширээний сонголт</h1>
-            <div class="table">
-                <div class="row">
-                    <div class="seat tables" aria-valuetext="2">
-                        <option value="2"></option>
-                        <span class="seatNum">1</span>
-                    </div>
-                    <div class="seat tables">
-                        <option value="2"></option>
-                        <span class="seatNum">2</span>
-                    </div>
-                    <div class="seat tables">
-                        <option value="2"></option>
-
-                        <span class="seatNum">3</span>
-                    </div>
-                    <div class="seat tables">
-                        <option value="2"></option>
-
-                        <span class="seatNum">4</span>
-                    </div>
-                    <div class="seat tables">
-                        <option value="2"></option>
-
-                        <span class="seatNum">5</span>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="seat1 tables">
-                        <option value="6"></option>
-                        <span class="seat1Chair"></span>
-                        <span class="seatNum">4</span>
-                    </div>
-                    <div class="seat1 tables">
-                        <option value="6"></option>
-                        <span class="seat1Chair"></span>
-                        <span class="seatNum">5</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="seat2 tables">
-                        <option value="4"></option>
-                        <span class="seatNum">6</span>
-                    </div>
-                    <div class="seat2 tables">
-                        <option value="4"></option>
-                        <span class="seatNum">7</span>
-                    </div>
-                    <div class="seat2 tables">
-                        <option value="4"></option>
-                        <span class="seatNum">8</span>
-                    </div>
-                </div>
-                <div class="row moon">
-                    <div id="moon"> Касс</div>
-                </div>
-
-                <div class="windowsTop">
-                    <div class="test">
-                        <div></div>
-                    </div>
-                    <div class="test">
-                        <div></div>
-                    </div>
-                </div>
-                <!-- <div class="windowsRight">
-                    <div class="rightWindow">
-                        <div></div>
-                    </div>
-                </div> -->
-                
-                
+            <div class="cart-modal--item--content">
+              <h4>цуйван</h4>
+              <small>Тоо ширхэг : 5 </small>
+              <small>15000₮ </small>
             </div>
-            <button class="orderbutton">Захиалга</button>
-            <button class="orderbutton" onclick="location.href=`Main.html`">Буцах</button>
+            <!-- <div class="cart-modal--item--price">
+              <h4>15000₮</h4>
+            </div> -->
+            <div class="cart-item-delete-btn">
+              <i class="fas fa-times"></i>
+            </div>
+          </div>
+          <div class="cart-modal--item">
+            <div class="cart-modal--item--image">
+              <img
+                src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                alt=""
+              />
+            </div>
+            <div class="cart-modal--item--content">
+              <h4>цуйван</h4>
+              <small>Тоо ширхэг : 5 </small>
+              <small>15000₮ </small>
+            </div>
+            <!-- <div class="cart-modal--item--price">
+              <h4>15000₮</h4>
+            </div> -->
+            <div class="cart-item-delete-btn">
+              <i class="fas fa-times"></i>
+            </div>
+          </div>
         </div>
-        <!--============4.SIGNUP MODAL SECTION========= -->
-    <div class="signup-modal-container" id="signup-modal">
+      </div>
+      <div class="profile">
+        <a>
+          <i class="fas fa-user"></i>
+        </a>
+      </div>
+      <!-- Profile Window -->
+      <div class="user-profile-modal">
+        <h3 id="user-profile-modal--header">Хэрэглэгч:</h3>
+        <div>
+          <li>
+            <i class="fas fa-user-circle"></i
+            ><a class="" href="/profile.html">Хувийн мэдээлэл</a>
+          </li>
+          <li>
+            <i class="fas fa-edit"></i
+            ><a class="" href="/profile.html">Миний захиалга</a>
+          </li>
+          <li>
+            <a class="" href="#" id="logout-btn">Гарах</a>
+          </li>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!--==================2. TABLE SECTION================== -->
+    <main>
+      <section>
+        <div class="container">
+          <h2>Ширээ захиалга</h2>
+          <h3 class="logged-user-id">
+              Xэрэглэгч: &nbsp;<span id="logged-user-id">нэвтрээгүй!</span>
+            </h3>      
+          <div class="timer">
+            <select name="person" id="person" class="timerBorder fimerFlex">
+              <option class="option" value="1">1 хүн</option>
+              <option class="option" value="2">2 хүн</option>
+              <option class="option" value="3">3 хүн</option>
+              <option class="option" value="4">4 хүн</option>
+              <option class="option" value="5">5 хүн</option>
+            </select>
+            <div
+              class="date-picker fimerFlex center timerBorder timerBorderTrans"
+            >
+              <div class="selected-date"></div>
+              <div class="dates">
+                <div class="month">
+                  <div class="arrows prev-mth">&lt;</div>
+                  <div class="mth"></div>
+                  <div class="arrows next-mth">&gt;</div>
+                </div>
+                <div class="days"></div>
+              </div>
+            </div>
+            <select
+              name="time"
+              id="time"
+              class="timerBorder fimerFlex timerBorderTrans"
+            >
+              <option class="timeValue" value="timeValue">12:00 AM</option>
+              <option class="timeValue" value="timeValue">1:00 AM</option>
+              <option class="timeValue" value="timeValue">2:00 AM</option>
+              <option class="timeValue" value="timeValue">3:00 AM</option>
+              <option class="timeValue" value="timeValue">4:00 AM</option>
+              <option class="timeValue" value="timeValue">5:00 AM</option>
+              <option class="timeValue" value="timeValue">6:00 AM</option>
+              <option class="timeValue" value="timeValue">7:00 AM</option>
+              <option class="timeValue" value="timeValue">8:00 AM</option>
+              <option class="timeValue" value="timeValue">9:00 AM</option>
+              <option class="timeValue" value="timeValue">10:00 AM</option>
+              <option class="timeValue" value="timeValue">11:00 AM</option>
+              <option class="timeValue" value="timeValue" selected>
+                1:00 PM
+              </option>
+              <option class="timeValue" value="timeValue">2:00 PM</option>
+              <option class="timeValue" value="timeValue">3:00 PM</option>
+              <option class="timeValue" value="timeValue">4:00 PM</option>
+              <option class="timeValue" value="timeValue">5:00 PM</option>
+              <option class="timeValue" value="timeValue">6:00 PM</option>
+              <option class="timeValue" value="timeValue">7:00 PM</option>
+              <option class="timeValue" value="timeValue">8:00 PM</option>
+              <option class="timeValue" value="timeValue">9:00 PM</option>
+              <option class="timeValue" value="timeValue">10:00 PM</option>
+              <option class="timeValue" value="timeValue">11:00 PM</option>
+              <option class="timeValue" value="timeValue">12:00 PM</option>
+            </select>
+          </div>
+          <h1>Ширээний сонголт</h1>
+          <div class="table">
+            <div class="row">
+              <div class="seat tables" aria-valuetext="2">
+                <option value="2"></option>
+                <span class="seatNum">1</span>
+              </div>
+              <div class="seat tables">
+                <option value="2"></option>
+                <span class="seatNum">2</span>
+              </div>
+              <div class="seat tables">
+                <option value="2"></option>
+  
+                <span class="seatNum">3</span>
+              </div>
+              <div class="seat tables">
+                <option value="2"></option>
+  
+                <span class="seatNum">4</span>
+              </div>
+              <div class="seat tables">
+                <option value="2"></option>
+  
+                <span class="seatNum">5</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="seat1 tables">
+                <option value="6"></option>
+                <span class="seat1Chair"></span>
+                <span class="seatNum">4</span>
+              </div>
+              <div class="seat1 tables">
+                <option value="6"></option>
+                <span class="seat1Chair"></span>
+                <span class="seatNum">5</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="seat2 tables">
+                <option value="4"></option>
+                <span class="seatNum">6</span>
+              </div>
+              <div class="seat2 tables">
+                <option value="4"></option>
+                <span class="seatNum">7</span>
+              </div>
+              <div class="seat2 tables">
+                <option value="4"></option>
+                <span class="seatNum">8</span>
+              </div>
+            </div>
+            <div class="row moon">
+              <div id="moon">Касс</div>
+            </div>
+  
+            <div class="windowsTop">
+              <div class="test">
+                <div></div>
+              </div>
+              <div class="test">
+                <div></div>
+              </div>
+            </div>
+            <!-- <div class="windowsRight">
+                      <div class="rightWindow">
+                          <div></div>
+                      </div>
+                  </div> -->
+          </div>
+          <div class="table-button">
+            <button class="orderbutton" onclick="location.href=`Main.html`"> <i class="fas fa-arrow-left"></i>Буцах
+            </button>
+            <button class="orderbutton">
+              Захиалга <i class="fas fa-arrow-right"></i>
+            </button>
+
+          </div>
+        </div>
+      </section>
+    </main>
+     <!--============4.SIGNUP MODAL SECTION========= -->
+      <div class="signup-modal-container" id="signup-modal">
         <div class="signup-modal">
           <button class="signup-close-btn" id="signup-close-btn">
             <i class="fa fa-times"></i>
@@ -249,10 +355,65 @@
           </div>
         </div>
       </div>
-    </main>
+    <!--============6.FOOTER SECTION========= -->
+    <footer>
+      <div class="footer-container1">
+        <div class="footer-items">
+          <div class="footer-contacts">
+            <h2 class="footer-items-title">Холбоо барих</h2>
+            <p>
+              <i id="contact-icon" class="fas fa-phone"></i>72-700-800
+            </p=>
+            <p>
+              <i id="contact-icon" class="fas fa-envelope"></i>info@nest.edu.mn
+            </p>
+          </div>
+          <div class="footer-location">
+            <h2 class="footer-items-title">Байршил</h2>
+            <p>
+              <i class="fas fa-location-dot"></i> Улаанбаатар,
+              Чингисийн Өргөн Чөлөө 17, Гурван гол оффис, 301 тоот
+            </p>
+          </div>
+          <div class="footer-technology">
+            <h2 class="footer-items-title">Ашигласан технологиуд</h2>
+            <p>
+              <span>HTML5</span>
+              <span>CSS3</span>
+              <span>Javascript</span>
+              <span>Firebase</span>
+              <span>Github</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-container2">
+        <div class="footer-items2">
+          <p class="footer-items2-created-by">Бүтээсэн: <span>Coding is Doping</span> </p>
+          <div class="footer-items2-social">
+            <a href="https://www.facebook.com/">
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.twitter.com/">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.github.com/">
+              <i class="fab fa-github"></i>
+            </a>
+          </div>
+          <div class="footer-items2-all-rights">
+            <span class="text"
+              >© 2022. Зохиогчийн бүх эрх хуулиар хамгаалагдсан.
+            </span>
+          </div>
+        </div>
+        <button class="scroll-to-top-button" id="scrollToTop-button"><i class="fas fa-arrow-up"></i></button>
+      </div>
+    </footer>
     <script src="Calendar.js"></script>
     <script src="table.js"></script>
-
-
-</body>
+  </body>
 </html>
