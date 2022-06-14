@@ -24,103 +24,6 @@ function getRatings() {
   });
 }
 
-// ==================Scroll To Top Effect===============
-const scrollToTopBtn = document.getElementById("scrollToTop-button");
-window.onscroll = function () {
-  scrollFunction();
-};
-function scrollFunction() {
-  if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
-    scrollToTopBtn.style.display = "block";
-  } else {
-    scrollToTopBtn.style.display = "none";
-  }
-}
-
-scrollToTopBtn.addEventListener("click", () => {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
-});
-
-// =================Button Effect====================
-const buttons = document.querySelectorAll(".ripple");
-buttons.forEach((button) => {
-  button.addEventListener("click", function (e) {
-    // mouse-iin bairshliig X, Y toogoor gargaj ogno.
-    const x = e.clientX;
-    const y = e.clientY;
-
-    // button bairshliig gargaj ogno.
-    const buttonTop = e.target.offsetTop;
-    const buttonLeft = e.target.offsetLeft;
-
-    const xInside = x - buttonLeft;
-    const yInside = y - buttonTop;
-
-    const circle = document.createElement("span");
-
-    // circle.className = "circle"- ni classList.add-tai adilhan.
-    circle.classList.add("circle");
-    this.appendChild(circle);
-    circle.style.top = yInside + "px";
-    circle.style.left = xInside + "px";
-
-    setTimeout(() => circle.remove(), 200);
-  });
-});
-
-// ========================Profile window Open=====================
-const userProfileBtn = document.getElementsByClassName("profile")[0];
-const userProfile = document.getElementsByClassName("user-profile-modal")[0];
-
-userProfileBtn.addEventListener("click", () => {
-  userProfile.classList.toggle("hidden");
-});
-
-// ========================Cart Modal Window Open=====================
-const cartIconBtn = document.getElementsByClassName("fa-shopping-cart")[0];
-const cartModal = document.getElementsByClassName("cart-modal")[0];
-
-cartIconBtn.addEventListener("click", () => {
-  cartModal.classList.toggle("hidden");
-});
-
-// ========================LOGIN MODAL window Open=====================
-const loginOpen = document.getElementById("login-open");
-const loginModal = document.getElementsByClassName("login-modal-container")[0];
-const loginClose = document.getElementById("modal-close-btn");
-
-loginOpen.addEventListener("click", () => {
-  loginModal.classList.add("show-modal");
-  clearLoginInputs();
-});
-loginClose.addEventListener("click", () => {
-  loginModal.classList.remove("show-modal");
-});
-
-window.addEventListener("click", (e) => {
-  if (e.target == loginModal) {
-    loginModal.classList.remove("show-modal");
-  }
-});
-
-// ========================SIGNUP MODAL window Open=====================
-let signupOpen = document.getElementById("signup-open");
-let signupModal = document.getElementById("signup-modal");
-const signupClose = document.getElementById("signup-close-btn");
-
-signupOpen.addEventListener("click", () => {
-  signupModal.classList.add("show-modal");
-  clearSignupInputs();
-});
-signupClose.addEventListener("click", () => {
-  signupModal.classList.remove("show-modal");
-});
-
-window.addEventListener("click", (e) => {
-  e.target == signupModal ? signupModal.classList.remove("show-modal") : false;
-});
-
 //////////////////////////////////FIRESTORE///////////////////////////
 // =============================GLOBAL VARIABLES=======================
 const signupBtn = document.getElementById("signup-submit-btn");
@@ -286,7 +189,7 @@ function inActiveUserProfile() {
   userProfileBtn.style.background = "#ccc";
 }
 
-// =========================USER NAME-iig Haruulah=================
+// =========================Newtersen USER NAME-iig Haruulah=================
 function showUserName() {
   if (localStorage.length > 0) {
     //Items are stored in local storage
@@ -326,7 +229,6 @@ const restaurantsArr = [
     rating: 4.9,
   },
 ];
-// console.log(restaurantsArr.some((res) => res.rating === 2.7));
 
 function getRestaurantsToDOM(ratingValue) {
   // 1. Restauranii array-g ihees baga ruu ni sort-low.
@@ -378,6 +280,7 @@ function getRestaurantsToDOM(ratingValue) {
   }
 }
 
+//=============== haih towchin dr darahad restauran-uudiig vnelgeegeer ni haruulah==========
 searchField.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -395,7 +298,7 @@ searchField.addEventListener("submit", (event) => {
   }
 });
 
-// ============================================================
+// =============================Restauran-uudiig Home page dr haruulah===============================
 function showRestaurantsContent() {
   let restaurantArr = JSON.parse(localStorage.getItem("restaurantAllData"));
 
@@ -454,3 +357,101 @@ function moreBtnClick() {
     });
   });
 }
+
+///////////////////////=BUSAD=//////////////////////////////////
+// ==================Scroll To Top Effect===============
+const scrollToTopBtn = document.getElementById("scrollToTop-button");
+window.onscroll = function () {
+  scrollFunction();
+};
+function scrollFunction() {
+  if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
+    scrollToTopBtn.style.display = "block";
+  } else {
+    scrollToTopBtn.style.display = "none";
+  }
+}
+
+scrollToTopBtn.addEventListener("click", () => {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+});
+
+// =================Button Effect====================
+const buttons = document.querySelectorAll(".ripple");
+buttons.forEach((button) => {
+  button.addEventListener("click", function (e) {
+    // mouse-iin bairshliig X, Y toogoor gargaj ogno.
+    const x = e.clientX;
+    const y = e.clientY;
+
+    // button bairshliig gargaj ogno.
+    const buttonTop = e.target.offsetTop;
+    const buttonLeft = e.target.offsetLeft;
+
+    const xInside = x - buttonLeft;
+    const yInside = y - buttonTop;
+
+    const circle = document.createElement("span");
+
+    // circle.className = "circle"- ni classList.add-tai adilhan.
+    circle.classList.add("circle");
+    this.appendChild(circle);
+    circle.style.top = yInside + "px";
+    circle.style.left = xInside + "px";
+
+    setTimeout(() => circle.remove(), 200);
+  });
+});
+
+// ========================Profile window Open=====================
+const userProfileBtn = document.getElementsByClassName("profile")[0];
+const userProfile = document.getElementsByClassName("user-profile-modal")[0];
+
+userProfileBtn.addEventListener("click", () => {
+  userProfile.classList.toggle("hidden");
+});
+
+// ========================Cart Modal Window Open=====================
+const cartIconBtn = document.getElementsByClassName("fa-shopping-cart")[0];
+const cartModal = document.getElementsByClassName("cart-modal")[0];
+
+cartIconBtn.addEventListener("click", () => {
+  cartModal.classList.toggle("hidden");
+});
+
+// ========================LOGIN MODAL window Open=====================
+const loginOpen = document.getElementById("login-open");
+const loginModal = document.getElementsByClassName("login-modal-container")[0];
+const loginClose = document.getElementById("modal-close-btn");
+
+loginOpen.addEventListener("click", () => {
+  loginModal.classList.add("show-modal");
+  clearLoginInputs();
+});
+loginClose.addEventListener("click", () => {
+  loginModal.classList.remove("show-modal");
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target == loginModal) {
+    loginModal.classList.remove("show-modal");
+  }
+});
+
+// ========================SIGNUP MODAL window Open=====================
+let signupOpen = document.getElementById("signup-open");
+let signupModal = document.getElementById("signup-modal");
+const signupClose = document.getElementById("signup-close-btn");
+
+signupOpen.addEventListener("click", () => {
+  signupModal.classList.add("show-modal");
+  clearSignupInputs();
+});
+signupClose.addEventListener("click", () => {
+  signupModal.classList.remove("show-modal");
+});
+
+window.addEventListener("click", (e) => {
+  e.target == signupModal ? signupModal.classList.remove("show-modal") : false;
+});
