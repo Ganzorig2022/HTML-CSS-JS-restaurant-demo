@@ -2,17 +2,22 @@ let tablesSelected = document.getElementsByClassName("tables");
 let personNum = document.getElementById("person");
 let option = document.getElementsByClassName("option");
 let tableTimeValue = document.getElementsByClassName("timeValue");
-let orderButton = document.getElementsByClassName("orderbutton")[0];
+let orderButton = document.getElementsByClassName("orderbutton")[1];
+
+
+
+let orderTime = JSON.parse(localStorage.getItem("order-time"));
+
 
 //LocalStore
 for (let i = 0; i < option.length; i++) {
-  if (option[i].textContent === localStorage.person) {
+  if (option[i].textContent === orderTime.person) {
     option[i].setAttribute("selected", "");
   }
 }
-selected_date_element.textContent = localStorage.Date;
+selected_date_element.textContent = orderTime.date;
 for (let i = 0; i < tableTimeValue.length; i++) {
-  if (tableTimeValue[i].textContent === localStorage.timeValue) {
+  if (tableTimeValue[i].textContent === orderTime.time) {
     tableTimeValue[i].setAttribute("selected", "");
   }
 }
@@ -50,22 +55,21 @@ for (let i = 0; i < tablesSelected.length; i++) {
 //=============================================================================================
 
 //
+
 orderButton.addEventListener("click", () => {
-  let key = "person";
-  let value = selectedPerson.options[selectedPerson.selectedIndex].text;
-  let dateValue = selected_date_element.textContent;
-  let datekey = "Date";
-  let timeKey = selectedTime.value;
-  let timeValue = selectedTime.options[selectedTime.selectedIndex].text;
-  let orderTableKey = "Table";
-  let orderTableValue = orderTable;
-  if (key && value) {
-    localStorage.setItem(key, value);
-    localStorage.setItem(datekey, dateValue);
-    localStorage.setItem(timeKey, timeValue);
-    localStorage.setItem(orderTableKey, orderTableValue);
-  }
-  window.location.assign("profile.html");
+    let personValue = selectedPerson.options[selectedPerson.selectedIndex].text;
+    let dateValue = selected_date_element.textContent;
+    let timeValue = selectedTime.options[selectedTime.selectedIndex].text;
+  
+    let timeData = {
+      person: personValue,
+      date: dateValue,
+      time: timeValue,
+    };
+    localStorage.setItem("order-time", JSON.stringify(timeData));
+
+//   window.location.assign("profile.html");
+
 });
 
 const loginOpen = document.getElementById("login-open");

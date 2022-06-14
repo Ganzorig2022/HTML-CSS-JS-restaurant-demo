@@ -374,7 +374,6 @@ let orderStatus = document.getElementsByClassName("order-status")[0];
 
 
 
-console.log(localStorage.Date);
 localStorageShowOrderItems();
 function localStorageShowOrderItems(){
   personOrderDate.lastElementChild.textContent = localStorage.Date;

@@ -768,6 +768,16 @@ section .rightContainer {
   padding: 0 10px;
   margin: 10px;
 }
+.rightContainer h2{
+  justify-content: space-evenly;
+  font-family: var(--third-font-family);
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1.1;
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid rgb(230, 230, 230);
+}
 section .leftContainer {
   width: 35%;
   border-radius: 10px;

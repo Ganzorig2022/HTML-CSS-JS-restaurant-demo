@@ -539,6 +539,9 @@ main section {
 .seat2 .seatNum {
   transform: rotate(-45deg);
 }
+.tables:hover{
+    background-color: var(--text-shadow-color);
+}
 .seat2::after {
   content: "";
   position: absolute;

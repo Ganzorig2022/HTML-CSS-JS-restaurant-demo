@@ -31,7 +31,6 @@ next_mth_element.addEventListener('click', goToNextMonth);
 prev_mth_element.addEventListener('click', goToPrevMonth);
 selectedPerson.addEventListener('click', ()=>{
     selectedPerson.classList.toggle("borderActive");
-console.log(selectedPerson);
 
 });
 
