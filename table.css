@@ -539,8 +539,8 @@ main section {
 .seat2 .seatNum {
   transform: rotate(-45deg);
 }
-.tables:hover{
-    background-color: var(--text-shadow-color);
+.tables:hover {
+  background-color: var(--text-shadow-color);
 }
 .seat2::after {
   content: "";
@@ -576,7 +576,26 @@ main section {
   margin: auto;
   /* margin-bottom: 50px; */
   padding: 10px;
+  position: relative;
+  margin-top: 20px;
 }
+.timer select {
+  cursor: pointer;
+}
+.timer p {
+  position: absolute;
+  top: -20px;
+}
+.timer p:nth-of-type(1) {
+  left: 0;
+}
+.timer p:nth-of-type(2) {
+  left: 200px;
+}
+.timer p:nth-of-type(3) {
+  left: 400px;
+}
+
 .timer .date-picker {
   background-color: #fff;
 }

@@ -1,9 +1,4 @@
-import {
-  signUp,
-  signIn,
-  logOut,
-  updateUserOrderDataToFireStore,
-} from "./firebase_auth.js";
+import { updateUserOrderDataToFireStore } from "./firebase_auth.js";
 
 let tablesSelected = document.getElementsByClassName("tables");
 let personNum = document.getElementById("person");
@@ -66,26 +61,30 @@ orderButton.addEventListener("click", () => {
   let timeValue = selectedTime.options[selectedTime.selectedIndex].text;
   let tableValue = orderTable;
 
-  let timeData = {
-    person: personValue,
-    date: dateValue,
-    time: timeValue,
-    table: tableValue,
-  };
-  localStorage.setItem("order-time", JSON.stringify(timeData));
+  if (tableValue === "") {
+    swal("Та ширээгээ заавал сонгоно уу!")
+  } else {
+    let timeData = {
+      person: personValue,
+      date: dateValue,
+      time: timeValue,
+      table: tableValue,
+    };
+    localStorage.setItem("order-time", JSON.stringify(timeData));
 
-  let restaurantID = JSON.parse(localStorage.getItem("selectedRestaurantID"));
-  let loggedUserID = JSON.parse(localStorage.getItem("loggedUserID"));
-  console.log(restaurantID);
+    let restaurantID = JSON.parse(localStorage.getItem("selectedRestaurantID"));
+    let loggedUserID = JSON.parse(localStorage.getItem("loggedUserID"));
+    console.log(restaurantID);
 
-  updateUserOrderDataToFireStore(
-    loggedUserID,
-    restaurantID,
-    personValue,
-    dateValue,
-    timeValue,
-    +tableValue
-  );
+    updateUserOrderDataToFireStore(
+      loggedUserID,
+      restaurantID,
+      personValue,
+      dateValue,
+      timeValue,
+      +tableValue
+    );
+  }
 
   //   window.location.assign("profile.html");
 });
@@ -124,6 +123,21 @@ const userProfileModalHeader = document.getElementById(
 const userProfileBtn = document.getElementsByClassName("profile")[0];
 const loggedUserId = document.getElementById("logged-user-id");
 
+// ========================Profile window Open=====================
+const userProfile = document.getElementsByClassName("user-profile-modal")[0];
+
+userProfileBtn.addEventListener("click", () => {
+  userProfile.classList.toggle("hidden2");
+});
+
+// ========================Cart Modal Window Open=====================
+const cartIconBtn = document.getElementsByClassName("fa-shopping-cart")[0];
+const cartModal = document.getElementsByClassName("cart-modal")[0];
+
+cartIconBtn.addEventListener("click", () => {
+  cartModal.classList.toggle("hidden");
+});
+
 function showUserName() {
   if (localStorage.length > 0) {
     //Items are stored in local storage
@@ -149,10 +163,3 @@ function inActiveUserProfile() {
   userProfileBtn.style.background = "#ccc";
 }
 showUserName();
-
-// ========================Profile window Open=====================
-const userProfile = document.getElementsByClassName("user-profile-modal")[0];
-
-userProfileBtn.addEventListener("click", () => {
-  userProfile.classList.toggle("hidden2");
-});
