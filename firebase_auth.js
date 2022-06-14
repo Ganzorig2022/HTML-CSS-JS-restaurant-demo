@@ -30,6 +30,8 @@ import {
   getDoc,
   onSnapshot,
   query,
+  updateDoc,
+  arrayUnion,
 } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -81,6 +83,8 @@ const signIn = async function (signinEmail, signinPassword) {
     );
 
     const userUid = userCredential.user.uid;
+    localStorage.setItem("loggedUserID", JSON.stringify(userUid));
+
     await getUserDataFromFireStore(userUid);
 
     return true;
@@ -113,7 +117,7 @@ onAuthStateChanged(auth, (user) => {
 const getUserDataFromFireStore = async function (userUid) {
   const docData = await getDoc(doc(db, "users", userUid));
   let userData = docData.data();
-  localStorage.setItem("loggedUserUid", JSON.stringify(userData));
+  localStorage.setItem("loggedUserData", JSON.stringify(userData));
 };
 // =============Get Multiple Document Data from Firestore=============
 const getTableDataFromFireStore = async function () {
@@ -130,6 +134,31 @@ const getTableDataFromFireStore = async function () {
 
 getTableDataFromFireStore();
 
+// =============Update User Table Data to Firestore=============
+const updateUserOrderDataToFireStore = async function (
+  loggedUserID,
+  restaurantID,
+  personValue,
+  dateValue,
+  timeValue,
+  tableValue
+) {
+  try {
+    const docRef = await doc(db, "restaurant", restaurantID);
+    await updateDoc(docRef, {
+      order: arrayUnion({
+        date: dateValue,
+        people: personValue,
+        rating: 3.5,
+        time: timeValue,
+        userID: loggedUserID,
+        table: tableValue,
+      }),
+    });
+  } catch (error) {
+    swal("ERR: ", error);
+  }
+};
 // =============Update User Info to Firestore=============
 const updateUserDataInFireStore = async function (
   userFirstName,
@@ -186,4 +215,10 @@ function resetPasswordEmail(userLoginPassword, userLoginEmail) {
     });
 }
 
-export { signUp, signIn, logOut, updateUserDataInFireStore };
+export {
+  signUp,
+  signIn,
+  logOut,
+  updateUserDataInFireStore,
+  updateUserOrderDataToFireStore,
+};

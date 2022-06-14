@@ -6,7 +6,10 @@ import {
 } from "./firebase_auth.js";
 
 // DOM Refresh hiigdehed ehleed ajillana.
-document.addEventListener("DOMContentLoaded", showUserName);
+document.addEventListener("DOMContentLoaded", () => {
+  showUserInfo();
+  showUserName();
+});
 
 // ==================Scroll To Top Effect===============
 const scrollToTopBtn = document.getElementById("scrollToTop-button");
@@ -361,21 +364,20 @@ function inActiveUserProfile() {
   userProfileBtn.style.background = "#ccc";
 }
 
-
-
-
 //LOCALSTORAGE-ees data awaw
 
 let personOrderDate = document.getElementsByClassName("right-content-date")[0];
-let personOrderPersonValue = document.getElementsByClassName("right-content-people")[0];
-let personOrderTimeValue = document.getElementsByClassName("right-content-time")[0];
-let personOrderSeatValue = document.getElementsByClassName("right-content-seat")[0];
+let personOrderPersonValue = document.getElementsByClassName(
+  "right-content-people"
+)[0];
+let personOrderTimeValue =
+  document.getElementsByClassName("right-content-time")[0];
+let personOrderSeatValue =
+  document.getElementsByClassName("right-content-seat")[0];
 let orderStatus = document.getElementsByClassName("order-status")[0];
 
-
-
 localStorageShowOrderItems();
-function localStorageShowOrderItems(){
+function localStorageShowOrderItems() {
   personOrderDate.lastElementChild.textContent = localStorage.Date;
   personOrderPersonValue.lastElementChild.textContent = localStorage.person;
   personOrderTimeValue.lastElementChild.textContent = localStorage.timeValue;
@@ -383,11 +385,8 @@ function localStorageShowOrderItems(){
   orderStatus.textContent = "Баталгаажсан";
 }
 
-
-
 //Ширээ захиалга руу буцах хэсэг
 let backUserInfoBtn = document.getElementById("back-user-info-btn");
-backUserInfoBtn.addEventListener("click", ()=>{
-  window.location.assign("table.html")
-
+backUserInfoBtn.addEventListener("click", () => {
+  window.location.assign("table.html");
 });

@@ -54,9 +54,10 @@ buttons.forEach((button) => {
 // ========================Profile window Open=====================
 const userProfileBtn = document.getElementsByClassName("profile")[0];
 const userProfile = document.getElementsByClassName("user-profile-modal")[0];
+console.log(userProfile);
 
 userProfileBtn.addEventListener("click", () => {
-  userProfile.classList.toggle("hidden");
+  userProfile.classList.toggle("hidden1");
 });
 
 // let meterDiv = document.getElementsByClassName("meterDiv")[0];
@@ -132,7 +133,7 @@ btnTime.addEventListener("click", () => {
 
   localStorage.setItem("order-time", JSON.stringify(timeData));
 
-  if (localStorage.loggedUserUid) {
+  if (localStorage.loggedUserData) {
     window.location.assign("table.html");
   } else {
     loginModal.classList.add("show-modal");
@@ -143,9 +144,9 @@ btnTime.addEventListener("click", () => {
 const loggedUserId = document.getElementById("logged-user-id");
 
 function showUserName() {
-  if (localStorage.loggedUserUid) {
+  if (localStorage.loggedUserData) {
     //Items are stored in local storage
-    let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
+    let userData = JSON.parse(localStorage.getItem("loggedUserData"));
     let userName = userData.name;
 
     loggedUserId.innerHTML = `${userName}`;

@@ -246,7 +246,7 @@ nav ul li a.activePage {
   display: none;
   z-index: 5;
 }
-.user-profile-modal.hidden {
+.user-profile-modal.hidden2 {
   display: block;
 }
 .user-profile-modal div {

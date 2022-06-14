@@ -249,9 +249,9 @@ nav ul li a.active {
   top: 90px;
   right: 10px;
   display: none;
-  z-index: 5;
+  z-index: 15;
 }
-.user-profile-modal.hidden {
+.user-profile-modal.hidden1 {
   display: block;
 }
 .user-profile-modal div {

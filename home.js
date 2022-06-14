@@ -206,7 +206,7 @@ logoutBtn.addEventListener("click", async () => {
   if (isSuccessful) {
     swal("Та системээс гарлаа.");
     // localStorage-iig empty bolgono.
-    localStorage.removeItem("loggedUserUid");
+    localStorage.removeItem("loggedUserData");
 
     userProfileModal.classList.remove("hidden");
     userProfileModalHeader.innerHTML = `Хэрэглэгч:`;
@@ -290,7 +290,7 @@ function inActiveUserProfile() {
 function showUserName() {
   if (localStorage.length > 0) {
     //Items are stored in local storage
-    let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
+    let userData = JSON.parse(localStorage.getItem("loggedUserData"));
     let userName = userData.name;
 
     userProfileModalHeader.innerHTML = `Хэрэглэгч: ${userName}`;
@@ -444,7 +444,12 @@ function showRestaurantsContent() {
 function moreBtnClick() {
   const moreBtn = document.querySelectorAll(".more-btn");
   moreBtn.forEach((more) => {
-    more.addEventListener("click", () => {
+    more.addEventListener("click", (e) => {
+      const restaurantID = e.target.getAttribute("restaurant-id");
+      localStorage.setItem(
+        "selectedRestaurantID",
+        JSON.stringify(restaurantID)
+      );
       location.href = "Main.html";
     });
   });

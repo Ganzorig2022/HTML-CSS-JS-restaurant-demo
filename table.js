@@ -1,13 +1,17 @@
+import {
+  signUp,
+  signIn,
+  logOut,
+  updateUserOrderDataToFireStore,
+} from "./firebase_auth.js";
+
 let tablesSelected = document.getElementsByClassName("tables");
 let personNum = document.getElementById("person");
 let option = document.getElementsByClassName("option");
 let tableTimeValue = document.getElementsByClassName("timeValue");
 let orderButton = document.getElementsByClassName("orderbutton")[1];
 
-
-
 let orderTime = JSON.parse(localStorage.getItem("order-time"));
-
 
 //LocalStore
 for (let i = 0; i < option.length; i++) {
@@ -57,19 +61,33 @@ for (let i = 0; i < tablesSelected.length; i++) {
 //
 
 orderButton.addEventListener("click", () => {
-    let personValue = selectedPerson.options[selectedPerson.selectedIndex].text;
-    let dateValue = selected_date_element.textContent;
-    let timeValue = selectedTime.options[selectedTime.selectedIndex].text;
-  
-    let timeData = {
-      person: personValue,
-      date: dateValue,
-      time: timeValue,
-    };
-    localStorage.setItem("order-time", JSON.stringify(timeData));
+  let personValue = selectedPerson.options[selectedPerson.selectedIndex].text;
+  let dateValue = selected_date_element.textContent;
+  let timeValue = selectedTime.options[selectedTime.selectedIndex].text;
+  let tableValue = orderTable;
 
-//   window.location.assign("profile.html");
+  let timeData = {
+    person: personValue,
+    date: dateValue,
+    time: timeValue,
+    table: tableValue,
+  };
+  localStorage.setItem("order-time", JSON.stringify(timeData));
 
+  let restaurantID = JSON.parse(localStorage.getItem("selectedRestaurantID"));
+  let loggedUserID = JSON.parse(localStorage.getItem("loggedUserID"));
+  console.log(restaurantID);
+
+  updateUserOrderDataToFireStore(
+    loggedUserID,
+    restaurantID,
+    personValue,
+    dateValue,
+    timeValue,
+    +tableValue
+  );
+
+  //   window.location.assign("profile.html");
 });
 
 const loginOpen = document.getElementById("login-open");
@@ -109,9 +127,10 @@ const loggedUserId = document.getElementById("logged-user-id");
 function showUserName() {
   if (localStorage.length > 0) {
     //Items are stored in local storage
-    let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
+    let userData = JSON.parse(localStorage.getItem("loggedUserData"));
     let userName = userData.name;
     loggedUserId.innerHTML = `${userName}`;
+    userProfileModalHeader.innerHTML = `Хэрэглэгч: ${userName}`;
     console.log("User is available");
     activeUserProfile();
   } else {
@@ -130,3 +149,10 @@ function inActiveUserProfile() {
   userProfileBtn.style.background = "#ccc";
 }
 showUserName();
+
+// ========================Profile window Open=====================
+const userProfile = document.getElementsByClassName("user-profile-modal")[0];
+
+userProfileBtn.addEventListener("click", () => {
+  userProfile.classList.toggle("hidden2");
+});
