@@ -4,6 +4,7 @@ import { signUp, signIn, logOut } from "./firebase_auth.js";
 document.addEventListener("DOMContentLoaded", () => {
   getRatings();
   showRestaurantsContent();
+  pleaseChooseRestaurantAlert();
   showUserName();
 });
 
@@ -188,19 +189,6 @@ function inActiveUserProfile() {
   const userIcon = document.getElementsByClassName("fa-user")[0];
   userIcon.style.color = "#000";
   userProfileBtn.style.background = "#ccc";
-}
-
-// =========================Newtersen USER NAME-iig Haruulah=================
-function showUserName() {
-  if (localStorage.length > 0) {
-    //Items are stored in local storage
-    let userData = JSON.parse(localStorage.getItem("loggedUserData"));
-    let userName = userData.name;
-
-    userProfileModalHeader.innerHTML = `Хэрэглэгч: ${userName}`;
-  } else {
-    console.log("Local storage is empty");
-  }
 }
 
 //=============restauran-iig vnelgeegeer ni haih==========
@@ -456,3 +444,30 @@ signupClose.addEventListener("click", () => {
 window.addEventListener("click", (e) => {
   e.target == signupModal ? signupModal.classList.remove("show-modal") : false;
 });
+
+// ================================
+function pleaseChooseRestaurantAlert() {
+  const restaurantID = localStorage.getItem("selectedRestaurantID");
+  if (!restaurantID) {
+    alert("Та рестораны захиалга өгөхийн тулд 'ДЭЛГЭРЭНГҮЙ' товчин дарна уу!");
+  } else {
+    alert("Та ресторанаа сонгосон тул захиалгаа өгнө үү!");
+  }
+}
+
+// =========================Newtersen USER NAME-iig Haruulah=================
+function showUserName() {
+  const loggedUserData = localStorage.getItem("loggedUserData");
+
+  if (loggedUserData) {
+    //Items are stored in local storage
+    let userData = JSON.parse(localStorage.getItem("loggedUserData"));
+    let userName = userData.name;
+
+    userProfileModalHeader.innerHTML = `Хэрэглэгч: ${userName}`;
+  } else {
+    console.log("Local storage is empty");
+  }
+}
+
+export { clearSignupInputs, clearLoginInputs };

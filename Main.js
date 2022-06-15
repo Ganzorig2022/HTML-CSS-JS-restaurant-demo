@@ -1,4 +1,11 @@
-// import { signinBtn, logoutBtn, signupBtn } from "./home.js";
+import {
+  signUp,
+  signIn,
+  logOut,
+  updateUserDataInFireStore,
+  updateUserOrderDataToLocalstorage,
+} from "./firebase_auth.js";
+// import { clearSignupInputs, clearLoginInputs } from "./home.js";
 
 // Run getRatings when DOM loads
 document.addEventListener("DOMContentLoaded", () => {
@@ -54,12 +61,90 @@ buttons.forEach((button) => {
 // ========================Profile window Open=====================
 const userProfileBtn = document.getElementsByClassName("profile")[0];
 const userProfile = document.getElementsByClassName("user-profile-modal")[0];
-console.log(userProfile);
 
 userProfileBtn.addEventListener("click", () => {
   userProfile.classList.toggle("hidden1");
 });
 
+// ========================LOGIN MODAL window Open=====================
+const loginOpen = document.getElementById("login-open");
+const loginModal = document.getElementById("login-modal");
+const loginClose = document.getElementById("modal-close-btn");
+
+loginOpen.addEventListener("click", () => {
+  loginModal.classList.add("show-modal");
+});
+
+loginClose.addEventListener("click", () => {
+  loginModal.classList.remove("show-modal");
+});
+
+window.addEventListener("click", (e) => {
+  e.target == loginModal ? loginModal.classList.remove("show-modal") : false;
+});
+
+// ===========================SIGN IN EXISTING USER=======================
+const signinBtn = document.getElementById("login-submit-btn");
+let isSuccessful = false;
+let signupOpen = document.getElementById("signup-open");
+
+signinBtn.addEventListener("click", async () => {
+  const signinEmail = document.getElementById("login-email").value;
+  const signinPassword = document.getElementById("login-password").value;
+
+  if (checkRequiredInputs([signinEmail, signinPassword])) {
+    isSuccessful = await signIn(signinEmail, signinPassword);
+
+    if (isSuccessful) {
+      swal(`Хэрэглэгч та амжилттай нэвтэрлээ!`);
+
+      loginModal.classList.remove("show-modal");
+      disableLoginBtn();
+      disableSignUpBtn();
+      activeUserProfile();
+
+      showUserName();
+      // content1.classList.add("show");
+      updateUserOrderDataToLocalstorage();
+    } else {
+      swal("Нэвтрэлт амжилтгүй. Хэрэглэгч олдсонгүй!");
+    }
+  } else {
+    swal("Таны бөглөх талбарууд хоосон байна!");
+  }
+});
+// INPUT-uud hooson esehiig shalgadag function()
+function checkRequiredInputs(inputArr) {
+  return !inputArr.includes("");
+}
+
+// SIGN IN hiisnii daraa LOGIN button-iig NONE bolgoh
+function disableLoginBtn() {
+  loginOpen.style.display = "none";
+}
+// SIGN OUT hiisnii daraa LOGIN button-iig IDEWHTEI bolgoh
+function enableLoginBtn() {
+  loginOpen.style.display = "block";
+}
+// SIGN UP hiisnii daraa LOGIN button-iig NONE bolgoh
+function disableSignUpBtn() {
+  signupOpen.style.display = "none";
+}
+
+// SIGN UP hiisnii daraa LOGIN button-iig IDEWHTEI bolgoh
+function enableSignUpBtn() {
+  signupOpen.style.display = "block";
+}
+function activeUserProfile() {
+  const userIcon = document.getElementsByClassName("fa-user")[0];
+  userIcon.style.color = "#fff";
+  userProfileBtn.style.background = "#fb1c25";
+}
+function inActiveUserProfile() {
+  const userIcon = document.getElementsByClassName("fa-user")[0];
+  userIcon.style.color = "#000";
+  userProfileBtn.style.background = "#ccc";
+}
 // let meterDiv = document.getElementsByClassName("meterDiv")[0];
 // meterDiv.style.width = "50%";
 // Meter rating
@@ -113,10 +198,6 @@ cartIconBtn.addEventListener("click", () => {
 });
 
 // ========================Захиалга өгөх товч дээр дарах=====================
-
-const loginOpen = document.getElementById("login-open");
-const loginModal = document.getElementsByClassName("login-modal-container")[0];
-const loginClose = document.getElementById("modal-close-btn");
 let btnTime = document.getElementsByClassName("btnTime")[0];
 
 btnTime.addEventListener("click", () => {
@@ -142,7 +223,9 @@ btnTime.addEventListener("click", () => {
 
 // =========================USER NAME-iig Haruulah=================
 const loggedUserId = document.getElementById("logged-user-id");
-
+const userProfileModalHeader = document.getElementById(
+  "user-profile-modal--header"
+);
 function showUserName() {
   if (localStorage.loggedUserData) {
     //Items are stored in local storage
@@ -150,6 +233,10 @@ function showUserName() {
     let userName = userData.name;
 
     loggedUserId.innerHTML = `${userName}`;
+    userProfileModalHeader.innerHTML = `Хэрэглэгч: ${userName}`;
+
+    disableLoginBtn();
+    disableSignUpBtn();
     console.log("User is available");
   } else {
     console.log("User is NOT available");

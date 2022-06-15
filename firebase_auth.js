@@ -134,24 +134,26 @@ const getTableDataFromFireStore = async function () {
 
 getTableDataFromFireStore();
 
-
 // =============Update User Table Data to Localstorage=============
 
-const updateUserOrderDataToLocalstorage = async function (
-
-){
+const updateUserOrderDataToLocalstorage = async function () {
   try {
     const resQuery = await query(collection(db, "restaurant"));
     let resQueryData = await getDocs(resQuery);
-    resQueryData.forEach((item)=>{
+    resQueryData.forEach((item) => {
       let selectedRes = item.data();
       let selectedResOrder = selectedRes.order;
       let userID = JSON.parse(localStorage.getItem("loggedUserID"));
-      let selectedUserOrder = selectedResOrder.filter((e)=> e.userID===userID);
-      if(selectedUserOrder.length>0){
-        localStorage.setItem("selectedUserOrder", JSON.stringify(selectedUserOrder));
+      let selectedUserOrder = selectedResOrder.filter(
+        (e) => e.userID === userID
+      );
+      if (selectedUserOrder.length > 0) {
+        localStorage.setItem(
+          "selectedUserOrder",
+          JSON.stringify(selectedUserOrder)
+        );
       }
-    })
+    });
     // let docRefData = await getDoc(docRef);
     // let docOrderArr = docRefData.data().order;
     // let existingUserArrFiltered = docOrderArr.filter((e)=> e.userID== loggedUserID1);
@@ -161,7 +163,6 @@ const updateUserOrderDataToLocalstorage = async function (
   }
 };
 updateUserOrderDataToLocalstorage();
-
 
 // =============Update User Table Data to Firestore=============
 const updateUserOrderDataToFireStore = async function (
@@ -176,34 +177,36 @@ const updateUserOrderDataToFireStore = async function (
     const docRef = await doc(db, "restaurant", restaurantID);
     let docRefData = await getDoc(docRef);
     let docOrderArr = docRefData.data().order;
-    if(docOrderArr.length >0){
-      let existingUserArrFiltered = docOrderArr.filter((e)=> e.userID==loggedUserID);
-          if (existingUserArrFiltered.length>0) {
-            swal("Та ширээ захиалсан байна.")
-          } else {
-            swal("Та ширээ амжилттай захиаллаа.")
-             updateDoc(docRef, {
-              order: arrayUnion({
-              date: dateValue,
-              people: personValue,
-              rating: 3.5,
-              time: timeValue,
-              userID: loggedUserID,
-              table: tableValue,
-                }),
-            });
-          }
-    }else {
-        await updateDoc(docRef, {
+    if (docOrderArr.length > 0) {
+      let existingUserArrFiltered = docOrderArr.filter(
+        (e) => e.userID == loggedUserID
+      );
+      if (existingUserArrFiltered.length > 0) {
+        swal("Та ширээ захиалсан байна.");
+      } else {
+        swal("Та ширээ амжилттай захиаллаа.");
+        updateDoc(docRef, {
           order: arrayUnion({
+            date: dateValue,
+            people: personValue,
+            rating: 3.5,
+            time: timeValue,
+            userID: loggedUserID,
+            table: tableValue,
+          }),
+        });
+      }
+    } else {
+      await updateDoc(docRef, {
+        order: arrayUnion({
           date: dateValue,
           people: personValue,
           rating: 3.5,
           time: timeValue,
           userID: loggedUserID,
           table: tableValue,
-            }),
-        });
+        }),
+      });
     }
   } catch (error) {
     swal("ERR: ", error);
@@ -271,5 +274,5 @@ export {
   logOut,
   updateUserDataInFireStore,
   updateUserOrderDataToFireStore,
-  updateUserOrderDataToLocalstorage
+  updateUserOrderDataToLocalstorage,
 };

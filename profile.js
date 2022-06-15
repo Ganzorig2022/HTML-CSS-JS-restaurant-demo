@@ -3,7 +3,7 @@ import {
   signIn,
   logOut,
   updateUserDataInFireStore,
-  updateUserOrderDataToLocalstorage
+  updateUserOrderDataToLocalstorage,
 } from "./firebase_auth.js";
 
 // DOM Refresh hiigdehed ehleed ajillana.
@@ -136,7 +136,6 @@ const signupBtn = document.getElementById("signup-submit-btn");
 const signinBtn = document.getElementById("login-submit-btn");
 const logoutBtn = document.getElementById("user-logout-btn");
 const userProfileBtn = document.getElementsByClassName("profile")[0];
-let loginInputs = document.querySelectorAll(".login-modal-form input");
 const loggedUserId = document.getElementById("logged-user-id");
 
 const userIcon = document.getElementsByClassName("fa-user")[0];
@@ -381,33 +380,32 @@ let orderStatus = document.getElementsByClassName("order-status")[0];
 
 // localStorageShowOrderItems();
 function localStorageShowOrderItems() {
-  
   let selectedUserOrder = JSON.parse(localStorage.getItem("selectedUserOrder"));
-  if(localStorage.selectedUserOrder){
-      selectedUserOrder.forEach((item)=>{
+  if (localStorage.selectedUserOrder) {
+    selectedUserOrder.forEach((item) => {
       personOrderDate.lastElementChild.textContent = item.date;
       personOrderPersonValue.lastElementChild.textContent = item.people;
       personOrderTimeValue.lastElementChild.textContent = item.time;
       personOrderSeatValue.lastElementChild.textContent = item.table;
       orderStatus.textContent = "Баталгаажсан";
-      })
-  }else{
-      personOrderDate.lastElementChild.textContent = "";
-      personOrderPersonValue.lastElementChild.textContent = "";
-      personOrderTimeValue.lastElementChild.textContent = "";
-      personOrderSeatValue.lastElementChild.textContent = "";
-      orderStatus.textContent = "Баталгаажаагүй";
+    });
+  } else {
+    personOrderDate.lastElementChild.textContent = "";
+    personOrderPersonValue.lastElementChild.textContent = "";
+    personOrderTimeValue.lastElementChild.textContent = "";
+    personOrderSeatValue.lastElementChild.textContent = "";
+    orderStatus.textContent = "";
   }
-  
 }
-//Ширээ захиалга руу буцах хэсэг
+//==============Ширээ захиалга руу буцах хэсэг
 let backUserInfoBtn = document.getElementById("back-user-info-btn");
 backUserInfoBtn.addEventListener("click", () => {
-  window.location.assign("table.html");
+  const restaurantID = localStorage.getItem("selectedRestaurantID");
+  if (restaurantID) {
+    window.location.assign("table.html");
+  } else {
+    window.location.assign("home.html");
+  }
 });
 
-
-
-export{
-  localStorageShowOrderItems
-};
+export { localStorageShowOrderItems };

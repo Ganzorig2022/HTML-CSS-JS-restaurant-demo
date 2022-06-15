@@ -62,7 +62,7 @@ orderButton.addEventListener("click", () => {
   let tableValue = orderTable;
 
   if (tableValue === "") {
-    swal("Та ширээгээ заавал сонгоно уу!")
+    swal("Та ширээгээ заавал сонгоно уу!");
   } else {
     let timeData = {
       person: personValue,
