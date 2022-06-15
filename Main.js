@@ -58,6 +58,20 @@ buttons.forEach((button) => {
   });
 });
 
+// let meterDiv = document.getElementsByClassName("meterDiv")[0];
+// meterDiv.style.width = "50%";
+// Meter rating
+let meterFoodRating = document.getElementsByClassName("meterFoodRating");
+let meterDivCount = 0;
+for (let i = 0; i < meterFoodRating.length; i++) {
+  let meterFoodRatingValue = meterFoodRating[i].textContent;
+  let meterPercentage = (meterFoodRatingValue / starsTotal) * 100;
+  // Round to nearest 10
+  let meterPercentageRounded = `${Math.round(meterPercentage / 10) * 10}%`;
+  meterDivCount++;
+  let meterDiv = document.getElementsByClassName(`meterDiv${meterDivCount}`)[0];
+  meterDiv.style.width = meterPercentageRounded;
+}
 // ========================Profile window Open=====================
 const userProfileBtn = document.getElementsByClassName("profile")[0];
 const userProfile = document.getElementsByClassName("user-profile-modal")[0];
@@ -70,6 +84,10 @@ userProfileBtn.addEventListener("click", () => {
 const loginOpen = document.getElementById("login-open");
 const loginModal = document.getElementById("login-modal");
 const loginClose = document.getElementById("modal-close-btn");
+const signupOpen = document.getElementById("signup-open");
+const logoutBtn = document.getElementById("logout-btn");
+const userProfileModal =
+  document.getElementsByClassName("user-profile-modal")[0];
 
 loginOpen.addEventListener("click", () => {
   loginModal.classList.add("show-modal");
@@ -86,7 +104,6 @@ window.addEventListener("click", (e) => {
 // ===========================SIGN IN EXISTING USER=======================
 const signinBtn = document.getElementById("login-submit-btn");
 let isSuccessful = false;
-let signupOpen = document.getElementById("signup-open");
 
 signinBtn.addEventListener("click", async () => {
   const signinEmail = document.getElementById("login-email").value;
@@ -104,7 +121,6 @@ signinBtn.addEventListener("click", async () => {
       activeUserProfile();
 
       showUserName();
-      // content1.classList.add("show");
       updateUserOrderDataToLocalstorage();
     } else {
       swal("Нэвтрэлт амжилтгүй. Хэрэглэгч олдсонгүй!");
@@ -117,6 +133,26 @@ signinBtn.addEventListener("click", async () => {
 function checkRequiredInputs(inputArr) {
   return !inputArr.includes("");
 }
+// =========================LOG OUT USER=================
+logoutBtn.addEventListener("click", async () => {
+  isSuccessful = await logOut();
+  if (isSuccessful) {
+    swal("Та системээс гарлаа.");
+    // localStorage-iig empty bolgono.
+    localStorage.removeItem("loggedUserData");
+    localStorage.removeItem("selectedUserOrder");
+    localStorage.removeItem("loggedUserID");
+
+    userProfileModalHeader.innerHTML = `Хэрэглэгч:`;
+    userProfileModal.classList.remove("hidden");
+
+    enableLoginBtn();
+    enableSignUpBtn();
+    showUserName();
+  } else {
+    disableLoginInputs();
+  }
+});
 
 // SIGN IN hiisnii daraa LOGIN button-iig NONE bolgoh
 function disableLoginBtn() {
@@ -144,20 +180,6 @@ function inActiveUserProfile() {
   const userIcon = document.getElementsByClassName("fa-user")[0];
   userIcon.style.color = "#000";
   userProfileBtn.style.background = "#ccc";
-}
-// let meterDiv = document.getElementsByClassName("meterDiv")[0];
-// meterDiv.style.width = "50%";
-// Meter rating
-let meterFoodRating = document.getElementsByClassName("meterFoodRating");
-let meterDivCount = 0;
-for (let i = 0; i < meterFoodRating.length; i++) {
-  let meterFoodRatingValue = meterFoodRating[i].textContent;
-  let meterPercentage = (meterFoodRatingValue / starsTotal) * 100;
-  // Round to nearest 10
-  let meterPercentageRounded = `${Math.round(meterPercentage / 10) * 10}%`;
-  meterDivCount++;
-  let meterDiv = document.getElementsByClassName(`meterDiv${meterDivCount}`)[0];
-  meterDiv.style.width = meterPercentageRounded;
 }
 
 //=====================listContainer1===========================
@@ -217,6 +239,7 @@ btnTime.addEventListener("click", () => {
   if (localStorage.loggedUserData) {
     window.location.assign("table.html");
   } else {
+    swal("Та нэвтэрч орсны дараа захиалга өгөх боломжтой!");
     loginModal.classList.add("show-modal");
   }
 });
@@ -237,8 +260,13 @@ function showUserName() {
 
     disableLoginBtn();
     disableSignUpBtn();
+    activeUserProfile();
+
     console.log("User is available");
   } else {
     console.log("User is NOT available");
+    loggedUserId.innerHTML = "нэвтрээгүй!";
+
+    inActiveUserProfile();
   }
 }

@@ -6,19 +6,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-  updateProfile,
   updatePassword,
   updateEmail,
 } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-auth.js";
-
-// import {
-//   getDatabase,
-//   get,
-//   ref,
-//   child,
-//   onChildChanged,
-//   push,
-// } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-database.js";
 
 import {
   getFirestore,
@@ -28,7 +18,6 @@ import {
   setDoc,
   doc,
   getDoc,
-  onSnapshot,
   query,
   updateDoc,
   arrayUnion,
@@ -129,7 +118,6 @@ const getTableDataFromFireStore = async function () {
     restaurantArr.push({ ...restaurantData, id: doc.id });
   });
   localStorage.setItem("restaurantAllData", JSON.stringify(restaurantArr));
-  // return restaurantArr;
 };
 
 getTableDataFromFireStore();
@@ -154,13 +142,7 @@ const updateUserOrderDataToLocalstorage = async function () {
         );
       }
     });
-    // let docRefData = await getDoc(docRef);
-    // let docOrderArr = docRefData.data().order;
-    // let existingUserArrFiltered = docOrderArr.filter((e)=> e.userID== loggedUserID1);
-    // localStorage.setItem("existingUserArrFiltered", JSON.stringify(existingUserArrFiltered));
-  } catch (error) {
-    swal("ERR: ", error);
-  }
+  } catch (error) {}
 };
 updateUserOrderDataToLocalstorage();
 
