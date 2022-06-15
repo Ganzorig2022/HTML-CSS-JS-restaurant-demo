@@ -3,6 +3,7 @@ import {
   signIn,
   logOut,
   updateUserDataInFireStore,
+  updateUserOrderDataToLocalstorage
 } from "./firebase_auth.js";
 
 // DOM Refresh hiigdehed ehleed ajillana.
@@ -69,6 +70,7 @@ listItems.forEach((item, idx) => {
     if (idx === 1) {
       //hereglegchiin zahialga tsonh
       content2.classList.add("show");
+      localStorageShowOrderItems();
     } else {
       content2.classList.remove("show");
     }
@@ -202,6 +204,7 @@ signinBtn.addEventListener("click", async () => {
 
       showUserName();
       content1.classList.add("show");
+      updateUserOrderDataToLocalstorage();
 
       showUserInfo();
     } else {
@@ -227,7 +230,7 @@ logoutBtn.addEventListener("click", async () => {
     clearLoginInputs();
     inActiveUserProfile();
     clearUserInputs();
-    localStorage.clear();
+    // localStorage.clear();
     localStorageShowOrderItems();
   } else {
     disableLoginBtn();
@@ -238,7 +241,7 @@ logoutBtn.addEventListener("click", async () => {
 function showUserInfo() {
   if (localStorage.length > 0) {
     //Items are stored in local storage
-    let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
+    let userData = JSON.parse(localStorage.getItem("loggedUserData"));
     let FirstName = userData.firstname;
     let LastName = userData.lastname;
     let Password = userData.password;
@@ -257,7 +260,7 @@ function showUserInfo() {
 function showUserName() {
   if (localStorage.length > 0) {
     //Items are stored in local storage
-    let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
+    let userData = JSON.parse(localStorage.getItem("loggedUserData"));
     let userName = userData.name;
     // console.log("Username: ", userName);
 
@@ -376,17 +379,35 @@ let personOrderSeatValue =
   document.getElementsByClassName("right-content-seat")[0];
 let orderStatus = document.getElementsByClassName("order-status")[0];
 
-localStorageShowOrderItems();
+// localStorageShowOrderItems();
 function localStorageShowOrderItems() {
-  personOrderDate.lastElementChild.textContent = localStorage.Date;
-  personOrderPersonValue.lastElementChild.textContent = localStorage.person;
-  personOrderTimeValue.lastElementChild.textContent = localStorage.timeValue;
-  personOrderSeatValue.lastElementChild.textContent = localStorage.Table;
-  orderStatus.textContent = "Баталгаажсан";
+  
+  let selectedUserOrder = JSON.parse(localStorage.getItem("selectedUserOrder"));
+  if(localStorage.selectedUserOrder){
+      selectedUserOrder.forEach((item)=>{
+      personOrderDate.lastElementChild.textContent = item.date;
+      personOrderPersonValue.lastElementChild.textContent = item.people;
+      personOrderTimeValue.lastElementChild.textContent = item.time;
+      personOrderSeatValue.lastElementChild.textContent = item.table;
+      orderStatus.textContent = "Баталгаажсан";
+      })
+  }else{
+      personOrderDate.lastElementChild.textContent = "";
+      personOrderPersonValue.lastElementChild.textContent = "";
+      personOrderTimeValue.lastElementChild.textContent = "";
+      personOrderSeatValue.lastElementChild.textContent = "";
+      orderStatus.textContent = "Баталгаажаагүй";
+  }
+  
 }
-
 //Ширээ захиалга руу буцах хэсэг
 let backUserInfoBtn = document.getElementById("back-user-info-btn");
 backUserInfoBtn.addEventListener("click", () => {
   window.location.assign("table.html");
 });
+
+
+
+export{
+  localStorageShowOrderItems
+};

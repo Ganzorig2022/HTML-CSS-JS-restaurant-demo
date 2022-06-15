@@ -119,6 +119,7 @@ logoutBtn.addEventListener("click", async () => {
     enableSignUpBtn();
     clearLoginInputs();
     inActiveUserProfile();
+    localStorage.clear("selectedUserOrder");
   } else {
     disableLoginInputs();
   }
