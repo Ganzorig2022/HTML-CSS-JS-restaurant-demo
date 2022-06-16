@@ -82,6 +82,7 @@ function totalRating() {
           restaurantRatingSumValue / restaurantCommentArr.length
         ).toFixed(1);
 
+        // 4. Firebase.auth.js-rvv utga damjuulaw.
         updateRestaurantRatingInFireStore(
           restaurantAverageRatingValue,
           restaurantID
