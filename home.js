@@ -298,15 +298,13 @@ function showRestaurantsContent() {
               <h2>${restaurant.name}
                 <span
                   ><img
-                    src="https://scontent.fuln8-1.fna.fbcdn.net/v/t31.18172-8/17761016_1896818063904890_8880108015428113544_o.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=knDZV3HMs5IAX9Ujg6u&tn=SZT24u-xOvzoHsDB&_nc_ht=scontent.fuln8-1.fna&oh=00_AT9_1fu_3gSME4gAa7hw50JfxkHqOtK838ZEE1jakNoWTw&oe=62B5DB9B"
+                    src="${restaurant.logo}"
                     alt=""
                 /></span>
               </h2>
               <p>
-                Эрүүл, амтат хоол, найрсаг үйлчилгээтэй Момо Хот Пот та бүхнийг урьж
-                байна.<br /><br />
-                <strong>Хаяг :&nbsp; </strong>Улсын Их Дэлгүүрийн зүүн талд, Мөнгөн
-                завьяа явах зам дагуу
+                ${restaurant.about}<br /><br />
+                <strong>Хаяг :&nbsp; </strong>${restaurant.location}
               </p>
               <div class="stars-outer">
                 <div class="stars-inner"></div>
