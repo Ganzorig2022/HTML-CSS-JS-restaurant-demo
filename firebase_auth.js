@@ -102,14 +102,16 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-// =============Get Single Document Data from Firestore=============
+// =============Нэвтэрсэн хэрэглэгчийн бүх data-г Firestore-оос LOCAL дээр хадгалах=============
 const getUserDataFromFireStore = async function (userUid) {
   const docData = await getDoc(doc(db, "users", userUid));
   let userData = docData.data();
   localStorage.setItem("loggedUserData", JSON.stringify(userData));
 };
-// =============Get Multiple Document Data from Firestore=============
+
+// =============Рестораны бүх data-г Firestore-оос LOCAL дээр хадгалах=============
 const getTableDataFromFireStore = async function () {
+  // resauranii buh data-g tataj awah
   const docData = await query(collection(db, "restaurant"));
   let queryData = await getDocs(docData);
   let restaurantArr = [];
@@ -117,13 +119,13 @@ const getTableDataFromFireStore = async function () {
     let restaurantData = doc.data();
     restaurantArr.push({ ...restaurantData, id: doc.id });
   });
+  // awsan data-gaa LOCAL ruu hadgalah
   localStorage.setItem("restaurantAllData", JSON.stringify(restaurantArr));
 };
 
 getTableDataFromFireStore();
 
-// =============Update User Table Data to Localstorage=============
-
+// =============Хэрэглэгчийн Захиалгыг Firestore-оос LOCAL дээр хадгалах=============
 const updateUserOrderDataToLocalstorage = async function () {
   try {
     const resQuery = await query(collection(db, "restaurant"));
@@ -146,7 +148,7 @@ const updateUserOrderDataToLocalstorage = async function () {
 };
 updateUserOrderDataToLocalstorage();
 
-// =============Update User Table Data to Firestore=============
+// =============Захиалгыг Firestore дээр НЭМЖ хадгалах=============
 const updateUserOrderDataToFireStore = async function (
   loggedUserID,
   restaurantID,
@@ -158,6 +160,7 @@ const updateUserOrderDataToFireStore = async function (
   try {
     const docRef = await doc(db, "restaurant", restaurantID);
     let docRefData = await getDoc(docRef);
+    // зөвхөн захиалгуудыг салгаж авах
     let docOrderArr = docRefData.data().order;
     if (docOrderArr.length > 0) {
       let existingUserArrFiltered = docOrderArr.filter(
@@ -194,7 +197,24 @@ const updateUserOrderDataToFireStore = async function (
     swal("ERR: ", error);
   }
 };
-// =============Update User Info to Firestore=============
+
+// =============Хэрэглэгчийн ҮНЭЛГЭЭГ UPDATE хийх=============
+const updateRestaurantRatingInFireStore = async function (
+  userRatingValue,
+  restaurantID
+) {
+  try {
+    const docRef = await doc(db, "restaurant", restaurantID);
+    await updateDoc(docRef, {
+      rating: userRatingValue,
+    });
+    alert(" Үнэлгээ амжилттай шинэчлэгдлээ!");
+  } catch (error) {
+    console.log("ERR: ", error);
+  }
+};
+
+// =============Хэрэглэгчийн хувийн мэдээллийг UPDATE хийх=============
 const updateUserDataInFireStore = async function (
   userFirstName,
   userLastName,
@@ -224,7 +244,7 @@ const updateUserDataInFireStore = async function (
   }
 };
 
-// =============Change Login Password and Email to Firestore=============
+// =============Хэрэглэгчийн нэвтрэх нэр, имэйлийг ШИНЭЭР СОЛИХ=============
 function resetPasswordEmail(userLoginPassword, userLoginEmail) {
   const user = auth.currentUser;
   const newPassword = userLoginPassword;
@@ -257,4 +277,5 @@ export {
   updateUserDataInFireStore,
   updateUserOrderDataToFireStore,
   updateUserOrderDataToLocalstorage,
+  updateRestaurantRatingInFireStore,
 };

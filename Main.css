@@ -1053,39 +1053,44 @@ h5 {
 }
 .personRatingRight {
   flex: 1;
-  visibility: hidden;
 }
-.personRatingRight.show {
-  visibility: visible;
-}
+
 .personRatingRight div {
   display: flex;
 }
 .meterFoodRating {
-  width: 20%;
-  padding: 0 5px;
+  padding-right: 15px;
 }
 .meter {
   appearance: none;
   width: 100%;
   height: 20px;
   border: 0.0625rem solid #d8d9db;
-  margin-left: 5px;
 }
 .meterDiv1 {
-  /* display: block; */
   background-color: var(--secondary-color);
   height: 1rem;
+  width: 0;
 }
 .meterDiv2 {
-  /* display: block; */
   background-color: var(--secondary-color);
   height: 1rem;
+  width: 0;
 }
 .meterDiv3 {
-  /* display: block; */
   background-color: var(--secondary-color);
   height: 1rem;
+  width: 0;
+}
+.meterDiv4 {
+  background-color: var(--secondary-color);
+  height: 1rem;
+  width: 0;
+}
+.meterDiv5 {
+  background-color: var(--secondary-color);
+  height: 1rem;
+  width: 0;
 }
 /* Comment heseg */
 .comment {

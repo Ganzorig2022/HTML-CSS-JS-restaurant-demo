@@ -3,6 +3,7 @@ import {
   signIn,
   logOut,
   updateUserOrderDataToLocalstorage,
+  updateRestaurantRatingInFireStore,
 } from "./firebase_auth.js";
 
 //=============1. Хамгийн түрүүнд ажиллах ФУНКЦҮҮД =============
@@ -32,8 +33,9 @@ const cartModal = document.getElementsByClassName("cart-modal")[0];
 
 let restaurantArr = JSON.parse(localStorage.getItem("restaurantAllData"));
 let restaurantID = JSON.parse(localStorage.getItem("selectedRestaurantID"));
-let restaurantAverageRating;
-let restaurantArrRating;
+let restaurantAverageRatingValue;
+let restaurantRatingSumValue;
+let restaurantAverageRatingArr;
 let countRating5star = 0;
 let countRating4star = 0;
 let countRating3star = 0;
@@ -62,16 +64,32 @@ function getRatings() {
 function totalRating() {
   restaurantArr.forEach((restaurant) => {
     if (restaurant.id == restaurantID) {
-      if (restaurant.comments.length > 0) {
+      if (restaurant.comments) {
         const restaurantCommentArr = restaurant.comments;
-        restaurantAverageRating = restaurantCommentArr
-          .map((comment) => comment.rating)
-          .reduce(
-            (item, item1) => (item += item1) / restaurantCommentArr.length
-          );
-        restaurantArrRating = restaurantCommentArr.map(
+
+        // 1. array-aas rating-vvdiig ni salgaad NEW ARRAY bolgono.
+        restaurantAverageRatingArr = restaurantCommentArr.map(
           (comment) => comment.rating
         );
+
+        // 2. NEW ARRAY-iin rating-iin SUM-iig gargana.
+        restaurantRatingSumValue = restaurantAverageRatingArr.reduce(
+          (acc, item1) => (acc += item1)
+        );
+
+        // 3. SUM-iigaa array-iin urtdaa huwaagaad AVERAGE Rating gargana. Butarhai orong 1-eer awaw.
+        restaurantAverageRatingValue = (
+          restaurantRatingSumValue / restaurantCommentArr.length
+        ).toFixed(1);
+
+        updateRestaurantRatingInFireStore(
+          restaurantAverageRatingValue,
+          restaurantID
+        );
+        // console.log(
+        //   "Restauran-ii DUNDAJ VNELGEE: ",
+        //   restaurantAverageRatingValue
+        // );
       } else {
         console.log("comments bhgv bn.");
       }
@@ -79,49 +97,35 @@ function totalRating() {
   });
 
   // ямар үнэлгээ хэд байгааг тоолох
-  if (restaurantArrRating) {
-    restaurantArrRating.forEach((e) => {
-      if (e === 5) {
+  if (restaurantAverageRatingArr) {
+    for (let rating of restaurantAverageRatingArr) {
+      if (rating === 5) {
         countRating5star++;
         calculateStarMeterWidth(countRating5star, 1);
-      } else {
-        calculateStarMeterWidth(countRating5star, 1);
-      }
-      if (e === 4) {
+      } else if (rating === 4) {
         countRating4star++;
         calculateStarMeterWidth(countRating4star, 2);
-      } else {
-        calculateStarMeterWidth(countRating4star, 2);
-      }
-      if (e === 3) {
+      } else if (rating === 3) {
         countRating3star++;
         calculateStarMeterWidth(countRating3star, 3);
-      } else {
-        calculateStarMeterWidth(countRating3star, 3);
-      }
-      if (e === 2) {
+      } else if (rating === 2) {
         countRating2star++;
         calculateStarMeterWidth(countRating2star, 4);
       } else {
-        calculateStarMeterWidth(countRating2star, 4);
-      }
-      if (e === 1) {
         countRating1star++;
         calculateStarMeterWidth(countRating1star, 5);
-      } else {
-        calculateStarMeterWidth(countRating1star, 5);
       }
-    });
+    }
   }
 
   // ========================Нийт үнэлгээний үзлэх Хувиар харуулах=====================
   function calculateStarMeterWidth(countRatingStar, num) {
-    totalStar = (countRatingStar * 100) / restaurantArrRating.length;
+    totalStar = (countRatingStar * 100) / restaurantAverageRatingArr.length;
     let meterDiv = document.getElementsByClassName(`meterDiv${num}`)[0];
-    const personRatingRight =
-      document.getElementsByClassName("personRatingRight")[0];
-    personRatingRight.classList.add("show");
-    meterDiv.style.width = `${totalStar}%`;
+    // console.log(meterDiv);
+    if (totalStar > 0) {
+      meterDiv.style.width = `${totalStar}%`;
+    }
   }
 }
 // ========================Profile window Open=====================
@@ -507,4 +511,8 @@ buttons.forEach((button) => {
 
     setTimeout(() => circle.remove(), 200);
   });
+});
+
+window.addEventListener("popstate", function () {
+  console.log("location changed!");
 });
