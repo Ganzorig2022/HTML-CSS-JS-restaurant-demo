@@ -768,7 +768,7 @@ section .rightContainer {
   padding: 0 10px;
   margin: 10px;
 }
-.rightContainer h2{
+.rightContainer h2 {
   justify-content: space-evenly;
   font-family: var(--third-font-family);
   font-size: 2rem;
@@ -1053,6 +1053,10 @@ h5 {
 }
 .personRatingRight {
   flex: 1;
+  visibility: hidden;
+}
+.personRatingRight.show {
+  visibility: visible;
 }
 .personRatingRight div {
   display: flex;
@@ -1066,6 +1070,7 @@ h5 {
   width: 100%;
   height: 20px;
   border: 0.0625rem solid #d8d9db;
+  margin-left: 5px;
 }
 .meterDiv1 {
   /* display: block; */
@@ -1090,9 +1095,8 @@ h5 {
   flex-direction: column;
   padding: 10px 0;
   border-bottom: 1px solid rgb(87, 87, 87);
-  
 }
-.comments{
+.comments {
   display: flex;
   margin-bottom: 20px;
 }
@@ -1106,7 +1110,6 @@ h5 {
 }
 .comment .commentText {
   width: 80%;
-  
 }
 .commentProfilePicture {
   width: 50px;

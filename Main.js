@@ -2,12 +2,33 @@ import {
   signUp,
   signIn,
   logOut,
-  updateUserDataInFireStore,
   updateUserOrderDataToLocalstorage,
 } from "./firebase_auth.js";
-// import { clearSignupInputs, clearLoginInputs } from "./home.js";
 
-
+//=============1. Хамгийн түрүүнд ажиллах ФУНКЦҮҮД =============
+document.addEventListener("DOMContentLoaded", () => {
+  getRatings();
+  showRestaurantsContent();
+  showUserName();
+});
+//======================= 2. GLOBAL VARIABLES=====================
+const userProfileBtn = document.getElementsByClassName("profile")[0];
+const userProfile = document.getElementsByClassName("user-profile-modal")[0];
+const loginOpen = document.getElementById("login-open");
+const loginModal = document.getElementById("login-modal");
+const loginClose = document.getElementById("modal-close-btn");
+const signupOpen = document.getElementById("signup-open");
+const logoutBtn = document.getElementById("logout-btn");
+const userProfileModal =
+  document.getElementsByClassName("user-profile-modal")[0];
+const signinBtn = document.getElementById("login-submit-btn");
+const cartIconBtn = document.getElementsByClassName("fa-shopping-cart")[0];
+let btnTime = document.getElementsByClassName("btnTime")[0];
+const loggedUserId = document.getElementById("logged-user-id");
+const userProfileModalHeader = document.getElementById(
+  "user-profile-modal--header"
+);
+const cartModal = document.getElementsByClassName("cart-modal")[0];
 
 let restaurantArr = JSON.parse(localStorage.getItem("restaurantAllData"));
 let restaurantID = JSON.parse(localStorage.getItem("selectedRestaurantID"));
@@ -19,24 +40,12 @@ let countRating3star = 0;
 let countRating2star = 0;
 let countRating1star = 0;
 let totalStar = 0;
-
-
-
-// Run getRatings when DOM loads
-document.addEventListener("DOMContentLoaded", () => {
-  getRatings();
-  showRestaurantsContent();
-  showUserName();
-
-});
-
 const starsTotal = 5;
-// Get ratings
-//=======Vnelgeenii toonoos hamaars 5 STAR-uudiig budah
+
+//=======Vnelgeenii toonoos hamaars 5 STAR-uudiig budah=============
 function getRatings() {
   let starPercentageRounded = 0;
 
-  // Get percentage
   const numberRatings = document.querySelectorAll(".number-rating");
 
   // Set width of stars-inner to percentage
@@ -48,108 +57,79 @@ function getRatings() {
     starInner.style.width = starPercentageRounded;
   });
 }
-// =================Button Effect====================
-const buttons = document.querySelectorAll(".ripple");
-buttons.forEach((button) => {
-  button.addEventListener("click", function (e) {
-    // mouse-iin bairshliig X, Y toogoor gargaj ogno.
-    const x = e.clientX;
-    const y = e.clientY;
 
-    // button bairshliig gargaj ogno.
-    const buttonTop = e.target.offsetTop;
-    const buttonLeft = e.target.offsetLeft;
-
-    const xInside = x - buttonLeft;
-    const yInside = y - buttonTop;
-
-    const circle = document.createElement("span");
-
-    // circle.className = "circle"- ni classList.add-tai adilhan.
-    circle.classList.add("circle");
-    this.appendChild(circle);
-    circle.style.top = yInside + "px";
-    circle.style.left = xInside + "px";
-
-    setTimeout(() => circle.remove(), 200);
-  });
-});
-// ========================Нийт үнэлгээний үзлэх ХУВиар харуулах=====================
-
-// let meterDiv = document.getElementsByClassName("meterDiv")[0];
-// meterDiv.style.width = "50%";
-// Meter rating
-function totalRating(){
-  restaurantArr.forEach((restaurant)=>{
-    if(restaurant.id == restaurantID){
-      const restaurantCommentArr = restaurant.comments;
-      restaurantAverageRating = restaurantCommentArr.map(comment => 
-        comment.rating).reduce((acc, item)=> (acc+=item)/restaurantCommentArr.length);
-        restaurantArrRating = restaurantCommentArr.map(comment => 
-          comment.rating);
+// ========================Хэрэглэгчдийн үнэлгээнүүдийг тусад нь САЛГАЖ авах=====================
+function totalRating() {
+  restaurantArr.forEach((restaurant) => {
+    if (restaurant.id == restaurantID) {
+      if (restaurant.comments.length > 0) {
+        const restaurantCommentArr = restaurant.comments;
+        restaurantAverageRating = restaurantCommentArr
+          .map((comment) => comment.rating)
+          .reduce(
+            (item, item1) => (item += item1) / restaurantCommentArr.length
+          );
+        restaurantArrRating = restaurantCommentArr.map(
+          (comment) => comment.rating
+        );
+      } else {
+        console.log("comments bhgv bn.");
       }
-    })
-    restaurantArrRating.forEach((e)=>{
-      console.log("e",e)
-        if(e===5){
-          countRating5star++;
-          calculateStarMeterWidth(countRating5star, 1);
-        } else{
-          calculateStarMeterWidth(countRating5star, 1);
-        }
-        if(e===4){
-          countRating4star++;
-          calculateStarMeterWidth(countRating4star, 2);
-        }else{
-          calculateStarMeterWidth(countRating4star, 2);
-        }
-        if(e===3){
-          countRating3star++;
-          calculateStarMeterWidth(countRating3star, 3);
-        } else{
-          calculateStarMeterWidth(countRating3star, 3);
-        }
-        if(e===2){
-          countRating2star++;
-          calculateStarMeterWidth(countRating2star, 4);
-        } else{
-          calculateStarMeterWidth(countRating2star, 4);
-        }
-        if(e===1){
-          countRating1star++;
-          calculateStarMeterWidth(countRating1star, 5);
-        }
-        // else{
-        //   calculateStarMeterWidth(countRating1star, 5);
-        // }
-      console.log("countRating2star",countRating1star)
-
-      })
-    function calculateStarMeterWidth (countRatingStar, num) {
-      totalStar = countRatingStar *100 / restaurantArrRating.length;
-      let meterDiv = document.getElementsByClassName(`meterDiv${num}`)[0];
-      meterDiv.style.width = `${totalStar}%`;
-      // console.log("meterDiv",meterDiv)
-
     }
+  });
+
+  // ямар үнэлгээ хэд байгааг тоолох
+  if (restaurantArrRating) {
+    restaurantArrRating.forEach((e) => {
+      if (e === 5) {
+        countRating5star++;
+        calculateStarMeterWidth(countRating5star, 1);
+      } else {
+        calculateStarMeterWidth(countRating5star, 1);
+      }
+      if (e === 4) {
+        countRating4star++;
+        calculateStarMeterWidth(countRating4star, 2);
+      } else {
+        calculateStarMeterWidth(countRating4star, 2);
+      }
+      if (e === 3) {
+        countRating3star++;
+        calculateStarMeterWidth(countRating3star, 3);
+      } else {
+        calculateStarMeterWidth(countRating3star, 3);
+      }
+      if (e === 2) {
+        countRating2star++;
+        calculateStarMeterWidth(countRating2star, 4);
+      } else {
+        calculateStarMeterWidth(countRating2star, 4);
+      }
+      if (e === 1) {
+        countRating1star++;
+        calculateStarMeterWidth(countRating1star, 5);
+      } else {
+        calculateStarMeterWidth(countRating1star, 5);
+      }
+    });
+  }
+
+  // ========================Нийт үнэлгээний үзлэх Хувиар харуулах=====================
+  function calculateStarMeterWidth(countRatingStar, num) {
+    totalStar = (countRatingStar * 100) / restaurantArrRating.length;
+    let meterDiv = document.getElementsByClassName(`meterDiv${num}`)[0];
+    const personRatingRight =
+      document.getElementsByClassName("personRatingRight")[0];
+    personRatingRight.classList.add("show");
+    meterDiv.style.width = `${totalStar}%`;
+  }
 }
 // ========================Profile window Open=====================
-const userProfileBtn = document.getElementsByClassName("profile")[0];
-const userProfile = document.getElementsByClassName("user-profile-modal")[0];
-
 userProfileBtn.addEventListener("click", () => {
   userProfile.classList.toggle("hidden1");
 });
 
 // ========================LOGIN MODAL window Open=====================
-const loginOpen = document.getElementById("login-open");
-const loginModal = document.getElementById("login-modal");
-const loginClose = document.getElementById("modal-close-btn");
-const signupOpen = document.getElementById("signup-open");
-const logoutBtn = document.getElementById("logout-btn");
-const userProfileModal =
-  document.getElementsByClassName("user-profile-modal")[0];
-
 loginOpen.addEventListener("click", () => {
   loginModal.classList.add("show-modal");
 });
@@ -162,95 +142,13 @@ window.addEventListener("click", (e) => {
   e.target == loginModal ? loginModal.classList.remove("show-modal") : false;
 });
 
-// ===========================SIGN IN EXISTING USER=======================
-const signinBtn = document.getElementById("login-submit-btn");
-let isSuccessful = false;
-
-signinBtn.addEventListener("click", async () => {
-  const signinEmail = document.getElementById("login-email").value;
-  const signinPassword = document.getElementById("login-password").value;
-
-  if (checkRequiredInputs([signinEmail, signinPassword])) {
-    isSuccessful = await signIn(signinEmail, signinPassword);
-
-    if (isSuccessful) {
-      swal(`Хэрэглэгч та амжилттай нэвтэрлээ!`);
-
-      loginModal.classList.remove("show-modal");
-      disableLoginBtn();
-      disableSignUpBtn();
-      activeUserProfile();
-
-      showUserName();
-      updateUserOrderDataToLocalstorage();
-    } else {
-      swal("Нэвтрэлт амжилтгүй. Хэрэглэгч олдсонгүй!");
-    }
-  } else {
-    swal("Таны бөглөх талбарууд хоосон байна!");
-  }
-});
-// INPUT-uud hooson esehiig shalgadag function()
-function checkRequiredInputs(inputArr) {
-  return !inputArr.includes("");
-}
-// =========================LOG OUT USER=================
-logoutBtn.addEventListener("click", async () => {
-  isSuccessful = await logOut();
-  if (isSuccessful) {
-    swal("Та системээс гарлаа.");
-    // localStorage-iig empty bolgono.
-    localStorage.removeItem("loggedUserData");
-    localStorage.removeItem("selectedUserOrder");
-    localStorage.removeItem("loggedUserID");
-
-    userProfileModalHeader.innerHTML = `Хэрэглэгч:`;
-    userProfileModal.classList.remove("hidden");
-
-    enableLoginBtn();
-    enableSignUpBtn();
-    showUserName();
-  } else {
-    disableLoginInputs();
-  }
-});
-
-// SIGN IN hiisnii daraa LOGIN button-iig NONE bolgoh
-function disableLoginBtn() {
-  loginOpen.style.display = "none";
-}
-// SIGN OUT hiisnii daraa LOGIN button-iig IDEWHTEI bolgoh
-function enableLoginBtn() {
-  loginOpen.style.display = "block";
-}
-// SIGN UP hiisnii daraa LOGIN button-iig NONE bolgoh
-function disableSignUpBtn() {
-  signupOpen.style.display = "none";
-}
-
-// SIGN UP hiisnii daraa LOGIN button-iig IDEWHTEI bolgoh
-function enableSignUpBtn() {
-  signupOpen.style.display = "block";
-}
-function activeUserProfile() {
-  const userIcon = document.getElementsByClassName("fa-user")[0];
-  userIcon.style.color = "#fff";
-  userProfileBtn.style.background = "#fb1c25";
-}
-function inActiveUserProfile() {
-  const userIcon = document.getElementsByClassName("fa-user")[0];
-  userIcon.style.color = "#000";
-  userProfileBtn.style.background = "#ccc";
-}
 // =========================Restaurant-iig Haruulah=================
-
-function showRestaurantsContent (){
-
-  restaurantArr.forEach((restaurant)=>{
-    if(restaurant.id == restaurantID){
+function showRestaurantsContent() {
+  restaurantArr.forEach((restaurant) => {
+    if (restaurant.id == restaurantID) {
       let restaurantBackground = document.getElementsByTagName("header")[0];
       restaurantBackground.style.backgroundImage = `url(${restaurant.backgroundImage})`;
-      let itemHTML =`        
+      let itemHTML = `        
           <h2 class="center">
           ${restaurant.name}
           <span
@@ -263,10 +161,14 @@ function showRestaurantsContent (){
           <div class="stars-outer">
             <div class="stars-inner"></div>
           </div>
-          <span class="number-rating" id="number-rating"> ${restaurant.rating}</span
+          <span class="number-rating" id="number-rating"> ${
+            restaurant.rating
+          }</span
           >
           <i class="fa-regular fa-message"></i>
-          <span><span>${restaurant.comments.length}  </span>Comment</span>
+          <span><span>${
+            restaurant.comments ? `${restaurant.comments.length}` : ""
+          }  </span>Comment</span>
           </div>
           <span>${restaurant.about}</span>
           <h3>
@@ -283,26 +185,31 @@ function showRestaurantsContent (){
           <h5>ШӨЛ</h5>
           <ul class="listContainer">
           ${restaurant.menu.food
-            .map((food)=>
+            .map(
+              (food) =>
                 `<li>
                 <h4> <span class="MenuText">${food.name}</span><span>${food.price}</span></h4>
                 </li>`
-            ).join("")
-            }
+            )
+            .join("")}
           
           </ul>
           <ul class="listContainer1">
           ${restaurant.menu.drink
-          .map((drink)=>
-              `<li>
+            .map(
+              (drink) =>
+                `<li>
               <h4> <span class="MenuText">${drink.name}</span><span>${drink.price}</span></h4>
               </li>`
-          ).join("")
-          }
+            )
+            .join("")}
           </ul>
           <button class="buttonMenu" id="food-menu-btn">Хоолны цэс дэлгэрэнгүй харах</button>
           <h3>
-          Үнэлгээ өгсөн: <span> ${restaurant.comments.length} </span> хүн
+          Үнэлгээ өгсөн:
+          <span> ${
+            restaurant.comments ? `${restaurant.comments.length}` : ""
+          } </span> хүн
           </h3>
           <div class="personRating">
           <div class="personRatingLeft">
@@ -310,7 +217,9 @@ function showRestaurantsContent (){
               <div class="stars-outer">
                 <div class="stars-inner"></div>
               </div>
-            <span class="number-rating" id="number-rating">${restaurant.rating}</span>
+            <span class="number-rating" id="number-rating">${
+              restaurant.rating
+            }</span>
 
             </div>
             <ul class="ratingContaner">
@@ -352,13 +261,15 @@ function showRestaurantsContent (){
             </div>
           </div>
           </div>
-
-
           <h3>Сэтгэгдэл</h3>
           <div class="comment">
-            ${restaurant.comments
-              .map((comment)=>
-                  `
+            ${
+              restaurant.comments
+                ? `
+              ${restaurant.comments
+                .map(
+                  (comment) =>
+                    `
                 <div class="comments">
                   <div class="commentProfile">
                     <div class="commentProfilePicture center">
@@ -371,7 +282,9 @@ function showRestaurantsContent (){
                       <div class="stars-outer">
                         <div class="stars-inner"></div>
                       </div>
-                      <span class="number-rating" id="number-rating"> ${comment.rating}</span>
+                      <span class="number-rating" id="number-rating"> ${
+                        comment.rating
+                      }</span>
                       <span>2 days ago</span>
                     </div>
                     <div>
@@ -380,64 +293,42 @@ function showRestaurantsContent (){
                   </div>
                 </div>
                   `
-              ).join("")
+                )
+                .join("")}`
+                : ""
             }
               
           </div>`;
-    let rightContainer = document.getElementsByClassName("rightContainer")[0];
-    rightContainer.innerHTML += itemHTML;
-    getRatings();
-    btnClick();
-    totalRating();
+      let rightContainer = document.getElementsByClassName("rightContainer")[0];
+      rightContainer.innerHTML += itemHTML;
+      getRatings();
+      btnClick();
+      totalRating();
     }
-  })
+  });
 }
 
-// <li>
-//             <h4> <span class="MenuText">МӨСТЭЙ ЦАЙ /Алим/</span><span>3,900₮</span></h4>
-//           </li>
-//           <li>
-//             <h4> <span class="MenuText">МӨСТЭЙ ЦАЙ /Гүзээлзгэнэ/</span> <span>3,900₮</span></h4>
-//           </li>
-//           <li><h4> <span class="MenuText">МӨСТЭЙ ЦАЙ /Лимон/</span> <span>3,900₮</span></h4>
-//           <li><h4> <span class="MenuText">МӨСТЭЙ ЦАЙ /Хад/</span> <span>3,900₮</span></h4>
-
-{/* <li>
-            <h4> <span class="MenuText">ЯСНЫ ШӨЛ</span> <span>5,500₮</span></h4>
-            <p>Mongolian beef boun soup</p>
-          </li>
-          <li>
-            <h4> <span class="MenuText">ЯСНЫ СҮҮН ШӨЛ</span> <span>6,900₮</span></h4>
-            <p>Milk boun soup</p>
-          </li>
-          <li><h4> <span class="MenuText">МӨӨГНИЙ ШӨЛ</span> <span>6,500₮</span></h4>
-            <p>Mushroom boun soup</p></li>
-          <li><h4> <span class="MenuText">УЛААН ЛОЙЛЫН ШӨЛ</span> <span>7,500₮</span></h4>
-            <p>Tomato boun soup</p></li> */}
-
-//=====================Нэрний эхний 2 үсэг тастдаг функц===========================
-
-function sliceUserName(name){
-  return name.slice(0,2);
+//=====================Нэрний эхний 2 үсгийг тастдаг функц===========================
+function sliceUserName(name) {
+  return name ? name.slice(0, 2) : [];
 }
 
-
-//=====================listContainer1===========================
-function btnClick (){
+//=====================Хоол, Уух menu дээр дарахад солбиж харуулах===========================
+function btnClick() {
   let menuBtn = document.getElementById("btnBorder");
   let menuBtn1 = document.getElementById("btnBorder1");
   let MenuTxt = document.getElementsByTagName("h5")[0];
   let listContainer = document.querySelector(".listContainer");
   let listContainer1 = document.querySelector(".listContainer1");
-  
+
   menuBtn.addEventListener("click", () => {
     if (listContainer.style.display == "block") {
     } else {
       menuBtn.classList.toggle("btnActive");
       menuBtn1.classList.toggle("btnActive");
-  
+
       MenuTxt.textContent = "ШӨЛ";
-  
+
       listContainer.style.display = "block";
       listContainer1.style.display = "none";
     }
@@ -454,17 +345,97 @@ function btnClick (){
   });
 }
 
+// ===========================SIGN IN EXISTING USER=======================
+let isSuccessful = false;
 
-// ========================Cart Modal Window Open=====================
-const cartIconBtn = document.getElementsByClassName("fa-shopping-cart")[0];
+signinBtn.addEventListener("click", async () => {
+  const signinEmail = document.getElementById("login-email").value;
+  const signinPassword = document.getElementById("login-password").value;
+
+  if (checkRequiredInputs([signinEmail, signinPassword])) {
+    isSuccessful = await signIn(signinEmail, signinPassword);
+
+    if (isSuccessful) {
+      swal(`Хэрэглэгч та амжилттай нэвтэрлээ!`);
+
+      loginModal.classList.remove("show-modal");
+      disableLoginBtn();
+      disableSignUpBtn();
+      activeUserProfile();
+
+      showUserName();
+      updateUserOrderDataToLocalstorage();
+    } else {
+      swal("Нэвтрэлт амжилтгүй. Хэрэглэгч олдсонгүй!");
+    }
+  } else {
+    swal("Таны бөглөх талбарууд хоосон байна!");
+  }
+});
+
+// INPUT-uud hooson esehiig shalgadag function()
+function checkRequiredInputs(inputArr) {
+  return !inputArr.includes("");
+}
+
+// =========================LOG OUT USER=================
+logoutBtn.addEventListener("click", async () => {
+  isSuccessful = await logOut();
+  if (isSuccessful) {
+    swal("Та системээс гарлаа.");
+    // localStorage-iig empty bolgono.
+    localStorage.removeItem("loggedUserData");
+    localStorage.removeItem("selectedUserOrder");
+    localStorage.removeItem("loggedUserID");
+
+    userProfileModalHeader.innerHTML = `Хэрэглэгч:`;
+    userProfileModal.classList.remove("hidden");
+
+    enableLoginBtn();
+    enableSignUpBtn();
+    showUserName();
+  } else {
+    disableLoginInputs();
+  }
+});
+
+// SIGN IN hiisnii daraa LOGIN button-iig NONE bolgoh
+function disableLoginBtn() {
+  loginOpen.style.display = "none";
+}
+// SIGN OUT hiisnii daraa LOGIN button-iig IDEWHTEI bolgoh
+function enableLoginBtn() {
+  loginOpen.style.display = "block";
+}
+// SIGN UP hiisnii daraa LOGIN button-iig NONE bolgoh
+function disableSignUpBtn() {
+  signupOpen.style.display = "none";
+}
+
+// SIGN UP hiisnii daraa LOGIN button-iig IDEWHTEI bolgoh
+function enableSignUpBtn() {
+  signupOpen.style.display = "block";
+}
+
+// Хэрэглэгч нэвтэрсэн үед хэрэглэгчийн button-ыг УЛААН болгох
+function activeUserProfile() {
+  const userIcon = document.getElementsByClassName("fa-user")[0];
+  userIcon.style.color = "#fff";
+  userProfileBtn.style.background = "#fb1c25";
+}
+// Хэрэглэгч гарсан үед хэрэглэгчийн button-ыг СААРАЛ болгох
+function inActiveUserProfile() {
+  const userIcon = document.getElementsByClassName("fa-user")[0];
+  userIcon.style.color = "#000";
+  userProfileBtn.style.background = "#ccc";
+}
+
+// ========================Сагсан дах захиалсан хоолны меню-г НЭЭХ=====================
 cartIconBtn.addEventListener("click", () => {
-  const cartModal = document.getElementsByClassName("cart-modal")[0];
   cartModal.classList.toggle("hidden");
 });
 
-// ========================Захиалга өгөх товч дээр дарах=====================
-let btnTime = document.getElementsByClassName("btnTime")[0];
-
+// ========================Захиалга дээр дарахад ХАДГАЛАХ=====================
 btnTime.addEventListener("click", () => {
   // let key = selectedPerson.value;
   let personValue = selectedPerson.options[selectedPerson.selectedIndex].text;
@@ -477,6 +448,7 @@ btnTime.addEventListener("click", () => {
     time: timeValue,
   };
 
+  // Zahialgiin medeellvvdiig LOCAL dr hadgalah
   localStorage.setItem("order-time", JSON.stringify(timeData));
 
   if (localStorage.loggedUserData) {
@@ -487,11 +459,7 @@ btnTime.addEventListener("click", () => {
   }
 });
 
-// =========================USER NAME-iig Haruulah=================
-const loggedUserId = document.getElementById("logged-user-id");
-const userProfileModalHeader = document.getElementById(
-  "user-profile-modal--header"
-);
+// =========================Нэвтэрсэн Хэрэглэгчийн НЭРИЙГ харуулах=================
 function showUserName() {
   if (localStorage.loggedUserData) {
     //Items are stored in local storage
@@ -514,6 +482,29 @@ function showUserName() {
   }
 }
 
+// =================Button Effect====================
+const buttons = document.querySelectorAll(".ripple");
+buttons.forEach((button) => {
+  button.addEventListener("click", function (e) {
+    // mouse-iin bairshliig X, Y toogoor gargaj ogno.
+    const x = e.clientX;
+    const y = e.clientY;
 
+    // button bairshliig gargaj ogno.
+    const buttonTop = e.target.offsetTop;
+    const buttonLeft = e.target.offsetLeft;
 
+    const xInside = x - buttonLeft;
+    const yInside = y - buttonTop;
 
+    const circle = document.createElement("span");
+
+    // circle.className = "circle"- ni classList.add-tai adilhan.
+    circle.classList.add("circle");
+    this.appendChild(circle);
+    circle.style.top = yInside + "px";
+    circle.style.left = xInside + "px";
+
+    setTimeout(() => circle.remove(), 200);
+  });
+});
