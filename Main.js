@@ -7,10 +7,27 @@ import {
 } from "./firebase_auth.js";
 // import { clearSignupInputs, clearLoginInputs } from "./home.js";
 
+
+
+let restaurantArr = JSON.parse(localStorage.getItem("restaurantAllData"));
+let restaurantID = JSON.parse(localStorage.getItem("selectedRestaurantID"));
+let restaurantAverageRating;
+let restaurantArrRating;
+let countRating5star = 0;
+let countRating4star = 0;
+let countRating3star = 0;
+let countRating2star = 0;
+let countRating1star = 0;
+let totalStar = 0;
+
+
+
 // Run getRatings when DOM loads
 document.addEventListener("DOMContentLoaded", () => {
   getRatings();
+  showRestaurantsContent();
   showUserName();
+
 });
 
 const starsTotal = 5;
@@ -57,20 +74,64 @@ buttons.forEach((button) => {
     setTimeout(() => circle.remove(), 200);
   });
 });
+// ========================Нийт үнэлгээний үзлэх ХУВиар харуулах=====================
 
 // let meterDiv = document.getElementsByClassName("meterDiv")[0];
 // meterDiv.style.width = "50%";
 // Meter rating
-let meterFoodRating = document.getElementsByClassName("meterFoodRating");
-let meterDivCount = 0;
-for (let i = 0; i < meterFoodRating.length; i++) {
-  let meterFoodRatingValue = meterFoodRating[i].textContent;
-  let meterPercentage = (meterFoodRatingValue / starsTotal) * 100;
-  // Round to nearest 10
-  let meterPercentageRounded = `${Math.round(meterPercentage / 10) * 10}%`;
-  meterDivCount++;
-  let meterDiv = document.getElementsByClassName(`meterDiv${meterDivCount}`)[0];
-  meterDiv.style.width = meterPercentageRounded;
+function totalRating(){
+  restaurantArr.forEach((restaurant)=>{
+    if(restaurant.id == restaurantID){
+      const restaurantCommentArr = restaurant.comments;
+      restaurantAverageRating = restaurantCommentArr.map(comment => 
+        comment.rating).reduce((acc, item)=> (acc+=item)/restaurantCommentArr.length);
+        restaurantArrRating = restaurantCommentArr.map(comment => 
+          comment.rating);
+      }
+    })
+    restaurantArrRating.forEach((e)=>{
+      console.log("e",e)
+        if(e===5){
+          countRating5star++;
+          calculateStarMeterWidth(countRating5star, 1);
+        } else{
+          calculateStarMeterWidth(countRating5star, 1);
+        }
+        if(e===4){
+          countRating4star++;
+          calculateStarMeterWidth(countRating4star, 2);
+        }else{
+          calculateStarMeterWidth(countRating4star, 2);
+        }
+        if(e===3){
+          countRating3star++;
+          calculateStarMeterWidth(countRating3star, 3);
+        } else{
+          calculateStarMeterWidth(countRating3star, 3);
+        }
+        if(e===2){
+          countRating2star++;
+          calculateStarMeterWidth(countRating2star, 4);
+        } else{
+          calculateStarMeterWidth(countRating2star, 4);
+        }
+        if(e===1){
+          countRating1star++;
+          calculateStarMeterWidth(countRating1star, 5);
+        }
+        // else{
+        //   calculateStarMeterWidth(countRating1star, 5);
+        // }
+      console.log("countRating2star",countRating1star)
+
+      })
+    function calculateStarMeterWidth (countRatingStar, num) {
+      totalStar = countRatingStar *100 / restaurantArrRating.length;
+      let meterDiv = document.getElementsByClassName(`meterDiv${num}`)[0];
+      meterDiv.style.width = `${totalStar}%`;
+      // console.log("meterDiv",meterDiv)
+
+    }
 }
 // ========================Profile window Open=====================
 const userProfileBtn = document.getElementsByClassName("profile")[0];
@@ -181,36 +242,218 @@ function inActiveUserProfile() {
   userIcon.style.color = "#000";
   userProfileBtn.style.background = "#ccc";
 }
+// =========================Restaurant-iig Haruulah=================
+
+function showRestaurantsContent (){
+
+  restaurantArr.forEach((restaurant)=>{
+    if(restaurant.id == restaurantID){
+      let restaurantBackground = document.getElementsByTagName("header")[0];
+      restaurantBackground.style.backgroundImage = `url(${restaurant.backgroundImage})`;
+      let itemHTML =`        
+          <h2 class="center">
+          ${restaurant.name}
+          <span
+            ><img
+              src="${restaurant.logo}"
+              alt=""
+          /></span>
+          </h2>
+          <div class="stars-container">
+          <div class="stars-outer">
+            <div class="stars-inner"></div>
+          </div>
+          <span class="number-rating" id="number-rating"> ${restaurant.rating}</span
+          >
+          <i class="fa-regular fa-message"></i>
+          <span><span>${restaurant.comments.length}  </span>Comment</span>
+          </div>
+          <span>${restaurant.about}</span>
+          <h3>
+          Menu
+          </h3>
+          <div class="menu-container">
+            <button id="btnBorder" class="buttonMenu btnActive">
+              Хоол
+            </button>
+            <button id="btnBorder1" class="buttonMenu">
+              Ус, ундаа
+            </button>
+          </div>
+          <h5>ШӨЛ</h5>
+          <ul class="listContainer">
+          ${restaurant.menu.food
+            .map((food)=>
+                `<li>
+                <h4> <span class="MenuText">${food.name}</span><span>${food.price}</span></h4>
+                </li>`
+            ).join("")
+            }
+          
+          </ul>
+          <ul class="listContainer1">
+          ${restaurant.menu.drink
+          .map((drink)=>
+              `<li>
+              <h4> <span class="MenuText">${drink.name}</span><span>${drink.price}</span></h4>
+              </li>`
+          ).join("")
+          }
+          </ul>
+          <button class="buttonMenu" id="food-menu-btn">Хоолны цэс дэлгэрэнгүй харах</button>
+          <h3>
+          Үнэлгээ өгсөн: <span> ${restaurant.comments.length} </span> хүн
+          </h3>
+          <div class="personRating">
+          <div class="personRatingLeft">
+            <div class="stars-container">
+              <div class="stars-outer">
+                <div class="stars-inner"></div>
+              </div>
+            <span class="number-rating" id="number-rating">${restaurant.rating}</span>
+
+            </div>
+            <ul class="ratingContaner">
+              <li>4 <span>хоол</span> </li>
+              <li>4 <span>үйлчилгээ</span></li>
+              <li>5 <span>Тав тухтай байдал</span></li>
+            </ul>
+          </div>
+          <div class="personRatingRight">
+            <div>
+              <span class="meterFoodRating">5</span>
+              <meter class="meter" min="0" max="100" value="">
+                <div class="meterDiv1">
+                </div>
+            </div>
+            <div>
+              <span class="meterFoodRating">4</span>
+              <meter class="meter" min="0" max="100" value="">
+                <div class="meterDiv2">
+                </div>
+            </div>
+            <div>
+              <span class="meterFoodRating">3</span>
+              <meter class="meter" min="0" max="100" value="">
+                <div class="meterDiv3">
+                </div>
+            </div>
+            <div>
+              <span class="meterFoodRating">2</span>
+              <meter class="meter" min="0" max="100" value="">
+                <div class="meterDiv4">
+                </div>
+            </div>
+            <div>
+              <span class="meterFoodRating">1</span>
+              <meter class="meter" min="0" max="100" value="">
+                <div class="meterDiv5">
+                </div>
+            </div>
+          </div>
+          </div>
+
+
+          <h3>Сэтгэгдэл</h3>
+          <div class="comment">
+            ${restaurant.comments
+              .map((comment)=>
+                  `
+                <div class="comments">
+                  <div class="commentProfile">
+                    <div class="commentProfilePicture center">
+                      <span>${sliceUserName(comment.name)}</span>
+                    </div>
+                    <span>${comment.name}</span>
+                  </div>
+                  <div class="commentText">
+                    <div class="stars-container">
+                      <div class="stars-outer">
+                        <div class="stars-inner"></div>
+                      </div>
+                      <span class="number-rating" id="number-rating"> ${comment.rating}</span>
+                      <span>2 days ago</span>
+                    </div>
+                    <div>
+                      <span>${comment.description}</span>
+                    </div>
+                  </div>
+                </div>
+                  `
+              ).join("")
+            }
+              
+          </div>`;
+    let rightContainer = document.getElementsByClassName("rightContainer")[0];
+    rightContainer.innerHTML += itemHTML;
+    getRatings();
+    btnClick();
+    totalRating();
+    }
+  })
+}
+
+// <li>
+//             <h4> <span class="MenuText">МӨСТЭЙ ЦАЙ /Алим/</span><span>3,900₮</span></h4>
+//           </li>
+//           <li>
+//             <h4> <span class="MenuText">МӨСТЭЙ ЦАЙ /Гүзээлзгэнэ/</span> <span>3,900₮</span></h4>
+//           </li>
+//           <li><h4> <span class="MenuText">МӨСТЭЙ ЦАЙ /Лимон/</span> <span>3,900₮</span></h4>
+//           <li><h4> <span class="MenuText">МӨСТЭЙ ЦАЙ /Хад/</span> <span>3,900₮</span></h4>
+
+{/* <li>
+            <h4> <span class="MenuText">ЯСНЫ ШӨЛ</span> <span>5,500₮</span></h4>
+            <p>Mongolian beef boun soup</p>
+          </li>
+          <li>
+            <h4> <span class="MenuText">ЯСНЫ СҮҮН ШӨЛ</span> <span>6,900₮</span></h4>
+            <p>Milk boun soup</p>
+          </li>
+          <li><h4> <span class="MenuText">МӨӨГНИЙ ШӨЛ</span> <span>6,500₮</span></h4>
+            <p>Mushroom boun soup</p></li>
+          <li><h4> <span class="MenuText">УЛААН ЛОЙЛЫН ШӨЛ</span> <span>7,500₮</span></h4>
+            <p>Tomato boun soup</p></li> */}
+
+//=====================Нэрний эхний 2 үсэг тастдаг функц===========================
+
+function sliceUserName(name){
+  return name.slice(0,2);
+}
+
 
 //=====================listContainer1===========================
-let menuBtn = document.getElementById("btnBorder");
-let menuBtn1 = document.getElementById("btnBorder1");
-let MenuTxt = document.getElementsByTagName("h5")[0];
-let listContainer = document.querySelector(".listContainer");
-let listContainer1 = document.querySelector(".listContainer1");
+function btnClick (){
+  let menuBtn = document.getElementById("btnBorder");
+  let menuBtn1 = document.getElementById("btnBorder1");
+  let MenuTxt = document.getElementsByTagName("h5")[0];
+  let listContainer = document.querySelector(".listContainer");
+  let listContainer1 = document.querySelector(".listContainer1");
+  
+  menuBtn.addEventListener("click", () => {
+    if (listContainer.style.display == "block") {
+    } else {
+      menuBtn.classList.toggle("btnActive");
+      menuBtn1.classList.toggle("btnActive");
+  
+      MenuTxt.textContent = "ШӨЛ";
+  
+      listContainer.style.display = "block";
+      listContainer1.style.display = "none";
+    }
+  });
+  menuBtn1.addEventListener("click", () => {
+    if (listContainer1.style.display == "block") {
+    } else {
+      menuBtn.classList.toggle("btnActive");
+      menuBtn1.classList.toggle("btnActive");
+      MenuTxt.textContent = "Ус, ундаа";
+      listContainer.style.display = "none";
+      listContainer1.style.display = "block";
+    }
+  });
+}
 
-menuBtn.addEventListener("click", () => {
-  if (listContainer.style.display == "block") {
-  } else {
-    menuBtn.classList.toggle("btnActive");
-    menuBtn1.classList.toggle("btnActive");
-
-    MenuTxt.textContent = "ШӨЛ";
-
-    listContainer.style.display = "block";
-    listContainer1.style.display = "none";
-  }
-});
-menuBtn1.addEventListener("click", () => {
-  if (listContainer1.style.display == "block") {
-  } else {
-    menuBtn.classList.toggle("btnActive");
-    menuBtn1.classList.toggle("btnActive");
-    MenuTxt.textContent = "Ус, ундаа";
-    listContainer.style.display = "none";
-    listContainer1.style.display = "block";
-  }
-});
 
 // ========================Cart Modal Window Open=====================
 const cartIconBtn = document.getElementsByClassName("fa-shopping-cart")[0];
@@ -270,3 +513,7 @@ function showUserName() {
     inActiveUserProfile();
   }
 }
+
+
+
+

@@ -312,7 +312,7 @@ nav ul li a.active {
 /*====================HEADER SECTION=============== */
 header {
   height: 50vh;
-  background-image: url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80");
+  /* background-image: url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"); */
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -762,7 +762,7 @@ section .rightContainer {
   display: flex;
   flex-direction: column;
   width: 60%;
-  height: 1000px;
+  height: auto;
   background-color: white;
   border-radius: 10px;
   padding: 0 10px;
@@ -1008,7 +1008,7 @@ h5 {
   margin-left: 5px;
 }
 .number-rating + span {
-  margin-left: 10px;
+  margin-left: 50px;
 }
 .stars-inner {
   position: absolute;
@@ -1087,8 +1087,14 @@ h5 {
   width: 100%;
   height: auto;
   display: flex;
+  flex-direction: column;
   padding: 10px 0;
   border-bottom: 1px solid rgb(87, 87, 87);
+  
+}
+.comments{
+  display: flex;
+  margin-bottom: 20px;
 }
 .comment .commentProfile {
   width: 20%;
@@ -1100,6 +1106,7 @@ h5 {
 }
 .comment .commentText {
   width: 80%;
+  
 }
 .commentProfilePicture {
   width: 50px;
