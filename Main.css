@@ -1181,14 +1181,13 @@ button .circle {
   }
 }
 
-
 /* Үнэлгээ өгөх хэсэг */
 .feedback-container-items {
   overflow: hidden;
   width: 100%;
   /* width: 400px; */
   /* background: #111; */
-  padding: 20px 30px;
+  padding: 20px 10px;
 }
 .feedback-container-items .post {
   display: none;
@@ -1214,7 +1213,7 @@ button .circle {
 .feedback-container-items .star-widget input {
   display: none;
 }
-.star-widget{
+.star-widget {
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -1223,13 +1222,15 @@ button .circle {
 .star-widget-container {
   display: flex;
   flex-direction: row-reverse;
-  position: relative;
-  
+}
+.star-widget p {
+  margin: 10px 0;
+  color: #f8ce0b;
 }
 .star-widget-container label {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #ccc;
-  padding: 10px;
+  padding-right: 10px;
   transition: all 0.2s ease;
 }
 input:not(:checked) ~ label:hover,
@@ -1243,33 +1244,7 @@ input#rate-5:checked ~ label {
   color: #f8ce0b;
   text-shadow: 0 0 20px #952;
 }
-.star-rating-text:before {
-  content: "Үйлчилгээ ёстой таалагдсангүй";
-}
-/* .star-rating-text:before {
-  position: absolute;
-  top:10px;
-  left:10px
-} */
-/* .star-rating-text:before{
-  content: "Үйлчилгээ ёстой таалагдсангүй";
-} */
-#rate-2:checked ~ form .star-rating-text:before {
-  content: "Ер нь таалагдсангүй ";
-}
-#rate-3:checked ~ form .star-rating-text:before {
-  content: "Ер нь таалагдсан ";
-}
-#rate-4:checked ~ form .star-rating-text:before {
-  content: "Үйлчилгээ сайн байсан";
-}
-#rate-5:checked ~ form .star-rating-text:before {
-  content: "Үнэхээр сайхан үйлчилгээтэй ";
-}
-
 form .star-rating-text {
-  position: absolute;
-
   width: 100%;
   font-size: 1rem;
   color: #000000;
@@ -1278,12 +1253,12 @@ form .star-rating-text {
   text-align: center;
   transition: all 0.2s ease;
 }
-form .textarea {
-  height: 100px;
+.star-widget  .textarea {
+  height: 100%;
   width: 100%;
   overflow: hidden;
 }
-form .textarea textarea {
+.star-widget .textarea textarea {
   height: 100%;
   width: 100%;
   outline: none;
@@ -1291,19 +1266,20 @@ form .textarea textarea {
   border: 1px solid #333;
   border-radius: 5px;
   padding: 10px;
-  font-size: 17px;
+  font-size: 1rem;
   resize: none;
+  font-family: inherit;
 }
 .textarea textarea:focus {
   border-color: #444;
 }
-form .submit-comment-btn {
+.star-widget .submit-comment-btn {
   height: 45px;
   width: 100%;
   margin: 15px 0;
 }
 /* post button */
-form .submit-comment-btn button {
+.star-widget .submit-comment-btn button {
   height: 100%;
   width: 100%;
   background-color: var(--secondary-color);
@@ -1311,13 +1287,12 @@ form .submit-comment-btn button {
   border-radius: 5px;
   outline: none;
   color: rgb(255, 255, 255);
-  font-size: 17px;
+  font-size: 1rem;
   font-weight: 500;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 
 .feedback-post {
   color: #fff;

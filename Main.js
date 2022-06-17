@@ -4,7 +4,7 @@ import {
   logOut,
   updateUserOrderDataToLocalstorage,
   updateRestaurantRatingInFireStore,
-  updateRestaurantRatingCommentInFireStore
+  updateRestaurantRatingCommentInFireStore,
 } from "./firebase_auth.js";
 
 //=============1. Хамгийн түрүүнд ажиллах ФУНКЦҮҮД =============
@@ -274,7 +274,8 @@ function showRestaurantsContent() {
           </div>
                 <div class="feedback-container-items">
                   <div class="star-widget">
-                    <div class="star-widget-container"> 
+                    <div class="star-widget-container">
+                      <span class="star-rating-value">5-aaс</span>
                       <input type="radio" name="rate" class="starRate"  id="rate-5" value="5"/>
                       <label for="rate-5" class="fas fa-star"></label>
                       <input type="radio" name="rate" class="starRate" id="rate-4" value="4"/>
@@ -286,6 +287,8 @@ function showRestaurantsContent() {
                       <input type="radio" name="rate" class="starRate" id="rate-1" value="1"/>
                       <label for="rate-1" class="fas fa-star"></label>
                     </div>
+                    <p class="starRatingText">
+                    </p
                     <form>
                       <div class="star-rating-text"></div>
                       <div class="textarea">
@@ -294,10 +297,9 @@ function showRestaurantsContent() {
                           placeholder="Та сэтгэгдлээ энд бичнэ үү.."
                         ></textarea>
                       </div>
-                      
                     </form>
                       <div class="submit-comment-btn">
-                        <button type="submit">Сэтгэгдэл илгээх</button>
+                        <button type="submit">Сэтгэгдэл үлдээх</button>
                       </div>
                   </div>
                 </div>
@@ -351,9 +353,7 @@ function showRestaurantsContent() {
   });
 }
 // =========================Restaurant-ii location харуулах=================
-function showRestaurantsLocation(){
-
-}
+function showRestaurantsLocation() {}
 
 //=====================Нэрний эхний 2 үсгийг тастдаг функц===========================
 function sliceUserName(name) {
@@ -529,6 +529,68 @@ function showUserName() {
   }
 }
 
+// ====================Захиалга хийсэн хэрэглэгч КОМЕНТ үлдээх====================
+function feedbackComment() {
+  const submitCommentBtn =
+    document.getElementsByClassName("submit-comment-btn")[0];
+  const textArea = document.getElementsByClassName("textarea")[0];
+  const starsSelected = document.querySelectorAll(".starRate");
+  let starRatingNumber;
+  let textAreaValue = "";
+
+  let userData = JSON.parse(localStorage.getItem("loggedUserData"));
+  let userName = userData.name;
+  console.log("userName", userName);
+
+  //Ж/нь: 1 гэсэн од дээр дарахад 1 гэсэн утга авдаг функц
+  starsSelected.forEach((starInput) => {
+    starInput.addEventListener("input", (event) => {
+      starRatingNumber = event.target.value;
+      showStarRatingText(+starRatingNumber);
+    });
+  });
+  // bichsen setgegdel-ee textarea tag-aas barij awah
+  textArea.addEventListener("input", (event) => {
+    textAreaValue = event.target.value;
+  });
+
+  // ilgeeh towchin dr darahad bichsen textiig firestore-luu yawuulah
+  submitCommentBtn.addEventListener("click", () => {
+    if (textAreaValue && starRatingNumber) {
+      updateRestaurantRatingCommentInFireStore(
+        textAreaValue,
+        starRatingNumber,
+        restaurantID,
+        userName
+      );
+    } else {
+      alert("Та сэтгэгдэл бичнэ үү!");
+    }
+  });
+}
+
+// Хэрэглэгчийн сонгосон одноос хамаарч харгалзах текстийг гаргадаг функц.
+function showStarRatingText(starRatingNumber) {
+  const starRatingText = document.getElementsByClassName("starRatingText")[0];
+  const starRatingValue =
+    document.getElementsByClassName("star-rating-value")[0];
+  if (starRatingNumber == 1) {
+    starRatingText.innerHTML = `"Үйлчилгээ ёстой таалагдсангүй"`;
+    starRatingValue.innerHTML = `5-aac ${starRatingNumber}`;
+  } else if (starRatingNumber == 2) {
+    starRatingText.innerHTML = `"Ер нь таалагдсангүй"`;
+    starRatingValue.innerHTML = `5-aac ${starRatingNumber}`;
+  } else if (starRatingNumber == 3) {
+    starRatingText.innerHTML = `"Ер нь таалагдсан"`;
+    starRatingValue.innerHTML = `5-aac ${starRatingNumber}`;
+  } else if (starRatingNumber == 4) {
+    starRatingText.innerHTML = `"Үйлчилгээ сайн байсан"`;
+    starRatingValue.innerHTML = `5-aac ${starRatingNumber}`;
+  } else {
+    starRatingText.innerHTML = `"Үнэхээр сайхан үйлчилгээтэй"`;
+    starRatingValue.innerHTML = `5-aac ${starRatingNumber}`;
+  }
+}
 // =================Button Effect====================
 const buttons = document.querySelectorAll(".ripple");
 buttons.forEach((button) => {
@@ -555,46 +617,3 @@ buttons.forEach((button) => {
     setTimeout(() => circle.remove(), 200);
   });
 });
-
-
-
-
-
-// ====================Comment oruulah heseg====================
-function feedbackComment (){
-  const submitCommentBtn = document.getElementsByClassName("submit-comment-btn")[0];
-  const textArea = document.getElementsByClassName("textarea")[0];
-  const starsSelected = document.querySelectorAll(".starRate");
-  let starRatingNumber;
-  let textAreaValue = "";
-
-  let userData = JSON.parse(localStorage.getItem("loggedUserData")) 
-  let userName = userData.name
-  console.log("userName",userName);
-
-  starsSelected.forEach((starInput)=>{
-    starInput.addEventListener("input", (event)=>{
-      starRatingNumber = event.target.value
-    })
-  });
-  // bichsen setgegdel-ee textarea tag-aas barij awah
-  textArea.addEventListener("input", (event) => {
-    textAreaValue = event.target.value;
-  });
-
-  // ilgeeh towchin dr darahad bichsen textiig hadgalah
-  submitCommentBtn.addEventListener("click", () => {
-    
-    if(textAreaValue && starRatingNumber){
-      updateRestaurantRatingCommentInFireStore(
-        textAreaValue,
-        +starRatingNumber,
-        restaurantID,
-        userName
-      );
-    }else {alert("Та сэтгэгдэл бичнэ үү!");}
-    
-
-  });
-}
-
