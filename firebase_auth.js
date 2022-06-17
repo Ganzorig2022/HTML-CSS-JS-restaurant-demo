@@ -208,11 +208,34 @@ const updateRestaurantRatingInFireStore = async function (
     await updateDoc(docRef, {
       rating: userRatingValue,
     });
-    alert(" Үнэлгээ амжилттай шинэчлэгдлээ!");
+    // alert(" Үнэлгээ амжилттай шинэчлэгдлээ!");
   } catch (error) {
     console.log("ERR: ", error);
   }
 };
+// =============Хэрэглэгчийн Сэтгэгдэл UPDATE хийх=============
+//
+const updateRestaurantRatingCommentInFireStore = async function(
+  textAreaValue,
+  starRatingNumber,
+  restaurantID,
+  userName
+){
+
+  try {
+    const docRef = await doc(db, "restaurant", restaurantID);
+    updateDoc(docRef, {
+      comments: arrayUnion({
+        name: userName,
+        description: textAreaValue,
+        rating: starRatingNumber,
+      }),
+    });
+    // alert(" Үнэлгээ амжилттай шинэчлэгдлээ!");
+  } catch (error) {
+    console.log("ERR: ", error);
+  }
+}
 
 // =============Хэрэглэгчийн хувийн мэдээллийг UPDATE хийх=============
 const updateUserDataInFireStore = async function (
@@ -278,4 +301,5 @@ export {
   updateUserOrderDataToFireStore,
   updateUserOrderDataToLocalstorage,
   updateRestaurantRatingInFireStore,
+  updateRestaurantRatingCommentInFireStore
 };

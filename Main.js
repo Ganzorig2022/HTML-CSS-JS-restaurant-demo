@@ -4,6 +4,7 @@ import {
   logOut,
   updateUserOrderDataToLocalstorage,
   updateRestaurantRatingInFireStore,
+  updateRestaurantRatingCommentInFireStore
 } from "./firebase_auth.js";
 
 //=============1. Хамгийн түрүүнд ажиллах ФУНКЦҮҮД =============
@@ -271,6 +272,35 @@ function showRestaurantsContent() {
             </div>
           </div>
           </div>
+                <div class="feedback-container-items">
+                  <div class="star-widget">
+                    <div class="star-widget-container"> 
+                      <input type="radio" name="rate" class="starRate"  id="rate-5" value="5"/>
+                      <label for="rate-5" class="fas fa-star"></label>
+                      <input type="radio" name="rate" class="starRate" id="rate-4" value="4"/>
+                      <label for="rate-4" class="fas fa-star"></label>
+                      <input type="radio" name="rate" class="starRate" id="rate-3" value="3"/>
+                      <label for="rate-3" class="fas fa-star"></label>
+                      <input type="radio" name="rate" class="starRate" id="rate-2" value="2"/>
+                      <label for="rate-2" class="fas fa-star"></label>
+                      <input type="radio" name="rate" class="starRate" id="rate-1" value="1"/>
+                      <label for="rate-1" class="fas fa-star"></label>
+                    </div>
+                    <form>
+                      <div class="star-rating-text"></div>
+                      <div class="textarea">
+                        <textarea
+                          cols="30"
+                          placeholder="Та сэтгэгдлээ энд бичнэ үү.."
+                        ></textarea>
+                      </div>
+                      
+                    </form>
+                      <div class="submit-comment-btn">
+                        <button type="submit">Сэтгэгдэл илгээх</button>
+                      </div>
+                  </div>
+                </div>
           <h3>Сэтгэгдэл</h3>
           <div class="comment">
             ${
@@ -316,6 +346,7 @@ function showRestaurantsContent() {
       getRatings();
       btnClick();
       totalRating();
+      feedbackComment();
     }
   });
 }
@@ -525,6 +556,45 @@ buttons.forEach((button) => {
   });
 });
 
-window.addEventListener("popstate", function () {
-  console.log("location changed!");
-});
+
+
+
+
+// ====================Comment oruulah heseg====================
+function feedbackComment (){
+  const submitCommentBtn = document.getElementsByClassName("submit-comment-btn")[0];
+  const textArea = document.getElementsByClassName("textarea")[0];
+  const starsSelected = document.querySelectorAll(".starRate");
+  let starRatingNumber;
+  let textAreaValue = "";
+
+  let userData = JSON.parse(localStorage.getItem("loggedUserData")) 
+  let userName = userData.name
+  console.log("userName",userName);
+
+  starsSelected.forEach((starInput)=>{
+    starInput.addEventListener("input", (event)=>{
+      starRatingNumber = event.target.value
+    })
+  });
+  // bichsen setgegdel-ee textarea tag-aas barij awah
+  textArea.addEventListener("input", (event) => {
+    textAreaValue = event.target.value;
+  });
+
+  // ilgeeh towchin dr darahad bichsen textiig hadgalah
+  submitCommentBtn.addEventListener("click", () => {
+    
+    if(textAreaValue && starRatingNumber){
+      updateRestaurantRatingCommentInFireStore(
+        textAreaValue,
+        +starRatingNumber,
+        restaurantID,
+        userName
+      );
+    }else {alert("Та сэтгэгдэл бичнэ үү!");}
+    
+
+  });
+}
+

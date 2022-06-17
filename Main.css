@@ -1047,6 +1047,8 @@ h5 {
   display: flex;
   width: 100%;
   height: auto;
+  padding: 10px 0;
+  border-bottom: 1px solid rgb(230, 230, 230);
 }
 .personRatingLeft {
   flex: 1;
@@ -1177,4 +1179,146 @@ button .circle {
     transform: translate(-50%, -50%) scale(3);
     opacity: 0;
   }
+}
+
+
+/* Үнэлгээ өгөх хэсэг */
+.feedback-container-items {
+  overflow: hidden;
+  width: 100%;
+  /* width: 400px; */
+  /* background: #111; */
+  padding: 20px 30px;
+}
+.feedback-container-items .post {
+  display: none;
+}
+.feedback-container-items .post .text {
+  font-size: 25px;
+  color: #666;
+  font-weight: 500;
+}
+.feedback-container-items .post .edit {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-size: 16px;
+  color: rgb(250, 0, 0);
+  font-weight: 500;
+  cursor: pointer;
+}
+.feedback-container-items .post .edit:hover {
+  text-decoration: underline;
+}
+/* ================== */
+.feedback-container-items .star-widget input {
+  display: none;
+}
+.star-widget{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.star-widget-container {
+  display: flex;
+  flex-direction: row-reverse;
+  position: relative;
+  
+}
+.star-widget-container label {
+  font-size: 2rem;
+  color: #ccc;
+  padding: 10px;
+  transition: all 0.2s ease;
+}
+input:not(:checked) ~ label:hover,
+input:not(:checked) ~ label:hover ~ label {
+  color: #f8ce0b;
+}
+input:checked ~ label {
+  color: #f8ce0b;
+}
+input#rate-5:checked ~ label {
+  color: #f8ce0b;
+  text-shadow: 0 0 20px #952;
+}
+.star-rating-text:before {
+  content: "Үйлчилгээ ёстой таалагдсангүй";
+}
+/* .star-rating-text:before {
+  position: absolute;
+  top:10px;
+  left:10px
+} */
+/* .star-rating-text:before{
+  content: "Үйлчилгээ ёстой таалагдсангүй";
+} */
+#rate-2:checked ~ form .star-rating-text:before {
+  content: "Ер нь таалагдсангүй ";
+}
+#rate-3:checked ~ form .star-rating-text:before {
+  content: "Ер нь таалагдсан ";
+}
+#rate-4:checked ~ form .star-rating-text:before {
+  content: "Үйлчилгээ сайн байсан";
+}
+#rate-5:checked ~ form .star-rating-text:before {
+  content: "Үнэхээр сайхан үйлчилгээтэй ";
+}
+
+form .star-rating-text {
+  position: absolute;
+
+  width: 100%;
+  font-size: 1rem;
+  color: #000000;
+  font-weight: 500;
+  margin: 5px 0 20px 0;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+form .textarea {
+  height: 100px;
+  width: 100%;
+  overflow: hidden;
+}
+form .textarea textarea {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  color: rgb(0, 0, 0);
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 17px;
+  resize: none;
+}
+.textarea textarea:focus {
+  border-color: #444;
+}
+form .submit-comment-btn {
+  height: 45px;
+  width: 100%;
+  margin: 15px 0;
+}
+/* post button */
+form .submit-comment-btn button {
+  height: 100%;
+  width: 100%;
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  color: rgb(255, 255, 255);
+  font-size: 17px;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+.feedback-post {
+  color: #fff;
 }
