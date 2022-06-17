@@ -111,7 +111,9 @@ logoutBtn.addEventListener("click", async () => {
     swal("Та системээс гарлаа.");
     // localStorage-iig empty bolgono.
     localStorage.removeItem("loggedUserData");
-
+    localStorage.removeItem("loggedUserID");
+    localStorage.removeItem("selectedUserOrder");
+    localStorage.removeItem("selectedRestaurantID");
     userProfileModal.classList.remove("hidden");
     userProfileModalHeader.innerHTML = `Хэрэглэгч:`;
 
@@ -120,7 +122,6 @@ logoutBtn.addEventListener("click", async () => {
     enableSignUpBtn();
     clearLoginInputs();
     inActiveUserProfile();
-    localStorage.removeItem("selectedUserOrder");
   } else {
     disableLoginInputs();
   }

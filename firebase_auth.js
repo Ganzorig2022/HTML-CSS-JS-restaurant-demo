@@ -162,10 +162,7 @@ const updateUserOrderDataToFireStore = async function (
     let docRefData = await getDoc(docRef);
     // зөвхөн захиалгуудыг салгаж авах
     let docOrderArr = docRefData.data().order;
-    console.log("docOrderArr", docOrderArr);
     if (docOrderArr.length > 0 || docOrderArr == "undefined") {
-    console.log("start...");
-
       let existingUserArrFiltered = docOrderArr.filter(
         (e) => e.userID == loggedUserID
       );

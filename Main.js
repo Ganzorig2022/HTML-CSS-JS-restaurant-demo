@@ -153,6 +153,11 @@ function showRestaurantsContent() {
     if (restaurant.id == restaurantID) {
       let restaurantBackground = document.getElementsByTagName("header")[0];
       restaurantBackground.style.backgroundImage = `url(${restaurant.backgroundImage})`;
+      let itemHTMLlocation = `
+        <div>
+          <i class="fa-solid fa-location-dot"></i><span>Салбар 1: ${restaurant.location},</span>
+        </div>
+      `;
       let itemHTML = `        
           <h2 class="center">
           ${restaurant.name}
@@ -305,12 +310,18 @@ function showRestaurantsContent() {
               
           </div>`;
       let rightContainer = document.getElementsByClassName("rightContainer")[0];
+      let restaurantLocation = document.getElementById("locationTitle");
+      restaurantLocation.innerHTML += itemHTMLlocation;
       rightContainer.innerHTML += itemHTML;
       getRatings();
       btnClick();
       totalRating();
     }
   });
+}
+// =========================Restaurant-ii location харуулах=================
+function showRestaurantsLocation(){
+
 }
 
 //=====================Нэрний эхний 2 үсгийг тастдаг функц===========================

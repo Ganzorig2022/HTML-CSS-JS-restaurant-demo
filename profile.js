@@ -224,7 +224,12 @@ logoutBtn.addEventListener("click", async () => {
   isSuccessful = await logOut();
   if (isSuccessful) {
     swal("Та системээс гарлаа. Дахин нэвтэрч орно уу.");
-    localStorage.clear("loggedUserUid");
+    localStorage.removeItem("loggedUserID");
+    localStorage.removeItem("selectedUserOrder");
+    localStorage.removeItem("loggedUserData");
+    localStorage.removeItem("selectedRestaurantID");
+
+
     content1.classList.add("show");
     loggedUserId.textContent = "байхгүй!";
 
