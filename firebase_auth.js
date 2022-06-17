@@ -146,7 +146,7 @@ const updateUserOrderDataToLocalstorage = async function () {
     });
   } catch (error) {}
 };
-updateUserOrderDataToLocalstorage();
+// updateUserOrderDataToLocalstorage();
 
 // =============Захиалгыг Firestore дээр НЭМЖ хадгалах=============
 const updateUserOrderDataToFireStore = async function (
@@ -162,7 +162,10 @@ const updateUserOrderDataToFireStore = async function (
     let docRefData = await getDoc(docRef);
     // зөвхөн захиалгуудыг салгаж авах
     let docOrderArr = docRefData.data().order;
-    if (docOrderArr.length > 0) {
+    console.log("docOrderArr", docOrderArr);
+    if (docOrderArr.length > 0 || docOrderArr == "undefined") {
+    console.log("start...");
+
       let existingUserArrFiltered = docOrderArr.filter(
         (e) => e.userID == loggedUserID
       );

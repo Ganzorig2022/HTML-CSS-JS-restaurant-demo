@@ -1,4 +1,4 @@
-import { signUp, signIn, logOut } from "./firebase_auth.js";
+import { signUp, signIn, logOut, updateUserOrderDataToLocalstorage } from "./firebase_auth.js";
 
 // Run getRatings when DOM loads
 document.addEventListener("DOMContentLoaded", () => {
@@ -94,7 +94,7 @@ signinBtn.addEventListener("click", async () => {
       disableLoginBtn();
       disableSignUpBtn();
       activeUserProfile();
-
+      updateUserOrderDataToLocalstorage();
       showUserName();
     } else {
       swal("Нэвтрэлт амжилтгүй. Хэрэглэгч олдсонгүй!");
@@ -120,7 +120,7 @@ logoutBtn.addEventListener("click", async () => {
     enableSignUpBtn();
     clearLoginInputs();
     inActiveUserProfile();
-    localStorage.clear("selectedUserOrder");
+    localStorage.removeItem("selectedUserOrder");
   } else {
     disableLoginInputs();
   }

@@ -137,11 +137,15 @@ const signinBtn = document.getElementById("login-submit-btn");
 const logoutBtn = document.getElementById("user-logout-btn");
 const userProfileBtn = document.getElementsByClassName("profile")[0];
 const loggedUserId = document.getElementById("logged-user-id");
+const userProfile = document.getElementsByClassName("user-profile-modal")[0];
+
 
 const userIcon = document.getElementsByClassName("fa-user")[0];
 
 let isSuccessful = false;
-
+userProfileBtn.addEventListener("click", () => {
+  userProfile.classList.toggle("hidden");
+});
 // ===========================SIGN UP NEW USER=======================
 signupBtn.addEventListener("click", async () => {
   const signupName = document.getElementById("signup-name").value;
