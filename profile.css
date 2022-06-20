@@ -535,7 +535,7 @@ main p strong {
   display: flex;
 }
 
-.right-content-food .order-status {
+.order-status {
   color: #10de1a;
 }
 /* ===================content 1 ==============*/
@@ -868,6 +868,11 @@ button .circle {
   transform: translate(-50%, -50%) scale(0);
   animation: scale 0.6s ease-out;
 }
+/* Profile TABLE */
+table, th, td {
+  border: 1px solid black;
+}
+
 
 @keyframes scale {
   to {

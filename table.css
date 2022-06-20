@@ -539,7 +539,7 @@ main section {
 .seat2 .seatNum {
   transform: rotate(-45deg);
 }
-.tables:hover {
+.tableHover:hover {
   background-color: var(--text-shadow-color);
 }
 .seat2::after {
@@ -890,4 +890,14 @@ button:active {
 .scroll-to-top-button:hover {
   background-color: var(--secondary-color);
   color: #000;
+}
+
+
+
+/* Disable style */
+.disable{
+  background-color: var(--secondary-color);
+}
+.disable:hover{
+  cursor: not-allowed;
 }

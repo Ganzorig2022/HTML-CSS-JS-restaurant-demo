@@ -124,6 +124,7 @@ const getTableDataFromFireStore = async function () {
 };
 
 getTableDataFromFireStore();
+let selectedResOrderArr = [];
 
 // =============Хэрэглэгчийн Захиалгыг Firestore-оос LOCAL дээр хадгалах=============
 const updateUserOrderDataToLocalstorage = async function () {
@@ -132,9 +133,9 @@ const updateUserOrderDataToLocalstorage = async function () {
     let resQueryData = await getDocs(resQuery);
     resQueryData.forEach((item) => {
       let selectedRes = item.data();
-      let selectedResOrder = selectedRes.order;
+      selectedResOrderArr.push(...selectedRes.order)
       let userID = JSON.parse(localStorage.getItem("loggedUserID"));
-      let selectedUserOrder = selectedResOrder.filter(
+      let selectedUserOrder = selectedResOrderArr.filter(
         (e) => e.userID === userID
       );
       if (selectedUserOrder.length > 0) {
@@ -162,11 +163,12 @@ const updateUserOrderDataToFireStore = async function (
     let docRefData = await getDoc(docRef);
     // зөвхөн захиалгуудыг салгаж авах
     let docOrderArr = docRefData.data().order;
+    let docOrdername = docRefData.data().name;
     if (docOrderArr.length > 0 || docOrderArr == "undefined") {
       let existingUserArrFiltered = docOrderArr.filter(
-        (e) => e.userID == loggedUserID
+        (e) => e.userID == loggedUserID && e.date == dateValue
       );
-      if (existingUserArrFiltered.length > 0) {
+      if (existingUserArrFiltered.length > 0 ) {
         swal("Та ширээ захиалсан байна.");
       } else {
         swal("Та ширээ амжилттай захиаллаа.");
@@ -178,6 +180,7 @@ const updateUserOrderDataToFireStore = async function (
             time: timeValue,
             userID: loggedUserID,
             table: tableValue,
+            resName: docOrdername
           }),
         });
       }
@@ -193,6 +196,7 @@ const updateUserOrderDataToFireStore = async function (
         }),
       });
     }
+    orderTableDisable();
   } catch (error) {
     swal("ERR: ", error);
   }
@@ -293,6 +297,31 @@ function resetPasswordEmail(userLoginPassword, userLoginEmail) {
     });
 }
 
+
+// =============Захиалгатай ширээ идэвхигүй болгох=============
+let orderTableArr =[];
+const orderTableDisable = async function(
+  restaurantID,
+  dateValue
+){
+  try {
+    const docRef = await doc(db, "restaurant", restaurantID);
+    let docRefData = await getDoc(docRef);
+    // зөвхөн захиалгуудыг салгаж авах
+    let docOrderArr = docRefData.data().order;
+    
+    docOrderArr.forEach((orderData)=>{
+      if(orderData.date == dateValue){
+        orderTableArr.push(orderData.table);
+      }
+    });
+  localStorage.setItem("order-table", JSON.stringify(orderTableArr));
+
+  } catch (error) {
+    swal("ERR: ", error);
+  }
+}
+
 export {
   signUp,
   signIn,
@@ -301,5 +330,6 @@ export {
   updateUserOrderDataToFireStore,
   updateUserOrderDataToLocalstorage,
   updateRestaurantRatingInFireStore,
-  updateRestaurantRatingCommentInFireStore
+  updateRestaurantRatingCommentInFireStore,
+  orderTableDisable
 };

@@ -10,6 +10,8 @@ import {
 document.addEventListener("DOMContentLoaded", () => {
   showUserInfo();
   showUserName();
+  updateUserOrderDataToLocalstorage();
+  localStorageShowOrderItems();
 });
 
 // ==================Scroll To Top Effect===============
@@ -70,7 +72,7 @@ listItems.forEach((item, idx) => {
     if (idx === 1) {
       //hereglegchiin zahialga tsonh
       content2.classList.add("show");
-      localStorageShowOrderItems();
+      // localStorageShowOrderItems();
     } else {
       content2.classList.remove("show");
     }
@@ -387,23 +389,49 @@ let personOrderSeatValue =
   document.getElementsByClassName("right-content-seat")[0];
 let orderStatus = document.getElementsByClassName("order-status")[0];
 
-// localStorageShowOrderItems();
+
+
+//==============Захиалгуудыг дарааллаж харуулах хэсэг
+let profileTable = document.getElementById("profileTable");
 function localStorageShowOrderItems() {
+  
   let selectedUserOrder = JSON.parse(localStorage.getItem("selectedUserOrder"));
   if (localStorage.selectedUserOrder) {
     selectedUserOrder.forEach((item) => {
-      personOrderDate.lastElementChild.textContent = item.date;
-      personOrderPersonValue.lastElementChild.textContent = item.people;
-      personOrderTimeValue.lastElementChild.textContent = item.time;
-      personOrderSeatValue.lastElementChild.textContent = item.table;
-      orderStatus.textContent = "Баталгаажсан";
+      let profileHTML =`
+      <tr>
+        <td>${item.resName}</td>
+        <td>${item.date}</td>
+        <td>${item.people}</td>
+        <td>${item.time}</td>
+        <td>${item.table}</td>
+        <td class="order-status" >Баталгаажсан</td>
+      </tr>
+     `;
+      profileTable.innerHTML += profileHTML;
+
     });
   } else {
-    personOrderDate.lastElementChild.textContent = "";
-    personOrderPersonValue.lastElementChild.textContent = "";
-    personOrderTimeValue.lastElementChild.textContent = "";
-    personOrderSeatValue.lastElementChild.textContent = "";
-    orderStatus.textContent = "";
+    let profileHTML =`
+    <tr>
+      <th>Ресторан нэр</th>
+      <th>Огноо</th>
+      <th>Хүн</th>
+      <th>Цаг</th>
+      <th>Ширээ</th>
+      <th>Төлөв</th>
+    </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="order-status" ></td>
+      </tr>
+     `
+    profileTable.innerHTML = profileHTML;
+
   }
 }
 //==============Ширээ захиалга руу буцах хэсэг

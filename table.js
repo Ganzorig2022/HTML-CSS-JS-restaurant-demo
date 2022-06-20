@@ -1,4 +1,4 @@
-import { updateUserOrderDataToFireStore } from "./firebase_auth.js";
+import { updateUserOrderDataToFireStore, orderTableDisable } from "./firebase_auth.js";
 
 let tablesSelected = document.getElementsByClassName("tables");
 let personNum = document.getElementById("person");
@@ -52,6 +52,13 @@ for (let i = 0; i < tablesSelected.length; i++) {
   });
 }
 //=============================================================================================
+// 
+function disabled (){
+  
+}
+tablesSelected[0].classList.add("disable");
+tablesSelected[0].classList.remove("tableHover");
+
 
 //
 
@@ -83,6 +90,10 @@ orderButton.addEventListener("click", () => {
       dateValue,
       timeValue,
       +tableValue
+    );
+    orderTableDisable(
+      restaurantID,
+      dateValue
     );
   }
 
