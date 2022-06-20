@@ -32,6 +32,8 @@ const userProfileModalHeader = document.getElementById(
   "user-profile-modal--header"
 );
 const cartModal = document.getElementsByClassName("cart-modal")[0];
+let submitCommentBtnSelect = "";
+let textAreaSelect = "";
 
 
 let restaurantArr = JSON.parse(localStorage.getItem("restaurantAllData"));
@@ -349,10 +351,12 @@ function showRestaurantsContent() {
       let restaurantLocation = document.getElementById("locationTitle");
       restaurantLocation.innerHTML += itemHTMLlocation;
       rightContainer.innerHTML += itemHTML;
+      submitCommentBtnSelect = document.getElementById("submit-comment-btn");
+      textAreaSelect = document.getElementById("text-area-input");
       getRatings();
       btnClick();
       totalRating();
-      feedbackComment();
+      // feedbackComment();
       userComment();
     }
   });
@@ -636,9 +640,9 @@ buttons.forEach((button) => {
 
 
 // =================Сэтгэгдэл үлдээх - Баталгаажсан хэрэглэгч====================
-let submitCommentBtn =
-document.getElementById("submit-comment-btn");
-let textArea = document.getElementById("text-area-input");
+// let submitCommentBtn =
+// document.getElementById("submit-comment-btn");
+// let textArea = document.getElementById("text-area-input");
 
 function userComment(){
   
@@ -646,7 +650,7 @@ function userComment(){
     (e) => e.id == restaurantID
   );
   let selectedRestaurantOrders = selectedRestaurant[0].order;
-
+    console.log("selectedRestaurantOrders", selectedRestaurantOrders)
   if(selectedRestaurantOrders.length>0){
 
     selectedRestaurantOrders.forEach((order)=>{
@@ -663,15 +667,15 @@ function userComment(){
 }
 function disableUserCommentSection()
 {
-  submitCommentBtn.setAttribute("disabled", "");    
-  textArea.disabled =true;    
-  submitCommentBtn.style.cursor = "no-drop";    
-  submitCommentBtn.style.background = "#555";   
+  submitCommentBtnSelect.setAttribute("disabled", "");    
+  textAreaSelect.disabled =true;    
+  submitCommentBtnSelect.style.cursor = "no-drop";    
+  submitCommentBtnSelect.style.background = "#555";   
 };
 function enableUserCommentSection()
 {
-  submitCommentBtn.removeAttribute("disabled");    
-  textArea.disabled =false;    
-  submitCommentBtn.style.cursor = "pointer";    
+  submitCommentBtnSelect.removeAttribute("disabled");    
+  textAreaSelect.disabled =false;    
+  submitCommentBtnSelect.style.cursor = "pointer";    
   // submitCommentBtn.style.background = "#555";   
 };

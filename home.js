@@ -337,13 +337,15 @@ function showRestaurantsContent() {
 function moreBtnClick() {
   const moreBtn = document.querySelectorAll(".more-btn");
   moreBtn.forEach((more) => {
-    more.addEventListener("click", (e) => {
+    more.addEventListener("click", async (e) => {
       const restaurantID = e.target.getAttribute("restaurant-id");
-      localStorage.setItem(
+       localStorage.setItem(
         "selectedRestaurantID",
         JSON.stringify(restaurantID)
       );
-      location.href = "Main.html";
+      if(restaurantID){
+        location.href = "Main.html";
+      }
     });
   });
 }

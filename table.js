@@ -34,22 +34,22 @@ for (let i = 0; i < tablesSelected.length; i++) {
     let seatCount = tablesSelected[i].firstElementChild.value;
     orderTable = tablesSelected[i].lastElementChild.textContent;
     if (seatCount >= personValue) {
-      console.log("ALDAA");
       if (seat < 1) {
         seat++;
         tablesSelected[i].classList.toggle("active");
-        if (tablesSelected[i].classList[2]) {
+        if (tablesSelected[i].classList[3]) {
         } else {
           seat = seat - 2;
         }
       } else {
-        if (tablesSelected[i].classList[2]) {
+        if (tablesSelected[i].classList[3]) {
           seat--;
           tablesSelected[i].classList.toggle("active");
         } else alert("Та 2 ширээ захилах гэж байна.");
       }
     } else {
       swal(`${personValue} дээш суудалтай ширээ захиална уу!`);
+
     }
   });
 }
