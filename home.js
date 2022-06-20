@@ -114,6 +114,8 @@ logoutBtn.addEventListener("click", async () => {
     localStorage.removeItem("loggedUserID");
     localStorage.removeItem("selectedUserOrder");
     localStorage.removeItem("selectedRestaurantID");
+    localStorage.removeItem("order-table");
+
     userProfileModal.classList.remove("hidden");
     userProfileModalHeader.innerHTML = `Хэрэглэгч:`;
 

@@ -5,6 +5,7 @@ import {
   updateUserOrderDataToLocalstorage,
   updateRestaurantRatingInFireStore,
   updateRestaurantRatingCommentInFireStore,
+  orderTableDisable
 } from "./firebase_auth.js";
 
 //=============1. Хамгийн түрүүнд ажиллах ФУНКЦҮҮД =============
@@ -32,8 +33,11 @@ const userProfileModalHeader = document.getElementById(
 );
 const cartModal = document.getElementsByClassName("cart-modal")[0];
 
+
 let restaurantArr = JSON.parse(localStorage.getItem("restaurantAllData"));
 let restaurantID = JSON.parse(localStorage.getItem("selectedRestaurantID"));
+let loggedUserIDData = JSON.parse(localStorage.getItem("loggedUserID"));
+
 let restaurantAverageRatingValue;
 let restaurantRatingSumValue;
 let restaurantAverageRatingArr;
@@ -292,14 +296,14 @@ function showRestaurantsContent() {
                     <form>
                       <div class="star-rating-text"></div>
                       <div class="textarea">
-                        <textarea
+                        <textarea id="text-area-input"
                           cols="30"
                           placeholder="Та сэтгэгдлээ энд бичнэ үү.."
                         ></textarea>
                       </div>
                     </form>
                       <div class="submit-comment-btn">
-                        <button type="submit">Сэтгэгдэл үлдээх</button>
+                        <button type="submit" id="submit-comment-btn">Сэтгэгдэл үлдээх</button>
                       </div>
                   </div>
                 </div>
@@ -349,6 +353,7 @@ function showRestaurantsContent() {
       btnClick();
       totalRating();
       feedbackComment();
+      userComment();
     }
   });
 }
@@ -483,7 +488,7 @@ cartIconBtn.addEventListener("click", () => {
 });
 
 // ========================Захиалга дээр дарахад ХАДГАЛАХ=====================
-btnTime.addEventListener("click", () => {
+btnTime.addEventListener("click", async () => {
   // let key = selectedPerson.value;
   let personValue = selectedPerson.options[selectedPerson.selectedIndex].text;
   let dateValue = selected_date_element.textContent;
@@ -497,13 +502,23 @@ btnTime.addEventListener("click", () => {
 
   // Zahialgiin medeellvvdiig LOCAL dr hadgalah
   localStorage.setItem("order-time", JSON.stringify(timeData));
+  let restaurantID = JSON.parse(localStorage.getItem("selectedRestaurantID"));
+  let isSuccessful = false;
+  console.log("restaurantID",restaurantID);
+  console.log("dateValue",dateValue);
 
-  if (localStorage.loggedUserData) {
-    window.location.assign("table.html");
-  } else {
-    swal("Та нэвтэрч орсны дараа захиалга өгөх боломжтой!");
-    loginModal.classList.add("show-modal");
-  }
+  
+  isSuccessful = await orderTableDisable(restaurantID, dateValue);
+    if(isSuccessful){
+      if (localStorage.loggedUserData) {
+        window.location.assign("table.html");
+      } else {
+        swal("Та нэвтэрч орсны дараа захиалга өгөх боломжтой!");
+        loginModal.classList.add("show-modal");
+      }
+    }
+  
+  
 });
 
 // =========================Нэвтэрсэн Хэрэглэгчийн НЭРИЙГ харуулах=================
@@ -617,3 +632,46 @@ buttons.forEach((button) => {
     setTimeout(() => circle.remove(), 200);
   });
 });
+
+
+
+// =================Сэтгэгдэл үлдээх - Баталгаажсан хэрэглэгч====================
+let submitCommentBtn =
+document.getElementById("submit-comment-btn");
+let textArea = document.getElementById("text-area-input");
+
+function userComment(){
+  
+  let selectedRestaurant = restaurantArr.filter(
+    (e) => e.id == restaurantID
+  );
+  let selectedRestaurantOrders = selectedRestaurant[0].order;
+
+  if(selectedRestaurantOrders.length>0){
+
+    selectedRestaurantOrders.forEach((order)=>{
+      if(order.userID === loggedUserIDData){
+        enableUserCommentSection()      
+      }else {
+        disableUserCommentSection()      
+      }
+    })
+  } else{
+    disableUserCommentSection()
+  }
+  
+}
+function disableUserCommentSection()
+{
+  submitCommentBtn.setAttribute("disabled", "");    
+  textArea.disabled =true;    
+  submitCommentBtn.style.cursor = "no-drop";    
+  submitCommentBtn.style.background = "#555";   
+};
+function enableUserCommentSection()
+{
+  submitCommentBtn.removeAttribute("disabled");    
+  textArea.disabled =false;    
+  submitCommentBtn.style.cursor = "pointer";    
+  // submitCommentBtn.style.background = "#555";   
+};

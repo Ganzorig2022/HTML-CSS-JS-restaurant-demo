@@ -7,7 +7,9 @@ let tableTimeValue = document.getElementsByClassName("timeValue");
 let orderButton = document.getElementsByClassName("orderbutton")[1];
 
 let orderTime = JSON.parse(localStorage.getItem("order-time"));
-
+document.addEventListener("DOMContentLoaded", () => {
+  selectedOrderTableItem();
+});
 //LocalStore
 for (let i = 0; i < option.length; i++) {
   if (option[i].textContent === orderTime.person) {
@@ -53,14 +55,25 @@ for (let i = 0; i < tablesSelected.length; i++) {
 }
 //=============================================================================================
 // 
-function disabled (){
-  
+function selectedOrderTableItem (){
+  let tableArrSelected = JSON.parse(localStorage.getItem("order-table"));
+  tableArrSelected.forEach((tableId)=>{
+    disableSelecetedTable(
+      tableId
+    );
+  })
 }
-tablesSelected[0].classList.add("disable");
-tablesSelected[0].classList.remove("tableHover");
+function disableSelecetedTable(tableId){
+  let tablesSelectedArr = Array.from(tablesSelected);
+  tablesSelectedArr.forEach((event, idx)=>{
+    let seatCountItem = tablesSelected[idx].lastElementChild.textContent;
+    if(tableId==seatCountItem){
+      tablesSelected[idx].classList.add("disable")
+      tablesSelected[idx].classList.remove("tableHover")
+    }
+  })
+}
 
-
-//
 
 orderButton.addEventListener("click", () => {
   let personValue = selectedPerson.options[selectedPerson.selectedIndex].text;
@@ -91,10 +104,7 @@ orderButton.addEventListener("click", () => {
       timeValue,
       +tableValue
     );
-    orderTableDisable(
-      restaurantID,
-      dateValue
-    );
+    
   }
 
   //   window.location.assign("profile.html");
@@ -174,3 +184,6 @@ function inActiveUserProfile() {
   userProfileBtn.style.background = "#ccc";
 }
 showUserName();
+export{
+  selectedOrderTableItem
+}

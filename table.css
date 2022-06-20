@@ -896,7 +896,7 @@ button:active {
 
 /* Disable style */
 .disable{
-  background-color: var(--secondary-color);
+  background-color:#555;
 }
 .disable:hover{
   cursor: not-allowed;

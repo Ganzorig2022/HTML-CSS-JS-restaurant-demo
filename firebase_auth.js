@@ -196,7 +196,7 @@ const updateUserOrderDataToFireStore = async function (
         }),
       });
     }
-    orderTableDisable();
+    // orderTableDisable();
   } catch (error) {
     swal("ERR: ", error);
   }
@@ -309,7 +309,7 @@ const orderTableDisable = async function(
     let docRefData = await getDoc(docRef);
     // зөвхөн захиалгуудыг салгаж авах
     let docOrderArr = docRefData.data().order;
-    
+    console.log("docOrderArr", docOrderArr);
     docOrderArr.forEach((orderData)=>{
       if(orderData.date == dateValue){
         orderTableArr.push(orderData.table);
@@ -317,8 +317,9 @@ const orderTableDisable = async function(
     });
   localStorage.setItem("order-table", JSON.stringify(orderTableArr));
 
+  return true;
   } catch (error) {
-    swal("ERR: ", error);
+    return false;
   }
 }
 
