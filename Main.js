@@ -690,3 +690,4 @@ buttons.forEach((button) => {
     setTimeout(() => circle.remove(), 200);
   });
 });
+
