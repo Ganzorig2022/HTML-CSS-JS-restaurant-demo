@@ -1,4 +1,7 @@
-import { updateUserOrderDataToFireStore, orderTableDisable } from "./firebase_auth.js";
+import {
+  updateUserOrderDataToFireStore,
+  orderTableDisable,
+} from "./firebase_auth.js";
 
 let tablesSelected = document.getElementsByClassName("tables");
 let personNum = document.getElementById("person");
@@ -49,31 +52,27 @@ for (let i = 0; i < tablesSelected.length; i++) {
       }
     } else {
       swal(`${personValue} дээш суудалтай ширээ захиална уу!`);
-
     }
   });
 }
 //=============================================================================================
-// 
-function selectedOrderTableItem (){
+//
+function selectedOrderTableItem() {
   let tableArrSelected = JSON.parse(localStorage.getItem("order-table"));
-  tableArrSelected.forEach((tableId)=>{
-    disableSelecetedTable(
-      tableId
-    );
-  })
+  tableArrSelected.forEach((tableId) => {
+    disableSelecetedTable(tableId);
+  });
 }
-function disableSelecetedTable(tableId){
+function disableSelecetedTable(tableId) {
   let tablesSelectedArr = Array.from(tablesSelected);
-  tablesSelectedArr.forEach((event, idx)=>{
+  tablesSelectedArr.forEach((event, idx) => {
     let seatCountItem = tablesSelected[idx].lastElementChild.textContent;
-    if(tableId==seatCountItem){
-      tablesSelected[idx].classList.add("disable")
-      tablesSelected[idx].classList.remove("tableHover")
+    if (tableId == seatCountItem) {
+      tablesSelected[idx].classList.add("disable");
+      tablesSelected[idx].classList.remove("tableHover");
     }
-  })
+  });
 }
-
 
 orderButton.addEventListener("click", () => {
   let personValue = selectedPerson.options[selectedPerson.selectedIndex].text;
@@ -94,7 +93,6 @@ orderButton.addEventListener("click", () => {
 
     let restaurantID = JSON.parse(localStorage.getItem("selectedRestaurantID"));
     let loggedUserID = JSON.parse(localStorage.getItem("loggedUserID"));
-    console.log(restaurantID);
 
     updateUserOrderDataToFireStore(
       loggedUserID,
@@ -104,15 +102,12 @@ orderButton.addEventListener("click", () => {
       timeValue,
       +tableValue
     );
-    
   }
 
   //   window.location.assign("profile.html");
 });
 
-const loginOpen = document.getElementById("login-open");
 const loginModal = document.getElementsByClassName("login-modal-container")[0];
-const loginClose = document.getElementById("modal-close-btn");
 window.addEventListener("click", (e) => {
   if (e.target == loginModal) {
     loginModal.classList.remove("show-modal");
@@ -137,13 +132,6 @@ scrollToTopBtn.addEventListener("click", () => {
   document.documentElement.scrollTop = 0;
 });
 
-// =========================USER NAME-iig Haruulah=================
-const userProfileModalHeader = document.getElementById(
-  "user-profile-modal--header"
-);
-const userProfileBtn = document.getElementsByClassName("profile")[0];
-const loggedUserId = document.getElementById("logged-user-id");
-
 // ========================Profile window Open=====================
 const userProfile = document.getElementsByClassName("user-profile-modal")[0];
 
@@ -158,6 +146,13 @@ const cartModal = document.getElementsByClassName("cart-modal")[0];
 cartIconBtn.addEventListener("click", () => {
   cartModal.classList.toggle("hidden");
 });
+
+// =========================USER NAME-iig Haruulah=================
+const userProfileModalHeader = document.getElementById(
+  "user-profile-modal--header"
+);
+const userProfileBtn = document.getElementsByClassName("profile")[0];
+const loggedUserId = document.getElementById("logged-user-id");
 
 function showUserName() {
   if (localStorage.length > 0) {
@@ -184,6 +179,4 @@ function inActiveUserProfile() {
   userProfileBtn.style.background = "#ccc";
 }
 showUserName();
-export{
-  selectedOrderTableItem
-}
+export { selectedOrderTableItem };

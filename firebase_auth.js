@@ -133,7 +133,7 @@ const updateUserOrderDataToLocalstorage = async function () {
     let resQueryData = await getDocs(resQuery);
     resQueryData.forEach((item) => {
       let selectedRes = item.data();
-      selectedResOrderArr.push(...selectedRes.order)
+      selectedResOrderArr.push(...selectedRes.order);
       let userID = JSON.parse(localStorage.getItem("loggedUserID"));
       let selectedUserOrder = selectedResOrderArr.filter(
         (e) => e.userID === userID
@@ -168,7 +168,7 @@ const updateUserOrderDataToFireStore = async function (
       let existingUserArrFiltered = docOrderArr.filter(
         (e) => e.userID == loggedUserID && e.date == dateValue
       );
-      if (existingUserArrFiltered.length > 0 ) {
+      if (existingUserArrFiltered.length > 0) {
         swal("Та ширээ захиалсан байна.");
       } else {
         swal("Та ширээ амжилттай захиаллаа.");
@@ -180,7 +180,7 @@ const updateUserOrderDataToFireStore = async function (
             time: timeValue,
             userID: loggedUserID,
             table: tableValue,
-            resName: docOrdername
+            resName: docOrdername,
           }),
         });
       }
@@ -219,12 +219,13 @@ const updateRestaurantRatingInFireStore = async function (
 };
 // =============Хэрэглэгчийн Сэтгэгдэл UPDATE хийх=============
 //
-const updateRestaurantRatingCommentInFireStore = async function(
+const updateRestaurantRatingCommentInFireStore = async function (
   textAreaValue,
   starRatingNumber,
   restaurantID,
   userName
-){
+) {
+  console.log(starRatingNumber);
 
   try {
     const docRef = await doc(db, "restaurant", restaurantID);
@@ -239,7 +240,7 @@ const updateRestaurantRatingCommentInFireStore = async function(
   } catch (error) {
     console.log("ERR: ", error);
   }
-}
+};
 
 // =============Хэрэглэгчийн хувийн мэдээллийг UPDATE хийх=============
 const updateUserDataInFireStore = async function (
@@ -297,31 +298,26 @@ function resetPasswordEmail(userLoginPassword, userLoginEmail) {
     });
 }
 
-
 // =============Захиалгатай ширээ идэвхигүй болгох=============
-let orderTableArr =[];
-const orderTableDisable = async function(
-  restaurantID,
-  dateValue
-){
+let orderTableArr = [];
+const orderTableDisable = async function (restaurantID, dateValue) {
   try {
     const docRef = await doc(db, "restaurant", restaurantID);
     let docRefData = await getDoc(docRef);
     // зөвхөн захиалгуудыг салгаж авах
     let docOrderArr = docRefData.data().order;
-    console.log("docOrderArr", docOrderArr);
-    docOrderArr.forEach((orderData)=>{
-      if(orderData.date == dateValue){
+    docOrderArr.forEach((orderData) => {
+      if (orderData.date == dateValue) {
         orderTableArr.push(orderData.table);
       }
     });
-  localStorage.setItem("order-table", JSON.stringify(orderTableArr));
+    localStorage.setItem("order-table", JSON.stringify(orderTableArr));
 
-  return true;
+    return true;
   } catch (error) {
     return false;
   }
-}
+};
 
 export {
   signUp,
@@ -332,5 +328,5 @@ export {
   updateUserOrderDataToLocalstorage,
   updateRestaurantRatingInFireStore,
   updateRestaurantRatingCommentInFireStore,
-  orderTableDisable
+  orderTableDisable,
 };

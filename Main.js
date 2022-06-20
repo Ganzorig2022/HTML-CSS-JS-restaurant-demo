@@ -1,11 +1,10 @@
 import {
-  signUp,
   signIn,
   logOut,
   updateUserOrderDataToLocalstorage,
   updateRestaurantRatingInFireStore,
   updateRestaurantRatingCommentInFireStore,
-  orderTableDisable
+  orderTableDisable,
 } from "./firebase_auth.js";
 
 //=============1. Хамгийн түрүүнд ажиллах ФУНКЦҮҮД =============
@@ -35,8 +34,7 @@ const cartModal = document.getElementsByClassName("cart-modal")[0];
 let submitCommentBtnSelect = "";
 let textAreaSelect = "";
 
-
-let restaurantArr = JSON.parse(localStorage.getItem("restaurantAllData"));
+let restaurantAllArr = JSON.parse(localStorage.getItem("restaurantAllData"));
 let restaurantID = JSON.parse(localStorage.getItem("selectedRestaurantID"));
 let loggedUserIDData = JSON.parse(localStorage.getItem("loggedUserID"));
 
@@ -69,7 +67,7 @@ function getRatings() {
 
 // ========================Хэрэглэгчдийн үнэлгээнүүдийг тусад нь САЛГАЖ авах=====================
 function totalRating() {
-  restaurantArr.forEach((restaurant) => {
+  restaurantAllArr.forEach((restaurant) => {
     if (restaurant.id == restaurantID) {
       if (restaurant.comments) {
         const restaurantCommentArr = restaurant.comments;
@@ -94,10 +92,7 @@ function totalRating() {
           restaurantAverageRatingValue,
           restaurantID
         );
-        // console.log(
-        //   "Restauran-ii DUNDAJ VNELGEE: ",
-        //   restaurantAverageRatingValue
-        // );
+       
       } else {
         console.log("comments bhgv bn.");
       }
@@ -110,16 +105,20 @@ function totalRating() {
       if (rating === 5) {
         countRating5star++;
         calculateStarMeterWidth(countRating5star, 1);
-      } else if (rating === 4) {
+      }
+      if (rating === 4) {
         countRating4star++;
         calculateStarMeterWidth(countRating4star, 2);
-      } else if (rating === 3) {
+      }
+      if (rating === 3) {
         countRating3star++;
         calculateStarMeterWidth(countRating3star, 3);
-      } else if (rating === 2) {
+      }
+      if (rating === 2) {
         countRating2star++;
         calculateStarMeterWidth(countRating2star, 4);
-      } else {
+      }
+      if (rating === 1) {
         countRating1star++;
         calculateStarMeterWidth(countRating1star, 5);
       }
@@ -136,27 +135,10 @@ function totalRating() {
     }
   }
 }
-// ========================Profile window Open=====================
-userProfileBtn.addEventListener("click", () => {
-  userProfile.classList.toggle("hidden1");
-});
-
-// ========================LOGIN MODAL window Open=====================
-loginOpen.addEventListener("click", () => {
-  loginModal.classList.add("show-modal");
-});
-
-loginClose.addEventListener("click", () => {
-  loginModal.classList.remove("show-modal");
-});
-
-window.addEventListener("click", (e) => {
-  e.target == loginModal ? loginModal.classList.remove("show-modal") : false;
-});
 
 // =========================Restaurant-iig Haruulah=================
 function showRestaurantsContent() {
-  restaurantArr.forEach((restaurant) => {
+  restaurantAllArr.forEach((restaurant) => {
     if (restaurant.id == restaurantID) {
       let restaurantBackground = document.getElementsByTagName("header")[0];
       restaurantBackground.style.backgroundImage = `url(${restaurant.backgroundImage})`;
@@ -354,7 +336,7 @@ function showRestaurantsContent() {
       submitCommentBtnSelect = document.getElementById("submit-comment-btn");
       textAreaSelect = document.getElementById("text-area-input");
       getRatings();
-      btnClick();
+      menuSwap();
       totalRating();
       feedbackComment();
       userComment();
@@ -370,7 +352,7 @@ function sliceUserName(name) {
 }
 
 //=====================Хоол, Уух menu дээр дарахад солбиж харуулах===========================
-function btnClick() {
+function menuSwap() {
   let menuBtn = document.getElementById("btnBorder");
   let menuBtn1 = document.getElementById("btnBorder1");
   let MenuTxt = document.getElementsByTagName("h5")[0];
@@ -413,6 +395,7 @@ signinBtn.addEventListener("click", async () => {
 
     if (isSuccessful) {
       swal(`Хэрэглэгч та амжилттай нэвтэрлээ!`);
+      reloadCurrentPage();
 
       loginModal.classList.remove("show-modal");
       disableLoginBtn();
@@ -439,10 +422,12 @@ logoutBtn.addEventListener("click", async () => {
   isSuccessful = await logOut();
   if (isSuccessful) {
     swal("Та системээс гарлаа.");
+    reloadCurrentPage();
     // localStorage-iig empty bolgono.
     localStorage.removeItem("loggedUserData");
     localStorage.removeItem("selectedUserOrder");
     localStorage.removeItem("loggedUserID");
+    localStorage.removeItem("order-time");
 
     userProfileModalHeader.innerHTML = `Хэрэглэгч:`;
     userProfileModal.classList.remove("hidden");
@@ -486,11 +471,6 @@ function inActiveUserProfile() {
   userProfileBtn.style.background = "#ccc";
 }
 
-// ========================Сагсан дах захиалсан хоолны меню-г НЭЭХ=====================
-cartIconBtn.addEventListener("click", () => {
-  cartModal.classList.toggle("hidden");
-});
-
 // ========================Захиалга дээр дарахад ХАДГАЛАХ=====================
 btnTime.addEventListener("click", async () => {
   // let key = selectedPerson.value;
@@ -508,21 +488,18 @@ btnTime.addEventListener("click", async () => {
   localStorage.setItem("order-time", JSON.stringify(timeData));
   let restaurantID = JSON.parse(localStorage.getItem("selectedRestaurantID"));
   let isSuccessful = false;
-  console.log("restaurantID",restaurantID);
-  console.log("dateValue",dateValue);
+  console.log("restaurantID", restaurantID);
+  console.log("dateValue", dateValue);
 
-  
   isSuccessful = await orderTableDisable(restaurantID, dateValue);
-    if(isSuccessful){
-      if (localStorage.loggedUserData) {
-        window.location.assign("table.html");
-      } else {
-        swal("Та нэвтэрч орсны дараа захиалга өгөх боломжтой!");
-        loginModal.classList.add("show-modal");
-      }
+  if (isSuccessful) {
+    if (localStorage.loggedUserData) {
+      window.location.assign("table.html");
+    } else {
+      swal("Та нэвтэрч орсны дараа захиалга өгөх боломжтой!");
+      loginModal.classList.add("show-modal");
     }
-  
-  
+  }
 });
 
 // =========================Нэвтэрсэн Хэрэглэгчийн НЭРИЙГ харуулах=================
@@ -556,10 +533,15 @@ function feedbackComment() {
   const starsSelected = document.querySelectorAll(".starRate");
   let starRatingNumber;
   let textAreaValue = "";
+  let userName = "";
 
-  let userData = JSON.parse(localStorage.getItem("loggedUserData"));
-  let userName = userData.name;
-  console.log("userName", userName);
+  //Хэрэглэгч нэвтэрсэн эсэхийг шалгаад TRUE,FAlSE шалгана.
+  let isUserName = checkUserIsLogged();
+  if (isUserName) {
+    let userData = JSON.parse(localStorage.getItem("loggedUserData"));
+    userName = userData.name;
+  }
+  if (!isUserName) swal("Нэвтэрсэн хэрэглэгч алга байна!");
 
   //Ж/нь: 1 гэсэн од дээр дарахад 1 гэсэн утга авдаг функц
   starsSelected.forEach((starInput) => {
@@ -575,10 +557,11 @@ function feedbackComment() {
 
   // ilgeeh towchin dr darahad bichsen textiig firestore-luu yawuulah
   submitCommentBtn.addEventListener("click", () => {
-    if (textAreaValue && starRatingNumber) {
+    if (textAreaValue && starRatingNumber && userName) {
+      swal("Таны сэтгэгдэл амжилттай илгээгдлээ!");
       updateRestaurantRatingCommentInFireStore(
         textAreaValue,
-        starRatingNumber,
+        +starRatingNumber,
         restaurantID,
         userName
       );
@@ -586,6 +569,19 @@ function feedbackComment() {
       alert("Та сэтгэгдэл бичнэ үү!");
     }
   });
+}
+
+// ======LocalStorage-d hereglegch bga esehiig shalgah
+function checkUserIsLogged() {
+  const loggedUserData = localStorage.getItem("loggedUserData");
+
+  if (loggedUserData) return true;
+  if (!loggedUserData) return false;
+}
+
+// ========SignIn, SignOut hiihed huudsiig REFRESH hiih function
+function reloadCurrentPage() {
+  location.reload();
 }
 
 // Хэрэглэгчийн сонгосон одноос хамаарч харгалзах текстийг гаргадаг функц.
@@ -596,20 +592,78 @@ function showStarRatingText(starRatingNumber) {
   if (starRatingNumber == 1) {
     starRatingText.innerHTML = `"Үйлчилгээ ёстой таалагдсангүй"`;
     starRatingValue.innerHTML = `5-aac ${starRatingNumber}`;
-  } else if (starRatingNumber == 2) {
+  }
+  if (starRatingNumber == 2) {
     starRatingText.innerHTML = `"Ер нь таалагдсангүй"`;
     starRatingValue.innerHTML = `5-aac ${starRatingNumber}`;
-  } else if (starRatingNumber == 3) {
+  }
+  if (starRatingNumber == 3) {
     starRatingText.innerHTML = `"Ер нь таалагдсан"`;
     starRatingValue.innerHTML = `5-aac ${starRatingNumber}`;
-  } else if (starRatingNumber == 4) {
+  }
+  if (starRatingNumber == 4) {
     starRatingText.innerHTML = `"Үйлчилгээ сайн байсан"`;
     starRatingValue.innerHTML = `5-aac ${starRatingNumber}`;
-  } else {
+  }
+  if (starRatingNumber == 5) {
     starRatingText.innerHTML = `"Үнэхээр сайхан үйлчилгээтэй"`;
     starRatingValue.innerHTML = `5-aac ${starRatingNumber}`;
   }
 }
+
+// =================Сэтгэгдэл үлдээх - Баталгаажсан хэрэглэгч====================
+function userComment() {
+  let selectedRestaurant = restaurantAllArr.filter((e) => e.id == restaurantID);
+  let selectedRestaurantOrders = selectedRestaurant[0].order;
+  if (selectedRestaurantOrders.length > 0) {
+    selectedRestaurantOrders.forEach((order) => {
+      if (order.userID === loggedUserIDData) {
+        enableUserCommentSection();
+      } else {
+        disableUserCommentSection();
+      }
+    });
+  } else {
+    disableUserCommentSection();
+  }
+}
+function disableUserCommentSection() {
+  submitCommentBtnSelect.setAttribute("disabled", "");
+  textAreaSelect.disabled = true;
+  textAreaSelect.style.cursor = "no-drop";
+  submitCommentBtnSelect.style.cursor = "no-drop";
+  submitCommentBtnSelect.style.background = "#555";
+}
+function enableUserCommentSection() {
+  submitCommentBtnSelect.removeAttribute("disabled");
+  textAreaSelect.disabled = false;
+  // textAreaSelect.style.cursor = "no-drop";
+  submitCommentBtnSelect.style.cursor = "pointer";
+}
+
+// ========================Profile window Open=====================
+userProfileBtn.addEventListener("click", () => {
+  userProfile.classList.toggle("hidden1");
+});
+
+// ========================LOGIN MODAL window Open=====================
+loginOpen.addEventListener("click", () => {
+  loginModal.classList.add("show-modal");
+});
+
+loginClose.addEventListener("click", () => {
+  loginModal.classList.remove("show-modal");
+});
+
+window.addEventListener("click", (e) => {
+  e.target == loginModal ? loginModal.classList.remove("show-modal") : false;
+});
+
+// ========================Сагсан дах захиалсан хоолны меню-г НЭЭХ=====================
+cartIconBtn.addEventListener("click", () => {
+  cartModal.classList.toggle("hidden");
+});
+
 // =================Button Effect====================
 const buttons = document.querySelectorAll(".ripple");
 buttons.forEach((button) => {
@@ -636,46 +690,3 @@ buttons.forEach((button) => {
     setTimeout(() => circle.remove(), 200);
   });
 });
-
-
-
-// =================Сэтгэгдэл үлдээх - Баталгаажсан хэрэглэгч====================
-// let submitCommentBtn =
-// document.getElementById("submit-comment-btn");
-// let textArea = document.getElementById("text-area-input");
-
-function userComment(){
-  
-  let selectedRestaurant = restaurantArr.filter(
-    (e) => e.id == restaurantID
-  );
-  let selectedRestaurantOrders = selectedRestaurant[0].order;
-    console.log("selectedRestaurantOrders", selectedRestaurantOrders)
-  if(selectedRestaurantOrders.length>0){
-
-    selectedRestaurantOrders.forEach((order)=>{
-      if(order.userID === loggedUserIDData){
-        enableUserCommentSection()      
-      }else {
-        disableUserCommentSection()      
-      }
-    })
-  } else{
-    disableUserCommentSection()
-  }
-  
-}
-function disableUserCommentSection()
-{
-  submitCommentBtnSelect.setAttribute("disabled", "");    
-  textAreaSelect.disabled =true;    
-  submitCommentBtnSelect.style.cursor = "no-drop";    
-  submitCommentBtnSelect.style.background = "#555";   
-};
-function enableUserCommentSection()
-{
-  submitCommentBtnSelect.removeAttribute("disabled");    
-  textAreaSelect.disabled =false;    
-  submitCommentBtnSelect.style.cursor = "pointer";    
-  // submitCommentBtn.style.background = "#555";   
-};
