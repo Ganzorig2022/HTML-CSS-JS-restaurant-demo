@@ -356,7 +356,7 @@ function showRestaurantsContent() {
       getRatings();
       btnClick();
       totalRating();
-      // feedbackComment();
+      feedbackComment();
       userComment();
     }
   });
