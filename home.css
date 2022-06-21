@@ -901,6 +901,15 @@ button .circle {
 /* ====================MEDIA QUERIES======================= */
 /* ===================== SMARTPHONES===================== */
 @media (max-width: 500px) {
+  header{
+    height: 50vh;
+  }
+  .main-container__restaurant-content{
+    flex-direction: column;
+  }
+  .more-btn {
+    margin-bottom: 10px;
+  }
   nav ul {
     display: flex;
     align-items: center;
@@ -920,7 +929,9 @@ button .circle {
   nav .logo img {
     width: 100px;
   }
-
+  .fa-shopping-cart{
+    display: none;
+  }
   nav ul li a {
     font-size: 0.75rem;
     padding: 0.25rem;
@@ -946,34 +957,105 @@ button .circle {
     width: auto;
   }
   .right-content img {
-    width: 300px;
+    width: 100%;
   }
   .left-content h2 {
     font-size: 2rem;
   }
+  .left-content img{
+    width: 75px;
+  }
+  .footer-items{
+    flex-direction: column;
+  }
+  .footer-items div{
+    margin-bottom: 10px;
+  }
+  .login-modal, .signup-modal{
+    width: 300px;
+  }
+  
 }
 
 /* ======================TABLET====================== */
 @media (min-width: 501px) and (max-width: 768px) {
+  header{
+    height: 50vh;
+  }
+  .main-container__restaurant-content{
+    align-items: center;
+    flex-direction: column;
+  }
+  .right-content-img{
+    display: flex;
+    align-items: center;
+  }
+  .more-btn {
+    margin-bottom: 10px;
+  }
+  nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    height: 30px;
+    background-color: #000000;
+    top: 55px;
+    left: -100%;
+    transition: all 0.5s;
+  }
+
+  nav .logo {
+    text-align: center;
+  }
+  nav .logo img {
+    width: 100px;
+  }
+  .fa-shopping-cart{
+    display: none;
+  }
   nav ul li a {
     font-size: 0.75rem;
     padding: 0.25rem;
   }
-
-  .navBtnContainer button {
-    font-size: 0.75rem;
+  nav ul li a:hover {
+    border: 0;
   }
-  .main-container .left-content {
-    width: 40%;
+  nav .checkBtn {
+    display: block;
+  }
+  #check:checked ~ ul {
+    left: 0;
+  }
+  .navBtnContainer button {
+    font-size: 0.6rem;
+  }
+  .main-container {
+    flex-direction: column;
+    padding: 0;
+  }
+  .main-container .left-content,
+  .main-container .right-content {
+    width: auto;
+  }
+  .right-content img {
+    width: 400px;
   }
   .left-content h2 {
     font-size: 2rem;
   }
-  .left-content img {
+  .left-content img{
     width: 75px;
   }
-  .right-content img {
-    width: 400px;
+  .footer-items{
+    flex-direction: column;
+  }
+  .footer-items div{
+    margin-bottom: 10px;
+  }
+  .login-modal, .signup-modal{
+    width: 300px;
   }
 }
 

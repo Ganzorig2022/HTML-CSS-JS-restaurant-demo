@@ -172,6 +172,7 @@ const updateUserOrderDataToFireStore = async function (
         swal("Та ширээ захиалсан байна.");
       } else {
         swal("Та ширээ амжилттай захиаллаа.");
+
         updateDoc(docRef, {
           order: arrayUnion({
             date: dateValue,

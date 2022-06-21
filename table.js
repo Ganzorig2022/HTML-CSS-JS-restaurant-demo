@@ -134,6 +134,8 @@ scrollToTopBtn.addEventListener("click", () => {
 
 // ========================Profile window Open=====================
 const userProfile = document.getElementsByClassName("user-profile-modal")[0];
+const userProfileBtn = document.getElementsByClassName("profile")[0];
+
 
 userProfileBtn.addEventListener("click", () => {
   userProfile.classList.toggle("hidden2");
@@ -151,7 +153,6 @@ cartIconBtn.addEventListener("click", () => {
 const userProfileModalHeader = document.getElementById(
   "user-profile-modal--header"
 );
-const userProfileBtn = document.getElementsByClassName("profile")[0];
 const loggedUserId = document.getElementById("logged-user-id");
 
 function showUserName() {

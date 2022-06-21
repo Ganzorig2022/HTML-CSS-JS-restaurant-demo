@@ -12,8 +12,15 @@ document.addEventListener("DOMContentLoaded", () => {
   showUserName();
   updateUserOrderDataToLocalstorage();
   localStorageShowOrderItems();
+  
 });
-
+// ========SignIn, SignOut hiihed huudsiig REFRESH hiih function
+window.onload = function(){
+  if(!window.location.hash){
+    window.location = window.location + '#loaded';
+    window.location.reload();
+  }
+}
 // ==================Scroll To Top Effect===============
 const scrollToTopBtn = document.getElementById("scrollToTop-button");
 window.onscroll = function () {

@@ -884,6 +884,12 @@ table, th, td {
 /* ====================MEDIA QUERIES======================= */
 /* ===================== SMARTPHONES===================== */
 @media (max-width: 500px) {
+  .main-container__restaurant-content{
+    flex-direction: column;
+  }
+  .more-btn {
+    margin-bottom: 10px;
+  }
   nav ul {
     display: flex;
     align-items: center;
@@ -891,7 +897,7 @@ table, th, td {
     position: fixed;
     width: 100%;
     height: 30px;
-    background-color: #30336b;
+    background-color: #000000;
     top: 55px;
     left: -100%;
     transition: all 0.5s;
@@ -903,7 +909,9 @@ table, th, td {
   nav .logo img {
     width: 100px;
   }
-
+  .fa-shopping-cart{
+    display: none;
+  }
   nav ul li a {
     font-size: 0.75rem;
     padding: 0.25rem;
@@ -920,43 +928,126 @@ table, th, td {
   .navBtnContainer button {
     font-size: 0.6rem;
   }
-  .main-container {
-    flex-direction: column;
-    padding: 0;
+  header{
+    height: 25vh;
   }
-  .main-container .left-content,
-  .main-container .right-content {
-    width: auto;
+  header h1 {
+    font-size: 3rem;
+  }
+  .main-container{
+    margin: 0;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+  }
+  .main-container .left-content{
+    width: 90%;
+    margin: 0;
+  }
+  .main-container .left-content h3{
+    margin: 10px;
+  }
+  .main-container .left-content li{
+    margin: 0;
+  }
+  .main-container .right-content{
+    margin-top: 20px;
+    width: 90%;
+  }
+  .flex-row{
+    flex-direction: column;
+  }
+  .main-container .right-content.content2 .right-content-child1{
+    padding: 0;
+    font-size: 0.5rem;
+  }
+  .form1-container div{
+    width: 100%;
+    margin: 0;
+  }
+  .form-control{
+    height: auto;
+    padding: 10px;
+  }
+  .footer-items{
+    flex-direction: column;
+  }
+  .footer-items div{
+    margin-bottom: 10px;
+  }
+  .login-modal, .signup-modal{
+    width: 300px;
+  }
+  .right-content-child2{
+    padding: 10px;
+  }
+  .save-btn-container {
+    margin-bottom: 10px;
+  }
+  .save-btn {
+    margin-bottom: 0;
+    font-size: 0.75rem;
   }
 
-  .left-content h2 {
-    font-size: 2rem;
-  }
+  
 }
 
 /* ======================TABLET====================== */
 @media (min-width: 501px) and (max-width: 768px) {
-  nav ul li a {
-    font-size: 0.75rem;
-    padding: 0.25rem;
+  .more-btn {
+    margin-bottom: 10px;
   }
-
+  nav .logo {
+    text-align: center;
+  }
+  nav .logo img {
+    width: 100px;
+  }
+  .fa-shopping-cart{
+    display: none;
+  }
+  
   .navBtnContainer button {
-    font-size: 0.75rem;
+    font-size: 0.6rem;
   }
-  .main-container .left-content {
-    width: 40%;
+  header{
+    height: 50vh;
+  }
+  header h1 {
+    font-size: 3rem;
+  }
+  .main-container{
+    margin: 0;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+  }
+  .main-container .left-content{
+    width: 90%;
+    margin: 0;
+  }
+  .main-container .left-content h3{
+    margin: 10px;
+  }
+  .main-container .left-content li{
+    margin: 0;
+  }
+  .main-container .right-content{
+    margin-top: 20px;
+    width: 90%;
+  }
+  .flex-row{
+    flex-direction: column;
+  }
+  .main-container .right-content.content2 .right-content-child1{
+    padding: 0;
+    font-size: 0.5rem;
   }
 }
 
 /* ======================NORMAL====================== */
 @media (min-width: 769px) and (max-width: 1200px) {
-  /* .main-container .left-content {
-    width: 50%;
-  }
-  .right-content img {
-    width: 400px;
-  } */
+  
 }
 
 /* ====================WIDE SCREEN================== */

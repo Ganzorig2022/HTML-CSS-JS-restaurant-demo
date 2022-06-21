@@ -221,11 +221,7 @@ function showRestaurantsContent() {
             }</span>
 
             </div>
-            <ul class="ratingContaner">
-              <li>4 <span>хоол</span> </li>
-              <li>4 <span>үйлчилгээ</span></li>
-              <li>5 <span>Тав тухтай байдал</span></li>
-            </ul>
+            
           </div>
           <div class="personRatingRight">
             <div>
@@ -691,3 +687,20 @@ buttons.forEach((button) => {
   });
 });
 
+// ==================Scroll To Top Effect===============
+const scrollToTopBtn = document.getElementById("scrollToTop-button");
+window.onscroll = function () {
+  scrollFunction();
+};
+function scrollFunction() {
+  if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
+    scrollToTopBtn.style.display = "block";
+  } else {
+    scrollToTopBtn.style.display = "none";
+  }
+}
+
+scrollToTopBtn.addEventListener("click", () => {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+});
