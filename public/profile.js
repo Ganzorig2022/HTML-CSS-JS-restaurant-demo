@@ -3,11 +3,23 @@ import {
   signIn,
   logOut,
   updateUserDataInFireStore,
+  updateUserOrderDataToLocalstorage,
 } from "./firebase_auth.js";
 
 // DOM Refresh hiigdehed ehleed ajillana.
-document.addEventListener("DOMContentLoaded", showUserName);
-
+document.addEventListener("DOMContentLoaded", () => {
+  showUserInfo();
+  showUserName();
+  updateUserOrderDataToLocalstorage();
+  localStorageShowOrderItems();
+});
+// ========SignIn, SignOut hiihed huudsiig REFRESH hiih function
+// window.onload = function(){
+//   if(!window.location.hash){
+//     window.location = window.location + '#loaded';
+//     window.location.reload();
+//   }
+// }
 // ==================Scroll To Top Effect===============
 const scrollToTopBtn = document.getElementById("scrollToTop-button");
 window.onscroll = function () {
@@ -131,13 +143,15 @@ const signupBtn = document.getElementById("signup-submit-btn");
 const signinBtn = document.getElementById("login-submit-btn");
 const logoutBtn = document.getElementById("user-logout-btn");
 const userProfileBtn = document.getElementsByClassName("profile")[0];
-let loginInputs = document.querySelectorAll(".login-modal-form input");
 const loggedUserId = document.getElementById("logged-user-id");
+const userProfile = document.getElementsByClassName("user-profile-modal")[0];
 
 const userIcon = document.getElementsByClassName("fa-user")[0];
 
 let isSuccessful = false;
-
+userProfileBtn.addEventListener("click", () => {
+  userProfile.classList.toggle("hidden");
+});
 // ===========================SIGN UP NEW USER=======================
 signupBtn.addEventListener("click", async () => {
   const signupName = document.getElementById("signup-name").value;
@@ -199,6 +213,7 @@ signinBtn.addEventListener("click", async () => {
 
       showUserName();
       content1.classList.add("show");
+      updateUserOrderDataToLocalstorage();
 
       showUserInfo();
     } else {
@@ -215,7 +230,11 @@ logoutBtn.addEventListener("click", async () => {
   isSuccessful = await logOut();
   if (isSuccessful) {
     swal("Та системээс гарлаа. Дахин нэвтэрч орно уу.");
-    localStorage.clear("loggedUserUid");
+    localStorage.removeItem("loggedUserID");
+    localStorage.removeItem("selectedUserOrder");
+    localStorage.removeItem("loggedUserData");
+    localStorage.removeItem("selectedRestaurantID");
+
     content1.classList.add("show");
     loggedUserId.textContent = "байхгүй!";
 
@@ -224,6 +243,7 @@ logoutBtn.addEventListener("click", async () => {
     clearLoginInputs();
     inActiveUserProfile();
     clearUserInputs();
+    localStorageShowOrderItems();
   } else {
     disableLoginBtn();
   }
@@ -231,9 +251,11 @@ logoutBtn.addEventListener("click", async () => {
 
 //======================= SIGN IN hiisnii daraa hereglegchiin medeelliig HARUULAH
 function showUserInfo() {
-  if (localStorage.length > 0) {
+  const loggedUserData = localStorage.getItem("loggedUserData");
+
+  if (loggedUserData) {
     //Items are stored in local storage
-    let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
+    let userData = JSON.parse(localStorage.getItem("loggedUserData"));
     let FirstName = userData.firstname;
     let LastName = userData.lastname;
     let Password = userData.password;
@@ -250,9 +272,11 @@ function showUserInfo() {
 
 // =========================USER NAME-iig Haruulah=================
 function showUserName() {
-  if (localStorage.length > 0) {
+  const loggedUserData = localStorage.getItem("loggedUserData");
+
+  if (loggedUserData) {
     //Items are stored in local storage
-    let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
+    let userData = JSON.parse(localStorage.getItem("loggedUserData"));
     let userName = userData.name;
     // console.log("Username: ", userName);
 
@@ -358,3 +382,63 @@ function inActiveUserProfile() {
   userIcon.style.color = "#000";
   userProfileBtn.style.background = "#ccc";
 }
+
+//==============Захиалгуудыг дарааллаж харуулах хэсэг
+let profileTable = document.getElementById("profileTable");
+function localStorageShowOrderItems() {
+  let selectedUserOrder = localStorage.getItem("selectedUserOrder");
+
+  if (selectedUserOrder) {
+    let selectedUserOrderData = JSON.parse(
+      localStorage.getItem("selectedUserOrder")
+    );
+
+    if (localStorage.selectedUserOrder) {
+      selectedUserOrderData.forEach((item) => {
+        let profileHTML = `
+      <tr>
+        <td>${item.resName}</td>
+        <td>${item.date}</td>
+        <td>${item.people}</td>
+        <td>${item.time}</td>
+        <td>${item.table}</td>
+        <td class="order-status" >Баталгаажсан</td>
+      </tr>
+     `;
+        profileTable.innerHTML += profileHTML;
+      });
+    } else {
+      let profileHTML = `
+    <tr>
+      <th>Ресторан нэр</th>
+      <th>Огноо</th>
+      <th>Хүн</th>
+      <th>Цаг</th>
+      <th>Ширээ</th>
+      <th>Төлөв</th>
+    </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="order-status" ></td>
+      </tr>
+     `;
+      profileTable.innerHTML = profileHTML;
+    }
+  }
+}
+//==============Ширээ захиалга руу буцах хэсэг
+let backUserInfoBtn = document.getElementById("back-user-info-btn");
+backUserInfoBtn.addEventListener("click", () => {
+  const restaurantID = localStorage.getItem("selectedRestaurantID");
+  if (restaurantID) {
+    window.location.assign("table.html");
+  } else {
+    window.location.assign("home.html");
+  }
+});
+
+export { localStorageShowOrderItems };

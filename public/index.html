@@ -29,16 +29,12 @@
         <li><a href="#">Бидний тухай</a></li>
         <li><a href="#">Холбоо барих</a></li>
       </ul>
-      <!--============SEARCH INPUT SECTION========= -->
-      <!-- <form id="form">
-        <input type="text" id="search" placeholder="Enter restaurant name..." />
-        <button><i class="fas fa-search"></i></button>
-      </form> -->
-      <div class="navBtnContainer">
+     <div class="navBtnContainer">
         <button class="signUp-btn ripple" id="signup-open">Бүртгүүлэх</button>
         <button class="login-btn ripple" id="login-open">Нэвтрэх</button>
         <div class="cart-icon">
           <i class="fas fa-shopping-cart"></i>
+          <!-- Sagsand bga ITEM-iin heseg -->
           <div class="cart-modal">
             <div class="cart-modal--header">
               <h3>Таны сагс ( 1 захиалга )</h3>
@@ -85,7 +81,7 @@
           </div>
         </div>
         <div class="profile">
-          <a href="#">
+          <a>
             <i class="fas fa-user"></i>
           </a>
         </div>
@@ -112,45 +108,59 @@
     <header>
       <div class="showcase-content">
         <h1>Your Restaurant</h1>
-        <p>Чанартай сонголт</p>
-        <button class="order-btn ripple" id="open">Захиалга өгөх</button>
+        <p class="showcase-content__p">Чанартай сонголт</p>
+        <form class="restaurant-search">
+          <input type="text" class="restaurant-search__input" placeholder="Рестораны үнэлгээгээр хайна уу..."/>
+          <button class="restaurant-search__button">
+            <i class="fas fa-search"></i>
+          </button>
+        </form>
+        <!-- <button class="order-btn ripple" id="open">Захиалга өгөх</button> -->
+        <!-- JS-ees elementvvd END orj irne. -->
+        <div class="search-results">
+          <ul class="search-results-UL">
+            
+          </ul>
+        </div>
       </div>
     </header>
     <!--============3.Main SECTION========= -->
     <main>
       <h1>Restaurants</h1>
       <div class="main-container">
-        <div class="left-content">
-          <h2>
-            Momo Hot Pot restaurant
-            <span
-              ><img
-                src="https://scontent.fuln8-1.fna.fbcdn.net/v/t31.18172-8/17761016_1896818063904890_8880108015428113544_o.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=knDZV3HMs5IAX9Ujg6u&tn=SZT24u-xOvzoHsDB&_nc_ht=scontent.fuln8-1.fna&oh=00_AT9_1fu_3gSME4gAa7hw50JfxkHqOtK838ZEE1jakNoWTw&oe=62B5DB9B"
+        <!-- <div class="main-container__restaurant-content" >
+          <div class="left-content">
+            <h2 id = "left-content__restaurant-name">
+              Momo Hot Pot restaurant
+              <span
+                ><img
+                  src="https://scontent.fuln8-1.fna.fbcdn.net/v/t31.18172-8/17761016_1896818063904890_8880108015428113544_o.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=knDZV3HMs5IAX9Ujg6u&tn=SZT24u-xOvzoHsDB&_nc_ht=scontent.fuln8-1.fna&oh=00_AT9_1fu_3gSME4gAa7hw50JfxkHqOtK838ZEE1jakNoWTw&oe=62B5DB9B"
+                  alt=""
+              /></span>
+            </h2>
+            <p>
+              Эрүүл, амтат хоол, найрсаг үйлчилгээтэй Момо Хот Пот та бүхнийг урьж
+              байна.<br /><br />
+              <strong>Хаяг :&nbsp; </strong>Улсын Их Дэлгүүрийн зүүн талд, Мөнгөн
+              завьяа явах зам дагуу
+            </p>
+            <div class="stars-outer">
+              <div class="stars-inner"></div>
+            </div>
+            <span class="number-rating"
+              >Үнэлгээ: 5-аас <span id="number-rating"> 4.5</span></span
+            >
+            <button class="more-btn ripple" id="open" restaurant-id="">Дэлгэрэнгүй</button>
+          </div>
+          <div class="right-content">
+            <div class="right-content-img">
+              <img
+                src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
                 alt=""
-            /></span>
-          </h2>
-          <p>
-            Эрүүл, амтат хоол, найрсаг үйлчилгээтэй Момо Хот Пот та бүхнийг урьж
-            байна.<br /><br />
-            <strong>Хаяг :&nbsp; </strong>Улсын Их Дэлгүүрийн зүүн талд, Мөнгөн
-            завьяа явах зам дагуу
-          </p>
-          <div class="stars-outer">
-            <div class="stars-inner"></div>
+              />
+            </div>
           </div>
-          <span class="number-rating"
-            >Үнэлгээ: 5-аас <span id="number-rating"> 4.5</span></span
-          >
-          <button class="more-btn ripple" id="open">Дэлгэрэнгүй</button>
-        </div>
-        <div class="right-content">
-          <div class="right-content-img">
-            <img
-              src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-              alt=""
-            />
-          </div>
-        </div>
+        </div> -->
       </div>
     </main>
     <!--============4.SIGNUP MODAL SECTION========= -->
@@ -323,3 +333,25 @@
     <script type="module" src="home.js"></script>
   </body>
 </html>
+
+<!-- <li>
+              <p>restaurant1</p>
+              <div class="stars-outer">
+                <div class="stars-inner"></div>
+              </div>
+              <span class="number-rating"><span id="number-rating"> 4.5</span></span>
+            </li>
+             <li>
+              <p>restaurant2</p>
+              <div class="stars-outer">
+                <div class="stars-inner"></div>
+              </div>
+                <span class="number-rating"><span id="number-rating"> 3.5</span></span>
+            </li>
+             <li>
+              <p>restaurant3</p>
+              <div class="stars-outer">
+                <div class="stars-inner"></div>
+              </div>
+                <span class="number-rating"><span id="number-rating"> 3</span></span>
+            </li> -->

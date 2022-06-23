@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script
+      src="https://kit.fontawesome.com/06507b3ae3.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="Main.css" />
+    <link rel="stylesheet" href="MainCalendar.css" />
+    <!-- <script src="https://kit.fontawesome.com/a3b239acb8.js" crossorigin="anonymous"></script> -->
+    <link rel="shortcut icon" type="image/png" href="img/logo_black.png" />
+    <title>Restaurant Reservation and Booking Website</title>
+  </head>
+  <body>
+    <!--==================1. NAVBAR SECTION================== -->
+    <nav class="">
+      <div class="logo">
+        <a href="home.html"><img src="img/logo_white.png" /></a>
+      </div>
+      <input type="checkbox" name="" id="check" />
+      <label for="check" class="checkBtn">
+        <i class="fas fa-bars"></i>
+      </label>
+      <ul>
+        <li><a class="active" href="./home.html">Нүүр</a></li>
+        <li><a href="#">Бидний тухай</a></li>
+        <li><a href="#">Холбоо барих</a></li>
+      </ul>
+     <div class="navBtnContainer">
+        <button class="signUp-btn ripple" id="signup-open">Бүртгүүлэх</button>
+        <button class="login-btn ripple" id="login-open">Нэвтрэх</button>
+        <div class="cart-icon">
+          <i class="fas fa-shopping-cart"></i>
+          <div class="cart-modal">
+            <div class="cart-modal--header">
+              <h3>Таны сагс ( 1 захиалга )</h3>
+              <button class="cart-empty-btn">Хоослох</button>
+            </div>
+            <div class="cart-modal--item">
+              <div class="cart-modal--item--image">
+                <img
+                  src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                  alt=""
+                />
+              </div>
+              <div class="cart-modal--item--content">
+                <h4>цуйван</h4>
+                <small>Тоо ширхэг : 5 </small>
+                <small>15000₮ </small>
+              </div>
+              <!-- <div class="cart-modal--item--price">
+                <h4>15000₮</h4>
+              </div> -->
+              <div class="cart-item-delete-btn">
+                <i class="fas fa-times"></i>
+              </div>
+            </div>
+            <div class="cart-modal--item">
+              <div class="cart-modal--item--image">
+                <img
+                  src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                  alt=""
+                />
+              </div>
+              <div class="cart-modal--item--content">
+                <h4>цуйван</h4>
+                <small>Тоо ширхэг : 5 </small>
+                <small>15000₮ </small>
+              </div>
+              <!-- <div class="cart-modal--item--price">
+                <h4>15000₮</h4>
+              </div> -->
+              <div class="cart-item-delete-btn">
+                <i class="fas fa-times"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="profile">
+          <a>
+            <i class="fas fa-user"></i>
+          </a>
+        </div>
+        <!-- Profile Window -->
+        <div class="user-profile-modal">
+          <h3 id="user-profile-modal--header">Хэрэглэгч:</h3>
+          <div>
+            <li>
+              <i class="fas fa-user-circle"></i
+              ><a class="" href="/profile.html">Хувийн мэдээлэл</a>
+            </li>
+            <li>
+              <i class="fas fa-edit"></i
+              ><a class="" href="/profile.html">Миний захиалга</a>
+            </li>
+            <li>
+              <a class="" href="#" id="logout-btn">Гарах</a>
+            </li>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!--============2.HEADER SECTION========= -->
+    <header>
+      <div class="showcase-content">
+        <!-- <h1>MOMO HOT POT</h1> -->
+        <p>Цаг захиалгын хэсэг</p>
+        <!-- <button class="order-btn ripple" id="open">Захиалга өгөх</button> -->
+      </div>
+    </header>
+  
+    <!--============3.CONTAINER SECTION========= -->
+    <section class="container">
+      <div class="rightContainer ">
+
+          <!-- JS-ees end restauraniii content-uud bvgd orj irne.... -->
+
+
+      </div>
+      
+      <!--================== Tsag zahialgiin heseg================== -->
+      <div class="leftContainer">
+        <div class="leftContainerTime">
+          <h2 class="logged-user-id">
+            Xэрэглэгч: &nbsp;<span id="logged-user-id">нэвтрээгүй!</span>
+          </h2>          
+          <h2>Цаг захиалга</h2>
+        <span>Хүний тоо</span>
+        <select name="person" id="person" class="">
+          <option value="person">1 хүн</option>
+          <option value="person" selected>2 хүн</option>
+          <option value="person">3 хүн</option>
+          <option value="person">4 хүн</option>
+          <option value="person">5 хүн</option>
+        </select>
+        <div class="datetime ">
+          <div>Цаг</div>
+          <div>Өдөр</div>
+        </div>
+        <div class="calendar center">
+          <div class="date-picker center">
+            <div class="selected-date"></div>
+            <div class="dates">
+              <div class="month">
+                <div class="arrows prev-mth">&lt;</div>
+                <div class="mth"></div>
+                <div class="arrows next-mth">&gt;</div>
+              </div>
+              <div class="days"></div>
+            </div>
+          </div>
+          <select name="time" id="time" class="">
+            <option class="timeValue" value="timeValue" selected>1:00 PM</option>
+            <option class="timeValue" value="timeValue">2:00 PM</option>
+            <option class="timeValue" value="timeValue">3:00 PM</option>
+            <option class="timeValue" value="timeValue">4:00 PM</option>
+            <option class="timeValue" value="timeValue">5:00 PM</option>
+            <option class="timeValue" value="timeValue">6:00 PM</option>
+            <option class="timeValue" value="timeValue">7:00 PM</option>
+            <option class="timeValue" value="timeValue">8:00 PM</option>
+            <option class="timeValue" value="timeValue">9:00 PM</option>
+            <option class="timeValue" value="timeValue">10:00 PM</option>
+            <option class="timeValue" value="timeValue">11:00 PM</option>
+            <option class="timeValue" value="timeValue">12:00 PM</option>
+
+          </select></div>
+        <button class="btnTime"> Захиалга <i class="fas fa-arrow-right"></i></button>
+        </div>
+        <div class="leftContainerLocation">
+          <img src="img/location.png" style="width: 100%; border-radius: 5px;" alt="">
+          <div id="locationTitle" class="locationTitle">
+            <!-- <div>
+              <i class="fa-solid fa-location-dot"></i><span>Салбар 1: Мөнгөн завъяагаас Их дэлгүүр явах зам дагуу,</span>
+            </div> -->
+            <!-- <div>
+              <i class="fa-solid fa-location-dot"></i><span>Салбар 2: UB palace-н урд 47/2-р байр 15170 Ulaanbaatar, Mongolia</span>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </section>
+  <!--============4.SIGNUP MODAL SECTION========= -->
+    <div class="signup-modal-container" id="signup-modal">
+      <div class="signup-modal">
+        <button class="signup-close-btn" id="signup-close-btn">
+          <i class="fa fa-times"></i>
+        </button>
+        <div class="signup-modal-header">
+          <h3>Бүртгүүлэх</h3>
+        </div>
+        <div class="signup-modal-content">
+          <form class="signup-modal-form">
+            <div>
+              <label for="name">Нэр</label>
+              <input
+                type="text"
+                id="signup-name"
+                placeholder="Нэрээ оруулна уу..."
+                class="form-input"
+                required
+              />
+            </div>
+            <div>
+              <label for="email">Имэйл*</label>
+              <input
+                type="email"
+                id="signup-email"
+                placeholder="Имэйлээ оруулна уу..."
+                class="form-input"
+                required
+              />
+            </div>
+            <div>
+              <label for="password">Нууц үг*</label>
+              <input
+                type="password"
+                id="signup-password"
+                placeholder="Нууц үгээ оруулна уу..."
+                class="form-input"
+                required
+              />
+            </div>
+            <div>
+              <label for="password2">Нууц үг дахин оруулах</label>
+              <input
+                type="password"
+                id="signup-password2"
+                placeholder="Нууц үгээ дахин оруулна уу..."
+                class="form-input"
+              />
+            </div>
+            <input
+              type="button"
+              value="Бүртгүүлэх"
+              class="signup-submit-btn"
+              id="signup-submit-btn"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+    <!--============5.LOGIN MODAL SECTION========= -->
+    <div class="login-modal-container" id="login-modal">
+      <div class="login-modal">
+        <button class="modal-close-btn" id="modal-close-btn">
+          <i class="fa fa-times"></i>
+        </button>
+        <div class="login-modal-header">
+          <h3>Нэвтрэх</h3>
+        </div>
+        <div class="login-modal-content">
+          <form class="login-modal-form">
+            <!-- <div>
+              <label for="name">Нэр</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Нэрээ оруулна уу..."
+                class="form-input"
+              />
+            </div> -->
+            <div>
+              <label for="email">Имэйл</label>
+              <input
+                type="email"
+                id="login-email"
+                placeholder="Имэйлээ оруулна уу..."
+                class="form-input"
+              />
+            </div>
+            <div>
+              <label for="password">Нууц үг</label>
+              <input
+                type="password"
+                id="login-password"
+                placeholder="Нууц үгээ оруулна уу..."
+                class="form-input"
+              />
+            </div>
+            <input
+              type="button"
+              value="Нэвтрэх"
+              class="login-submit-btn"
+              id="login-submit-btn"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+    <!--============6.FOOTER SECTION========= -->
+    <footer>
+      <div class="footer-container1">
+        <div class="footer-items">
+          <div class="footer-contacts">
+            <h2 class="footer-items-title">Холбоо барих</h2>
+            <p>
+              <i id="contact-icon" class="fas fa-phone"></i>72-700-800
+            </p=>
+            <p>
+              <i id="contact-icon" class="fas fa-envelope"></i>info@nest.edu.mn
+            </p>
+          </div>
+          <div class="footer-location">
+            <h2 class="footer-items-title">Байршил</h2>
+            <p>
+              <i class="fas fa-location-dot"></i> Улаанбаатар,
+              Чингисийн Өргөн Чөлөө 17, Гурван гол оффис, 301 тоот
+            </p>
+          </div>
+          <div class="footer-technology">
+            <h2 class="footer-items-title">Ашигласан технологиуд</h2>
+            <p>
+              <span>HTML5</span>
+              <span>CSS3</span>
+              <span>Javascript</span>
+              <span>Firebase</span>
+              <span>Github</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-container2">
+        <div class="footer-items2">
+          <p class="footer-items2-created-by">Бүтээсэн: <span>Coding is Doping</span> </p>
+          <div class="footer-items2-social">
+            <a href="https://www.facebook.com/">
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.twitter.com/">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.github.com/">
+              <i class="fab fa-github"></i>
+            </a>
+          </div>
+          <div class="footer-items2-all-rights">
+            <span class="text"
+              >© 2022. Зохиогчийн бүх эрх хуулиар хамгаалагдсан.
+            </span>
+          </div>
+        </div>
+        <button class="scroll-to-top-button" id="scrollToTop-button"><i class="fas fa-arrow-up"></i></button>
+      </div>
+    </footer>
+    <script type="module" src="/firebase_auth.js"></script>
+    <script type="module" src="Main.js"></script>
+    <script src="Calendar.js"></script>
+
+  </body>
+</html>
