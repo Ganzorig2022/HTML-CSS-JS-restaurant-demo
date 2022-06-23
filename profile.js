@@ -3,7 +3,6 @@ import {
   signIn,
   logOut,
   updateUserDataInFireStore,
-<<<<<<< HEAD
   updateUserOrderDataToLocalstorage,
 } from "./firebase_auth.js";
 
@@ -13,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
   showUserName();
   updateUserOrderDataToLocalstorage();
   localStorageShowOrderItems();
-  
 });
 // ========SignIn, SignOut hiihed huudsiig REFRESH hiih function
 // window.onload = function(){
@@ -22,13 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
 //     window.location.reload();
 //   }
 // }
-=======
-} from "./firebase_auth.js";
-
-// DOM Refresh hiigdehed ehleed ajillana.
-document.addEventListener("DOMContentLoaded", showUserName);
-
->>>>>>> main
 // ==================Scroll To Top Effect===============
 const scrollToTopBtn = document.getElementById("scrollToTop-button");
 window.onscroll = function () {
@@ -152,25 +143,15 @@ const signupBtn = document.getElementById("signup-submit-btn");
 const signinBtn = document.getElementById("login-submit-btn");
 const logoutBtn = document.getElementById("user-logout-btn");
 const userProfileBtn = document.getElementsByClassName("profile")[0];
-<<<<<<< HEAD
 const loggedUserId = document.getElementById("logged-user-id");
 const userProfile = document.getElementsByClassName("user-profile-modal")[0];
-
-=======
-let loginInputs = document.querySelectorAll(".login-modal-form input");
-const loggedUserId = document.getElementById("logged-user-id");
->>>>>>> main
 
 const userIcon = document.getElementsByClassName("fa-user")[0];
 
 let isSuccessful = false;
-<<<<<<< HEAD
 userProfileBtn.addEventListener("click", () => {
   userProfile.classList.toggle("hidden");
 });
-=======
-
->>>>>>> main
 // ===========================SIGN UP NEW USER=======================
 signupBtn.addEventListener("click", async () => {
   const signupName = document.getElementById("signup-name").value;
@@ -232,10 +213,7 @@ signinBtn.addEventListener("click", async () => {
 
       showUserName();
       content1.classList.add("show");
-<<<<<<< HEAD
       updateUserOrderDataToLocalstorage();
-=======
->>>>>>> main
 
       showUserInfo();
     } else {
@@ -252,16 +230,11 @@ logoutBtn.addEventListener("click", async () => {
   isSuccessful = await logOut();
   if (isSuccessful) {
     swal("Та системээс гарлаа. Дахин нэвтэрч орно уу.");
-<<<<<<< HEAD
     localStorage.removeItem("loggedUserID");
     localStorage.removeItem("selectedUserOrder");
     localStorage.removeItem("loggedUserData");
     localStorage.removeItem("selectedRestaurantID");
 
-
-=======
-    localStorage.clear("loggedUserUid");
->>>>>>> main
     content1.classList.add("show");
     loggedUserId.textContent = "байхгүй!";
 
@@ -270,11 +243,7 @@ logoutBtn.addEventListener("click", async () => {
     clearLoginInputs();
     inActiveUserProfile();
     clearUserInputs();
-<<<<<<< HEAD
-    // localStorage.clear();
     localStorageShowOrderItems();
-=======
->>>>>>> main
   } else {
     disableLoginBtn();
   }
@@ -282,13 +251,11 @@ logoutBtn.addEventListener("click", async () => {
 
 //======================= SIGN IN hiisnii daraa hereglegchiin medeelliig HARUULAH
 function showUserInfo() {
-  if (localStorage.length > 0) {
+  const loggedUserData = localStorage.getItem("loggedUserData");
+
+  if (loggedUserData) {
     //Items are stored in local storage
-<<<<<<< HEAD
     let userData = JSON.parse(localStorage.getItem("loggedUserData"));
-=======
-    let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
->>>>>>> main
     let FirstName = userData.firstname;
     let LastName = userData.lastname;
     let Password = userData.password;
@@ -305,13 +272,11 @@ function showUserInfo() {
 
 // =========================USER NAME-iig Haruulah=================
 function showUserName() {
-  if (localStorage.length > 0) {
+  const loggedUserData = localStorage.getItem("loggedUserData");
+
+  if (loggedUserData) {
     //Items are stored in local storage
-<<<<<<< HEAD
     let userData = JSON.parse(localStorage.getItem("loggedUserData"));
-=======
-    let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
->>>>>>> main
     let userName = userData.name;
     // console.log("Username: ", userName);
 
@@ -417,31 +382,20 @@ function inActiveUserProfile() {
   userIcon.style.color = "#000";
   userProfileBtn.style.background = "#ccc";
 }
-<<<<<<< HEAD
-
-//LOCALSTORAGE-ees data awaw
-
-let personOrderDate = document.getElementsByClassName("right-content-date")[0];
-let personOrderPersonValue = document.getElementsByClassName(
-  "right-content-people"
-)[0];
-let personOrderTimeValue =
-  document.getElementsByClassName("right-content-time")[0];
-let personOrderSeatValue =
-  document.getElementsByClassName("right-content-seat")[0];
-let orderStatus = document.getElementsByClassName("order-status")[0];
-
-
 
 //==============Захиалгуудыг дарааллаж харуулах хэсэг
 let profileTable = document.getElementById("profileTable");
 function localStorageShowOrderItems() {
-  let selectedUserOrder = JSON.parse(localStorage.getItem("selectedUserOrder"));
-  const selectedUserOrderSort = selectedUserOrder.sort((a, b)=>a.table -b.table);
-  if(selectedUserOrder){
-  if (localStorage.selectedUserOrder) {
-    selectedUserOrderSort.forEach((item) => {
-      let profileHTML =`
+  let selectedUserOrder = localStorage.getItem("selectedUserOrder");
+
+  if (selectedUserOrder) {
+    let selectedUserOrderData = JSON.parse(
+      localStorage.getItem("selectedUserOrder")
+    );
+
+    if (localStorage.selectedUserOrder) {
+      selectedUserOrderData.forEach((item) => {
+        let profileHTML = `
       <tr>
         <td>${item.resName}</td>
         <td>${item.date}</td>
@@ -451,11 +405,10 @@ function localStorageShowOrderItems() {
         <td class="order-status" >Баталгаажсан</td>
       </tr>
      `;
-      profileTable.innerHTML += profileHTML;
-
-    });
-  } else {
-    let profileHTML =`
+        profileTable.innerHTML += profileHTML;
+      });
+    } else {
+      let profileHTML = `
     <tr>
       <th>Ресторан нэр</th>
       <th>Огноо</th>
@@ -472,12 +425,10 @@ function localStorageShowOrderItems() {
         <td></td>
         <td class="order-status" ></td>
       </tr>
-     `
-    profileTable.innerHTML = profileHTML;
-
+     `;
+      profileTable.innerHTML = profileHTML;
+    }
   }
-  }
-  
 }
 //==============Ширээ захиалга руу буцах хэсэг
 let backUserInfoBtn = document.getElementById("back-user-info-btn");
@@ -491,5 +442,3 @@ backUserInfoBtn.addEventListener("click", () => {
 });
 
 export { localStorageShowOrderItems };
-=======
->>>>>>> main

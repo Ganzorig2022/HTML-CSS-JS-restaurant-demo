@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import { signUp, signIn, logOut, updateUserOrderDataToLocalstorage } from "./firebase_auth.js";
-=======
-import { signUp, signIn, logOut } from "./firebase_auth.js";
->>>>>>> main
 
 // Run getRatings when DOM loads
 document.addEventListener("DOMContentLoaded", () => {
@@ -20,7 +16,6 @@ function getRatings() {
   // Get percentage
   const numberRatings = document.querySelectorAll("#number-rating");
   // Set width of stars-inner to percentage
-<<<<<<< HEAD
   const starsInners = document.querySelectorAll(".stars-inner");
   starsInners.forEach((starInner, idx) => {
     let numberRatingValue = numberRatings[idx].textContent;
@@ -28,29 +23,7 @@ function getRatings() {
     starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
     starInner.style.width = starPercentageRounded;
   });
-=======
-  const starsInner = document.querySelector(".stars-inner");
-  starsInner.style.width = starPercentageRounded;
-  showUserName();
->>>>>>> main
 }
-// ==================Scroll To Top Effect===============
-const scrollToTopBtn = document.getElementById("scrollToTop-button");
-window.onscroll = function () {
-  scrollFunction();
-};
-function scrollFunction() {
-  if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
-    scrollToTopBtn.style.display = "block";
-  } else {
-    scrollToTopBtn.style.display = "none";
-  }
-}
-
-scrollToTopBtn.addEventListener("click", () => {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
-});
 
 //////////////////////////////////FIRESTORE///////////////////////////
 // =============================GLOBAL VARIABLES=======================
@@ -475,7 +448,6 @@ window.addEventListener("click", (e) => {
   e.target == signupModal ? signupModal.classList.remove("show-modal") : false;
 });
 
-<<<<<<< HEAD
 // ================================
 function pleaseChooseRestaurantAlert() {
   const restaurantID = localStorage.getItem("selectedRestaurantID");
@@ -493,178 +465,6 @@ function showUserName() {
   if (loggedUserData) {
     //Items are stored in local storage
     let userData = JSON.parse(localStorage.getItem("loggedUserData"));
-=======
-//////////////////////////////////FIRESTORE///////////////////////////
-// =============================GLOBAL VARIABLES=======================
-const signupBtn = document.getElementById("signup-submit-btn");
-const signinBtn = document.getElementById("login-submit-btn");
-const logoutBtn = document.getElementById("logout-btn");
-const userProfileModal =
-  document.getElementsByClassName("user-profile-modal")[0];
-const userProfileModalHeader = document.getElementById(
-  "user-profile-modal--header"
-);
-let loginInputs = document.querySelectorAll(".login-modal-form input");
-
-let isSuccessful = false;
-
-// ===========================SIGN UP NEW USER=======================
-signupBtn.addEventListener("click", async () => {
-  const signupName = document.getElementById("signup-name").value;
-  const signupEmail = document.getElementById("signup-email").value;
-  const signupPassword = document.getElementById("signup-password").value;
-  const signupPassword2 = document.getElementById("signup-password2").value;
-
-  if (
-    checkRequiredInputs([
-      signupName,
-      signupEmail,
-      signupPassword,
-      signupPassword2,
-    ])
-  ) {
-    isSuccessful = await signUp(signupEmail, signupPassword, signupName);
-
-    if (isSuccessful) {
-      swal("Шинэ хэрэглэгч амжилттай үүслээ!");
-
-      signupModal.classList.remove("show-modal");
-
-      disableLoginInputs();
-      clearSignupInputs();
-      disableSignUpBtn();
-      disableLoginBtn();
-      activeUserProfile();
-    } else {
-      swal("Шинэ хэрэглэгч үүсэхэд алдаа гарлаа!");
-
-      enableLoginInputs();
-      enableSignUpBtn();
-    }
-  } else {
-    swal("Таны бөглөх талбарууд хоосон байна!");
-  }
-});
-
-// ===========================SIGN IN EXISTING USER=======================
-signinBtn.addEventListener("click", async () => {
-  const signinEmail = document.getElementById("login-email").value;
-  const signinPassword = document.getElementById("login-password").value;
-
-  if (checkRequiredInputs([signinEmail, signinPassword])) {
-    isSuccessful = await signIn(signinEmail, signinPassword);
-
-    if (isSuccessful) {
-      swal("Та амжилттай нэвтэрлээ!");
-
-      loginModal.classList.remove("show-modal");
-      clearLoginInputs();
-      disableLoginInputs();
-      disableLoginBtn();
-      disableSignUpBtn();
-      activeUserProfile();
-
-      showUserName();
-    } else {
-      swal("Нэвтрэлт амжилтгүй. Хэрэглэгч олдсонгүй!");
-    }
-  } else {
-    swal("Таны бөглөх талбарууд хоосон байна!");
-  }
-});
-
-// =========================LOG OUT USER=================
-logoutBtn.addEventListener("click", async () => {
-  isSuccessful = await logOut();
-  if (isSuccessful) {
-    swal("Та системээс гарлаа.");
-    // localStorage-iig empty bolgono.
-    localStorage.removeItem("loggedUserUid");
-
-    userProfileModal.classList.remove("hidden");
-    userProfileModalHeader.innerHTML = `Хэрэглэгч:`;
-
-    enableLoginInputs();
-    enableLoginBtn();
-    enableSignUpBtn();
-    clearLoginInputs();
-    inActiveUserProfile();
-  } else {
-    disableLoginInputs();
-  }
-});
-
-// INPUT-uud hooson esehiig shalgadag function()
-function checkRequiredInputs(inputArr) {
-  return !inputArr.includes("");
-}
-// SIGN IN hiisnii daraa input-uudiig IDEWHGV bolgoh
-function disableLoginInputs() {
-  loginInputs.forEach((input) => {
-    input.setAttribute("disabled", "");
-  });
-}
-
-// SIGN OUT hiisnii daraa input-uudiig IDEWHTEI bolgoh
-function enableLoginInputs() {
-  loginInputs.forEach((input) => {
-    input.removeAttribute("disabled");
-  });
-}
-// SIGN IN hiisnii daraa input-uudiig CLEAR hiih
-function clearLoginInputs() {
-  const signinEmail = document.getElementById("login-email");
-  const signinPassword = document.getElementById("login-password");
-
-  signinEmail.value = "";
-  signinPassword.value = "";
-}
-
-// SIGN OUT hiisnii daraa input-uudiig CLEAR hiih
-function clearSignupInputs() {
-  const signupName = document.getElementById("signup-name");
-  const signupEmail = document.getElementById("signup-email");
-  const signupPassword = document.getElementById("signup-password");
-
-  signupName.value = "";
-  signupEmail.value = "";
-  signupPassword.value = "";
-}
-
-// SIGN IN hiisnii daraa LOGIN button-iig NONE bolgoh
-function disableLoginBtn() {
-  loginOpen.style.display = "none";
-}
-// SIGN OUT hiisnii daraa LOGIN button-iig IDEWHTEI bolgoh
-function enableLoginBtn() {
-  loginOpen.style.display = "block";
-}
-// SIGN UP hiisnii daraa LOGIN button-iig NONE bolgoh
-function disableSignUpBtn() {
-  signupOpen.style.display = "none";
-}
-
-// SIGN UP hiisnii daraa LOGIN button-iig IDEWHTEI bolgoh
-function enableSignUpBtn() {
-  signupOpen.style.display = "block";
-}
-function activeUserProfile() {
-  const userIcon = document.getElementsByClassName("fa-user")[0];
-  userIcon.style.color = "#fff";
-  userProfileBtn.style.background = "#fb1c25";
-}
-function inActiveUserProfile() {
-  const userIcon = document.getElementsByClassName("fa-user")[0];
-  userIcon.style.color = "#000";
-  userProfileBtn.style.background = "#ccc";
-}
-
-// =========================USER NAME-iig Haruulah=================
-function showUserName() {
-  if (localStorage.length > 0) {
-    //Items are stored in local storage
-    let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
->>>>>>> main
     let userName = userData.name;
 
     userProfileModalHeader.innerHTML = `Хэрэглэгч: ${userName}`;
@@ -672,8 +472,5 @@ function showUserName() {
     console.log("Local storage is empty");
   }
 }
-<<<<<<< HEAD
 
 export { clearSignupInputs, clearLoginInputs };
-=======
->>>>>>> main
