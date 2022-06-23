@@ -383,6 +383,7 @@ function menuSwap() {
 let isSuccessful = false;
 
 signinBtn.addEventListener("click", async () => {
+
   const signinEmail = document.getElementById("login-email").value;
   const signinPassword = document.getElementById("login-password").value;
 
@@ -391,7 +392,8 @@ signinBtn.addEventListener("click", async () => {
 
     if (isSuccessful) {
       swal(`Хэрэглэгч та амжилттай нэвтэрлээ!`);
-      reloadCurrentPage();
+      updateUserOrderDataToLocalstorage();
+      getData();
 
       loginModal.classList.remove("show-modal");
       disableLoginBtn();
@@ -399,7 +401,8 @@ signinBtn.addEventListener("click", async () => {
       activeUserProfile();
 
       showUserName();
-      updateUserOrderDataToLocalstorage();
+      userComment();
+
     } else {
       swal("Нэвтрэлт амжилтгүй. Хэрэглэгч олдсонгүй!");
     }
@@ -431,6 +434,7 @@ logoutBtn.addEventListener("click", async () => {
     enableLoginBtn();
     enableSignUpBtn();
     showUserName();
+    // userComment();
   } else {
     disableLoginInputs();
   }
@@ -611,10 +615,12 @@ function showStarRatingText(starRatingNumber) {
 function userComment() {
   let selectedRestaurant = restaurantAllArr.filter((e) => e.id == restaurantID);
   let selectedRestaurantOrders = selectedRestaurant[0].order;
-  if (selectedRestaurantOrders.length > 0) {
-    selectedRestaurantOrders.forEach((order) => {
+  const selectedRestaurantUserOrder = selectedRestaurantOrders.filter((e)=> e.userID ===loggedUserIDData);
+  if (selectedRestaurantUserOrder.length > 0) {
+    selectedRestaurantUserOrder.forEach((order) => {
       if (order.userID === loggedUserIDData) {
         enableUserCommentSection();
+
       } else {
         disableUserCommentSection();
       }
@@ -633,8 +639,10 @@ function disableUserCommentSection() {
 function enableUserCommentSection() {
   submitCommentBtnSelect.removeAttribute("disabled");
   textAreaSelect.disabled = false;
-  // textAreaSelect.style.cursor = "no-drop";
+  textAreaSelect.style.cursor = "text";
   submitCommentBtnSelect.style.cursor = "pointer";
+  submitCommentBtnSelect.style.background = "var(--secondary-color)";
+  
 }
 
 // ========================Profile window Open=====================
@@ -704,3 +712,9 @@ scrollToTopBtn.addEventListener("click", () => {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 });
+
+function getData(){
+  restaurantAllArr = JSON.parse(localStorage.getItem("restaurantAllData"));
+  restaurantID = JSON.parse(localStorage.getItem("selectedRestaurantID"));
+  loggedUserIDData = JSON.parse(localStorage.getItem("loggedUserID"));
+}

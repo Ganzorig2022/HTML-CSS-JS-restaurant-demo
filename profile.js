@@ -15,12 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
   
 });
 // ========SignIn, SignOut hiihed huudsiig REFRESH hiih function
-window.onload = function(){
-  if(!window.location.hash){
-    window.location = window.location + '#loaded';
-    window.location.reload();
-  }
-}
+// window.onload = function(){
+//   if(!window.location.hash){
+//     window.location = window.location + '#loaded';
+//     window.location.reload();
+//   }
+// }
 // ==================Scroll To Top Effect===============
 const scrollToTopBtn = document.getElementById("scrollToTop-button");
 window.onscroll = function () {
@@ -79,7 +79,6 @@ listItems.forEach((item, idx) => {
     if (idx === 1) {
       //hereglegchiin zahialga tsonh
       content2.classList.add("show");
-      // localStorageShowOrderItems();
     } else {
       content2.classList.remove("show");
     }
@@ -401,10 +400,11 @@ let orderStatus = document.getElementsByClassName("order-status")[0];
 //==============Захиалгуудыг дарааллаж харуулах хэсэг
 let profileTable = document.getElementById("profileTable");
 function localStorageShowOrderItems() {
-  
   let selectedUserOrder = JSON.parse(localStorage.getItem("selectedUserOrder"));
+  const selectedUserOrderSort = selectedUserOrder.sort((a, b)=>a.table -b.table);
+  if(selectedUserOrder){
   if (localStorage.selectedUserOrder) {
-    selectedUserOrder.forEach((item) => {
+    selectedUserOrderSort.forEach((item) => {
       let profileHTML =`
       <tr>
         <td>${item.resName}</td>
@@ -440,6 +440,8 @@ function localStorageShowOrderItems() {
     profileTable.innerHTML = profileHTML;
 
   }
+  }
+  
 }
 //==============Ширээ захиалга руу буцах хэсэг
 let backUserInfoBtn = document.getElementById("back-user-info-btn");

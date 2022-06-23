@@ -587,13 +587,13 @@ main section {
   top: -20px;
 }
 .timer p:nth-of-type(1) {
-  left: 0;
+  left: 10px;
 }
 .timer p:nth-of-type(2) {
-  left: 200px;
+  left: 300px;
 }
 .timer p:nth-of-type(3) {
-  left: 400px;
+  left: 600px;
 }
 
 .timer .date-picker {
@@ -1002,6 +1002,9 @@ button:active {
 @media (min-width: 889px) and (max-width: 1300px) {
   .container{
     width: 80%;
+  }
+  .timer p {
+    display: none;
   }
 }
 @media (min-width: 769px) and (max-width: 890px) {

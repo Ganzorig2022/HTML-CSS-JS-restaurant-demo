@@ -96,9 +96,9 @@ const logOut = async function () {
 onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
-    swal(`Та нэвтэрсэн хэвээр байна. Таны ID:${uid}`);
+    // swal(`Та нэвтэрсэн хэвээр байна. Таны ID:${uid}`);
   } else {
-    swal("Та системээс гарсан байна!");
+    // swal("Та системээс гарсан байна!");
   }
 });
 
