@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/06507b3ae3.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Menu</title>
+
+    <style></style>
+  </head>
+  <body>
+    <div class="CartContainer" id="cart-box" class="cart-box">
+      <div id="no-cart-item" style="display: none">No items in cart</div>
+      <div class="Header">
+        <h3 class="Heading">Shopping Cart</h3>
+        <h5 class="Action">Remove all</h5>
+      </div>
+
+      <div id="item-template" class="cart-item">
+        <div class="about">
+          <h1 class="name" class="title">Apple Juice</h1>
+        </div>
+        <div class="counter">
+          <div class="btn">+</div>
+          <div class="amount" class="count">2</div>
+          <div class="btn">-</div>
+        </div>
+        <div class="prices">
+          <div class="price" class="amount">$2.99</div>
+          <div class="save"><u>Save for later</u></div>
+          <div class="remove"><u>Remove</u></div>
+        </div>
+      </div>
+      <hr />
+      <div class="checkout">
+        <div div class="total">
+          <div>
+            <div class="Subtotal">Sub-Total</div>
+            <div class="items" class="amount">2 items</div>
+          </div>
+          <div id="total-price" class="total-price" class="total-amount">
+            $6.18
+          </div>
+        </div>
+        <button class="button">Checkout</button>
+      </div>
+    </div>
+
+    <div class="container">
+      <!--============1.NAVBAR SECTION========= -->
+      <nav>
+        <div class="logo">
+          <a href="home.html"><img src="img/logo_white.png" /></a>
+        </div>
+        <input type="checkbox" name="" id="check" />
+        <label for="check" class="checkBtn">
+          <i class="fas fa-bars"></i>
+        </label>
+        <ul>
+          <li><a class="active" href="./home.html">Нүүр</a></li>
+          <li><a href="#">Бидний тухай</a></li>
+          <li><a href="#">Холбоо барих</a></li>
+        </ul>
+        <div class="navBtnContainer">
+          <span class="cart-count"></span>
+          <div class="cart-icon">
+            <a href="#" id="open-cart-button">
+              <i class="fas fa-shopping-cart"></i>
+            </a>
+          </div>
+          <div class="profile">
+            <a href="#">
+              <i class="fas fa-user"></i>
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <footer>
+        <!--============3.MENU SECTION========= -->
+        <!--============Menu header========= -->
+        <h2>Menu</h2>
+        <!--============Menu container========= -->
+        <div class="menu-container">
+          <div id="template-food" class="menu food">
+            <div class="menu-header">
+              <div class="img-container">
+                <img src="./img/tortilla.png" alt="" />
+              </div>
+              <h3>Food</h3>
+            </div>
+            <div class="food food-1" id="food-template" style="display: none">
+              <div class="description">
+                <div class="food food-1">
+                  <h4
+                    class="food-name"
+                    style="color: #ffffff; text-transform: uppercase"
+                  >
+                    Мексик лазанья
+                  </h4>
+                  <div
+                    class="edgtf-pli-dots"
+                    style="border-color: #5f5d5b"
+                  ></div>
+                  <div class="edgtf-pli-price-holder">
+                    <h4 class="edgtf-pli-price" style="color: #ff3520">
+                      <span class="food-price">₮ 30.9</span>
+                    </h4>
+                  </div>
+                  <div class="food1-description">
+                    <p class="food-description">
+                      Мексик амталгаатай үхрийн махан соус, гэр аргаар бэлдсэн
+                      лазанья гурил, крем
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="button-add menu-btn"
+                  data-id="0"
+                  data-type="0"
+                >
+                  <i class="fa fa-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div id="template-food" class="menu drinks">
+            <div class="menu-header">
+              <div class="img-container">
+                <img src="./img/milkshake.png" alt="" />
+              </div>
+              <h3>Drinks</h3>
+            </div>
+            <div class="food food-1" id="drink-template" style="display: none">
+              <div class="description">
+                <div class="food food-1">
+                  <h4
+                    class="drink-name"
+                    style="color: #ffffff; text-transform: uppercase"
+                  >
+                    Мексик лазанья
+                  </h4>
+                  <div
+                    class="edgtf-pli-dots"
+                    style="border-color: #5f5d5b"
+                  ></div>
+                  <div class="edgtf-pli-price-holder">
+                    <h4
+                      class="edgtf-pli-price food-price"
+                      style="color: #ff3520"
+                    >
+                      <div class="drink-price">₮ 30.9</div>
+                    </h4>
+                  </div>
+                  <div class="food1-description">
+                    <div class="drink-description">
+                      Мексик амталгаатай үхрийн махан соус, гэр аргаар бэлдсэн
+                      лазанья гурил, крем
+                    </div>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="button-add menu-btn"
+                  data-id="0"
+                  data-type="0"
+                >
+                  <i class="fa fa-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--============6.FOOTER SECTION========= -->
+        <footer>
+          <div class="footer-container1">
+            <div class="footer-items">
+              <div class="footer-contacts">
+                <h2 class="footer-items-title">Холбоо барих</h2>
+                <p><i id="contact-icon" class="fas fa-phone"></i>72-700-800</p>
+                <p>
+                  <i id="contact-icon" class="fas fa-envelope"></i
+                  >info@nest.edu.mn
+                </p>
+              </div>
+              <div class="footer-location">
+                <h2 class="footer-items-title">Байршил</h2>
+                <p>
+                  <i class="fas fa-location-dot"></i> Улаанбаатар, Чингисийн
+                  Өргөн Чөлөө 17, Гурван гол оффис, 301 тоот
+                </p>
+              </div>
+              <div class="footer-technology">
+                <h2 class="footer-items-title">Ашигласан технологиуд</h2>
+                <p>
+                  <span>HTML5</span>
+                  <span>CSS3</span>
+                  <span>Javascript</span>
+                  <span>Firebase</span>
+                  <span>Github</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="footer-container2">
+            <div class="footer-items2">
+              <p class="footer-items2-created-by">
+                Бүтээсэн: <span>Coding is Doping</span>
+              </p>
+              <div class="footer-items2-social">
+                <a href="https://www.facebook.com/">
+                  <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.instagram.com/">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.twitter.com/">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.github.com/">
+                  <i class="fab fa-github"></i>
+                </a>
+              </div>
+              <div class="footer-items2-all-rights">
+                <span class="text"
+                  >© 2022. Зохиогчийн бүх эрх хуулиар хамгаалагдсан.
+                </span>
+              </div>
+            </div>
+            <button class="scroll-to-top-button" id="scrollToTop-button">
+              <i class="fas fa-arrow-up"></i>
+            </button>
+          </div>
+        </footer>
+      </footer>
+    </div>
+    <script type="module" src="app.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

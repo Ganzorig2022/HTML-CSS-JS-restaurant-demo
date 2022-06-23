@@ -1,0 +1,219 @@
+{
+  "restaurants": {
+    "1": {
+      "name": "MadFox UB",
+      "drinks": {
+        "1": {
+          "name": "Coffee",
+          "description": "Americano",
+          "price": "5.0"
+        },
+        "2": {
+          "name": "Tea",
+          "description": "Pot tea",
+          "price": "9.0"
+        },
+        "3": {
+          "name": "Beer",
+          "description": "Paulaner",
+          "price": "7.0"
+        },
+        "4": {
+          "name": "Wine",
+          "description": "Penfolds Chardonnay",
+          "price": "11.0"
+        },
+        "5": {
+          "name": "Cocktail",
+          "description": "Gin based cocktails",
+          "price": "21.0"
+        },
+        "6": {
+          "name": "Whiskey",
+          "description": "Ballantines",
+          "price": "12.0"
+        }
+      },
+      "food": {
+        "1": {
+          "name": "Мексик лазанья",
+          "description": "Мексик амталгаатай үхрийн махан соус, гэр аргаар бэлдсэн лазанья гурил, крем",
+          "price": "30.0"
+        },
+        "2": {
+          "name": "Давхар үхрийн махтай бургер",
+          "description": "Давхар үхрийн мах, бяслаг, улаан лооль, даршилсан ногоо, навч, хөгцтэй бяслагны соус",
+          "price": "29.0"
+        },
+        "3": {
+          "name": "Ром аргаар хийсэн карбонара ",
+          "description": "Прошуто мах, гар аргаар хийсэн паста",
+          "price": "25.0"
+        },
+        "4": {
+          "name": "Нэрийн үхрийн хавирган толгойн стэйк",
+          "description": "Сэврээсэн 400 гр үхрийн хавирган толгой, чөмөгтэй масло, зөөхийтэй нухсан төмс",
+          "price": "27.0"
+        },
+        "5": {
+          "name": "Улаан винонд хийсэн үхрийн шаант ",
+          "description": "Улаан винонд болгосон үхрийн шаант, бяслагтай макарон гоймон",
+          "price": "27.0"
+        },
+        "6": {
+          "name": "Мисо далайн замгаар амталсан яргай загас",
+          "description": "Яргай загас, улаан лооль, өргөст хэмх, рэдиск, бяслаг, сонгино, хүрэн манжин",
+          "price": "26.0"
+        }
+      }
+    },
+    "2": {
+      "name": "Hoba Pizza UB",
+      "drinks": {
+        "1": {
+          "name": "Tea",
+          "description": "Matcha",
+          "price": "4.0"
+        },
+        "2": {
+          "name": "Coffee",
+          "description": "Espresso | Americano",
+          "price": "4.0"
+        },
+        "3": {
+          "name": "Kombucha",
+          "description": "A fermented, lightly effervescent, sweetened black or green tea drink",
+          "price": "5.0"
+        },
+        "4": {
+          "name": "Soda",
+          "description": "Cola | Sprite | Fanta",
+          "price": "4.0"
+        },
+        "5": {
+          "name": "Beer",
+          "description": "Schöfferhofer Grapefruit",
+          "price": "5.0"
+        },
+        "6": {
+          "name": "Wine",
+          "description": "Green Veltliner",
+          "price": "8.0"
+        }
+      },
+      "food": {
+        "1": {
+          "name": "Hoba Hoba Spirit",
+          "description": "Lamb Sausage, Tomato Sauce, Onion, Mozzarellas & Caciocavallo cheese, Zaatar Spice, Finished with Yogurt",
+          "price": "25.0"
+        },
+        "2": {
+          "name": "Fear Index",
+          "description": "Salami Piccante, Tomato Sauce, Mozzarella, Provolone and Grana Padano Cheese, Chili Flakes",
+          "price": "26.0"
+        },
+        "3": {
+          "name": "Oh Boy",
+          "description": "House-made Bacon, Pineapple Sauce, Tomato Sauce, Mozzarella, Provolone and Grana Padano cheeses",
+          "price": "26.0"
+        },
+        "4": {
+          "name": "Beautiful Agony",
+          "description": "House-made Tomato and Garlic Creamy Sauce, Mozzarella & Grana Padando cheese ",
+          "price": "26.0"
+        },
+        "5": {
+          "name": "Down to Earth",
+          "description": "House-made Pesto Cream, Mozzarella & Provolone cheese, Arugula",
+          "price": "26.0"
+        },
+        "6": {
+          "name": "Rise and Shine",
+          "description": "Mozzarellas, Spinach, Bacon, House-made Tomato and Garlic Creamy Sauce, Pesto green sauce",
+          "price": "26.0"
+        }
+      }
+    },
+    "3": {
+      "name": "Momo",
+      "drinks": {
+        "1": {
+          "name": "Кофе",
+          "description": "Americano | Cappuccino | Latte",
+          "price": "3.0"
+        },
+        "2": {
+          "name": "Цай",
+          "description": "ногоон цай | жасмин цай | хар цай | турк цай",
+          "price": "3.0"
+        },
+        "3": {
+          "name": "Шейк",
+          "description": "Ванил | гүзээлзгэнэ | банана",
+          "price": "4.0"
+        },
+        "4": {
+          "name": "Ундаа",
+          "description": "Cola | Sprite | Fanta",
+          "price": "2.0"
+        },
+        "5": {
+          "name": "Пиво",
+          "description": "Budweiser | Heineken | Chingis | Tsingtao",
+          "price": "4.0"
+        },
+        "6": {
+          "name": "Вино",
+          "description": "Merlot | Bordeaux | Chateau | Cabernet Sauvignon",
+          "price": "8.0"
+        }
+      },
+      "food": {
+        "1": {
+          "name": "Шөл",
+          "description": "ясны | тахианы | халуун ногоотой | улаан лоолийн",
+          "price": "2.0"
+        },
+        "2": {
+          "name": "Махны цуглуулга",
+          "description": "Хонь, үхрийн махны холимог",
+          "price": "6.0"
+        },
+        "3": {
+          "name": "Ногооны цуглуулга",
+          "description": "Байцаа, бор мөөг, цагаан мөөг, төмс, огурцы, цагаан лууван, дүфү, юуцай, чихэрлэг төмс, бууцай",
+          "price": "8.0"
+        },
+        "4": {
+          "name": "Холимог гурил",
+          "description": "хэрчсэн дээд гурил",
+          "price": "1.0"
+        },
+        "5": {
+          "name": "Банш",
+          "description": "Үхрийн махтай банш",
+          "price": "4.0"
+        },
+        "6": {
+          "name": "2 хүнд зориулсан сет",
+          "description": "Шөл сонголтоор, махны цуглуулга, ногооны багц, хэрчсэн дээд гурил, 6ш банш, амталсан будаа",
+          "price": "25.0"
+        }
+      }
+    }
+  },
+  "carts": {
+    "1": {
+      "drinks": {
+        "1": { "id": "1", "count": 2 },
+        "2": { "id": "2", "count": 1 },
+        "3": { "id": "3", "count": 3 }
+      },
+      "foods": {
+        "1": { "id": "1", "count": 2 },
+        "2": { "id": "2", "count": 1 },
+        "3": { "id": "3", "count": 3 }
+      }
+    }
+  }
+}
