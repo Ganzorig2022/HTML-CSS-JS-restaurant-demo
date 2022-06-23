@@ -3,6 +3,7 @@ import {
   signIn,
   logOut,
   updateUserDataInFireStore,
+<<<<<<< HEAD
   updateUserOrderDataToLocalstorage,
 } from "./firebase_auth.js";
 
@@ -21,6 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
 //     window.location.reload();
 //   }
 // }
+=======
+} from "./firebase_auth.js";
+
+// DOM Refresh hiigdehed ehleed ajillana.
+document.addEventListener("DOMContentLoaded", showUserName);
+
+>>>>>>> main
 // ==================Scroll To Top Effect===============
 const scrollToTopBtn = document.getElementById("scrollToTop-button");
 window.onscroll = function () {
@@ -144,16 +152,25 @@ const signupBtn = document.getElementById("signup-submit-btn");
 const signinBtn = document.getElementById("login-submit-btn");
 const logoutBtn = document.getElementById("user-logout-btn");
 const userProfileBtn = document.getElementsByClassName("profile")[0];
+<<<<<<< HEAD
 const loggedUserId = document.getElementById("logged-user-id");
 const userProfile = document.getElementsByClassName("user-profile-modal")[0];
 
+=======
+let loginInputs = document.querySelectorAll(".login-modal-form input");
+const loggedUserId = document.getElementById("logged-user-id");
+>>>>>>> main
 
 const userIcon = document.getElementsByClassName("fa-user")[0];
 
 let isSuccessful = false;
+<<<<<<< HEAD
 userProfileBtn.addEventListener("click", () => {
   userProfile.classList.toggle("hidden");
 });
+=======
+
+>>>>>>> main
 // ===========================SIGN UP NEW USER=======================
 signupBtn.addEventListener("click", async () => {
   const signupName = document.getElementById("signup-name").value;
@@ -215,7 +232,10 @@ signinBtn.addEventListener("click", async () => {
 
       showUserName();
       content1.classList.add("show");
+<<<<<<< HEAD
       updateUserOrderDataToLocalstorage();
+=======
+>>>>>>> main
 
       showUserInfo();
     } else {
@@ -232,12 +252,16 @@ logoutBtn.addEventListener("click", async () => {
   isSuccessful = await logOut();
   if (isSuccessful) {
     swal("Та системээс гарлаа. Дахин нэвтэрч орно уу.");
+<<<<<<< HEAD
     localStorage.removeItem("loggedUserID");
     localStorage.removeItem("selectedUserOrder");
     localStorage.removeItem("loggedUserData");
     localStorage.removeItem("selectedRestaurantID");
 
 
+=======
+    localStorage.clear("loggedUserUid");
+>>>>>>> main
     content1.classList.add("show");
     loggedUserId.textContent = "байхгүй!";
 
@@ -246,8 +270,11 @@ logoutBtn.addEventListener("click", async () => {
     clearLoginInputs();
     inActiveUserProfile();
     clearUserInputs();
+<<<<<<< HEAD
     // localStorage.clear();
     localStorageShowOrderItems();
+=======
+>>>>>>> main
   } else {
     disableLoginBtn();
   }
@@ -257,7 +284,11 @@ logoutBtn.addEventListener("click", async () => {
 function showUserInfo() {
   if (localStorage.length > 0) {
     //Items are stored in local storage
+<<<<<<< HEAD
     let userData = JSON.parse(localStorage.getItem("loggedUserData"));
+=======
+    let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
+>>>>>>> main
     let FirstName = userData.firstname;
     let LastName = userData.lastname;
     let Password = userData.password;
@@ -276,7 +307,11 @@ function showUserInfo() {
 function showUserName() {
   if (localStorage.length > 0) {
     //Items are stored in local storage
+<<<<<<< HEAD
     let userData = JSON.parse(localStorage.getItem("loggedUserData"));
+=======
+    let userData = JSON.parse(localStorage.getItem("loggedUserUid"));
+>>>>>>> main
     let userName = userData.name;
     // console.log("Username: ", userName);
 
@@ -382,6 +417,7 @@ function inActiveUserProfile() {
   userIcon.style.color = "#000";
   userProfileBtn.style.background = "#ccc";
 }
+<<<<<<< HEAD
 
 //LOCALSTORAGE-ees data awaw
 
@@ -455,3 +491,5 @@ backUserInfoBtn.addEventListener("click", () => {
 });
 
 export { localStorageShowOrderItems };
+=======
+>>>>>>> main

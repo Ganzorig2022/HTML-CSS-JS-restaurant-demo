@@ -55,7 +55,6 @@ const signUp = async function (signupEmail, signupPassword, signupName) {
       password: signupPassword,
       email: signupEmail,
     });
-
     return true;
   } catch (error) {
     return false;
