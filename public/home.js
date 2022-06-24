@@ -1,4 +1,9 @@
-import { signUp, signIn, logOut, updateUserOrderDataToLocalstorage } from "./firebase_auth.js";
+import {
+  signUp,
+  signIn,
+  logOut,
+  updateUserOrderDataToLocalstorage,
+} from "./firebase_auth.js";
 
 // Run getRatings when DOM loads
 document.addEventListener("DOMContentLoaded", () => {
@@ -205,20 +210,16 @@ const searchResultsUL = document.getElementsByClassName("search-results-UL")[0];
 
 const restaurantsArr = [
   {
-    name: "ling",
-    rating: 2.7,
+    name: "Hoba Pizza UB restaurant",
+    rating: 3.7,
   },
   {
-    name: "momo",
-    rating: 4.5,
+    name: "Momo Hot Pot restaurant",
+    rating: 3.3,
   },
   {
-    name: "yuna",
-    rating: 3.8,
-  },
-  {
-    name: "bull",
-    rating: 4.9,
+    name: "MadFox UB restaurant",
+    rating: 3.3,
   },
 ];
 
@@ -293,7 +294,7 @@ searchField.addEventListener("submit", (event) => {
 // =============================Restauran-uudiig Home page dr haruulah===============================
 function showRestaurantsContent() {
   let restaurantArr = JSON.parse(localStorage.getItem("restaurantAllData"));
-
+  console.log(restaurantArr);
   restaurantArr.forEach((restaurant) => {
     let itemHTML = `        
     <div class="main-container__restaurant-content">
@@ -320,8 +321,7 @@ function showRestaurantsContent() {
             <div class="right-content">
               <div class="right-content-img">
                 <img
-                  src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                  alt=""
+                  src="${restaurant.backgroundImage}"
                 />
               </div>
             </div>
@@ -339,11 +339,11 @@ function moreBtnClick() {
   moreBtn.forEach((more) => {
     more.addEventListener("click", async (e) => {
       const restaurantID = e.target.getAttribute("restaurant-id");
-       localStorage.setItem(
+      localStorage.setItem(
         "selectedRestaurantID",
         JSON.stringify(restaurantID)
       );
-      if(restaurantID){
+      if (restaurantID) {
         location.href = "Main.html";
       }
     });
