@@ -437,7 +437,7 @@ backUserInfoBtn.addEventListener("click", () => {
   if (restaurantID) {
     window.location.assign("table.html");
   } else {
-    window.location.assign("home.html");
+    window.location.assign("index.html");
   }
 });
 

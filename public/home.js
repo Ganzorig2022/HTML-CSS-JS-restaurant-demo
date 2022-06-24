@@ -294,7 +294,6 @@ searchField.addEventListener("submit", (event) => {
 // =============================Restauran-uudiig Home page dr haruulah===============================
 function showRestaurantsContent() {
   let restaurantArr = JSON.parse(localStorage.getItem("restaurantAllData"));
-  console.log(restaurantArr);
   restaurantArr.forEach((restaurant) => {
     let itemHTML = `        
     <div class="main-container__restaurant-content">
